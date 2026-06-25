@@ -1,0 +1,36 @@
+# Phi-4-mini LoRA configuration
+# Expose: "Phi-4-mini with LoRA (Weeks 5-6)"
+
+model:
+  name: "microsoft/phi-4-mini-instruct"
+  max_length: 512
+  method: "lora"                     # NOT qlora
+
+lora:
+  r: 16                              # rank — higher = more capacity, more memory
+  alpha: 32                          # scaling factor (usually 2x r)
+  dropout: 0.05
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  num_epochs: 3
+  batch_size: 4
+  gradient_accumulation_steps: 4     # effective batch = 4x4 = 16
+  learning_rate: 2e-4
+  warmup_ratio: 0.03
+  lr_scheduler: "cosine"
+  fp16: true
+  save_steps: 100
+  logging_steps: 10
+  max_samples_train: 5000
+  max_samples_eval: 500
+
+cost:
+  gpu_cost_per_hour: 2.50            # SRH A6000 approximate USD/hr
+  deployment: "on_premise"
+
+mlflow:
+  experiment_name: "phase2_phi4_lora"
+  tracking_uri: "sqlite:///mlflow.db"

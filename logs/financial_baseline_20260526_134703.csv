@@ -1,0 +1,101 @@
+text,true_label,openai_pred,anthropic_pred,gemini_pred,openai_correct,anthropic_correct,gemini_correct,openai_latency_s,anthropic_latency_s,gemini_latency_s
+"According to Gran , the company has no plans to move all production to Russia , ",neutral,neutral,neutral,neutral,1,1,1,0.733,0.862,0.41
+"For the last quarter of 2010 , Componenta 's net sales doubled to EUR131m from E",positive,positive,positive,positive,1,1,1,0.556,0.717,0.453
+"In the third quarter of 2010 , net sales increased by 5.2 % to EUR 205.5 mn , an",positive,positive,positive,positive,1,1,1,0.767,0.622,0.522
+Operating profit rose to EUR 13.1 mn from EUR 8.7 mn in the corresponding period,positive,positive,positive,positive,1,1,1,2.143,1.336,0.814
+"Operating profit totalled EUR 21.1 mn , up from EUR 18.6 mn in 2007 , representi",positive,positive,positive,positive,1,1,1,0.814,0.722,0.407
+Finnish Talentum reports its operating profit increased to EUR 20.5 mn in 2005 f,positive,positive,positive,positive,1,1,1,0.476,0.896,0.573
+"Clothing retail chain Sepp+ñl+ñ 's sales increased by 8 % to EUR 155.2 mn , and ",positive,positive,positive,positive,1,1,1,0.532,0.686,0.349
+"Consolidated net sales increased 16 % to reach EUR74 .8 m , while operating prof",positive,positive,positive,positive,1,1,1,0.585,0.608,0.72
+Foundries division reports its sales increased by 9.7 % to EUR 63.1 mn from EUR ,positive,positive,positive,positive,1,1,1,0.72,1.025,0.408
+"HELSINKI ( AFX ) - Shares closed higher , led by Nokia after it announced plans ",positive,positive,positive,positive,1,1,1,0.527,0.589,0.478
+"Its board of directors will propose a dividend of EUR0 .12 per share for 2010 , ",positive,positive,positive,positive,1,1,1,0.631,0.998,0.359
+MegaFon 's subscriber base increased 16.1 % in 2009 to 50.5 million users as of ,positive,positive,positive,positive,1,1,1,0.61,0.929,0.517
+"Net income from life insurance doubled to EUR 6.8 mn from EUR 3.2 mn , and net i",positive,positive,positive,positive,1,1,1,0.679,0.998,0.469
+Net sales increased to EUR193 .3 m from EUR179 .9 m and pretax profit rose by 34,positive,positive,positive,positive,1,1,1,0.734,0.612,0.307
+"Net sales surged by 18.5 % to EUR167 .8 m. Teleste said that EUR20 .4 m , or 12.",positive,positive,positive,positive,1,1,1,0.767,0.566,0.474
+Nordea Group 's operating profit increased in 2010 by 18 percent year-on-year to,positive,positive,positive,positive,1,1,1,0.728,0.717,0.419
+"Operating profit for the nine-month period increased from EUR13 .6 m , while net",positive,positive,positive,positive,1,1,1,0.414,0.637,0.375
+"Operating profit for the three-month period increased from EUR1 .2 m , while rev",positive,positive,positive,positive,1,1,1,1.52,0.741,0.624
+The company 's net profit rose 11.4 % on the year to 82.2 million euros in 2005 ,positive,positive,positive,positive,1,1,1,0.606,0.704,0.546
+"The Lithuanian beer market made up 14.41 million liters in January , a rise of 0",positive,positive,positive,positive,1,1,1,2.232,1.425,0.378
+"Viking Line 's cargo revenue increased by 5.4 % to EUR 21.46 mn , and cargo volu",positive,positive,positive,positive,1,1,1,0.55,0.718,0.834
+The fair value of the property portfolio doubled as a result of the Kapiteeli ac,positive,positive,positive,positive,1,1,1,0.497,0.922,0.474
+10 February 2011 - Finnish media company Sanoma Oyj HEL : SAA1V said yesterday i,positive,positive,positive,positive,1,1,1,0.687,1.369,0.644
+"A Helsinki : ELIiV today reported EPS of EUR1 .13 for 2009 , an increase over EP",positive,positive,positive,positive,1,1,1,0.51,0.976,0.357
+"Commission income increased by 22 % to EUR 4.4 mn , and lending volume rose by 1",positive,positive,positive,positive,1,1,1,0.604,0.648,0.592
+"In January , traffic , measured in revenue passenger kilometres RPK , went up by",positive,neutral,neutral,neutral,0,0,0,0.922,0.818,0.716
+"In January-September 2010 , Fiskars ' net profit went up by 14 % year-on-year to",positive,positive,positive,positive,1,1,1,0.616,0.715,0.512
+"Net income from life insurance rose to EUR 16.5 mn from EUR 14.0 mn , and net in",positive,positive,positive,positive,1,1,1,0.618,0.714,0.722
+Sales have risen in other export markets .,positive,positive,positive,positive,1,1,1,0.54,0.786,0.597
+Sales increased due to growing market rates and increased operations .,positive,positive,positive,positive,1,1,1,0.53,0.921,0.613
+The agreement strengthens our long-term partnership with Nokia Siemens Networks ,positive,positive,positive,positive,1,1,1,0.719,0.714,0.615
+"The company 's order book stood at 1.5 bln euro $ 2.2 bln on September 30 , 2007",positive,positive,positive,positive,1,1,1,0.722,0.71,0.615
+"The company said that paper demand increased in all of its main markets , includ",positive,positive,positive,positive,1,1,1,0.411,0.819,0.818
+The world 's second largest stainless steel maker said net profit in the three-m,positive,positive,positive,positive,1,1,1,0.514,0.717,0.716
+"Shares of Standard Chartered ( STAN ) rose 1.2 % in the FTSE 100 , while Royal B",positive,positive,positive,positive,1,1,1,0.58,0.67,0.694
+Shares of Nokia Corp. rose Thursday after the cell phone maker said its third-qu,positive,positive,positive,positive,1,1,1,0.822,0.92,0.819
+"In its financial report , published on Friday , SEB said its net profit soared t",positive,positive,positive,positive,1,1,1,0.414,0.815,0.409
+"At the request of Finnish media company Alma Media 's newspapers , research mana",neutral,neutral,neutral,neutral,1,1,1,0.511,0.718,0.513
+STOCK EXCHANGE ANNOUNCEMENT 20 July 2006 1 ( 1 ) BASWARE SHARE SUBSCRIPTIONS WIT,neutral,neutral,positive,neutral,1,0,1,0.701,0.937,0.615
+"A maximum of 666,104 new shares can further be subscribed for by exercising B op",neutral,neutral,neutral,neutral,1,1,1,0.511,1.23,0.51
+Tiimari operates 194 stores in six countries -- including its core Finnish marke,neutral,neutral,neutral,neutral,1,1,1,0.617,0.818,0.717
+The acquisition will considerably increase Kemira 's sales and market position i,positive,positive,positive,positive,1,1,1,0.618,0.816,0.41
+"In January-September 2007 , Finnlines ' net sales rose to EUR 505.4 mn from EUR ",positive,positive,positive,positive,1,1,1,0.513,0.716,0.408
+"Adjusted for changes in the Group structure , the Division 's net sales increase",positive,positive,neutral,positive,1,0,1,0.616,0.615,0.613
+4 February 2011 - Finnish broadband data communication systems provider Teleste ,positive,positive,positive,positive,1,1,1,0.616,1.023,0.726
+Finnish Aktia Group 's operating profit rose to EUR 17.5 mn in the first quarter,positive,positive,positive,positive,1,1,1,0.71,0.816,0.822
+Finnish Bank of +àland 's consolidated net operating profit increased from EUR 4,positive,positive,positive,positive,1,1,1,0.511,1.023,0.652
+Finnish financial group Aktia reports operating profit of EUR 44.4 mn in January,positive,positive,positive,positive,1,1,1,0.475,0.715,0.411
+Finnish high technology provider Vaahto Group reports net sales of EUR 41.8 mn i,positive,positive,positive,positive,1,1,1,1.513,0.659,0.489
+Net sales of Finnish food industry company L+ñnnen Tehtaat 's continuing operati,positive,positive,positive,positive,1,1,1,0.729,1.244,0.487
+Biohit already services many current Genesis customers and the customer base is ,positive,positive,positive,positive,1,1,1,0.615,0.753,0.576
+"Both operating profit and turnover for the three-month period increased , respec",positive,positive,positive,positive,1,1,1,0.512,1.332,0.353
+Circulation revenue has increased by 5 % in Finland and 4 % in Sweden in 2008 .,positive,positive,positive,positive,1,1,1,0.773,0.82,0.819
+Clothing chain Sepp+ñl+ñ 's net sales increased by 7.0 % to EUR 30.8 mn .,positive,positive,positive,positive,1,1,1,6.655,0.719,0.444
+Construction volumes meanwhile grow at a rate of 10-15 percent annually .,positive,positive,positive,positive,1,1,1,0.476,0.718,0.409
+"However , Biohit estimates its total net sales will continue to grow in 2009 , a",positive,positive,positive,positive,1,1,1,0.571,0.792,0.787
+"In 2009 , Fiskars ' cash flow from operating activities amounted to EUR121m , up",positive,positive,positive,positive,1,1,1,2.048,0.837,0.801
+"In Lithuania , operating profit rose to EUR 190,000 from EUR 70,000 in the corre",positive,positive,positive,positive,1,1,1,0.56,0.875,0.818
+"In the fourth quarter of 2008 , net sales increased by 2 % to EUR 1,050.7 mn fro",positive,positive,positive,positive,1,1,1,0.82,1.332,0.715
+"International sales rose by 59.8 % to EUR 1,244.4 mn .",positive,positive,positive,positive,1,1,1,0.617,0.818,0.407
+Net sales grew in the period to  x20ac 402 million $ 585US million from  x20ac 4,positive,positive,neutral,positive,1,0,1,0.719,0.699,0.526
+Net sales increased to EUR655m in April to June 2010 from EUR438m a year earlier,positive,positive,positive,positive,1,1,1,0.592,0.803,0.691
+"Net sales rose by 25.5 % year-on-year to EUR59 .6 m , as the number of chargers ",positive,positive,positive,positive,1,1,1,0.409,0.953,0.415
+"Net sales totaled EUR 93.6 mn , up from EUR 93.2 mn in the corresponding period ",positive,positive,neutral,positive,1,0,1,0.451,0.808,0.512
+Operating profit increased by 145.1 % to EUR 8.3 mn from EUR 3.4 mn .,positive,positive,positive,positive,1,1,1,0.617,0.68,0.613
+Operating profit margin increased from 11.2 % to 11.7 % .,positive,positive,positive,positive,1,1,1,0.461,1.622,0.411
+Operating profit rose to EUR 3.11 mn from EUR 1.22 mn in the corresponding perio,positive,positive,positive,positive,1,1,1,0.537,0.687,0.72
+Operating profit rose to EUR 5mn from EUR 2.8 mn in the fourth quarter of 2008 .,positive,positive,positive,positive,1,1,1,0.662,1.036,0.351
+"Operating profit was EUR 24.5 mn , up from EUR 23.0 mn .",positive,positive,positive,positive,1,1,1,0.514,1.053,0.685
+Ramirent 's net sales in the second quarterended June 30 were EURO 128.7 million,positive,positive,positive,positive,1,1,1,0.423,0.705,0.571
+"Revenue grew by 2 percent to  x20ac 580 million $ 743 million , from  x20ac 569 ",positive,positive,neutral,positive,1,0,1,0.863,0.719,0.416
+Ruukki 's delivery volumes and selling prices showed favourable development and ,positive,positive,positive,positive,1,1,1,0.526,1.308,0.344
+"The company 's consolidated operating profit amounted to EUR 15.86 mn , up from ",positive,positive,positive,positive,1,1,1,1.09,0.614,0.632
+The Department Store Division reported an increase in sales of 4 per cent .,positive,positive,positive,positive,1,1,1,0.598,0.818,0.471
+The fair value of the company 's investment properties grew to EUR 2.803 billion,positive,positive,positive,positive,1,1,1,0.447,0.853,0.687
+"The last quarter was the best quarter of 2009 in net sales , and the operating m",positive,positive,positive,positive,1,1,1,0.427,1.008,0.654
+The major breweries increased their domestic beer sales by 4.5 per cent last yea,positive,positive,positive,positive,1,1,1,0.41,0.676,0.354
+- Operating profit rose by 26.9 % to EUR 105.8 ( 83.4 ) million .,positive,positive,positive,positive,1,1,1,0.528,0.635,0.62
+21 October 2010 - Finnish fishing tackle company Rapala VMC Corp ( HEL : RAP1V ),positive,positive,positive,positive,1,1,1,0.526,1.063,0.677
+"According to Finnish Metso Minerals , the value of the company 's orders has gon",positive,positive,positive,positive,1,1,1,0.512,0.614,0.41
+Finnish Bank of +àland reports its operating profit rose to EUR 21.3 mn in the s,positive,positive,positive,positive,1,1,1,0.615,1.023,0.309
+Finnish financial group Aktia 's operating profit for 2009 increased to EUR 47.0,positive,positive,positive,positive,1,1,1,0.921,0.921,0.717
+Finnish forest machinery manufacturer Ponsse 's net sales grew to EUR 51.3 mn in,positive,positive,positive,positive,1,1,1,0.614,0.861,0.676
+Finnish KCI Konecranes has raised its net sales growth estimate for 2006 from ov,positive,positive,positive,positive,1,1,1,0.512,0.92,0.615
+"According to HKScan Finland , the plan is to increase J+ñrvi-Suomen Portti 's ne",positive,positive,positive,positive,1,1,1,0.511,0.822,0.407
+"Advertising and circulation revenues grew by 3.4 % and by 0.4 % , respectively .",positive,positive,neutral,positive,1,0,1,1.23,1.127,0.511
+"At the end of March 2007 , the group 's order book was at EUR 39.6 mn , up 42 % ",positive,positive,positive,positive,1,1,1,0.616,0.816,0.512
+At the same time profit of the company increased by 10 % in H1 and reached Ls 79,positive,positive,positive,positive,1,1,1,0.561,0.873,0.512
+"Both operating profit and net sales for the 12-month period increased , respecti",positive,positive,positive,positive,1,1,1,0.719,0.817,0.331
+"Both operating profit and net sales for the 12-month period increased , respecti",positive,positive,positive,positive,1,1,1,0.438,1.485,0.596
+"Both operating profit and net sales for the 12-month period increased , respecti",positive,positive,positive,positive,1,1,1,0.634,0.818,0.406
+"Both operating profit and net sales for the 12-month period increased , respecti",positive,positive,positive,positive,1,1,1,0.618,0.716,0.409
+"Both operating profit and net sales for the nine-month period increased , respec",positive,positive,positive,positive,1,1,1,0.513,0.65,0.588
+"Both operating profit and net sales for the six-month period increased , respect",positive,positive,positive,positive,1,1,1,0.608,0.904,0.734
+"Both operating profit and net sales for the six-month period increased , respect",positive,positive,positive,positive,1,1,1,0.614,1.025,0.817
+"Both operating profit and net sales for the six-month period increased , respect",positive,positive,positive,positive,1,1,1,0.718,0.819,0.375
+"Both operating profit and net sales for the six-month period increased , respect",positive,positive,positive,positive,1,1,1,0.546,0.921,0.512
+"Both operating profit and net sales for the three-month period increased , respe",positive,positive,positive,positive,1,1,1,0.716,0.82,0.716
+"Both operating profit and net sales for the three-month period increased , respe",positive,positive,positive,positive,1,1,1,0.652,1.089,0.615
+"Both operating profit and sales for the three-month period increased , respectiv",positive,positive,positive,positive,1,1,1,0.514,0.818,0.407

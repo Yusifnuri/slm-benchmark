@@ -1,0 +1,793 @@
+text,true_entities,openai_response,anthropic_response,openai_latency,anthropic_latency,openai_precision,openai_recall,openai_f1,anthropic_precision,anthropic_recall,anthropic_f1
+"SOCCER - JAPAN GET LUCKY WIN , CHINA IN SURPRISE DEFEAT .","{'PER': ['CHINA'], 'ORG': [], 'LOC': ['JAPAN']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Japan"", ""China""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""JAPAN"", ""CHINA""]
+}
+```",1.4612009525299072,0.8880951404571533,1.0,1.0,1.0,1.0,1.0,1.0
+Nadim Ladki,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [""Nadim Ladki""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [""Nadim Ladki""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",1.4137179851531982,0.7135767936706543,0.0,0.0,0.0,0.0,0.0,0.0
+"AL-AIN , United Arab Emirates 1996-12-06","{'PER': [], 'ORG': [], 'LOC': ['AL-AIN', 'United Arab Emirates']}","{""PER"": [], ""ORG"": [], ""LOC"": [""AL-AIN"", ""United Arab Emirates""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""AL-AIN"", ""United Arab Emirates""]
+}
+```",0.7557120323181152,0.9172720909118652,1.0,1.0,1.0,1.0,1.0,1.0
+Japan began the defence of their Asian Cup title with a lucky 2-1 win against Sy,"{'PER': [], 'ORG': [], 'LOC': ['Japan', 'Syria']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Japan"", ""Syria""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Japan"", ""Syria""]
+}
+```",1.9492080211639404,0.7517728805541992,1.0,1.0,1.0,1.0,1.0,1.0
+"But China saw their luck desert them in the second match of the group , crashing","{'PER': [], 'ORG': [], 'LOC': ['China', 'Uzbekistan']}","{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""China"", ""Uzbekistan""]
+}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""China"", ""Uzbekistan""]
+}
+```",1.1668860912322998,0.906498908996582,1.0,1.0,1.0,1.0,1.0,1.0
+China controlled most of the match and saw several chances missed until the 78th,"{'PER': ['Igor Shkvyrin'], 'ORG': [], 'LOC': ['China']}","{
+  ""PER"": [""Igor Shkvyrin""],
+  ""ORG"": [],
+  ""LOC"": [""China""]
+}","```json
+{
+  ""PER"": [""Igor Shkvyrin""],
+  ""ORG"": [],
+  ""LOC"": [""China"", ""Uzbek""]
+}
+```",4.8651227951049805,0.8881123065948486,1.0,1.0,1.0,0.6666666666666666,1.0,0.8
+"Oleg Shatskiku made sure of the win in injury time , hitting an unstoppable left","{'PER': ['Oleg Shatskiku'], 'ORG': [], 'LOC': []}","{""PER"": [""Oleg Shatskiku""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [""Oleg Shatskiku""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",0.9122300148010254,1.4662909507751465,1.0,1.0,1.0,1.0,1.0,1.0
+The former Soviet republic was playing in an Asian Cup finals tie for the first ,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": [""Soviet"", ""Asian Cup""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [""Asian Cup""],
+  ""LOC"": [""Soviet""]
+}
+```",0.9779918193817139,1.0274930000305176,0.0,0.0,0.0,0.0,0.0,0.0
+"Despite winning the Asian Games title two years ago , Uzbekistan are in the fina","{'PER': [], 'ORG': [], 'LOC': ['Uzbekistan']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Uzbekistan""]}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": [""Asian Games"", ""Uzbekistan""]}
+```",1.1252501010894775,0.7598519325256348,1.0,1.0,1.0,0.5,1.0,0.6666666666666666
+Two goals from defensive errors in the last six minutes allowed Japan to come fr,"{'PER': [], 'ORG': [], 'LOC': ['Japan', 'Syria']}","{""PER"": [""Japan"", ""Syria""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Japan"", ""Syria""]
+}
+```",4.4026830196380615,0.8171589374542236,1.0,1.0,1.0,1.0,1.0,1.0
+"Takuya Takagi scored the winner in the 88th minute , rising to head a Hiroshige ","{'PER': ['Takuya Takagi', 'Hiroshige Yanagimoto', 'Salem Bitar'], 'ORG': [], 'LOC': []}","{
+  ""PER"": [""Takuya Takagi"", ""Hiroshige Yanagimoto"", ""Salem Bitar""],
+  ""ORG"": [],
+  ""LOC"": [""Syria""]
+}","```json
+{
+  ""PER"": [""Takuya Takagi"", ""Hiroshige Yanagimoto"", ""Salem Bitar""],
+  ""ORG"": [],
+  ""LOC"": [""Syrian""]
+}
+```",4.404365062713623,0.9443871974945068,0.75,1.0,0.8571428571428571,0.75,1.0,0.8571428571428571
+It was the second costly blunder by Syria in four minutes .,"{'PER': [], 'ORG': [], 'LOC': ['Syria']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Syria""]}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": [""Syria""]}
+```",1.1018822193145752,1.6264808177947998,1.0,1.0,1.0,1.0,1.0,1.0
+Defender Hassan Abbas rose to intercept a long ball into the area in the 84th mi,"{'PER': ['Hassan Abbas', 'Bitar'], 'ORG': [], 'LOC': []}","{""PER"": [""Hassan Abbas""], ""ORG"": [], ""LOC"": [""Bitar""]}","```json
+{
+  ""PER"": [""Hassan Abbas"", ""Bitar""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",0.6493752002716064,0.9997420310974121,1.0,1.0,1.0,1.0,1.0,1.0
+Nader Jokhadar had given Syria the lead with a well-struck header in the seventh,"{'PER': ['Nader Jokhadar'], 'ORG': [], 'LOC': ['Syria']}","{""PER"": [""Nader Jokhadar""], ""ORG"": [], ""LOC"": [""Syria""]}","```json
+{
+  ""PER"": [""Nader Jokhadar""],
+  ""ORG"": [],
+  ""LOC"": [""Syria""]
+}
+```",0.9123508930206299,0.939208984375,1.0,1.0,1.0,1.0,1.0,1.0
+Japan then laid siege to the Syrian penalty area for most of the game but rarely,"{'PER': [], 'ORG': [], 'LOC': ['Japan']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Japan"", ""Syria""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Japan"", ""Syrian""]
+}
+```",0.8874738216400146,1.011220932006836,0.5,1.0,0.6666666666666666,0.5,1.0,0.6666666666666666
+Bitar pulled off fine saves whenever they did .,"{'PER': ['Bitar'], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [""Bitar""], ""ORG"": [], ""LOC"": []}
+```",2.0857577323913574,0.821019172668457,0.0,0.0,0.0,1.0,1.0,1.0
+Japan coach Shu Kamo said : ' ' The Syrian own goal proved lucky for us .,"{'PER': ['Shu Kamo'], 'ORG': [], 'LOC': ['Japan']}","{""PER"": [""Shu Kamo""], ""ORG"": [], ""LOC"": [""Japan"", ""Syria""]}","```json
+{
+  ""PER"": [""Shu Kamo""],
+  ""ORG"": [],
+  ""LOC"": [""Japan"", ""Syria""]
+}
+```",1.8394291400909424,1.2283809185028076,0.6666666666666666,1.0,0.8,0.6666666666666666,1.0,0.8
+The Syrians scored early and then played defensively and adopted long balls whic,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": [""Syria""]}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": [""Syria""]}
+```",0.5943489074707031,0.8560178279876709,0.0,0.0,0.0,0.0,0.0,0.0
+',"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","I'd be happy to help extract named entities, but I don't see any text provided in your message. You've included the instructions and an example format, but the actual text to analyze is missing.
+
+Please provide the text you'd like me to analyze, and I'll extract the named entities in the JSON format you've specified.",0.7070698738098145,1.2152283191680908,1.0,1.0,1.0,1.0,1.0,1.0
+"Japan , co-hosts of the World Cup in 2002 and ranked 20th in the world by FIFA ,","{'PER': [], 'ORG': ['FIFA'], 'LOC': ['Japan']}","{""PER"": [], ""ORG"": [""FIFA""], ""LOC"": [""Japan""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [""FIFA""],
+  ""LOC"": [""Japan""]
+}
+```",0.8268671035766602,0.9197487831115723,1.0,1.0,1.0,1.0,1.0,1.0
+Hosts UAE play Kuwait and South Korea take on Indonesia on Saturday in Group A m,"{'PER': [], 'ORG': [], 'LOC': ['UAE', 'Kuwait', 'South Korea', 'Indonesia']}","```json
+{""PER"": [], ""ORG"": [""UAE"", ""Kuwait"", ""South Korea"", ""Indonesia""], ""LOC"": [""Group A""]}
+```","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""UAE"", ""Kuwait"", ""South Korea"", ""Indonesia""]
+}
+```",0.7248387336730957,1.1202239990234375,0.8,1.0,0.888888888888889,1.0,1.0,1.0
+All four teams are level with one point each from one game .,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```
+
+The text contains no named entities. It only references generic concepts (teams, games, and points) without mentioning any specific persons, organizations, or locations.",2.8936541080474854,1.5673611164093018,1.0,1.0,1.0,1.0,1.0,1.0
+RUGBY UNION - CUTTITTA BACK FOR ITALY AFTER A YEAR .,"{'PER': ['CUTTITTA'], 'ORG': ['RUGBY UNION'], 'LOC': ['ITALY']}","{""PER"": [""Cuttitta""], ""ORG"": [], ""LOC"": [""Italy""]}","```json
+{
+  ""PER"": [""CUTTITTA""],
+  ""ORG"": [""ITALY""],
+  ""LOC"": []
+}
+```",1.332106113433838,0.9636127948760986,1.0,0.6666666666666666,0.8,1.0,0.6666666666666666,0.8
+ROME 1996-12-06,"{'PER': [], 'ORG': [], 'LOC': ['ROME']}","{""PER"": [], ""ORG"": [], ""LOC"": [""ROME""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""ROME""]
+}
+```",0.6147201061248779,0.956744909286499,1.0,1.0,1.0,1.0,1.0,1.0
+Italy recalled Marcello Cuttitta,"{'PER': [], 'ORG': [], 'LOC': ['Italy']}","{""PER"": [""Marcello Cuttitta""], ""ORG"": [], ""LOC"": [""Italy""]}","```json
+{
+  ""PER"": [""Marcello Cuttitta""],
+  ""ORG"": [""Italy""],
+  ""LOC"": []
+}
+```",0.8581740856170654,0.8008270263671875,0.5,1.0,0.6666666666666666,0.5,1.0,0.6666666666666666
+on Friday for their friendly against Scotland at Murrayfield more than a year af,"{'PER': [], 'ORG': [], 'LOC': ['Scotland', 'Murrayfield']}","{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Scotland"", ""Murrayfield""]
+}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Scotland"", ""Murrayfield""]
+}
+```",0.8183028697967529,0.753997802734375,1.0,1.0,1.0,1.0,1.0,1.0
+"Cuttitta , who trainer George Coste said was certain to play on Saturday week , ","{'PER': ['Cuttitta', 'George Coste'], 'ORG': [], 'LOC': ['England', 'Twickenham']}","{""PER"": [""Cuttitta"", ""George Coste""], ""ORG"": [""England""], ""LOC"": [""Twickenham""]}","```json
+{
+  ""PER"": [""Cuttitta"", ""George Coste""],
+  ""ORG"": [],
+  ""LOC"": [""Twickenham"", ""England""]
+}
+```",0.9011011123657227,0.8964166641235352,1.0,1.0,1.0,1.0,1.0,1.0
+Stefano Bordon is out through illness and Coste said he had dropped back row Cor,"{'PER': ['Stefano Bordon', 'Coste', 'Corrado Covi'], 'ORG': [], 'LOC': ['England']}","{
+  ""PER"": [""Stefano Bordon"", ""Coste"", ""Corrado Covi""],
+  ""ORG"": [""England national team""],
+  ""LOC"": []
+}","```json
+{
+  ""PER"": [""Stefano Bordon"", ""Coste"", ""Corrado Covi""],
+  ""ORG"": [],
+  ""LOC"": [""England""]
+}
+```",1.3451619148254395,0.9852092266082764,0.75,0.75,0.75,1.0,1.0,1.0
+"Cuttitta announced his retirement after the 1995 World Cup , where he took issue","{'PER': ['Cuttitta'], 'ORG': [], 'LOC': ['Italy', 'England']}","```json
+{""PER"": [""Cuttitta""], ""ORG"": [""Italy""], ""LOC"": [""England""]}
+```","```json
+{
+  ""PER"": [""Cuttitta"", ""England""],
+  ""ORG"": [""Italy""],
+  ""LOC"": []
+}
+```",3.529331922531128,2.2810139656066895,1.0,1.0,1.0,1.0,1.0,1.0
+Coste said he had approached the player two months ago about a comeback .,"{'PER': ['Coste'], 'ORG': [], 'LOC': []}","{""PER"": [""Coste""], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [""Coste""], ""ORG"": [], ""LOC"": []}
+```",5.346520185470581,0.8573529720306396,1.0,1.0,1.0,1.0,1.0,1.0
+""" He ended the World Cup on the wrong note , "" Coste said .","{'PER': ['Coste'], 'ORG': [], 'LOC': []}","{""PER"": [""Coste""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [""Coste""],
+  ""ORG"": [""World Cup""],
+  ""LOC"": []
+}
+```",3.479513168334961,0.7697780132293701,1.0,1.0,1.0,0.5,1.0,0.6666666666666666
+""" I thought it would be useful to have him back and he said he would be availabl","{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```
+
+The provided text contains no identifiable named entities. It consists of a general statement without references to specific persons, organizations, or locations.",1.005721092224121,1.222146987915039,1.0,1.0,1.0,1.0,1.0,1.0
+"I think now is the right time for him to return . ""","{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```
+
+The text provided does not contain any specific named entities. It is a generic statement without references to particular persons, organizations, or locations.",1.0511000156402588,2.2064220905303955,1.0,1.0,1.0,1.0,1.0,1.0
+"Squad : Javier Pertile , Paolo Vaccari , Marcello Cuttitta , Ivan Francescato , ","{'PER': ['Javier Pertile', 'Paolo Vaccari', 'Marcello Cuttitta', 'Ivan Francescato', 'Leandro Manteri', 'Diego Dominguez', 'Francesco Mazzariol', 'Alessandro Troncon', 'Orazio Arancio', 'Andrea Sgorlon', 'Massimo Giovanelli', 'Carlo Checchinato', 'Walter Cristofoletto', 'Franco Properzi Curti', 'Carlo Orlandi', 'Massimo Cuttitta', 'Giambatista Croci', 'Gianluca Guidi', 'Nicola Mazzucato', 'Alessandro Moscardi', 'Andrea Castellani'], 'ORG': [], 'LOC': []}","```json
+{
+  ""PER"": [
+    ""Javier Pertile"",
+    ""Paolo Vaccari"",
+    ""Marcello Cuttitta"",
+    ""Ivan Francescato"",
+    ""Leandro Manteri"",
+    ""Diego Dominguez"",
+    ""Francesco Mazzariol"",
+    ""Alessandro Troncon"",
+    ""Orazio Arancio"",
+    ""Andrea Sgorlon"",
+    ""Massimo Giovanelli"",
+    ""Carlo Checchinato"",
+    ""Walter Cristofoletto"",
+    ""Franco Properzi Curti"",
+    ""Carlo Orlandi"",
+    ""Massimo Cuttitta"",
+    ""Giambatista Croci"",
+    ""Gianluca","```json
+{
+  ""PER"": [
+    ""Javier Pertile"",
+    ""Paolo Vaccari"",
+    ""Marcello Cuttitta"",
+    ""Ivan Francescato"",
+    ""Leandro Manteri"",
+    ""Diego Dominguez"",
+    ""Francesco Mazzariol"",
+    ""Alessandro Troncon"",
+    ""Orazio Arancio"",
+    ""Andrea Sgorlon"",
+    ""Massimo Giovanelli"",
+    ""Carlo Checchinato"",
+    ""Walter Cristofoletto"",
+    ""Franco Properzi Curti"",",5.051495790481567,1.3351850509643555,0.0,0.0,0.0,0.0,0.0,0.0
+SOCCER - LATE GOALS GIVE JAPAN WIN OVER SYRIA .,"{'PER': [], 'ORG': [], 'LOC': ['JAPAN', 'SYRIA']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Japan"", ""Syria""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Japan"", ""Syria""]
+}
+```",1.333132028579712,0.9018468856811523,1.0,1.0,1.0,1.0,1.0,1.0
+"AL-AIN , United Arab Emirates 1996-12-06","{'PER': [], 'ORG': [], 'LOC': ['AL-AIN', 'United Arab Emirates']}","{""PER"": [], ""ORG"": [], ""LOC"": [""AL-AIN"", ""United Arab Emirates""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""AL-AIN"", ""United Arab Emirates""]
+}
+```",1.0507190227508545,1.2239961624145508,1.0,1.0,1.0,1.0,1.0,1.0
+Two goals in the last six minutes gave holders Japan an uninspiring 2-1 Asian Cu,"{'PER': [], 'ORG': [], 'LOC': ['Japan', 'Syria']}","{""PER"": [""Japan"", ""Syria""], ""ORG"": [""Asian Cup""], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Japan"", ""Syria""]
+}
+```",1.037062168121338,0.8840901851654053,0.6666666666666666,1.0,0.8,1.0,1.0,1.0
+Takuya Takagi headed the winner in the 88th minute of the group C game after goa,"{'PER': ['Takuya Takagi', 'Salem Bitar'], 'ORG': [], 'LOC': []}","{""PER"": [""Takuya Takagi"", ""Salem Bitar""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [""Takuya Takagi"", ""Salem Bitar""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",0.9303669929504395,0.8052279949188232,1.0,1.0,1.0,1.0,1.0,1.0
+It was the second Syrian defensive blunder in four minutes .,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": [""Syria""]}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": [""Syrian""]}
+```",1.046194076538086,0.8870489597320557,0.0,0.0,0.0,0.0,0.0,0.0
+Defender Hassan Abbas rose to intercept a long ball into the area in the 84th mi,"{'PER': ['Hassan Abbas', 'Bitar'], 'ORG': [], 'LOC': []}","{""PER"": [""Hassan Abbas""], ""ORG"": [], ""LOC"": [""Bitar""]}","```json
+{
+  ""PER"": [""Hassan Abbas"", ""Bitar""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",1.057023048400879,0.9347810745239258,1.0,1.0,1.0,1.0,1.0,1.0
+Syria had taken the lead from their first serious attack in the seventh minute .,"{'PER': [], 'ORG': [], 'LOC': ['Syria']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Syria""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Syria""]
+}
+```",1.0444741249084473,0.7680718898773193,1.0,1.0,1.0,1.0,1.0,1.0
+Nader Jokhadar headed a cross from the right by Ammar Awad into the top right co,"{'PER': ['Nader Jokhadar', 'Ammar Awad', 'Kenichi Shimokawa'], 'ORG': [], 'LOC': []}","{""PER"": [""Nader Jokhadar"", ""Ammar Awad"", ""Kenichi Shimokawa""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [""Nader Jokhadar"", ""Ammar Awad"", ""Kenichi Shimokawa""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",1.6538619995117188,0.8495700359344482,1.0,1.0,1.0,1.0,1.0,1.0
+Japan then laid siege to the Syrian penalty area and had a goal disallowed for o,"{'PER': [], 'ORG': [], 'LOC': ['Japan']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Japan"", ""Syria""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Japan"", ""Syrian""]
+}
+```",1.0313661098480225,0.869758129119873,0.5,1.0,0.6666666666666666,0.5,1.0,0.6666666666666666
+"A minute later , Bitar produced a good double save , first from Kazuyoshi Miura ","{'PER': ['Bitar', 'Kazuyoshi Miura', 'Takagi'], 'ORG': [], 'LOC': []}","{""PER"": [""Bitar"", ""Kazuyoshi Miura"", ""Takagi""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [""Bitar"", ""Kazuyoshi Miura"", ""Takagi""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",0.8276181221008301,0.9233660697937012,1.0,1.0,1.0,1.0,1.0,1.0
+"Bitar saved well again from Miura in the 37th minute , parrying away his header ","{'PER': ['Bitar', 'Miura'], 'ORG': [], 'LOC': []}","{""PER"": [""Bitar"", ""Miura""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [""Bitar"", ""Miura""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",1.1305816173553467,0.9780573844909668,1.0,1.0,1.0,1.0,1.0,1.0
+Japan started the second half brightly but Bitar denied them an equaliser when h,"{'PER': ['Bitar', 'Naoki Soma'], 'ORG': [], 'LOC': ['Japan']}","{""PER"": [""Bitar"", ""Naoki Soma""], ""ORG"": [], ""LOC"": [""Japan""]}","```json
+{
+  ""PER"": [""Bitar"", ""Naoki Soma""],
+  ""ORG"": [],
+  ""LOC"": [""Japan""]
+}
+```",1.2072770595550537,0.7731277942657471,1.0,1.0,1.0,1.0,1.0,1.0
+"Japan : 19 - Kenichi Shimokawa , 2 - Hiroshige Yanagimoto , 3 - Naoki Soma , 4 -","{'PER': ['Kenichi Shimokawa', 'Hiroshige Yanagimoto', 'Naoki Soma', 'Masami Ihara', 'Norio Omura', 'Motohiro Yamaguchi', 'Masakiyo Maezono', 'Yasuto Honda', 'Takuya Takagi', 'Hiroshi Nanami', 'Kazuyoshi Miura', 'Hiroaki Morishima', 'Masayuki Okano'], 'ORG': [], 'LOC': ['Japan']}","{
+  ""PER"": [
+    ""Kenichi Shimokawa"",
+    ""Hiroshige Yanagimoto"",
+    ""Naoki Soma"",
+    ""Masami Ihara"",
+    ""Norio Omura"",
+    ""Motohiro Yamaguchi"",
+    ""Masakiyo Maezono"",
+    ""Yasuto Honda"",
+    ""Takuya Takagi"",
+    ""Hiroshi Nanami"",
+    ""Kazuyoshi Miura"",
+    ""Hiroaki Morishima"",
+    ""Masayuki Okano""
+  ],
+  ""ORG"": [],
+  ""LOC"": [
+    ""Japan""
+  ]
+}","```json
+{
+  ""PER"": [
+    ""Kenichi Shimokawa"",
+    ""Hiroshige Yanagimoto"",
+    ""Naoki Soma"",
+    ""Masami Ihara"",
+    ""Norio Omura"",
+    ""Motohiro Yamaguchi"",
+    ""Masakiyo Maezono"",
+    ""Yasuto Honda"",
+    ""Takuya Takagi"",
+    ""Hiroshi Nanami"",
+    ""Kazuyoshi Miura"",
+    ""Hiroaki Morishima"",
+    ""Masayuki Okano",3.615589141845703,1.265873908996582,1.0,1.0,1.0,0.0,0.0,0.0
+"Syria : 24 - Salem Bitar , 3 - Bachar Srour ; 4 - Hassan Abbas , 5 - Tarek Jabba","{'PER': ['Salem Bitar', 'Bachar Srour', 'Hassan Abbas', 'Tarek Jabban', 'Ammar Awad', 'Louay Taleb', 'Nihad al-Boushi', 'Mohammed Afash', 'Ali Dib', 'Abdul Latif Helou', 'Ammar Rihawiy', 'Khaled Zaher', 'Nader Jokhadar'], 'ORG': [], 'LOC': ['Syria']}","{
+  ""PER"": [
+    ""Salem Bitar"",
+    ""Bachar Srour"",
+    ""Hassan Abbas"",
+    ""Tarek Jabban"",
+    ""Ammar Awad"",
+    ""Louay Taleb"",
+    ""Nihad al-Boushi"",
+    ""Mohammed Afash"",
+    ""Ali Dib"",
+    ""Abdul Latif Helou"",
+    ""Ammar Rihawiy"",
+    ""Khaled Zaher"",
+    ""Nader Jokhadar""
+  ],
+  ""ORG"": [],
+  ""LOC"": [
+    ""Syria""
+  ]
+}","```json
+{
+  ""PER"": [
+    ""Salem Bitar"",
+    ""Bachar Srour"",
+    ""Hassan Abbas"",
+    ""Tarek Jabban"",
+    ""Ammar Awad"",
+    ""Louay Taleb"",
+    ""Nihad al-Boushi"",
+    ""Mohammed Afash"",
+    ""Ali Dib"",
+    ""Abdul Latif Helou"",
+    ""Ammar Rihawiy"",
+    ""Khaled Zaher"",
+    ""Nader Jokhadar""
+  ],
+  ""ORG"": [],",4.238365888595581,1.2351200580596924,1.0,1.0,1.0,0.0,0.0,0.0
+FREESTYLE SKIING-WORLD CUP MOGUL RESULTS .,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [""FREESTYLE SKIING-WORLD CUP""],
+  ""LOC"": []
+}
+```",0.9168188571929932,0.9982540607452393,1.0,1.0,1.0,0.0,0.0,0.0
+"TIGNES , France 1996-12-06","{'PER': [], 'ORG': [], 'LOC': ['TIGNES', 'France']}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": [""TIGNES"", ""France""]}
+```","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""TIGNES"", ""France""]
+}
+```",1.4712610244750977,0.7610409259796143,1.0,1.0,1.0,1.0,1.0,1.0
+Results of the World Cup,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [""World Cup""], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```
+
+The text ""Results of the World Cup"" contains no specific named entities. ""World Cup"" is a generic event reference rather than a named entity with a specific instance.",0.6754770278930664,1.209914207458496,0.0,0.0,0.0,1.0,1.0,1.0
+freestyle skiing moguls competition on Friday :,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```
+
+The text ""freestyle skiing moguls competition on Friday :"" contains no named entities. It only describes a type of event and a day of the week.",0.7065651416778564,1.1178836822509766,1.0,1.0,1.0,1.0,1.0,1.0
+Men,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```
+
+The text ""Men"" is a common noun and does not contain any named entities (specific persons, organizations, or locations).",1.0206348896026611,1.1688811779022217,1.0,1.0,1.0,1.0,1.0,1.0
+1. Jesper Ronnback ( Sweden ) 25.76 points,"{'PER': ['Jesper Ronnback'], 'ORG': [], 'LOC': ['Sweden']}","{""PER"": [""Jesper Ronnback""], ""ORG"": [], ""LOC"": [""Sweden""]}","```json
+{
+  ""PER"": [""Jesper Ronnback""],
+  ""ORG"": [],
+  ""LOC"": [""Sweden""]
+}
+```",1.5739078521728516,0.8523440361022949,1.0,1.0,1.0,1.0,1.0,1.0
+2. Andrei Ivanov ( Russia ) 24.88,"{'PER': ['Andrei Ivanov'], 'ORG': [], 'LOC': ['Russia']}","{""PER"": [""Andrei Ivanov""], ""ORG"": [], ""LOC"": [""Russia""]}","```json
+{
+  ""PER"": [""Andrei Ivanov""],
+  ""ORG"": [],
+  ""LOC"": [""Russia""]
+}
+```",1.2986690998077393,0.968109130859375,1.0,1.0,1.0,1.0,1.0,1.0
+3. Ryan Johnson ( Canada ) 24.57,"{'PER': ['Ryan Johnson'], 'ORG': [], 'LOC': ['Canada']}","{""PER"": [""Ryan Johnson""], ""ORG"": [], ""LOC"": [""Canada""]}","```json
+{
+  ""PER"": [""Ryan Johnson""],
+  ""ORG"": [],
+  ""LOC"": [""Canada""]
+}
+```",1.2283127307891846,0.9046328067779541,1.0,1.0,1.0,1.0,1.0,1.0
+4. Jean-Luc Brassard ( Canada ) 24.40,"{'PER': ['Jean-Luc Brassard'], 'ORG': [], 'LOC': ['Canada']}","{""PER"": [""Jean-Luc Brassard""], ""ORG"": [], ""LOC"": [""Canada""]}","```json
+{
+  ""PER"": [""Jean-Luc Brassard""],
+  ""ORG"": [],
+  ""LOC"": [""Canada""]
+}
+```",0.7893931865692139,0.8617470264434814,1.0,1.0,1.0,1.0,1.0,1.0
+5. Korneilus Hole ( Norway ) 23.92,"{'PER': ['Korneilus Hole'], 'ORG': [], 'LOC': ['Norway']}","{""PER"": [""Korneilus Hole""], ""ORG"": [], ""LOC"": [""Norway""]}","```json
+{
+  ""PER"": [""Korneilus Hole""],
+  ""ORG"": [],
+  ""LOC"": [""Norway""]
+}
+```",1.0243780612945557,0.8193528652191162,1.0,1.0,1.0,1.0,1.0,1.0
+6. Jeremie Collomb-Patton ( France ) 23.87,"{'PER': ['Jeremie Collomb-Patton'], 'ORG': [], 'LOC': ['France']}","{""PER"": [""Jeremie Collomb-Patton""], ""ORG"": [], ""LOC"": [""France""]}","```json
+{
+  ""PER"": [""Jeremie Collomb-Patton""],
+  ""ORG"": [],
+  ""LOC"": [""France""]
+}
+```",1.1639480590820312,1.0196268558502197,1.0,1.0,1.0,1.0,1.0,1.0
+7. Jim Moran ( U.S. ) 23.25,"{'PER': ['Jim Moran'], 'ORG': [], 'LOC': ['U.S.']}","```json
+{""PER"": [""Jim Moran""], ""ORG"": [], ""LOC"": [""U.S.""]}
+```","```json
+{
+  ""PER"": [""Jim Moran""],
+  ""ORG"": [],
+  ""LOC"": [""U.S.""]
+}
+```",0.9464287757873535,0.8610339164733887,1.0,1.0,1.0,1.0,1.0,1.0
+8. Dominick Gauthier ( Canada ) 22.73,"{'PER': ['Dominick Gauthier'], 'ORG': [], 'LOC': ['Canada']}","{""PER"": [""Dominick Gauthier""], ""ORG"": [], ""LOC"": [""Canada""]}","```json
+{
+  ""PER"": [""Dominick Gauthier""],
+  ""ORG"": [],
+  ""LOC"": [""Canada""]
+}
+```",1.1278762817382812,0.9227001667022705,1.0,1.0,1.0,1.0,1.0,1.0
+9. Johann Gregoire ( France ) 22.58,"{'PER': ['Johann Gregoire'], 'ORG': [], 'LOC': ['France']}","{""PER"": [""Johann Gregoire""], ""ORG"": [], ""LOC"": [""France""]}","```json
+{
+  ""PER"": [""Johann Gregoire""],
+  ""ORG"": [],
+  ""LOC"": [""France""]
+}
+```",1.460832118988037,0.9497048854827881,1.0,1.0,1.0,1.0,1.0,1.0
+10. Troy Benson ( U.S. ) 22.56,"{'PER': ['Troy Benson'], 'ORG': [], 'LOC': ['U.S.']}","{""PER"": [""Troy Benson""], ""ORG"": [], ""LOC"": [""U.S.""]}","```json
+{
+  ""PER"": [""Troy Benson""],
+  ""ORG"": [],
+  ""LOC"": [""U.S.""]
+}
+```",0.8379199504852295,0.8700652122497559,1.0,1.0,1.0,1.0,1.0,1.0
+Women,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```
+
+The text ""Women"" contains no named entities - it is a common noun, not a proper name referring to a specific person, organization, or location.",1.1273579597473145,1.2113010883331299,1.0,1.0,1.0,1.0,1.0,1.0
+1. Tatjana Mittermayer ( Germany ) 24.32,"{'PER': ['Tatjana Mittermayer'], 'ORG': [], 'LOC': ['Germany']}","{""PER"": [""Tatjana Mittermayer""], ""ORG"": [], ""LOC"": [""Germany""]}","```json
+{
+  ""PER"": [""Tatjana Mittermayer""],
+  ""ORG"": [],
+  ""LOC"": [""Germany""]
+}
+```",1.3204371929168701,1.1273767948150635,1.0,1.0,1.0,1.0,1.0,1.0
+2. Candice Gilg ( France ) 24.31,"{'PER': ['Candice Gilg'], 'ORG': [], 'LOC': ['France']}","{""PER"": [""Candice Gilg""], ""ORG"": [], ""LOC"": [""France""]}","```json
+{
+  ""PER"": [""Candice Gilg""],
+  ""ORG"": [],
+  ""LOC"": [""France""]
+}
+```",1.126802921295166,0.9196243286132812,1.0,1.0,1.0,1.0,1.0,1.0
+3. Minna Karhu ( Finland ) 24.05,"{'PER': ['Minna Karhu'], 'ORG': [], 'LOC': ['Finland']}","{""PER"": [""Minna Karhu""], ""ORG"": [], ""LOC"": [""Finland""]}","```json
+{
+  ""PER"": [""Minna Karhu""],
+  ""ORG"": [],
+  ""LOC"": [""Finland""]
+}
+```",0.801934003829956,1.142319917678833,1.0,1.0,1.0,1.0,1.0,1.0
+4. Tae Satoya ( Japan ) 23.75,"{'PER': ['Tae Satoya'], 'ORG': [], 'LOC': ['Japan']}","{""PER"": [""Tae Satoya""], ""ORG"": [], ""LOC"": [""Japan""]}","```json
+{
+  ""PER"": [""Tae Satoya""],
+  ""ORG"": [],
+  ""LOC"": [""Japan""]
+}
+```",1.5395240783691406,0.910376787185669,1.0,1.0,1.0,1.0,1.0,1.0
+5. Ann Battellle ( U.S. ) 23.56,"{'PER': ['Ann Battellle'], 'ORG': [], 'LOC': ['U.S.']}","{""PER"": [""Ann Battelle""], ""ORG"": [], ""LOC"": [""U.S.""]}","```json
+{
+  ""PER"": [""Ann Battellle""],
+  ""ORG"": [],
+  ""LOC"": [""U.S.""]
+}
+```",1.0843498706817627,0.767204999923706,0.5,0.5,0.5,1.0,1.0,1.0
+6. Donna Weinbrecht ( U.S. ) 22.48,"{'PER': ['Donna Weinbrecht'], 'ORG': [], 'LOC': ['U.S.']}","{""PER"": [""Donna Weinbrecht""], ""ORG"": [], ""LOC"": [""U.S.""]}","```json
+{
+  ""PER"": [""Donna Weinbrecht""],
+  ""ORG"": [],
+  ""LOC"": [""U.S.""]
+}
+```",1.426206111907959,0.9278290271759033,1.0,1.0,1.0,1.0,1.0,1.0
+7. Liz McIntyre ( U.S. ) 22.00,"{'PER': ['Liz McIntyre'], 'ORG': [], 'LOC': ['U.S.']}","{""PER"": [""Liz McIntyre""], ""ORG"": [], ""LOC"": [""U.S.""]}","```json
+{
+  ""PER"": [""Liz McIntyre""],
+  ""ORG"": [],
+  ""LOC"": [""U.S.""]
+}
+```",1.0445950031280518,0.9021949768066406,1.0,1.0,1.0,1.0,1.0,1.0
+8. Elena Koroleva ( Russia ) 21.77,"{'PER': ['Elena Koroleva'], 'ORG': [], 'LOC': ['Russia']}","{""PER"": [""Elena Koroleva""], ""ORG"": [], ""LOC"": [""Russia""]}","```json
+{
+  ""PER"": [""Elena Koroleva""],
+  ""ORG"": [],
+  ""LOC"": [""Russia""]
+}
+```",1.3330061435699463,1.3308169841766357,1.0,1.0,1.0,1.0,1.0,1.0
+9. Ljudmila Dymchenko ( Russia ) 21.59,"{'PER': ['Ljudmila Dymchenko'], 'ORG': [], 'LOC': ['Russia']}","{""PER"": [""Ljudmila Dymchenko""], ""ORG"": [], ""LOC"": [""Russia""]}","```json
+{
+  ""PER"": [""Ljudmila Dymchenko""],
+  ""ORG"": [],
+  ""LOC"": [""Russia""]
+}
+```",1.2368898391723633,0.9321682453155518,1.0,1.0,1.0,1.0,1.0,1.0
+10. Katleen Allais ( France ) 21.58,"{'PER': ['Katleen Allais'], 'ORG': [], 'LOC': ['France']}","{
+  ""PER"": [""Katleen Allais""],
+  ""ORG"": [],
+  ""LOC"": [""France""]
+}","```json
+{
+  ""PER"": [""Katleen Allais""],
+  ""ORG"": [],
+  ""LOC"": [""France""]
+}
+```",1.1079671382904053,1.0962769985198975,1.0,1.0,1.0,1.0,1.0,1.0
+SOCCER - ASIAN CUP GROUP C RESULTS .,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [""Asian Cup""], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [""ASIAN CUP""],
+  ""LOC"": []
+}
+```",1.049288272857666,0.9243700504302979,0.0,0.0,0.0,0.0,0.0,0.0
+"AL-AIN , United Arab Emirates 1996-12-06","{'PER': [], 'ORG': [], 'LOC': ['AL-AIN', 'United Arab Emirates']}","{""PER"": [], ""ORG"": [], ""LOC"": [""AL-AIN"", ""United Arab Emirates""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""AL-AIN"", ""United Arab Emirates""]
+}
+```",0.8178842067718506,1.1236090660095215,1.0,1.0,1.0,1.0,1.0,1.0
+Results of Asian Cup group C matches played on Friday :,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": [""Asian Cup""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [""Asian Cup""],
+  ""LOC"": []
+}
+```",1.6067907810211182,0.8845479488372803,0.0,0.0,0.0,0.0,0.0,0.0
+Japan 2 Syria 1 ( halftime 0-1 ),"{'PER': [], 'ORG': [], 'LOC': ['Japan', 'Syria']}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": [""Japan"", ""Syria""]}
+```","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Japan"", ""Syria""]
+}
+```",1.0279722213745117,0.8836698532104492,1.0,1.0,1.0,1.0,1.0,1.0
+Scorers :,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```
+
+The text ""Scorers :"" contains no named entities to extract.",2.5623297691345215,0.8168478012084961,1.0,1.0,1.0,1.0,1.0,1.0
+"Japan - Hassan Abbas 84 own goal , Takuya Takagi 88 .","{'PER': ['Hassan Abbas', 'Takuya Takagi'], 'ORG': [], 'LOC': ['Japan']}","{""PER"": [""Hassan Abbas"", ""Takuya Takagi""], ""ORG"": [], ""LOC"": [""Japan""]}","```json
+{
+  ""PER"": [""Hassan Abbas"", ""Takuya Takagi""],
+  ""ORG"": [],
+  ""LOC"": [""Japan""]
+}
+```",1.5372910499572754,1.0398838520050049,1.0,1.0,1.0,1.0,1.0,1.0
+Syria - Nader Jokhadar 7,"{'PER': ['Nader Jokhadar'], 'ORG': [], 'LOC': ['Syria']}","{""PER"": [""Nader Jokhadar""], ""ORG"": [], ""LOC"": [""Syria""]}","```json
+{
+  ""PER"": [""Nader Jokhadar""],
+  ""ORG"": [],
+  ""LOC"": [""Syria""]
+}
+```",1.3015432357788086,0.8934671878814697,1.0,1.0,1.0,1.0,1.0,1.0
+"Attendance : 10,000 .","{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```",0.47754693031311035,0.8056418895721436,1.0,1.0,1.0,1.0,1.0,1.0
+China 0 Uzbekistan 2 ( halftime 0-0 ),"{'PER': [], 'ORG': [], 'LOC': ['China', 'Uzbekistan']}","{""PER"": [], ""ORG"": [], ""LOC"": [""China"", ""Uzbekistan""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""China"", ""Uzbekistan""]
+}
+```",1.4182789325714111,0.8470649719238281,1.0,1.0,1.0,1.0,1.0,1.0
+"Scorers : Shkvyrin Igor 78 , Shatskikh Oleg 90","{'PER': ['Shkvyrin Igor', 'Shatskikh Oleg'], 'ORG': [], 'LOC': []}","```json
+{""PER"": [""Shkvyrin Igor"", ""Shatskikh Oleg""], ""ORG"": [], ""LOC"": []}
+```","```json
+{
+  ""PER"": [""Shkvyrin Igor"", ""Shatskikh Oleg""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",1.3021190166473389,0.9218459129333496,1.0,1.0,1.0,1.0,1.0,1.0
+"Attendence : 3,000","{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```",0.7179830074310303,0.8719432353973389,1.0,1.0,1.0,1.0,1.0,1.0
+"Standings ( tabulate under played , won , drawn , lost , goals","{'PER': [], 'ORG': [], 'LOC': []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```
+
+The provided text contains only generic terms related to sports standings (played, won, drawn, lost, goals) and does not include any specific named entities.",0.5865879058837891,1.2719128131866455,1.0,1.0,1.0,1.0,1.0,1.0
+"for , goals against , points ) :","{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```",1.0433568954467773,0.888024091720581,1.0,1.0,1.0,1.0,1.0,1.0
+Uzbekistan 1 1 0 0 2 0 3,"{'PER': [], 'ORG': [], 'LOC': ['Uzbekistan']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Uzbekistan""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Uzbekistan""]
+}
+```",1.3782010078430176,0.7331922054290771,1.0,1.0,1.0,1.0,1.0,1.0
+Japan 1 1 0 0 2 1 3,"{'PER': [], 'ORG': [], 'LOC': ['Japan']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Japan""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Japan""]
+}
+```",0.8033010959625244,1.0209128856658936,1.0,1.0,1.0,1.0,1.0,1.0
+Syria 1 0 0 1 1 2 0,"{'PER': [], 'ORG': [], 'LOC': ['Syria']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Syria""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Syria""]
+}
+```",1.4356849193572998,0.9192168712615967,1.0,1.0,1.0,1.0,1.0,1.0
+China 1 0 0 1 0 2 0,"{'PER': [], 'ORG': [], 'LOC': ['China']}","{""PER"": [], ""ORG"": [], ""LOC"": [""China""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""China""]
+}
+```",0.8781952857971191,1.0207087993621826,1.0,1.0,1.0,1.0,1.0,1.0
+CRICKET - PAKISTAN V NEW ZEALAND ONE-DAY SCOREBOARD .,"{'PER': [], 'ORG': [], 'LOC': ['PAKISTAN', 'NEW ZEALAND']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Pakistan"", ""New Zealand""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""PAKISTAN"", ""NEW ZEALAND""]
+}
+```",0.8654391765594482,0.9217610359191895,1.0,1.0,1.0,1.0,1.0,1.0
+[ CORRECTED 14:06 GMT ],"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```
+
+The text contains only a timestamp correction notation with no named entities to extract.",0.8187437057495117,1.1011109352111816,1.0,1.0,1.0,1.0,1.0,1.0
+"SIALKOT , Pakistan 1996-12-06","{'PER': [], 'ORG': [], 'LOC': ['SIALKOT', 'Pakistan']}","{""PER"": [], ""ORG"": [], ""LOC"": [""Sialkot"", ""Pakistan""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""SIALKOT"", ""Pakistan""]
+}
+```",0.7403738498687744,0.8438527584075928,1.0,1.0,1.0,1.0,1.0,1.0
+Scoreboard in the second,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```
+
+The text ""Scoreboard in the second"" does not contain any clear named entities for persons, organizations, or locations.",0.8995308876037598,1.0828909873962402,1.0,1.0,1.0,1.0,1.0,1.0
+one-day cricket international between Pakistan and New Zealand,"{'PER': [], 'ORG': [], 'LOC': ['Pakistan']}","{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Pakistan"", ""New Zealand""]
+}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Pakistan"", ""New Zealand""]
+}
+```",1.2410612106323242,1.0335807800292969,0.5,1.0,0.6666666666666666,0.5,1.0,0.6666666666666666
+on Friday :,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": []}","```json
+{""PER"": [], ""ORG"": [], ""LOC"": []}
+```
+
+The text ""on Friday :"" does not contain any named entities. It only contains a day of the week, which is a common noun rather than a proper noun.",0.7020070552825928,1.159754991531372,1.0,1.0,1.0,1.0,1.0,1.0
+Pakistan,"{'PER': [], 'ORG': [], 'LOC': []}","{""PER"": [], ""ORG"": [], ""LOC"": [""Pakistan""]}","```json
+{
+  ""PER"": [],
+  ""ORG"": [],
+  ""LOC"": [""Pakistan""]
+}
+```",0.7181539535522461,0.820512056350708,0.0,0.0,0.0,0.0,0.0,0.0
+Saeed Anwar run out 91 ( corrects from 90 ),"{'PER': ['Saeed Anwar'], 'ORG': [], 'LOC': []}","{""PER"": [""Saeed Anwar""], ""ORG"": [], ""LOC"": []}","```json
+{
+  ""PER"": [""Saeed Anwar""],
+  ""ORG"": [],
+  ""LOC"": []
+}
+```",0.9204761981964111,0.8173630237579346,1.0,1.0,1.0,1.0,1.0,1.0
+Zahoor Elahi b Cairns 86 ( corrects from 87 ),"{'PER': ['Zahoor Elahi', 'Cairns'], 'ORG': [], 'LOC': []}","{""PER"": [""Zahoor Elahi""], ""ORG"": [], ""LOC"": [""Cairns""]}","```json
+{
+  ""PER"": [""Zahoor Elahi""],
+  ""ORG"": [],
+  ""LOC"": [""Cairns""]
+}
+```",0.9464960098266602,0.7934222221374512,1.0,1.0,1.0,1.0,1.0,1.0

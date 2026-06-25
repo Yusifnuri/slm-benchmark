@@ -1,0 +1,42 @@
+# Mistral-7B QLoRA configuration
+# Expose: "Mistral-7B-v0.3 with QLoRA (Weeks 7-8)"
+# QLoRA reduces GPU RAM from ~80GB to ~14GB via 4-bit quantization
+
+model:
+  name: "mistralai/Mistral-7B-v0.3"
+  max_length: 512
+  method: "qlora"                    # 4-bit quantization + LoRA
+
+qlora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  # QLoRA-specific quantization settings (Dettmers et al. 2023)
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "float16"  # adapter computation stays float16
+  bnb_4bit_quant_type: "nf4"        # NormalFloat4 — optimal for LLM weights
+  bnb_4bit_use_double_quant: true    # quantize quantization constants too
+
+training:
+  num_epochs: 3
+  batch_size: 2                      # smaller batch — 7B model
+  gradient_accumulation_steps: 8     # effective batch = 2x8 = 16
+  learning_rate: 2e-4
+  warmup_ratio: 0.03
+  lr_scheduler: "cosine"
+  fp16: true
+  save_steps: 100
+  logging_steps: 10
+  max_samples_train: 5000
+  max_samples_eval: 500
+
+cost:
+  gpu_cost_per_hour: 2.50
+  deployment: "on_premise"
+
+mlflow:
+  experiment_name: "phase2_mistral_qlora"
+  tracking_uri: "sqlite:///mlflow.db"

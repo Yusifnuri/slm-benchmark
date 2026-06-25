@@ -1,0 +1,36 @@
+# Llama-3.2-3B LoRA configuration
+# Expose: "Llama-3.2-3B with LoRA (Weeks 9-10)"
+
+model:
+  name: "meta-llama/Llama-3.2-3B-Instruct"
+  max_length: 512
+  method: "lora"                     # NOT qlora
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  num_epochs: 3
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 2e-4
+  warmup_ratio: 0.03
+  lr_scheduler: "cosine"
+  fp16: true
+  save_steps: 100
+  logging_steps: 10
+  max_samples_train: 5000
+  max_samples_eval: 500
+
+cost:
+  gpu_cost_per_hour: 2.50
+  deployment: "on_premise"
+
+mlflow:
+  experiment_name: "phase2_llama_lora"
+  tracking_uri: "sqlite:///mlflow.db"

@@ -1,0 +1,101 @@
+text,true_label,openai_pred,anthropic_pred,gemini_pred,openai_latency,anthropic_latency,gemini_latency
+Fears for T N pension after talks Unions represent,Business,Business,Business,Error,0.9866659641265869,1.873425006866455,0.5436527729034424
+The Race is On: Second Private Team Sets Launch Da,Technology,Technology,Technology,Error,0.42657995223999023,0.7476708889007568,0.2342529296875
+Ky. Company Wins Grant to Study Peptides (AP) AP -,Technology,Business,Technology,Error,0.603355884552002,1.0787310600280762,0.16269803047180176
+Prediction Unit Helps Forecast Wildfires (AP) AP -,Technology,Technology,Technology,Error,0.679739236831665,0.8707599639892578,0.15780210494995117
+Calif. Aims to Limit Farm-Related Smog (AP) AP - S,Technology,World,World,Error,0.736644983291626,0.7737152576446533,0.11366987228393555
+Open Letter Against British Copyright Indoctrinati,Technology,World,Business,Error,7.380554914474487,1.1018040180206299,0.25409889221191406
+"Loosing the War on Terrorism \\""Sven Jaschan, self",Technology,Technology,Technology,Error,0.6449778079986572,0.8023586273193359,0.23932385444641113
+"FOAFKey: FOAF, PGP, Key Distribution, and Bloom Fi",Technology,Technology,Technology,Error,0.5439589023590088,0.7806060314178467,0.07663583755493164
+E-mail scam targets police chief Wiltshire Police ,Technology,World,Business,Error,0.7653160095214844,0.7118058204650879,0.13680505752563477
+"Card fraud unit nets 36,000 cards In its first two",Technology,Business,Business,Error,0.7106058597564697,1.2344813346862793,0.11619400978088379
+Group to Propose New High-Speed Wireless Format  L,Technology,Technology,Technology,Error,0.7683603763580322,0.7552011013031006,0.2588200569152832
+"Apple Launches Graphics Software, Video Bundle  LO",Technology,Technology,Technology,Error,2.421143054962158,0.8666749000549316,0.07242703437805176
+Dutch Retailer Beats Apple to Local Download Marke,Technology,Business,Business,Error,0.4925999641418457,0.6443450450897217,0.1000978946685791
+Super ant colony hits Australia A giant 100km colo,Technology,World,World,Error,0.7381339073181152,1.0118188858032227,0.14275693893432617
+"Socialites unite dolphin groups Dolphin groups, or",Technology,World,World,Error,0.9286279678344727,0.7285690307617188,0.24832487106323242
+Teenage T. rex's monster growth Tyrannosaurus rex ,Technology,World,World,Error,0.6152870655059814,0.7333698272705078,0.09693312644958496
+Scientists Discover Ganymede has a Lumpy Interior ,Technology,World,Technology,Error,0.6076819896697998,0.7892987728118896,0.1383979320526123
+Mars Rovers Relay Images Through Mars Express Euro,Technology,Technology,Technology,Error,5.370147943496704,1.0905301570892334,0.3029208183288574
+Rocking the Cradle of Life When did life begin? On,Technology,World,World,Error,0.5109059810638428,1.0009779930114746,0.14840197563171387
+"Storage, servers bruise HP earnings update Earning",Technology,Business,Business,Error,1.138401985168457,0.7043740749359131,0.08586502075195312
+IBM to hire even more new workers By the end of th,Technology,Business,Business,Error,0.5944790840148926,0.70467209815979,0.10321283340454102
+Sun's Looking Glass Provides 3D View Developers ge,Technology,Technology,Technology,Error,0.6681699752807617,1.0149710178375244,0.3030390739440918
+IBM Chips May Someday Heal Themselves New technolo,Technology,Technology,Technology,Error,0.47183704376220703,0.894108772277832,0.17273592948913574
+Some People Not Eligible to Get in on Google IPO G,Technology,Business,Business,Error,3.727909803390503,1.110642910003662,0.5493812561035156
+Rivals Try to Turn Tables on Charles Schwab By MIC,Technology,Business,Business,Error,2.030465841293335,0.8195178508758545,0.07725167274475098
+News: Sluggish movement on power grid cyber securi,Technology,Technology,Technology,Error,2.034116744995117,0.7888989448547363,0.06779217720031738
+Giddy Phelps Touches Gold for First Time Michael P,Sports,Sports,Sports,Error,0.5331683158874512,0.7687258720397949,0.07759690284729004
+Tougher rules won't soften Law's game FOXBOROUGH -,Sports,Sports,Sports,Error,0.848330020904541,0.8163158893585205,0.11627769470214844
+Shoppach doesn't appear ready to hit the next leve,Sports,Sports,Sports,Error,0.632230281829834,0.7360696792602539,0.14879274368286133
+Mighty Ortiz makes sure Sox can rest easy Just ima,Sports,Sports,Sports,Error,0.8284502029418945,0.7560780048370361,0.07981109619140625
+They've caught his eye In  quot;helping themselves,Sports,Sports,Sports,Error,0.6365633010864258,0.8221149444580078,0.15820693969726562
+Indians Mount Charge The Cleveland Indians pulled ,Sports,Sports,Sports,Error,0.6023800373077393,0.7719888687133789,0.1275348663330078
+Sister of man who died in Vancouver police custody,World,World,World,Error,1.0302629470825195,1.5139141082763672,0.11345410346984863
+"Man Sought  #36;50M From McGreevey, Aides Say (AP)",World,World,World,Error,0.6658399105072021,0.8816890716552734,0.10517001152038574
+"Explosions Echo Throughout Najaf NAJAF, Iraq - Exp",World,World,World,Error,0.6137189865112305,0.7227849960327148,0.2462007999420166
+"Frail Pope Celebrates Mass at Lourdes LOURDES, Fra",World,World,World,Error,0.5013229846954346,0.8551506996154785,0.10685396194458008
+Venezuela Prepares for Chavez Recall Vote Supporte,World,World,World,Error,0.5657298564910889,0.7138750553131104,0.13047504425048828
+1994 Law Designed to Preserve Guard Jobs (AP) AP -,World,Business,World,Error,0.5386512279510498,0.7227230072021484,0.13347887992858887
+Iran Warns Its Missiles Can Hit Anywhere in Israel,World,World,World,Error,0.6083669662475586,0.779853105545044,0.5698750019073486
+"Afghan Army Dispatched to Calm Violence KABUL, Afg",World,World,World,Error,0.6965687274932861,0.7223620414733887,0.10861372947692871
+Johnson Helps D-Backs End Nine-Game Slide (AP) AP ,Sports,Sports,Sports,Error,0.5980470180511475,0.7130358219146729,0.12098479270935059
+Retailers Vie for Back-To-School Buyers (Reuters) ,Business,Business,Business,Error,0.5694050788879395,0.7490041255950928,0.08407878875732422
+Politics an Afterthought Amid Hurricane (AP) AP - ,World,World,World,Error,0.4492509365081787,0.7526800632476807,0.12713217735290527
+Spam suspension hits Sohu.com shares (FT.com) FT.c,Technology,Business,Business,Error,0.9425969123840332,0.7034120559692383,0.17098593711853027
+Erstad's Double Lifts Angels to Win (AP) AP - Dari,Sports,Sports,Sports,Error,1.8503508567810059,0.6830000877380371,0.08848071098327637
+Drew Out of Braves' Lineup After Injury (AP) AP - ,Sports,Sports,Sports,Error,0.9701733589172363,0.7503149509429932,0.07249212265014648
+"Venezuelans Flood Polls, Voting Extended  CARACAS,",World,World,World,Error,0.953671932220459,0.7324559688568115,0.12366104125976562
+Dell Exits Low-End China Consumer PC Market  HONG ,Technology,Business,Business,Error,0.6325891017913818,0.7473537921905518,0.14713597297668457
+China Says Taiwan Spy Also Operated in U.S. - Medi,World,World,World,Error,0.6646871566772461,0.7966079711914062,0.07191300392150879
+"Another Major Non-Factor Another major, another di",Sports,Sports,Sports,Error,1.2931389808654785,0.7983500957489014,0.13961505889892578
+US fighter squadron to be deployed in South Korea ,World,World,World,Error,0.9726841449737549,0.7370059490203857,0.10897707939147949
+Johnson Back to His Best as D-Backs End Streak  NE,Sports,Sports,Sports,Error,0.47351789474487305,0.7790470123291016,0.07435488700866699
+Restive Maldives eases curfew after rounding up di,World,World,World,Error,0.49697017669677734,0.779120922088623,0.09241700172424316
+Vodafone hires Citi for Cesky bid (TheDeal.com) Th,Technology,Business,Business,Error,0.47232604026794434,1.694153070449829,0.14163899421691895
+Dollar Briefly Hits 4-Wk Low Vs Euro  LONDON (Reut,Business,Business,Business,Error,0.600916862487793,0.8209328651428223,0.08903193473815918
+Promoting a Shared Vision As Michael Kaleko kept r,Technology,World,Business,Error,0.8392338752746582,1.0995941162109375,0.10254096984863281
+India's Tata expands regional footprint via NatSte,World,Business,Business,Error,0.817828893661499,0.7218301296234131,0.09201884269714355
+Delegates Urge Cleric to Pull Out of Najaf BAGHDAD,World,World,World,Error,1.4873559474945068,0.6882867813110352,0.1260678768157959
+Treasuries Slip as Stocks Rally  NEW YORK (Reuters,Business,Business,Business,Error,1.059845209121704,0.8199810981750488,0.13497591018676758
+Dollar Rises Vs Euro on Asset Flows Data  NEW YORK,Business,Business,Business,Error,0.6166019439697266,0.6378271579742432,0.09169578552246094
+"Sutton Adds Haas, Cink to Ryder Cup Team  MILWAUKE",Sports,Sports,Sports,Error,0.697700023651123,0.7976820468902588,0.11225080490112305
+Haas and Cink Selected for Ryder Cup Team Jay Haas,Sports,Sports,Sports,Error,0.6096909046173096,0.7869429588317871,0.3849170207977295
+Natalie Coughlin Wins 100M Backstroke (AP) AP - Am,Sports,Sports,Sports,Error,0.7104499340057373,0.7167549133300781,0.11491012573242188
+Oracle Overhauls Sales-Side Apps for CRM Suite (Ne,Technology,Technology,Technology,Error,0.7500150203704834,0.8784000873565674,0.13740801811218262
+UN launches 210-million-dollar appeal for flood-hi,World,World,World,Error,0.6074719429016113,0.9484999179840088,0.206298828125
+Indian state rolls out wireless broadband Governme,Technology,Technology,Technology,Error,0.9638819694519043,0.9523072242736816,0.08246397972106934
+"Hurricane Survivors Wait for Water, Gas PUNTA GORD",World,World,World,Error,0.5288262367248535,0.6932988166809082,0.11585402488708496
+"Jackson Squares Off With Prosecutor SANTA MARIA, C",World,World,World,Error,0.5748260021209717,0.9125549793243408,0.11017489433288574
+Bobcats Trade Drobnjak to Hawks for Pick (AP) AP -,Sports,Sports,Sports,Error,0.6006979942321777,0.7601690292358398,0.07064294815063477
+"Suspect charged in abduction, sexual assault of 11",World,World,World,Error,1.130363941192627,0.8115427494049072,0.10663604736328125
+China's Red Flag Linux to focus on enterprise Red ,Technology,Technology,Technology,Error,0.92183518409729,0.832017183303833,0.139420747756958
+AOL Properties Sign Girafa For Thumbnail Search Im,Technology,Technology,Technology,Error,0.6425330638885498,0.8521590232849121,0.24271607398986816
+Cassini Spies Two Little Saturn Moons (AP) AP - NA,Technology,World,Technology,Error,1.391798973083496,1.2483899593353271,0.07512092590332031
+On front line of AIDS in Russia An industrial city,World,World,World,Error,2.3174140453338623,2.2318899631500244,0.08524274826049805
+Nobel Laureate Decries Stem Cell Limits (AP) AP - ,Technology,World,Technology,Error,1.0362038612365723,0.6885743141174316,0.08558797836303711
+Jury Can Hear of Kobe Accuser's Sex Life (AP) AP -,Sports,World,Sports,Error,0.5431580543518066,0.7017121315002441,0.12005925178527832
+"North Korea Talks Still On, China Tells Downer (Re",World,World,World,Error,0.3681960105895996,0.7737469673156738,0.12929582595825195
+Griffin to Anchor D-Line The Redskins expect huge ,Sports,Sports,Sports,Error,0.6334929466247559,0.698436975479126,0.11756086349487305
+Last American defector in North Korea agrees to te,World,World,World,Error,0.4480612277984619,0.6883270740509033,0.13118505477905273
+Live: Olympics day four Richard Faulds and Stephen,World,Sports,Sports,Error,0.983773946762085,0.7297580242156982,0.10007095336914062
+"Kerry Widens Lead in California, Poll Finds (Reute",World,World,World,Error,2.4691619873046875,0.9172279834747314,0.1327059268951416
+Capacity Crowds at Beach Volleyball Rock the Joint,Sports,Sports,Sports,Error,0.6266908645629883,0.748420238494873,0.09875917434692383
+"Dollar Near Recent Lows, Awaits ZEW/CPI  LONDON (R",Business,Business,Business,Error,1.6348180770874023,0.7440969944000244,0.08719420433044434
+Intel to delay product aimed for high-definition T,Business,Technology,Technology,Error,0.6481258869171143,0.8063828945159912,0.1212611198425293
+Venezuela vote keeps Chavez as president CARACAS -,World,World,World,Error,0.657958984375,0.9987189769744873,0.1181638240814209
+Jailing of HK democrat in China 'politically motiv,World,World,World,Error,3.2231152057647705,0.7413160800933838,0.11853599548339844
+Kmart Swings to Profit in 2Q; Stock Surges (AP) AP,Business,Business,Business,Error,1.1324589252471924,0.876349925994873,0.1286027431488037
+Fischer's Fiancee: Marriage Plans Genuine (AP) AP ,World,World,Sports,Error,0.5205061435699463,0.7160696983337402,0.07949376106262207
+"U.S. Misses Cut in Olympic 100 Free ATHENS, Greece",World,Sports,Sports,Error,0.7595572471618652,0.9887399673461914,0.11472702026367188
+Consumers Would Pay In Phone Proposal A proposal b,Technology,Business,Business,Error,0.6121180057525635,0.7961831092834473,0.1435542106628418
+U.S. Brokers Cease-fire in Western Afghanistan  KA,World,World,World,Error,0.5668227672576904,0.9139919281005859,0.10203385353088379
+Sneaky Credit Card Tactics Keep an eye on your cre,Business,Business,Business,Error,0.6465890407562256,0.7753520011901855,0.08362078666687012
+Intel Delays Launch of Projection TV Chip In anoth,Technology,Technology,Technology,Error,3.8900351524353027,0.8973329067230225,0.11552071571350098
+Fund pessimism grows NEW YORK (CNN/Money) - Money ,Business,Business,Business,Error,0.5392332077026367,0.727043867111206,0.08818984031677246
+Kederis proclaims innocence Olympic champion Kosta,Sports,Sports,Sports,Error,0.5442261695861816,1.148723840713501,0.10926413536071777
+Eriksson doesn #39;t feel any extra pressure follo,Sports,Sports,Sports,Error,0.4897792339324951,0.8989241123199463,0.08884596824645996
+"Injured Heskey to miss England friendly NEWCASTLE,",Sports,Sports,Sports,Error,0.49750494956970215,1.0233972072601318,0.10814309120178223
+"Staples Profit Up, to Enter China Market  NEW YORK",Business,Business,Business,Error,0.558837890625,1.1964850425720215,0.08782386779785156
+Delegation Is Delayed Before Reaching Najaf AGHDAD,World,World,World,Error,0.6692068576812744,1.2771258354187012,0.08094429969787598
+"Consumer Prices Down, Industry Output Up  WASHINGT",Business,Business,Business,Error,0.6415648460388184,0.8224880695343018,0.12006187438964844
