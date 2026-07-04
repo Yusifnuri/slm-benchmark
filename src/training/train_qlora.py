@@ -87,6 +87,15 @@ def build_qlora_model(model_name: str, qlora_cfg: dict):
 
     model = get_peft_model(model, lora_config)
     model.print_trainable_parameters()
+
+    # Gradient checkpointing trades compute for memory. Combined with 4-bit
+    # quantization this is what keeps Mistral-7B fine-tuning inside a single
+    # consumer/workstation GPU's VRAM budget. enable_input_require_grads() is
+    # required alongside it for PEFT models, otherwise no gradients flow to
+    # the LoRA adapters when the base model is frozen.
+    model.gradient_checkpointing_enable()
+    model.enable_input_require_grads()
+
     return model, tokenizer
 
 
@@ -109,8 +118,11 @@ def train(config_path: str, task: str, financial_path: str = None):
         financial_phrasebank_path=financial_path,
     )
     eval_ds = SLMDataset(
+        # "validation" here is for Trainer's periodic loss checks /
+        # load_best_model_at_end checkpoint selection only. Final reported
+        # benchmark numbers come from the untouched "test" split in evaluate.py.
         task=task,
-        split="validation" if task != "code_generation" else "test",
+        split="validation",
         tokenizer=tokenizer,
         max_length=cfg["model"]["max_length"],
         max_samples=cfg["training"]["max_samples_eval"],
@@ -131,7 +143,7 @@ def train(config_path: str, task: str, financial_path: str = None):
         fp16=cfg["training"]["fp16"],
         save_steps=cfg["training"]["save_steps"],
         logging_steps=cfg["training"]["logging_steps"],
-        evaluation_strategy="steps",
+        eval_strategy="steps",
         eval_steps=100,
         load_best_model_at_end=True,
         report_to="mlflow",

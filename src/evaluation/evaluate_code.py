@@ -9,10 +9,13 @@ pass@k = probability that at least 1 of k generated solutions passes all unit te
 import sys
 import os
 import time
+import multiprocessing
 import torch
 import numpy as np
 import mlflow
 from typing import List, Tuple, Optional
+
+CODE_EXEC_TIMEOUT_SECONDS = 5
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -79,19 +82,39 @@ def generate_solutions(
     return solutions, float(np.mean(latencies))
 
 
-def check_solution(prompt: str, solution: str, test_code: str, entry_point: str) -> bool:
-    """
-    Execute a generated solution against HumanEval unit tests.
-    Returns True if all tests pass, False otherwise.
-    """
+def _exec_target(prompt: str, solution: str, test_code: str, entry_point: str, result_queue) -> None:
+    """Runs in a separate process so a hanging/unsafe generated solution can't
+    block or damage the parent (evaluation) process."""
     try:
         exec_globals = {}
         exec(prompt + solution, exec_globals)
         exec(test_code, exec_globals)
         exec(f"check({entry_point})", exec_globals)
-        return True
+        result_queue.put(True)
     except Exception:
+        result_queue.put(False)
+
+
+def check_solution(prompt: str, solution: str, test_code: str, entry_point: str) -> bool:
+    """
+    Execute a generated solution against HumanEval unit tests in an isolated
+    subprocess with a timeout, since model-generated code is untrusted and may
+    hang (infinite loops) or misbehave. Returns True if all tests pass.
+    """
+    result_queue: multiprocessing.Queue = multiprocessing.Queue()
+    proc = multiprocessing.Process(
+        target=_exec_target,
+        args=(prompt, solution, test_code, entry_point, result_queue),
+    )
+    proc.start()
+    proc.join(timeout=CODE_EXEC_TIMEOUT_SECONDS)
+
+    if proc.is_alive():
+        proc.terminate()
+        proc.join()
         return False
+
+    return result_queue.get() if not result_queue.empty() else False
 
 
 def evaluate_humaneval(
