@@ -1,0 +1,2009 @@
+task_id,entry_point,openai_pass,anthropic_pass,gemini_pass,openai_latency_s,anthropic_latency_s,gemini_latency_s,openai_code,anthropic_code,gemini_code
+HumanEval/0,has_close_elements,0,0,0,1.213,1.449,1.16,"def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    numbers.sort()
+    for i in range(len(numbers) - 1):
+        if abs(numbers[i] - numbers[i + 1]) < threshold:
+            return True
+    return False","def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers, are any two numbers closer to each other than
+    given threshold.
+    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+    False
+    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
+    True
+    """"""
+    for i in range(len(numbers)):
+        for j in range(i + 1, len(numbers)):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False","from typing import List
+
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers, are any two numbers closer to each other than
+    given threshold.
+    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+    False
+    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
+    True
+    """"""
+    n = len(numbers)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False"
+HumanEval/1,separate_paren_groups,0,0,0,1.125,2.104,1.263,"def separate_paren_groups(paren_string: str) -> List[str]:
+    paren_string = paren_string.replace("" "", """")
+    result = []
+    balance = 0
+    current_group = []
+
+    for char in paren_string:
+        current_group.append(char)
+        if char == '(':
+            balance += 1
+        elif char == ')':
+            balance -= 1
+
+        if balance == 0 and current_group:
+            result.append(''.join(current_group))
+            current_group = []
+
+    return result","def separate_paren_groups(paren_string: str) -> List[str]:
+    """""" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to
+    separate those group into separate strings and return the list of those.
+    Separate groups are balanced (each open brace is properly closed) and not nested within each other
+    Ignore any spaces in the input string.
+    >>> separate_paren_groups('( ) (( )) (( )( ))')
+    ['()', '(())', '(()())']
+    """"""
+    # Remove spaces from the input string
+    paren_string = paren_string.replace(' ', '')
+    
+    result = []
+    current_group = ''
+    depth = 0
+    
+    for char in paren_string:
+        if char == '(':
+            current_group += char
+            depth += 1
+        elif char == ')':
+            current_group += char
+            depth -= 1
+            # When depth reaches 0, we've completed a group
+            if depth == 0:
+                result.append(current_group)
+                current_group = ''
+    
+    return result","def separate_paren_groups(paren_string: str) -> List[str]:
+    """""" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to
+    separate those group into separate strings and return the list of those.
+    Separate groups are balanced (each open brace is properly closed) and not nested within each other
+    Ignore any spaces in the input string.
+    >>> separate_paren_groups('( ) (( )) (( )( ))')
+    ['()', '(())', '(()())']
+    """"""
+    result = []
+    current_group = []
+    balance = 0
+
+    for char in paren_string:
+        if char == ' ':
+            continue
+
+        current_group.append(char)
+        if char == '(':
+            balance += 1
+        elif char == ')':
+            balance -= 1
+
+        if balance == 0 and current_group:
+            result.append("""".join(current_group))
+            current_group = []
+    return result"
+HumanEval/2,truncate_number,0,0,0,1.198,1.127,0.845,"def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    an integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+    return number - int(number)","def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+    return number - int(number)","def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+    return number - int(number)"
+HumanEval/3,below_zero,0,0,0,0.85,1.209,1.221,"def below_zero(operations: List[int]) -> bool:
+    balance = 0
+    for operation in operations:
+        balance += operation
+        if balance < 0:
+            return True
+    return False","def below_zero(operations: List[int]) -> bool:
+    """""" You're given a list of deposit and withdrawal operations on a bank account that starts with
+    zero balance. Your task is to detect if at any point the balance of account fallls below zero, and
+    at that point function should return True. Otherwise it should return False.
+    >>> below_zero([1, 2, 3])
+    False
+    >>> below_zero([1, 2, -4, 5])
+    True
+    """"""
+    balance = 0
+    for operation in operations:
+        balance += operation
+        if balance < 0:
+            return True
+    return False","def below_zero(operations: List[int]) -> bool:
+    """""" You're given a list of deposit and withdrawal operations on a bank account that starts with
+    zero balance. Your task is to detect if at any point the balance of account fallls below zero, and
+    at that point function should return True. Otherwise it should return False.
+    >>> below_zero([1, 2, 3])
+    False
+    >>> below_zero([1, 2, -4, 5])
+    True
+    """"""
+    balance = 0
+    for op in operations:
+        balance += op
+        if balance < 0:
+            return True
+    return False"
+HumanEval/4,mean_absolute_deviation,0,0,0,1.076,1.34,1.013,"def mean_absolute_deviation(numbers: List[float]) -> float:
+    if not numbers:
+        return 0.0
+    mean = sum(numbers) / len(numbers)
+    mad = sum(abs(x - mean) for x in numbers) / len(numbers)
+    return mad","def mean_absolute_deviation(numbers: List[float]) -> float:
+    """""" For a given list of input numbers, calculate Mean Absolute Deviation
+    around the mean of this dataset.
+    Mean Absolute Deviation is the average absolute difference between each
+    element and a centerpoint (mean in this case):
+    MAD = average | x - x_mean |
+    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])
+    1.0
+    """"""
+    mean = sum(numbers) / len(numbers)
+    return sum(abs(x - mean) for x in numbers) / len(numbers)","from typing import List
+
+
+def mean_absolute_deviation(numbers: List[float]) -> float:
+    """""" For a given list of input numbers, calculate Mean Absolute Deviation
+    around the mean of this dataset.
+    Mean Absolute Deviation is the average absolute difference between each
+    element and a centerpoint (mean in this case):
+    MAD = average | x - x_mean |
+    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])
+    1.0
+    """"""
+    if not numbers:
+        return 0.0
+
+    mean = sum(numbers) / len(numbers)
+    mad = sum(abs(x - mean) for x in numbers) / len(numbers)
+    return mad"
+HumanEval/5,intersperse,0,0,0,0.874,1.432,1.343,"def intersperse(numbers: List[int], delimeter: int) -> List[int]:
+    if not numbers:
+        return []
+    result = []
+    for i in range(len(numbers) - 1):
+        result.append(numbers[i])
+        result.append(delimeter)
+    result.append(numbers[-1])
+    return result","def intersperse(numbers: List[int], delimeter: int) -> List[int]:
+    """""" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'
+    >>> intersperse([], 4)
+    []
+    >>> intersperse([1, 2, 3], 4)
+    [1, 4, 2, 4, 3]
+    """"""
+    if not numbers:
+        return []
+    
+    result = []
+    for i, num in enumerate(numbers):
+        result.append(num)
+        if i < len(numbers) - 1:
+            result.append(delimeter)
+    
+    return result","from typing import List
+
+
+def intersperse(numbers: List[int], delimeter: int) -> List[int]:
+    """""" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'
+    >>> intersperse([], 4)
+    []
+    >>> intersperse([1, 2, 3], 4)
+    [1, 4, 2, 4, 3]
+    """"""
+    if not numbers:
+        return []
+
+    result = []
+    for i, num in enumerate(numbers):
+        result.append(num)
+        if i < len(numbers) - 1:
+            result.append(delimeter)
+    return result"
+HumanEval/6,parse_nested_parens,0,0,0,1.055,1.46,1.29,"def parse_nested_parens(paren_string: str) -> List[int]:
+    def max_nesting_level(s: str) -> int:
+        max_level = 0
+        current_level = 0
+        for char in s:
+            if char == '(':
+                current_level += 1
+                max_level = max(max_level, current_level)
+            elif char == ')':
+                current_level -= 1
+        return max_level
+
+    groups = paren_string.split()
+    return [max_nesting_level(group) for group in groups]","def parse_nested_parens(paren_string: str) -> List[int]:
+    """""" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+    For each of the group, output the deepest level of nesting of parentheses.
+    E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+    >>> parse_nested_parens('(()()) ((())) () ((())()())')
+    [2, 3, 1, 3]
+    """"""
+    groups = paren_string.split()
+    result = []
+    
+    for group in groups:
+        max_depth = 0
+        current_depth = 0
+        
+        for char in group:
+            if char == '(':
+                current_depth += 1
+                max_depth = max(max_depth, current_depth)
+            elif char == ')':
+                current_depth -= 1
+        
+        result.append(max_depth)
+    
+    return result","def parse_nested_parens(paren_string: str) -> List[int]:
+    """""" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+    For each of the group, output the deepest level of nesting of parentheses.
+    E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+    >>> parse_nested_parens('(()()) ((())) () ((())()())')
+    [2, 3, 1, 3]
+    """"""
+    groups = paren_string.split(' ')
+    results = []
+
+    for group in groups:
+        max_depth = 0
+        current_depth = 0
+        for char in group:
+            if char == '(':
+                current_depth += 1
+                max_depth = max(max_depth, current_depth)
+            elif char == ')':
+                current_depth -= 1
+        results.append(max_depth)
+    return results"
+HumanEval/7,filter_by_substring,0,0,0,0.767,1.164,0.884,"def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+return [s for s in strings if substring in s]","def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+    """""" Filter an input list of strings only for ones that contain given substring
+    >>> filter_by_substring([], 'a')
+    []
+    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')
+    ['abc', 'bacd', 'array']
+    """"""
+    return [s for s in strings if substring in s]","def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+    """""" Filter an input list of strings only for ones that contain given substring
+    >>> filter_by_substring([], 'a')
+    []
+    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')
+    ['abc', 'bacd', 'array']
+    """"""
+    return [s for s in strings if substring in s]"
+HumanEval/8,sum_product,0,0,0,0.74,1.152,1.007,"def sum_product(numbers: List[int]) -> Tuple[int, int]:
+    total_sum = sum(numbers)
+    total_product = 1
+    for number in numbers:
+        total_product *= number
+    return total_sum, total_product","def sum_product(numbers: List[int]) -> Tuple[int, int]:
+    """""" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.
+    Empty sum should be equal to 0 and empty product should be equal to 1.
+    >>> sum_product([])
+    (0, 1)
+    >>> sum_product([1, 2, 3, 4])
+    (10, 24)
+    """"""
+    total_sum = sum(numbers)
+    total_product = 1
+    for num in numbers:
+        total_product *= num
+    return (total_sum, total_product)","from typing import List, Tuple
+
+
+def sum_product(numbers: List[int]) -> Tuple[int, int]:
+    """""" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.
+    Empty sum should be equal to 0 and empty product should be equal to 1.
+    >>> sum_product([])
+    (0, 1)
+    >>> sum_product([1, 2, 3, 4])
+    (10, 24)
+    """"""
+    total_sum = 0
+    total_product = 1
+
+    for number in numbers:
+        total_sum += number
+        total_product *= number
+
+    return (total_sum, total_product)"
+HumanEval/9,rolling_max,0,0,0,0.797,1.223,1.239,"def rolling_max(numbers: List[int]) -> List[int]:
+if not numbers:
+        return []
+    
+    max_so_far = numbers[0]
+    result = [max_so_far]
+    
+    for num in numbers[1:]:
+        if num > max_so_far:
+            max_so_far = num
+        result.append(max_so_far)
+    
+    return result","def rolling_max(numbers: List[int]) -> List[int]:
+    """""" From a given list of integers, generate a list of rolling maximum element found until given moment
+    in the sequence.
+    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])
+    [1, 2, 3, 3, 3, 4, 4]
+    """"""
+    if not numbers:
+        return []
+    
+    result = []
+    current_max = float('-inf')
+    
+    for num in numbers:
+        current_max = max(current_max, num)
+        result.append(current_max)
+    
+    return result","from typing import List, Tuple
+
+
+def rolling_max(numbers: List[int]) -> List[int]:
+    """""" From a given list of integers, generate a list of rolling maximum element found until given moment
+    in the sequence.
+    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])
+    [1, 2, 3, 3, 3, 4, 4]
+    """"""
+    if not numbers:
+        return []
+
+    rolling_max_list = []
+    current_max = float('-inf')
+
+    for number in numbers:
+        if number > current_max:
+            current_max = number
+        rolling_max_list.append(current_max)
+
+    return rolling_max_list"
+HumanEval/10,make_palindrome,0,0,0,0.971,1.695,1.497,"def make_palindrome(string: str) -> str:
+if is_palindrome(string):
+        return string
+    
+    for i in range(len(string)):
+        if is_palindrome(string[i:]):
+            return string + string[:i][::-1]
+    
+    return string + string[:-1][::-1]","def make_palindrome(string: str) -> str:
+    """""" Find the shortest palindrome that begins with a supplied string.
+    Algorithm idea is simple:
+    - Find the longest postfix of supplied string that is a palindrome.
+    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.
+    >>> make_palindrome('')
+    ''
+    >>> make_palindrome('cat')
+    'catac'
+    >>> make_palindrome('cata')
+    'catac'
+    """"""
+    if not string:
+        return string
+    
+    # Find the longest palindromic suffix starting from index 0
+    # We want to find the smallest prefix that needs to be reversed and appended
+    for i in range(len(string)):
+        # Check if string[i:] is a palindrome
+        if is_palindrome(string[i:]):
+            # If it is, we need to append the reverse of string[:i] to the end
+            return string + string[:i][::-1]
+    
+    return string","def make_palindrome(string: str) -> str:
+    """""" Find the shortest palindrome that begins with a supplied string.
+    Algorithm idea is simple:
+    - Find the longest postfix of supplied string that is a palindrome.
+    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.
+    >>> make_palindrome('')
+    ''
+    >>> make_palindrome('cat')
+    'catac'
+    >>> make_palindrome('cata')
+    'catac'
+    """"""
+    if not string:
+        return """"
+
+    longest_palindromic_suffix_len = 0
+    for i in range(len(string)):
+        suffix = string[i:]
+        if suffix == suffix[::-1]:
+            longest_palindromic_suffix_len = len(suffix)
+            break
+
+    prefix_to_reverse = string[:len(string) - longest_palindromic_suffix_len]
+    return string + prefix_to_reverse[::-1]"
+HumanEval/11,string_xor,0,0,0,0.661,1.156,1.222,"def string_xor(a: str, b: str) -> str:
+return ''.join('1' if x != y else '0' for x, y in zip(a, b))","def string_xor(a: str, b: str) -> str:
+    """""" Input are two strings a and b consisting only of 1s and 0s.
+    Perform binary XOR on these inputs and return result also as a string.
+    >>> string_xor('010', '110')
+    '100'
+    """"""
+    return ''.join(str(int(x) ^ int(y)) for x, y in zip(a, b))","def string_xor(a: str, b: str) -> str:
+    """""" Input are two strings a and b consisting only of 1s and 0s.
+    Perform binary XOR on these inputs and return result also as a string.
+    >>> string_xor('010', '110')
+    '100'
+    """"""
+    result = []
+    for i in range(len(a)):
+        if a[i] == b[i]:
+            result.append('0')
+        else:
+            result.append('1')
+    return """".join(result)"
+HumanEval/12,longest,0,0,0,0.87,1.024,1.002,"def longest(strings: List[str]) -> Optional[str]:
+if not strings:
+        return None
+    return max(strings, key=len)","def longest(strings: List[str]) -> Optional[str]:
+    """""" Out of list of strings, return the longest one. Return the first one in case of multiple
+    strings of the same length. Return None in case the input list is empty.
+    >>> longest([])
+
+    >>> longest(['a', 'b', 'c'])
+    'a'
+    >>> longest(['a', 'bb', 'ccc'])
+    'ccc'
+    """"""
+    if not strings:
+        return None
+    return max(strings, key=len)","from typing import List, Optional
+
+
+def longest(strings: List[str]) -> Optional[str]:
+    """""" Out of list of strings, return the longest one. Return the first one in case of multiple
+    strings of the same length. Return None in case the input list is empty.
+    >>> longest([])
+
+    >>> longest(['a', 'b', 'c'])
+    'a'
+    >>> longest(['a', 'bb', 'ccc'])
+    'ccc'
+    """"""
+    if not strings:
+        return None
+
+    longest_string = strings[0]
+    for s in strings:
+        if len(s) > len(longest_string):
+            longest_string = s
+    return longest_string"
+HumanEval/13,greatest_common_divisor,0,0,0,1.166,1.1,1.039,"def greatest_common_divisor(a: int, b: int) -> int:
+    """""" Return a greatest common divisor of two integers a and b
+    >>> greatest_common_divisor(3, 5)
+    1
+    >>> greatest_common_divisor(25, 15)
+    5
+    """"""
+    while b:
+        a, b = b, a % b
+    return abs(a)","def greatest_common_divisor(a: int, b: int) -> int:
+    """""" Return a greatest common divisor of two integers a and b
+    >>> greatest_common_divisor(3, 5)
+    1
+    >>> greatest_common_divisor(25, 15)
+    5
+    """"""
+    while b:
+        a, b = b, a % b
+    return abs(a)","def greatest_common_divisor(a: int, b: int) -> int:
+    """""" Return a greatest common divisor of two integers a and b
+    >>> greatest_common_divisor(3, 5)
+    1
+    >>> greatest_common_divisor(25, 15)
+    5
+    """"""
+    while b:
+        a, b = b, a % b
+    return a"
+HumanEval/14,all_prefixes,0,0,0,0.936,0.908,1.044,"def all_prefixes(string: str) -> List[str]:
+return [string[:i] for i in range(1, len(string) + 1)]","def all_prefixes(string: str) -> List[str]:
+    """""" Return list of all prefixes from shortest to longest of the input string
+    >>> all_prefixes('abc')
+    ['a', 'ab', 'abc']
+    """"""
+    return [string[:i] for i in range(1, len(string) + 1)]","def all_prefixes(string: str) -> List[str]:
+    """""" Return list of all prefixes from shortest to longest of the input string
+    >>> all_prefixes('abc')
+    ['a', 'ab', 'abc']
+    """"""
+    prefixes = []
+    for i in range(1, len(string) + 1):
+        prefixes.append(string[0:i])
+    return prefixes"
+HumanEval/15,string_sequence,0,0,0,0.931,0.954,0.755,"def string_sequence(n: int) -> str:
+    """""" Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+    >>> string_sequence(0)
+    '0'
+    >>> string_sequence(5)
+    '0 1 2 3 4 5'
+    """"""
+    return ' '.join(str(i) for i in range(n + 1))","def string_sequence(n: int) -> str:
+    """""" Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+    >>> string_sequence(0)
+    '0'
+    >>> string_sequence(5)
+    '0 1 2 3 4 5'
+    """"""
+    return ' '.join(str(i) for i in range(n + 1))","def string_sequence(n: int) -> str:
+    """""" Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+    >>> string_sequence(0)
+    '0'
+    >>> string_sequence(5)
+    '0 1 2 3 4 5'
+    """"""
+    return ' '.join(str(i) for i in range(n + 1))"
+HumanEval/16,count_distinct_characters,0,0,0,0.73,1.405,0.748,"def count_distinct_characters(string: str) -> int:
+    """""" Given a string, find out how many distinct characters (regardless of case) does it consist of """"""
+    return len(set(string.lower()))","def count_distinct_characters(string: str) -> int:
+    """""" Given a string, find out how many distinct characters (regardless of case) does it consist of
+    >>> count_distinct_characters('xyzXYZ')
+    3
+    >>> count_distinct_characters('Jerry')
+    4
+    """"""
+    return len(set(string.lower()))","def count_distinct_characters(string: str) -> int:
+    """""" Given a string, find out how many distinct characters (regardless of case) does it consist of
+    >>> count_distinct_characters('xyzXYZ')
+    3
+    >>> count_distinct_characters('Jerry')
+    4
+    """"""
+    seen_characters = set()
+    for char in string:
+        seen_characters.add(char.lower())
+    return len(seen_characters)"
+HumanEval/17,parse_music,0,0,0,1.915,1.797,1.602,"def parse_music(music_string: str) -> List[int]:
+    note_map = {
+        'o': 4,
+        'o|': 2,
+        '.|': 1
+    }
+    notes = music_string.split()
+    beats = []
+    i = 0
+    while i < len(notes):
+        if i < len(notes) - 1 and notes[i] + notes[i + 1] in note_map:
+            beats.append(note_map[notes[i] + notes[i + 1]])
+            i += 2
+        else:
+            beats.append(note_map[notes[i]])
+            i += 1
+    return beats","def parse_music(music_string: str) -> List[int]:
+    """""" Input to this function is a string representing musical notes in a special ASCII format.
+    Your task is to parse this string and return list of integers corresponding to how many beats does each
+    not last.
+
+    Here is a legend:
+    'o' - whole note, lasts four beats
+    'o|' - half note, lasts two beats
+    '.|' - quater note, lasts one beat
+
+    >>> parse_music('o o| .| o| o| .| .| .| .| o o')
+    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]
+    """"""
+    note_map = {
+        'o': 4,
+        'o|': 2,
+        '.|': 1
+    }
+    
+    notes = music_string.split()
+    return [note_map[note] for note in notes]","def parse_music(music_string: str) -> List[int]:
+    """""" Input to this function is a string representing musical notes in a special ASCII format.
+    Your task is to parse this string and return list of integers corresponding to how many beats does each
+    not last.
+
+    Here is a legend:
+    'o' - whole note, lasts four beats
+    'o|' - half note, lasts two beats
+    '.|' - quater note, lasts one beat
+
+    >>> parse_music('o o| .| o| o| .| .| .| .| o o')
+    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]
+    """"""
+    beats = []
+    notes = music_string.split(' ')
+    for note in notes:
+        if note == 'o':
+            beats.append(4)
+        elif note == 'o|':
+            beats.append(2)
+        elif note == '.|':
+            beats.append(1)
+    return beats"
+HumanEval/18,how_many_times,0,0,0,1.403,1.288,1.179,"def how_many_times(string: str, substring: str) -> int:
+    """""" Find how many times a given substring can be found in the original string. Count overlapping cases.
+    >>> how_many_times('', 'a')
+    0
+    >>> how_many_times('aaa', 'a')
+    3
+    >>> how_many_times('aaaa', 'aa')
+    3
+    """"""
+    count = start = 0
+    while True:
+        start = string.find(substring, start)
+        if start == -1:
+            break
+        count += 1
+        start += 1
+    return count","def how_many_times(string: str, substring: str) -> int:
+    """""" Find how many times a given substring can be found in the original string. Count overlaping cases.
+    >>> how_many_times('', 'a')
+    0
+    >>> how_many_times('aaa', 'a')
+    3
+    >>> how_many_times('aaaa', 'aa')
+    3
+    """"""
+    if not substring or not string:
+        return 0
+    
+    count = 0
+    for i in range(len(string) - len(substring) + 1):
+        if string[i:i + len(substring)] == substring:
+            count += 1
+    
+    return count","def how_many_times(string: str, substring: str) -> int:
+    """""" Find how many times a given substring can be found in the original string. Count overlaping cases.
+    >>> how_many_times('', 'a')
+    0
+    >>> how_many_times('aaa', 'a')
+    3
+    >>> how_many_times('aaaa', 'aa')
+    3
+    """"""
+    count = 0
+    for i in range(len(string) - len(substring) + 1):
+        if string[i:i+len(substring)] == substring:
+            count += 1
+    return count"
+HumanEval/19,sort_numbers,0,0,0,1.161,1.705,1.831,"def sort_numbers(numbers: str) -> str:
+    number_map = {
+        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,
+        'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9
+    }
+    words = numbers.split()
+    sorted_words = sorted(words, key=lambda word: number_map[word])
+    return ' '.join(sorted_words)","def sort_numbers(numbers: str) -> str:
+    """""" Input is a space-delimited string of numberals from 'zero' to 'nine'.
+    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.
+    Return the string with numbers sorted from smallest to largest
+    >>> sort_numbers('three one five')
+    'one three five'
+    """"""
+    word_to_num = {
+        'zero': 0,
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5,
+        'six': 6,
+        'seven': 7,
+        'eight': 8,
+        'nine': 9
+    }
+    
+    num_to_word = {v: k for k, v in word_to_num.items()}
+    
+    number_words = numbers.split()
+    sorted_numbers = sorted(number_words, key=lambda x: word_to_num[x])
+    
+    return ' '.join(sorted_numbers)","def sort_numbers(numbers: str) -> str:
+    """""" Input is a space-delimited string of numberals from 'zero' to 'nine'.
+    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.
+    Return the string with numbers sorted from smallest to largest
+    >>> sort_numbers('three one five')
+    'one three five'
+    """"""
+    word_to_int = {
+        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,
+        'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9
+    }
+    int_to_word = {
+        0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four',
+        5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
+    }
+
+    number_words = numbers.split()
+    
+    # Convert words to integers
+    numeric_values = [word_to_int[word] for word in number_words]
+    
+    # Sort the integers
+    numeric_values.sort()
+    
+    # Convert sorted integers back to words
+    sorted_number_words = [int_to_word[num] for num in numeric_values]
+    
+    # Join the words back into a space-delimited string
+    return ' '.join(sorted_number_words)"
+HumanEval/20,find_closest_elements,0,0,0,1.138,1.657,1.901,"def find_closest_elements(numbers: List[float]) -> Tuple[float, float]:
+    numbers.sort()
+    min_diff = float('inf')
+    closest_pair = (numbers[0], numbers[1])
+    
+    for i in range(len(numbers) - 1):
+        diff = numbers[i + 1] - numbers[i]
+        if diff < min_diff:
+            min_diff = diff
+            closest_pair = (numbers[i], numbers[i + 1])
+    
+    return closest_pair","def find_closest_elements(numbers: List[float]) -> Tuple[float, float]:
+    """""" From a supplied list of numbers (of length at least two) select and return two that are the closest to each
+    other and return them in order (smaller number, larger number).
+    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])
+    (2.0, 2.2)
+    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])
+    (2.0, 2.0)
+    """"""
+    sorted_numbers = sorted(numbers)
+    min_distance = float('inf')
+    closest_pair = (sorted_numbers[0], sorted_numbers[1])
+    
+    for i in range(len(sorted_numbers) - 1):
+        distance = sorted_numbers[i + 1] - sorted_numbers[i]
+        if distance < min_distance:
+            min_distance = distance
+            closest_pair = (sorted_numbers[i], sorted_numbers[i + 1])
+    
+    return closest_pair","from typing import List, Tuple
+
+
+def find_closest_elements(numbers: List[float]) -> Tuple[float, float]:
+    """""" From a supplied list of numbers (of length at least two) select and return two that are the closest to each
+    other and return them in order (smaller number, larger number).
+    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])
+    (2.0, 2.2)
+    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])
+    (2.0, 2.0)
+    """"""
+    if len(numbers) < 2:
+        raise ValueError(""The input list must contain at least two numbers."")
+
+    numbers.sort()
+
+    min_diff = float('inf')
+    closest_pair = (0.0, 0.0)
+
+    for i in range(len(numbers) - 1):
+        diff = numbers[i+1] - numbers[i]
+        if diff < min_diff:
+            min_diff = diff
+            closest_pair = (numbers[i], numbers[i+1])
+
+    return closest_pair"
+HumanEval/21,rescale_to_unit,0,0,0,1.09,1.225,1.345,"def rescale_to_unit(numbers: List[float]) -> List[float]:
+    min_num = min(numbers)
+    max_num = max(numbers)
+    range_num = max_num - min_num
+    return [(num - min_num) / range_num for num in numbers]","def rescale_to_unit(numbers: List[float]) -> List[float]:
+    """""" Given list of numbers (of at least two elements), apply a linear transform to that list,
+    such that the smallest number will become 0 and the largest will become 1
+    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])
+    [0.0, 0.25, 0.5, 0.75, 1.0]
+    """"""
+    min_val = min(numbers)
+    max_val = max(numbers)
+    range_val = max_val - min_val
+    
+    return [(x - min_val) / range_val for x in numbers]","from typing import List
+
+
+def rescale_to_unit(numbers: List[float]) -> List[float]:
+    """""" Given list of numbers (of at least two elements), apply a linear transform to that list,
+    such that the smallest number will become 0 and the largest will become 1
+    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])
+    [0.0, 0.25, 0.5, 0.75, 1.0]
+    """"""
+    min_val = min(numbers)
+    max_val = max(numbers)
+
+    if max_val == min_val:
+        return [0.0] * len(numbers)
+
+    rescaled_numbers = []
+    for num in numbers:
+        rescaled_num = (num - min_val) / (max_val - min_val)
+        rescaled_numbers.append(rescaled_num)
+
+    return rescaled_numbers"
+HumanEval/22,filter_integers,0,0,0,0.677,1.142,0.982,"def filter_integers(values: List[Any]) -> List[int]:
+return [value for value in values if isinstance(value, int)]","def filter_integers(values: List[Any]) -> List[int]:
+    """""" Filter given list of any python values only for integers
+    >>> filter_integers(['a', 3.14, 5])
+    [5]
+    >>> filter_integers([1, 2, 3, 'abc', {}, []])
+    [1, 2, 3]
+    """"""
+    return [v for v in values if isinstance(v, int) and not isinstance(v, bool)]","from typing import List, Any
+
+
+def filter_integers(values: List[Any]) -> List[int]:
+    """""" Filter given list of any python values only for integers
+    >>> filter_integers(['a', 3.14, 5])
+    [5]
+    >>> filter_integers([1, 2, 3, 'abc', {}, []])
+    [1, 2, 3]
+    """"""
+    return [value for value in values if isinstance(value, int)]"
+HumanEval/23,strlen,0,0,0,0.961,0.841,0.786,"def strlen(string: str) -> int:
+    """""" Return length of given string
+    >>> strlen('')
+    0
+    >>> strlen('abc')
+    3
+    """"""
+    return len(string)","def strlen(string: str) -> int:
+    """""" Return length of given string
+    >>> strlen('')
+    0
+    >>> strlen('abc')
+    3
+    """"""
+    return len(string)","def strlen(string: str) -> int:
+    """""" Return length of given string
+    >>> strlen('')
+    0
+    >>> strlen('abc')
+    3
+    """"""
+    return len(string)"
+HumanEval/24,largest_divisor,0,0,0,1.238,1.121,0.817,"def largest_divisor(n: int) -> int:
+    """""" For a given number n, find the largest number that divides n evenly, smaller than n
+    >>> largest_divisor(15)
+    5
+    """"""
+    for i in range(n // 2, 0, -1):
+        if n % i == 0:
+            return i","def largest_divisor(n: int) -> int:
+    """""" For a given number n, find the largest number that divides n evenly, smaller than n
+    >>> largest_divisor(15)
+    5
+    """"""
+    # Start from n-1 and work downwards to find the largest divisor
+    for i in range(n - 1, 0, -1):
+        if n % i == 0:
+            return i
+    return 1","def largest_divisor(n: int) -> int:
+    """""" For a given number n, find the largest number that divides n evenly, smaller than n
+    >>> largest_divisor(15)
+    5
+    """"""
+    for i in range(n // 2, 0, -1):
+        if n % i == 0:
+            return i"
+HumanEval/25,factorize,0,0,0,1.006,1.362,1.199,"def factorize(n: int) -> List[int]:
+    """""" Return list of prime factors of given integer in the order from smallest to largest.
+    Each of the factors should be listed number of times corresponding to how many times it appears in factorization.
+    Input number should be equal to the product of all factors
+    """"""
+    factors = []
+    divisor = 2
+    while n >= divisor:
+        while n % divisor == 0:
+            factors.append(divisor)
+            n //= divisor
+        divisor += 1
+    return factors","def factorize(n: int) -> List[int]:
+    """""" Return list of prime factors of given integer in the order from smallest to largest.
+    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.
+    Input number should be equal to the product of all factors
+    >>> factorize(8)
+    [2, 2, 2]
+    >>> factorize(25)
+    [5, 5]
+    >>> factorize(70)
+    [2, 5, 7]
+    """"""
+    factors = []
+    d = 2
+    
+    while d * d <= n:
+        while n % d == 0:
+            factors.append(d)
+            n //= d
+        d += 1
+    
+    if n > 1:
+        factors.append(n)
+    
+    return factors","def factorize(n: int) -> List[int]:
+    """""" Return list of prime factors of given integer in the order from smallest to largest.
+    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.
+    Input number should be equal to the product of all factors
+    >>> factorize(8)
+    [2, 2, 2]
+    >>> factorize(25)
+    [5, 5]
+    >>> factorize(70)
+    [2, 5, 7]
+    """"""
+    factors = []
+    d = 2
+    temp_n = n
+    while d * d <= temp_n:
+        while temp_n % d == 0:
+            factors.append(d)
+            temp_n //= d
+        d += 1
+    if temp_n > 1:
+        factors.append(temp_n)
+    return factors"
+HumanEval/26,remove_duplicates,0,0,0,1.292,1.228,1.215,"def remove_duplicates(numbers: List[int]) -> List[int]:
+counts = {}
+    for number in numbers:
+        counts[number] = counts.get(number, 0) + 1
+    return [number for number in numbers if counts[number] == 1]","def remove_duplicates(numbers: List[int]) -> List[int]:
+    """""" From a list of integers, remove all elements that occur more than once.
+    Keep order of elements left the same as in the input.
+    >>> remove_duplicates([1, 2, 3, 2, 4])
+    [1, 3, 4]
+    """"""
+    count = {}
+    for num in numbers:
+        count[num] = count.get(num, 0) + 1
+    
+    return [num for num in numbers if count[num] == 1]","from typing import List
+
+
+def remove_duplicates(numbers: List[int]) -> List[int]:
+    """""" From a list of integers, remove all elements that occur more than once.
+    Keep order of elements left the same as in the input.
+    >>> remove_duplicates([1, 2, 3, 2, 4])
+    [1, 3, 4]
+    """"""
+    counts = {}
+    for num in numbers:
+        counts[num] = counts.get(num, 0) + 1
+
+    result = []
+    for num in numbers:
+        if counts[num] == 1:
+            result.append(num)
+    return result"
+HumanEval/27,flip_case,0,0,0,0.916,0.883,0.988,"def flip_case(string: str) -> str:
+    """""" For a given string, flip lowercase characters to uppercase and uppercase to lowercase.
+    >>> flip_case('Hello')
+    'hELLO'
+    """"""
+    return string.swapcase()","def flip_case(string: str) -> str:
+    """""" For a given string, flip lowercase characters to uppercase and uppercase to lowercase.
+    >>> flip_case('Hello')
+    'hELLO'
+    """"""
+    return string.swapcase()","def flip_case(string: str) -> str:
+    """""" For a given string, flip lowercase characters to uppercase and uppercase to lowercase.
+    >>> flip_case('Hello')
+    'hELLO'
+    """"""
+    flipped_string = """"
+    for char in string:
+        if 'a' <= char <= 'z':
+            flipped_string += chr(ord(char) - 32)
+        elif 'A' <= char <= 'Z':
+            flipped_string += chr(ord(char) + 32)
+        else:
+            flipped_string += char
+    return flipped_string"
+HumanEval/28,concatenate,0,0,0,0.884,0.921,0.586,"def concatenate(strings: List[str]) -> str:
+    """""" Concatenate list of strings into a single string
+    >>> concatenate([])
+    ''
+    >>> concatenate(['a', 'b', 'c'])
+    'abc'
+    """"""
+    return ''.join(strings)","def concatenate(strings: List[str]) -> str:
+    """""" Concatenate list of strings into a single string
+    >>> concatenate([])
+    ''
+    >>> concatenate(['a', 'b', 'c'])
+    'abc'
+    """"""
+    return ''.join(strings)","def concatenate(strings: List[str]) -> str:
+    """""" Concatenate list of strings into a single string
+    >>> concatenate([])
+    ''
+    >>> concatenate(['a', 'b', 'c'])
+    'abc'
+    """"""
+    return """".join(strings)"
+HumanEval/29,filter_by_prefix,0,0,0,0.636,1.232,0.858,"def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:
+return [s for s in strings if s.startswith(prefix)]","def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:
+    """""" Filter an input list of strings only for ones that start with a given prefix.
+    >>> filter_by_prefix([], 'a')
+    []
+    >>> filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a')
+    ['abc', 'array']
+    """"""
+    return [s for s in strings if s.startswith(prefix)]","def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:
+    """""" Filter an input list of strings only for ones that start with a given prefix.
+    >>> filter_by_prefix([], 'a')
+    []
+    >>> filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a')
+    ['abc', 'array']
+    """"""
+    return [s for s in strings if s.startswith(prefix)]"
+HumanEval/30,get_positive,0,0,0,1.062,1.391,0.925,"def get_positive(l: list):
+    """"""Return only positive numbers in the list.
+    >>> get_positive([-1, 2, -4, 5, 6])
+    [2, 5, 6]
+    >>> get_positive([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])
+    [5, 3, 2, 3, 9, 123, 1]
+    """"""
+    return [x for x in l if x > 0]","def get_positive(l: list):
+    """"""Return only positive numbers in the list.
+    >>> get_positive([-1, 2, -4, 5, 6])
+    [2, 5, 6]
+    >>> get_positive([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])
+    [5, 3, 2, 3, 9, 123, 1]
+    """"""
+    return [x for x in l if x > 0]","def get_positive(l: list):
+    """"""Return only positive numbers in the list.
+    >>> get_positive([-1, 2, -4, 5, 6])
+    [2, 5, 6]
+    >>> get_positive([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])
+    [5, 3, 2, 3, 9, 123, 1]
+    """"""
+    return [x for x in l if x > 0]"
+HumanEval/31,is_prime,0,0,0,1.7,1.33,1.234,"def is_prime(n):
+    """"""Return true if a given number is prime, and false otherwise.""""""
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True","def is_prime(n):
+    """"""Return true if a given number is prime, and false otherwise.
+    >>> is_prime(6)
+    False
+    >>> is_prime(101)
+    True
+    >>> is_prime(11)
+    True
+    >>> is_prime(13441)
+    True
+    >>> is_prime(61)
+    True
+    >>> is_prime(4)
+    False
+    >>> is_prime(1)
+    False
+    """"""
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    
+    # Check odd divisors up to sqrt(n)
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    
+    return True","def is_prime(n):
+    """"""Return true if a given number is prime, and false otherwise.
+    >>> is_prime(6)
+    False
+    >>> is_prime(101)
+    True
+    >>> is_prime(11)
+    True
+    >>> is_prime(13441)
+    True
+    >>> is_prime(61)
+    True
+    >>> is_prime(4)
+    False
+    >>> is_prime(1)
+    False
+    """"""
+    if n < 2:
+        return False
+    i = 2
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 1
+    return True"
+HumanEval/32,find_zero,0,0,0,1.71,3.077,2.585,"def f(x):
+        return poly(xs, x)
+
+    def f_prime(x):
+        h = 1e-5
+        return (f(x + h) - f(x - h)) / (2 * h)
+
+    x0 = 0
+    tolerance = 1e-7
+    max_iterations = 1000
+
+    for _ in range(max_iterations):
+        fx0 = f(x0)
+        if abs(fx0) < tolerance:
+            return x0
+        fpx0 = f_prime(x0)
+        if fpx0 == 0:
+            break
+        x0 -= fx0 / fpx0
+
+    return x0","import math
+
+
+def poly(xs: list, x: float):
+    """"""
+    Evaluates polynomial with coefficients xs at point x.
+    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n
+    """"""
+    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])
+
+
+def find_zero(xs: list):
+    """""" xs are coefficients of a polynomial.
+    find_zero find x such that poly(x) = 0.
+    find_zero returns only only zero point, even if there are many.
+    Moreover, find_zero only takes list xs having even number of coefficients
+    and largest non zero coefficient as it guarantees
+    a solution.
+    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x
+    -0.5
+    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
+    1.0
+    """"""
+    # Use Newton-Raphson method to find a zero
+    # Start with an initial guess
+    x = 1.0
+    
+    # Compute derivative coefficients: d/dx of polynomial
+    # If p(x) = xs[0] + xs[1]*x + xs[2]*x^2 + ...
+    # then p'(x) = xs[1] + 2*xs[2]*x + 3*xs[3]*x^2 + ...
+    derivative_xs = [i * xs[i] for i in range(1, len(xs))]
+    
+    # Newton-Raphson iteration
+    for _ in range(100):
+        fx = poly(xs, x)
+        if abs(fx) < 1e-10:
+            return x
+        
+        fpx = poly(derivative_xs, x)
+        if abs(fpx) < 1e-10:","import math
+
+
+def poly(xs: list, x: float):
+    """"""
+    Evaluates polynomial with coefficients xs at point x.
+    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n
+    """"""
+    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])
+
+
+def find_zero(xs: list):
+    """""" xs are coefficients of a polynomial.
+    find_zero find x such that poly(x) = 0.
+    find_zero returns only only zero point, even if there are many.
+    Moreover, find_zero only takes list xs having even number of coefficients
+    and largest non zero coefficient as it guarantees
+    a solution.
+    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x
+    -0.5
+    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
+    1.0
+    """"""
+    if len(xs) % 2 != 0:
+        raise ValueError(""The number of coefficients must be even."")
+
+    # For a linear polynomial ax + b = 0, x = -b/a
+    if len(xs) == 2:
+        return -xs[0] / xs[1]
+
+    # For higher degree polynomials, we can use numerical methods.
+    # Since the problem statement guarantees a solution and that the largest
+    # non-zero coefficient exists, we can use a simple root-finding algorithm
+    # like the bisection method or Newton-Raphson.
+    # Given the constraints, a simple iterative search might also work if the
+    # roots are within a reasonable range.
+
+    # Let's try a simple iterative search with a small step,
+    # and then refine using bisection if needed.
+    # The problem statement implies that a solution is guaranteed.
+
+    # We need to find an interval [a, b] such that poly(a) and poly(b) have
+    # opposite signs."
+HumanEval/33,sort_third,0,0,0,1.306,2.049,1.496,"def sort_third(l: list):
+    sorted_thirds = sorted(l[i] for i in range(0, len(l), 3))
+    result = l[:]
+    for idx, val in zip(range(0, len(l), 3), sorted_thirds):
+        result[idx] = val
+    return result","def sort_third(l: list):
+    """"""This function takes a list l and returns a list l' such that
+    l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal
+    to the values of the corresponding indicies of l, but sorted.
+    >>> sort_third([1, 2, 3])
+    [1, 2, 3]
+    >>> sort_third([5, 6, 3, 4, 8, 9, 2])
+    [2, 6, 3, 4, 8, 9, 5]
+    """"""
+    # Extract elements at indices divisible by 3
+    third_elements = [l[i] for i in range(len(l)) if i % 3 == 0]
+    
+    # Sort them
+    third_elements.sort()
+    
+    # Create result list
+    result = l.copy()
+    
+    # Replace elements at indices divisible by 3 with sorted values
+    third_index = 0
+    for i in range(len(result)):
+        if i % 3 == 0:
+            result[i] = third_elements[third_index]
+            third_index += 1
+    
+    return result","def sort_third(l: list):
+    """"""This function takes a list l and returns a list l' such that
+    l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal
+    to the values of the corresponding indicies of l, but sorted.
+    >>> sort_third([1, 2, 3])
+    [1, 2, 3]
+    >>> sort_third([5, 6, 3, 4, 8, 9, 2])
+    [2, 6, 3, 4, 8, 9, 5]
+    """"""
+    if not l:
+        return []
+
+    third_elements = []
+    for i in range(len(l)):
+        if i % 3 == 0:
+            third_elements.append(l[i])
+
+    third_elements.sort()
+
+    result = l[:]
+    third_elements_index = 0
+    for i in range(len(l)):
+        if i % 3 == 0:
+            result[i] = third_elements[third_elements_index]
+            third_elements_index += 1
+    return result"
+HumanEval/34,unique,0,0,0,0.991,0.967,0.748,"def unique(l: list):
+    """"""Return sorted unique elements in a list
+    >>> unique([5, 3, 5, 2, 3, 3, 9, 0, 123])
+    [0, 2, 3, 5, 9, 123]
+    """"""
+    return sorted(set(l))","def unique(l: list):
+    """"""Return sorted unique elements in a list
+    >>> unique([5, 3, 5, 2, 3, 3, 9, 0, 123])
+    [0, 2, 3, 5, 9, 123]
+    """"""
+    return sorted(set(l))","def unique(l: list):
+    """"""Return sorted unique elements in a list
+    >>> unique([5, 3, 5, 2, 3, 3, 9, 0, 123])
+    [0, 2, 3, 5, 9, 123]
+    """"""
+    return sorted(list(set(l)))"
+HumanEval/35,max_element,0,0,0,2.047,0.908,0.917,"def max_element(l: list):
+    """"""Return maximum element in the list.
+    >>> max_element([1, 2, 3])
+    3
+    >>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])
+    123
+    """"""
+    if not l:
+        return None
+    max_val = l[0]
+    for num in l:
+        if num > max_val:
+            max_val = num
+    return max_val","def max_element(l: list):
+    """"""Return maximum element in the list.
+    >>> max_element([1, 2, 3])
+    3
+    >>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])
+    123
+    """"""
+    return max(l)","def max_element(l: list):
+    """"""Return maximum element in the list.
+    >>> max_element([1, 2, 3])
+    3
+    >>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])
+    123
+    """"""
+    if not l:
+        raise ValueError(""Input list cannot be empty"")
+    
+    max_val = l[0]
+    for item in l:
+        if item > max_val:
+            max_val = item
+    return max_val"
+HumanEval/36,fizz_buzz,0,0,0,1.019,1.197,1.137,"def fizz_buzz(n: int):
+    """"""Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.""""""
+    count = 0
+    for i in range(n):
+        if i % 11 == 0 or i % 13 == 0:
+            count += str(i).count('7')
+    return count","def fizz_buzz(n: int):
+    """"""Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.
+    >>> fizz_buzz(50)
+    0
+    >>> fizz_buzz(78)
+    2
+    >>> fizz_buzz(79)
+    3
+    """"""
+    count = 0
+    for i in range(1, n):
+        if i % 11 == 0 or i % 13 == 0:
+            count += str(i).count('7')
+    return count","def fizz_buzz(n: int):
+    """"""Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.
+    >>> fizz_buzz(50)
+    0
+    >>> fizz_buzz(78)
+    2
+    >>> fizz_buzz(79)
+    3
+    """"""
+    count = 0
+    for i in range(n):
+        if i % 11 == 0 or i % 13 == 0:
+            count += str(i).count('7')
+    return count"
+HumanEval/37,sort_even,0,0,0,8.557,1.796,1.426,"def sort_even(l: list):
+    even_indices = [l[i] for i in range(0, len(l), 2)]
+    even_indices.sort()
+    result = l[:]
+    for i, val in enumerate(even_indices):
+        result[i * 2] = val
+    return result","def sort_even(l: list):
+    """"""This function takes a list l and returns a list l' such that
+    l' is identical to l in the odd indicies, while its values at the even indicies are equal
+    to the values of the even indicies of l, but sorted.
+    >>> sort_even([1, 2, 3])
+    [1, 2, 3]
+    >>> sort_even([5, 6, 3, 4])
+    [3, 6, 5, 4]
+    """"""
+    # Extract elements at even indices
+    even_elements = [l[i] for i in range(0, len(l), 2)]
+    # Sort them
+    even_elements.sort()
+    # Create result list
+    result = l.copy()
+    # Place sorted even elements back at even indices
+    for i, val in enumerate(even_elements):
+        result[i * 2] = val
+    return result","def sort_even(l: list):
+    """"""This function takes a list l and returns a list l' such that
+    l' is identical to l in the odd indicies, while its values at the even indicies are equal
+    to the values of the even indicies of l, but sorted.
+    >>> sort_even([1, 2, 3])
+    [1, 2, 3]
+    >>> sort_even([5, 6, 3, 4])
+    [3, 6, 5, 4]
+    """"""
+    if not l:
+        return []
+
+    even_indexed_values = []
+    for i in range(0, len(l), 2):
+        even_indexed_values.append(l[i])
+
+    even_indexed_values.sort()
+
+    result = l[:]
+    even_sorted_index = 0
+    for i in range(0, len(l), 2):
+        result[i] = even_indexed_values[even_sorted_index]
+        even_sorted_index += 1
+
+    return result"
+HumanEval/38,decode_cyclic,0,0,0,5.775,1.302,1.263,"def decode_cyclic(s: str):
+    """"""
+    takes as input string encoded with encode_cyclic function. Returns decoded string.
+    """"""
+    # split string to groups. Each of length 3.
+    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]
+    # reverse cycle elements in each group. Unless group has fewer elements than 3.
+    groups = [(group[-1] + group[:-1]) if len(group) == 3 else group for group in groups]
+    return """".join(groups)","def decode_cyclic(s: str):
+    """"""
+    takes as input string encoded with encode_cyclic function. Returns decoded string.
+    """"""
+    # split string to groups. Each of length 3.
+    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]
+    # reverse cycle elements in each group. Unless group has fewer elements than 3.
+    groups = [(group[-1] + group[:-1]) if len(group) == 3 else group for group in groups]
+    return """".join(groups)","def decode_cyclic(s: str):
+    """"""
+    takes as input string encoded with encode_cyclic function. Returns decoded string.
+    """"""
+    # split string to groups. Each of length 3.
+    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]
+    # reverse cycle elements in each group. Unless group has fewer elements than 3.
+    groups = [(group[-1] + group[:-1]) if len(group) == 3 else group for group in groups]
+    return """".join(groups)"
+HumanEval/39,prime_fib,0,0,0,2.02,1.571,1.302,"def prime_fib(n: int):
+    """"""
+    prime_fib returns n-th number that is a Fibonacci number and it's also prime.
+    """"""
+    def is_prime(num):
+        if num <= 1:
+            return False
+        if num <= 3:
+            return True
+        if num % 2 == 0 or num % 3 == 0:
+            return False
+        i = 5
+        while i * i <= num:
+            if num % i == 0 or num % (i + 2) == 0:
+                return False
+            i += 6
+        return True
+
+    def fibonacci():
+        a, b = 0, 1
+        while True:
+            yield b
+            a, b = b, a + b
+
+    fib_gen = fibonacci()
+    count = 0
+    while True:
+        fib_num = next(fib_gen)
+        if is_prime(fib_num):
+            count += 1
+            if count == n:
+                return fib_num","def prime_fib(n: int):
+    """"""
+    prime_fib returns n-th number that is a Fibonacci number and it's also prime.
+    >>> prime_fib(1)
+    2
+    >>> prime_fib(2)
+    3
+    >>> prime_fib(3)
+    5
+    >>> prime_fib(4)
+    13
+    >>> prime_fib(5)
+    89
+    """"""
+    def is_prime(num):
+        if num < 2:
+            return False
+        if num == 2:
+            return True
+        if num % 2 == 0:
+            return False
+        for i in range(3, int(num**0.5) + 1, 2):
+            if num % i == 0:
+                return False
+        return True
+    
+    count = 0
+    a, b = 0, 1
+    
+    while count < n:
+        a, b = b, a + b
+        if is_prime(b):
+            count += 1
+    
+    return b","def prime_fib(n: int):
+    """"""
+    prime_fib returns n-th number that is a Fibonacci number and it's also prime.
+    >>> prime_fib(1)
+    2
+    >>> prime_fib(2)
+    3
+    >>> prime_fib(3)
+    5
+    >>> prime_fib(4)
+    13
+    >>> prime_fib(5)
+    89
+    """"""
+    def is_prime(num):
+        if num < 2:
+            return False
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
+
+    count = 0
+    a, b = 0, 1
+    while True:
+        fib_num = a
+        if is_prime(fib_num):
+            count += 1
+            if count == n:
+                return fib_num
+        a, b = b, a + b"
+HumanEval/40,triples_sum_to_zero,0,0,0,1.825,1.574,1.406,"def triples_sum_to_zero(l: list):
+    n = len(l)
+    if n < 3:
+        return False
+    l.sort()
+    for i in range(n - 2):
+        if i > 0 and l[i] == l[i - 1]:
+            continue
+        left, right = i + 1, n - 1
+        while left < right:
+            total = l[i] + l[left] + l[right]
+            if total == 0:
+                return True
+            elif total < 0:
+                left += 1
+            else:
+                right -= 1
+    return False","def triples_sum_to_zero(l: list):
+    """"""
+    triples_sum_to_zero takes a list of integers as an input.
+    it returns True if there are three distinct elements in the list that
+    sum to zero, and False otherwise.
+
+    >>> triples_sum_to_zero([1, 3, 5, 0])
+    False
+    >>> triples_sum_to_zero([1, 3, -2, 1])
+    True
+    >>> triples_sum_to_zero([1, 2, 3, 7])
+    False
+    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])
+    True
+    >>> triples_sum_to_zero([1])
+    False
+    """"""
+    n = len(l)
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                if l[i] + l[j] + l[k] == 0:
+                    return True
+    return False","def triples_sum_to_zero(l: list):
+    """"""
+    triples_sum_to_zero takes a list of integers as an input.
+    it returns True if there are three distinct elements in the list that
+    sum to zero, and False otherwise.
+
+    >>> triples_sum_to_zero([1, 3, 5, 0])
+    False
+    >>> triples_sum_to_zero([1, 3, -2, 1])
+    True
+    >>> triples_sum_to_zero([1, 2, 3, 7])
+    False
+    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])
+    True
+    >>> triples_sum_to_zero([1])
+    False
+    """"""
+    n = len(l)
+    if n < 3:
+        return False
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                if l[i] + l[j] + l[k] == 0:
+                    return True
+    return False"
+HumanEval/41,car_race_collision,0,0,0,1.394,1.793,1.107,"def car_race_collision(n: int):
+    """"""
+    Imagine a road that's a perfectly straight infinitely long line.
+    n cars are driving left to right;  simultaneously, a different set of n cars
+    are driving right to left.   The two sets of cars start out being very far from
+    each other.  All cars move in the same speed.  Two cars are said to collide
+    when a car that's moving left to right hits a car that's moving right to left.
+    However, the cars are infinitely sturdy and strong; as a result, they continue moving
+    in their trajectory as if they did not collide.
+
+    This function outputs the number of such collisions.
+    """"""
+    return n","def car_race_collision(n: int):
+    """"""
+    Imagine a road that's a perfectly straight infinitely long line.
+    n cars are driving left to right;  simultaneously, a different set of n cars
+    are driving right to left.   The two sets of cars start out being very far from
+    each other.  All cars move in the same speed.  Two cars are said to collide
+    when a car that's moving left to right hits a car that's moving right to left.
+    However, the cars are infinitely sturdy and strong; as a result, they continue moving
+    in their trajectory as if they did not collide.
+
+    This function outputs the number of such collisions.
+    """"""
+    return n * n
+
+
+The solution is straightforward: each of the n cars moving left to right will collide with each of the n cars moving right to left exactly once. Since all cars move at the same speed and start far apart, every car from one group will eventually meet every car from the other group. Therefore, the total number of collisions is n × n = n².","def car_race_collision(n: int):
+    """"""
+    Imagine a road that's a perfectly straight infinitely long line.
+    n cars are driving left to right;  simultaneously, a different set of n cars
+    are driving right to left.   The two sets of cars start out being very far from
+    each other.  All cars move in the same speed.  Two cars are said to collide
+    when a car that's moving left to right hits a car that's moving right to left.
+    However, the cars are infinitely sturdy and strong; as a result, they continue moving
+    in their trajectory as if they did not collide.
+
+    This function outputs the number of such collisions.
+    """"""
+    return n * n"
+HumanEval/42,incr_list,0,0,0,1.538,1.23,0.907,"def incr_list(l: list):
+    """"""Return list with elements incremented by 1.
+    >>> incr_list([1, 2, 3])
+    [2, 3, 4]
+    >>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])
+    [6, 4, 6, 3, 4, 4, 10, 1, 124]
+    """"""
+    return [x + 1 for x in l]","def incr_list(l: list):
+    """"""Return list with elements incremented by 1.
+    >>> incr_list([1, 2, 3])
+    [2, 3, 4]
+    >>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])
+    [6, 4, 6, 3, 4, 4, 10, 1, 124]
+    """"""
+    return [x + 1 for x in l]","def incr_list(l: list):
+    """"""Return list with elements incremented by 1.
+    >>> incr_list([1, 2, 3])
+    [2, 3, 4]
+    >>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])
+    [6, 4, 6, 3, 4, 4, 10, 1, 124]
+    """"""
+    return [x + 1 for x in l]"
+HumanEval/43,pairs_sum_to_zero,0,0,0,0.793,1.828,1.529,"def pairs_sum_to_zero(l):
+    seen = set()
+    for num in l:
+        if -num in seen:
+            return True
+        seen.add(num)
+    return False","def pairs_sum_to_zero(l):
+    """"""
+    pairs_sum_to_zero takes a list of integers as an input.
+    it returns True if there are two distinct elements in the list that
+    sum to zero, and False otherwise.
+    >>> pairs_sum_to_zero([1, 3, 5, 0])
+    False
+    >>> pairs_sum_to_zero([1, 3, -2, 1])
+    False
+    >>> pairs_sum_to_zero([1, 2, 3, 7])
+    False
+    >>> pairs_sum_to_zero([2, 4, -5, 3, 5, 7])
+    True
+    >>> pairs_sum_to_zero([1])
+    False
+    """"""
+    seen = set()
+    for num in l:
+        if -num in seen:
+            return True
+        seen.add(num)
+    return False","def pairs_sum_to_zero(l):
+    """"""
+    pairs_sum_to_zero takes a list of integers as an input.
+    it returns True if there are two distinct elements in the list that
+    sum to zero, and False otherwise.
+    >>> pairs_sum_to_zero([1, 3, 5, 0])
+    False
+    >>> pairs_sum_to_zero([1, 3, -2, 1])
+    False
+    >>> pairs_sum_to_zero([1, 2, 3, 7])
+    False
+    >>> pairs_sum_to_zero([2, 4, -5, 3, 5, 7])
+    True
+    >>> pairs_sum_to_zero([1])
+    False
+    """"""
+    if len(l) < 2:
+        return False
+
+    seen = set()
+    for num in l:
+        if -num in seen:
+            return True
+        seen.add(num)
+    return False"
+HumanEval/44,change_base,0,0,0,1.485,1.275,0.997,"def change_base(x: int, base: int):
+    """"""Change numerical base of input number x to base.
+    return string representation after the conversion.
+    base numbers are less than 10.
+    """"""
+    if x == 0:
+        return '0'
+    digits = []
+    while x:
+        digits.append(str(x % base))
+        x //= base
+    return ''.join(reversed(digits))","def change_base(x: int, base: int):
+    """"""Change numerical base of input number x to base.
+    return string representation after the conversion.
+    base numbers are less than 10.
+    >>> change_base(8, 3)
+    '22'
+    >>> change_base(8, 2)
+    '1000'
+    >>> change_base(7, 2)
+    '111'
+    """"""
+    if x == 0:
+        return '0'
+    
+    digits = []
+    while x > 0:
+        digits.append(str(x % base))
+        x //= base
+    
+    return ''.join(reversed(digits))","def change_base(x: int, base: int):
+    """"""Change numerical base of input number x to base.
+    return string representation after the conversion.
+    base numbers are less than 10.
+    >>> change_base(8, 3)
+    '22'
+    >>> change_base(8, 2)
+    '1000'
+    >>> change_base(7, 2)
+    '111'
+    """"""
+    if x == 0:
+        return '0'
+    res = ''
+    while x > 0:
+        res = str(x % base) + res
+        x //= base
+    return res"
+HumanEval/45,triangle_area,0,0,0,1.014,1.215,0.543,"def triangle_area(a, h):
+    """"""Given length of a side and height return area for a triangle.
+    >>> triangle_area(5, 3)
+    7.5
+    """"""
+    return 0.5 * a * h","def triangle_area(a, h):
+    """"""Given length of a side and high return area for a triangle.
+    >>> triangle_area(5, 3)
+    7.5
+    """"""
+    return (a * h) / 2","def triangle_area(a, h):
+    """"""Given length of a side and high return area for a triangle.
+    >>> triangle_area(5, 3)
+    7.5
+    """"""
+    return 0.5 * a * h"
+HumanEval/46,fib4,0,0,0,1.503,1.942,1.848,"def fib4(n: int):
+    if n == 0 or n == 1 or n == 3:
+        return 0
+    elif n == 2:
+        return 2
+    
+    fib4_values = [0, 0, 2, 0]
+    
+    for i in range(4, n + 1):
+        next_value = fib4_values[-1] + fib4_values[-2] + fib4_values[-3] + fib4_values[-4]
+        fib4_values.append(next_value)
+    
+    return fib4_values[n]","def fib4(n: int):
+    """"""The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+    fib4(0) -> 0
+    fib4(1) -> 0
+    fib4(2) -> 2
+    fib4(3) -> 0
+    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).
+    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.
+    >>> fib4(5)
+    4
+    >>> fib4(6)
+    8
+    >>> fib4(7)
+    14
+    """"""
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 0
+    elif n == 2:
+        return 2
+    elif n == 3:
+        return 0
+    
+    # For n >= 4, use iterative approach
+    a, b, c, d = 0, 0, 2, 0  # fib4(0), fib4(1), fib4(2), fib4(3)
+    
+    for i in range(4, n + 1):
+        next_val = a + b + c + d
+        a, b, c, d = b, c, d, next_val
+    
+    return d","def fib4(n: int):
+    """"""The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:
+    fib4(0) -> 0
+    fib4(1) -> 0
+    fib4(2) -> 2
+    fib4(3) -> 0
+    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).
+    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.
+    >>> fib4(5)
+    4
+    >>> fib4(6)
+    8
+    >>> fib4(7)
+    14
+    """"""
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 0
+    elif n == 2:
+        return 2
+    elif n == 3:
+        return 0
+
+    a, b, c, d = 0, 0, 2, 0
+    for _ in range(4, n + 1):
+        next_fib = a + b + c + d
+        a = b
+        b = c
+        c = d
+        d = next_fib
+    return d"
+HumanEval/47,median,0,0,0,1.288,1.408,0.984,"def median(l: list):
+    """"""Return median of elements in the list l.
+    >>> median([3, 1, 2, 4, 5])
+    3
+    >>> median([-10, 4, 6, 1000, 10, 20])
+    15.0
+    """"""
+    n = len(l)
+    if n == 0:
+        raise ValueError(""The list is empty"")
+    sorted_list = sorted(l)
+    mid = n // 2
+    if n % 2 == 0:
+        return (sorted_list[mid - 1] + sorted_list[mid]) / 2
+    else:
+        return sorted_list[mid]","def median(l: list):
+    """"""Return median of elements in the list l.
+    >>> median([3, 1, 2, 4, 5])
+    3
+    >>> median([-10, 4, 6, 1000, 10, 20])
+    15.0
+    """"""
+    sorted_list = sorted(l)
+    n = len(sorted_list)
+    
+    if n % 2 == 1:
+        # Odd number of elements - return middle element
+        return sorted_list[n // 2]
+    else:
+        # Even number of elements - return average of two middle elements
+        mid1 = sorted_list[n // 2 - 1]
+        mid2 = sorted_list[n // 2]
+        return (mid1 + mid2) / 2","def median(l: list):
+    """"""Return median of elements in the list l.
+    >>> median([3, 1, 2, 4, 5])
+    3
+    >>> median([-10, 4, 6, 1000, 10, 20])
+    15.0
+    """"""
+    l.sort()
+    n = len(l)
+    if n % 2 == 1:
+        return l[n // 2]
+    else:
+        mid1 = l[n // 2 - 1]
+        mid2 = l[n // 2]
+        return (mid1 + mid2) / 2"
+HumanEval/48,is_palindrome,0,0,0,1.421,1.097,0.695,"def is_palindrome(text: str):
+    """"""
+    Checks if given string is a palindrome
+    >>> is_palindrome('')
+    True
+    >>> is_palindrome('aba')
+    True
+    >>> is_palindrome('aaaaa')
+    True
+    >>> is_palindrome('zbcd')
+    False
+    """"""
+    return text == text[::-1]","def is_palindrome(text: str):
+    """"""
+    Checks if given string is a palindrome
+    >>> is_palindrome('')
+    True
+    >>> is_palindrome('aba')
+    True
+    >>> is_palindrome('aaaaa')
+    True
+    >>> is_palindrome('zbcd')
+    False
+    """"""
+    return text == text[::-1]","def is_palindrome(text: str):
+    """"""
+    Checks if given string is a palindrome
+    >>> is_palindrome('')
+    True
+    >>> is_palindrome('aba')
+    True
+    >>> is_palindrome('aaaaa')
+    True
+    >>> is_palindrome('zbcd')
+    False
+    """"""
+    return text == text[::-1]"
+HumanEval/49,modp,0,0,0,1.326,5.775,0.915,"def modp(n: int, p: int):
+    """"""Return 2^n modulo p (be aware of numerics).""""""
+    return pow(2, n, p)","def modp(n: int, p: int):
+    """"""Return 2^n modulo p (be aware of numerics).
+    >>> modp(3, 5)
+    3
+    >>> modp(1101, 101)
+    2
+    >>> modp(0, 101)
+    1
+    >>> modp(3, 11)
+    8
+    >>> modp(100, 101)
+    1
+    """"""
+    return pow(2, n, p)","def modp(n: int, p: int):
+    """"""Return 2^n modulo p (be aware of numerics).
+    >>> modp(3, 5)
+    3
+    >>> modp(1101, 101)
+    2
+    >>> modp(0, 101)
+    1
+    >>> modp(3, 11)
+    8
+    >>> modp(100, 101)
+    1
+    """"""
+    return pow(2, n, p)"
