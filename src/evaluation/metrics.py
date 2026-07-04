@@ -6,12 +6,20 @@ Expose Sub-question 2: "cost per 1M tokens" and "monthly token volume ROI breake
 
 from typing import Literal
 
-# LLM API costs (USD per 1M tokens) — public pricing as of 2024
-# Expose: GPT-4o, Claude-3.5-Haiku, Gemini-1.5-Flash
+# LLM API costs (USD per 1M tokens).
+#
+# The expose names Claude-3.5-Haiku and Gemini-1.5-Flash as baselines, but the
+# Phase 1 notebooks (notebooks/02-06) actually call claude-haiku-4-5 and
+# gemini-2.5-flash — see README.md "Methodology notes" for why (older models
+# deprecated/unavailable by the time baselines were run). Pricing here must
+# match whatever model the notebooks actually queried, or the ROI/cost
+# numbers are computed against the wrong price. Verified current pricing:
+# - claude-haiku-4-5: $1.00 / $5.00 per 1M input/output tokens
+# - gemini-2.5-flash: $0.30 / $2.50 per 1M input/output tokens (standard tier)
 LLM_API_COSTS = {
     "gpt-4o": {"input": 5.00, "output": 15.00, "blended": 10.00},
-    "claude-3-5-haiku": {"input": 0.80, "output": 4.00, "blended": 2.40},
-    "gemini-1-5-flash": {"input": 0.075, "output": 0.30, "blended": 0.19},
+    "claude-haiku-4-5": {"input": 1.00, "output": 5.00, "blended": 3.00},
+    "gemini-2.5-flash": {"input": 0.30, "output": 2.50, "blended": 1.40},
 }
 
 # Privacy risk by deployment type

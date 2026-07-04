@@ -53,3 +53,56 @@ every task's `train`/`validation`/`test` loading path on CPU with 5 samples.
 If a dataset id or split name is ever wrong (e.g. an HF Hub repo gets
 renamed), this is where it will show up — cheaply, before the full sweep in
 `scripts/run_all_experiments.py`.
+
+## Phase 1 (LLM baseline) methodology notes
+
+The `notebooks/02`–`06` baselines call GPT-4o, Claude, and Gemini directly via
+API. A few deliberate deviations/fixes from a first-draft version of these
+notebooks, so the reasoning survives into the thesis write-up:
+
+1. **Model versions differ from the exposé.** The exposé names
+   Claude-3.5-Haiku and Gemini-1.5-Flash; the notebooks actually call
+   **`claude-haiku-4-5-20251001`** and **`gemini-2.5-flash`**. This is a
+   scope deviation the exposé's own rules say needs supervisor sign-off —
+   flag it explicitly in the thesis methodology section, and check whether
+   the older models are still reachable via API before deciding this is
+   final. `src/evaluation/metrics.py`'s `LLM_API_COSTS` table and
+   `results/benchmark_matrix.py`'s `MODELS` list have been updated to match
+   the models actually queried, with verified current pricing (Claude Haiku
+   4.5: $1.00/$5.00 per 1M input/output tokens; Gemini 2.5 Flash standard
+   tier: $0.30/$2.50) — before, the cost table was silently pricing a
+   different model than the one being benchmarked, which would have made
+   every ROI number in the thesis wrong.
+2. **Anthropic calls were missing `temperature=0.0`.** GPT-4o and Gemini were
+   already called at `temperature=0.0` (greedy, deterministic) in every
+   notebook, but the Claude calls had no `temperature` set — Anthropic's
+   default is 1.0. That meant Claude alone had sampling randomness in a
+   benchmark meant to compare models under identical decoding conditions.
+   Fixed across all 5 notebooks.
+3. **Gemini's retry loop was polluting the latency metric.** `summarize_gemini`/
+   `classify`/`generate_gemini` retry on a transient 503 with `time.sleep`
+   backoff (3s, 6s, 9s...), but `start = time.time()` was set once *before*
+   the retry loop — so a retried call's reported "latency" included the
+   failed attempts' round-trip time plus the deliberate sleep, sometimes
+   ballooning to 100+ seconds for what was really a fast successful call.
+   This is why notebook 06's own analysis cell flags a 151s Gemini outlier.
+   Fixed by resetting `start` inside each retry attempt, so latency reflects
+   only the successful call.
+4. **`evaluate_pass_at_1` ran model-generated code via bare `exec()` with no
+   timeout**, in both the HumanEval baseline (`06_baseline_humaneval.ipynb`)
+   and the SLM fine-tuning eval (`src/evaluation/evaluate_code.py`) — same
+   class of risk as any of the other untrusted-code-execution fixes in this
+   repo. Fixed to run in a subprocess with a 5-second timeout.
+5. **`05_baseline_financial.ipynb` had a hardcoded absolute path**
+   (`/Users/yusifnuri/...`) that only works on one machine. Changed to a
+   relative path. It already uses `Sentences_AllAgree.txt` (100% annotator
+   agreement) — `scripts/prepare_financial_data.py`'s default matches this
+   file so the SLM fine-tuning pipeline and the LLM baselines are scored
+   against the same ground truth.
+
+**Not fixed, flagged for awareness:** the LLM baseline notebooks evaluate on
+a fixed prefix of N samples (100, or 50 for HumanEval) with no retry/resume
+on OpenAI/Anthropic failures (only Gemini retries) — a single rate limit or
+transient error partway through a paid 100-sample loop loses all progress
+already paid for. Consider adding per-call retry + incremental result
+saving if this becomes a problem during the actual Phase 1 run.
