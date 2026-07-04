@@ -198,11 +198,12 @@ class SLMDataset(Dataset):
         sample = self.samples[idx]
         full_text = sample["prompt"] + " " + sample["completion"]
 
-        # Tokenize full text
+        # Tokenize full text. Padding is left to the data collator (dynamic,
+        # per-batch padding) instead of padding every example to max_length here —
+        # fixed max_length padding wastes compute on short samples across the batch.
         encoding = self.tokenizer(
             full_text,
             max_length=self.max_length,
-            padding="max_length",
             truncation=True,
             return_tensors="pt",
         )
