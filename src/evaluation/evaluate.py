@@ -92,6 +92,11 @@ def generate_prediction(
     return prediction, latency_ms
 
 
+CLASSIFICATION_MAX_NEW_TOKENS = 32
+NER_MAX_NEW_TOKENS = 64
+SUMMARIZATION_MAX_NEW_TOKENS = 128
+
+
 def evaluate_classification_or_sentiment(
     model,
     tokenizer,
@@ -108,7 +113,9 @@ def evaluate_classification_or_sentiment(
     valid_labels = list(label_map.values())
 
     for sample in samples:
-        pred, lat = generate_prediction(model, tokenizer, sample["prompt"])
+        pred, lat = generate_prediction(
+            model, tokenizer, sample["prompt"], max_new_tokens=CLASSIFICATION_MAX_NEW_TOKENS
+        )
         latencies.append(lat)
 
         # Normalize prediction to valid label
@@ -138,7 +145,9 @@ def evaluate_summarization(
     rouge_scores, latencies = [], []
 
     for sample in samples:
-        pred, lat = generate_prediction(model, tokenizer, sample["prompt"], max_new_tokens=128)
+        pred, lat = generate_prediction(
+            model, tokenizer, sample["prompt"], max_new_tokens=SUMMARIZATION_MAX_NEW_TOKENS
+        )
         latencies.append(lat)
         score = scorer.score(sample["completion"], pred)
         rouge_scores.append(score["rougeL"].fmeasure)
@@ -158,7 +167,9 @@ def evaluate_ner(
     all_preds, all_true, latencies = [], [], []
 
     for sample in samples:
-        pred, lat = generate_prediction(model, tokenizer, sample["prompt"], max_new_tokens=64)
+        pred, lat = generate_prediction(
+            model, tokenizer, sample["prompt"], max_new_tokens=NER_MAX_NEW_TOKENS
+        )
         latencies.append(lat)
         # Simple token overlap F1
         pred_tokens = set(pred.lower().split())
@@ -197,14 +208,19 @@ def run_full_evaluation(
     Computes all 5 metrics required by the expose.
     Logs results to MLflow.
     """
+    if task == "code_generation":
+        raise ValueError("Use evaluate_code.py for task: code_generation")
+
     print(f"\n📊 Evaluating: {base_model_name.split('/')[-1]} | Task: {task}")
 
     model, tokenizer = load_model_for_inference(base_model_name, adapter_path)
 
-    # Load evaluation dataset
+    # Load the held-out test split — never seen during training or during
+    # Trainer's periodic "validation" checks — for the numbers that actually
+    # get reported in the benchmark matrix.
     eval_ds = SLMDataset(
         task=task,
-        split="test" if task == "code_generation" else "validation",
+        split="test",
         tokenizer=tokenizer,
         max_length=512,
         max_samples=max_eval_samples,
@@ -218,16 +234,20 @@ def run_full_evaluation(
         accuracy, avg_latency_ms = evaluate_classification_or_sentiment(
             model, tokenizer, task, samples, config
         )
+        generated_tokens = CLASSIFICATION_MAX_NEW_TOKENS
     elif task == "summarization":
         accuracy, avg_latency_ms = evaluate_summarization(model, tokenizer, samples)
+        generated_tokens = SUMMARIZATION_MAX_NEW_TOKENS
     elif task == "ner":
         accuracy, avg_latency_ms = evaluate_ner(model, tokenizer, samples)
+        generated_tokens = NER_MAX_NEW_TOKENS
     else:
         raise ValueError(f"Use evaluate_code.py for task: {task}")
 
     # --- Metric 3: Cost per 1M tokens ---
-    # Estimate tokens per second from latency
-    avg_tokens_per_second = 32 / (avg_latency_ms / 1000)
+    # Estimate tokens per second from latency using the actual max_new_tokens
+    # generated for this task (must match the value passed to generate_prediction above).
+    avg_tokens_per_second = generated_tokens / (avg_latency_ms / 1000)
     cost_per_1m = calculate_slm_cost_per_1m_tokens(gpu_cost_per_hour, avg_tokens_per_second)
 
     # --- Metric 4: Privacy risk ---

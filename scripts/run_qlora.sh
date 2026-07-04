@@ -1,9 +1,9 @@
-z#!/bin/bash
+#!/bin/bash
 # Run QLoRA fine-tuning for Mistral-7B across all 5 tasks
 # Usage: bash scripts/run_qlora.sh
 
 CONFIG="configs/mistral_qlora.yaml"
-FINANCIAL_PATH="/path/to/financial_phrasebank.csv"  # update this
+FINANCIAL_PATH="data/financial_phrasebank.csv"  # run scripts/prepare_financial_data.py first
 
 TASKS=("classification" "ner" "summarization" "financial_sentiment" "code_generation")
 
