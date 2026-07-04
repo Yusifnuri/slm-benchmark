@@ -17,6 +17,14 @@ from typing import List, Tuple, Optional
 
 CODE_EXEC_TIMEOUT_SECONDS = 5
 
+# "fork" copies the current process (including functions defined at runtime,
+# e.g. in a Jupyter cell) instead of re-importing __main__ in a fresh
+# interpreter. macOS/Windows default to "spawn", which can't find a
+# notebook-defined target function and crashes with
+# "Can't get attribute '_exec_target' on <module '__main__'>". Linux already
+# defaults to fork; this just makes it explicit everywhere.
+_MP_CTX = multiprocessing.get_context("fork") if "fork" in multiprocessing.get_all_start_methods() else multiprocessing.get_context()
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from datasets import load_dataset
@@ -101,8 +109,8 @@ def check_solution(prompt: str, solution: str, test_code: str, entry_point: str)
     subprocess with a timeout, since model-generated code is untrusted and may
     hang (infinite loops) or misbehave. Returns True if all tests pass.
     """
-    result_queue: multiprocessing.Queue = multiprocessing.Queue()
-    proc = multiprocessing.Process(
+    result_queue = _MP_CTX.Queue()
+    proc = _MP_CTX.Process(
         target=_exec_target,
         args=(prompt, solution, test_code, entry_point, result_queue),
     )
