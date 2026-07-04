@@ -25,14 +25,17 @@ def test_dataset_loader():
 
     tasks_to_test = [
         ("classification", "train"),
+        ("classification", "validation"),  # exercises the seeded AG News validation carve-out
+        ("classification", "test"),
         ("ner", "train"),
         ("summarization", "train"),
-        ("code_generation", "test"),   # ← "test" olmalı
+        ("code_generation", "train"),      # now MBPP, not HumanEval — see dataset_loader.py docstring
+        ("code_generation", "validation"),
     ]
 
     for task, split in tasks_to_test:
         dataset, config = load_task_dataset(task, split=split, max_samples=5)
-        print(f"   ✅ {task}: {len(dataset)} samples loaded")
+        print(f"   ✅ {task} [{split}]: {len(dataset)} samples loaded")
 
     print("✅ Dataset loader: PASSED")
 

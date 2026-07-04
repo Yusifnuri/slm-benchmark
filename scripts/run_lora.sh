@@ -3,13 +3,12 @@
 # Usage: bash scripts/run_lora.sh phi4   OR   bash scripts/run_lora.sh llama
 
 MODEL=${1:-phi4}
+FINANCIAL_PATH="data/financial_phrasebank.csv"  # run scripts/prepare_financial_data.py first
 
 if [ "$MODEL" = "phi4" ]; then
     CONFIG="configs/phi4_lora.yaml"
-    FINANCIAL_PATH="/path/to/financial_phrasebank.csv"  # update this
 elif [ "$MODEL" = "llama" ]; then
     CONFIG="configs/llama_lora.yaml"
-    FINANCIAL_PATH="/path/to/financial_phrasebank.csv"  # update this
 else
     echo "Usage: bash scripts/run_lora.sh [phi4|llama]"
     exit 1

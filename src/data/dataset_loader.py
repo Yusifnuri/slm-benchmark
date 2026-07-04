@@ -6,7 +6,31 @@ Tasks and datasets (Expose, Section 2, Phase 1):
 - ner                 → CoNLL-2003
 - summarization       → CNN/DailyMail
 - financial_sentiment → Financial PhraseBank (local file)
-- code_generation     → HumanEval
+- code_generation     → MBPP (fine-tuning) / HumanEval (final eval only)
+
+WHY code_generation trains on MBPP instead of HumanEval:
+HumanEval ships with only one split ("test", 164 problems) — no train split.
+The original version of this loader fine-tuned on that same 164-problem
+"test" split, which is also exactly what evaluate_code.py's pass@k benchmark
+scores the model on. That means the reported HumanEval numbers would be
+measuring memorization of the fine-tuning data, not generalisation — the
+model would have seen the literal problems (and solutions) it's later
+"tested" on. This invalidates the code_generation column of the benchmark
+matrix and would very likely get flagged by any EMNLP/ICLR reviewer.
+Fix: fine-tune on MBPP (a different, non-overlapping Python problem set)
+and keep HumanEval strictly as an untouched final-eval-only benchmark.
+evaluate_code.py already loads HumanEval independently and is unaffected.
+
+WHY classification/financial_sentiment have an explicit train/validation/test
+carve-out below instead of just using load_dataset(..., split=split):
+AG News ships only "train"/"test" (no "validation"), and the local Financial
+PhraseBank CSV has no splits at all — every row is just "the dataset". The
+original loader passed split="validation" straight through for both, which
+for AG News crashes (unknown split) and for Financial PhraseBank silently
+loaded the exact same rows for train, validation-during-training, and final
+eval (a prefix-of-train "held-out" set that isn't held out at all — accuracy
+numbers would be inflated by training-set leakage). The carve-out below uses
+a seeded split so train/validation/test never overlap for either task.
 """
 
 import os
@@ -62,9 +86,13 @@ TASK_CONFIGS: Dict[str, Dict] = {
         ),
     },
     "code_generation": {
-        "dataset": "openai_humaneval",
-        "input_col": "prompt",
-        "label_col": "canonical_solution",
+        # Fine-tuning source: MBPP, NOT HumanEval — see module docstring.
+        # evaluate_code.py loads HumanEval independently for the final,
+        # untouched pass@k benchmark; this loader must never hand out
+        # HumanEval examples for training.
+        "dataset": "google-research-datasets/mbpp",
+        "input_col": "text",
+        "label_col": "code",
         "prompt_template": "Complete the following Python function:\n{text}\nSolution:",
     },
 }
@@ -96,14 +124,24 @@ def load_task_dataset(
         if financial_phrasebank_path is None:
             raise ValueError(
                 "financial_phrasebank_path is required for financial_sentiment.\n"
-                "Download from: https://www.kaggle.com/datasets/ankurzing/sentiment-analysis-for-financial-news\n"
+                "Run scripts/prepare_financial_data.py first.\n"
                 "Expected columns: ['sentence', 'label']"
             )
         df = pd.read_csv(financial_phrasebank_path)
         # Ensure correct column names
         if "sentence" not in df.columns or "label" not in df.columns:
             raise ValueError("CSV must have 'sentence' and 'label' columns.")
-        dataset = HFDataset.from_pandas(df)
+        full = HFDataset.from_pandas(df)
+
+        # No split exists in the source data — carve out a seeded 80/10/10
+        # train/validation/test split so the three never overlap.
+        trainval = full.train_test_split(test_size=0.2, seed=42)
+        val_test = trainval["test"].train_test_split(test_size=0.5, seed=42)
+        dataset = {
+            "train": trainval["train"],
+            "validation": val_test["train"],
+            "test": val_test["test"],
+        }[split]
 
     elif task == "ner":
         # CoNLL-2003 requires parquet revision workaround
@@ -121,19 +159,30 @@ def load_task_dataset(
             split=split,
         )
 
+    elif task == "code_generation":
+        # MBPP has real train/validation/test splits — HumanEval is never
+        # touched here (see module docstring for why).
+        dataset = load_dataset(config["dataset"], split=split, trust_remote_code=True)
+
+    elif task == "classification":
+        if split == "test":
+            dataset = load_dataset(config["dataset"], split="test")
+        else:
+            # AG News ships only train/test — carve a seeded validation
+            # slice out of train so periodic eval-during-training never
+            # touches the test set used for final benchmark reporting.
+            full_train = load_dataset(config["dataset"], split="train")
+            train_val = full_train.train_test_split(test_size=0.1, seed=42)
+            dataset = train_val["train"] if split == "train" else train_val["test"]
+
     else:
-        # AG News: train/test split var
-        # HumanEval: sadece "test" split var
-        if task == "code_generation":
-            split = "test"  # HumanEval has no train split
-        dataset = load_dataset(config["dataset"], split=split)
+        raise ValueError(f"Unknown task: {task}")
 
     # Subsample for fast testing
     if max_samples and max_samples < len(dataset):
         dataset = dataset.select(range(max_samples))
 
-
-    return dataset, config  # ← BU SATIR EKSİKTİ
+    return dataset, config
 
 
 class SLMDataset(Dataset):
@@ -198,11 +247,12 @@ class SLMDataset(Dataset):
         sample = self.samples[idx]
         full_text = sample["prompt"] + " " + sample["completion"]
 
-        # Tokenize full text
+        # Tokenize full text. Padding is left to the data collator (dynamic,
+        # per-batch padding) instead of padding every example to max_length here —
+        # fixed max_length padding wastes compute on short samples across the batch.
         encoding = self.tokenizer(
             full_text,
             max_length=self.max_length,
-            padding="max_length",
             truncation=True,
             return_tensors="pt",
         )

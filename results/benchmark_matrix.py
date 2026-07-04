@@ -14,8 +14,8 @@ import os
 
 MODELS = [
     "gpt-4o",
-    "claude-3-5-haiku",
-    "gemini-1-5-flash",
+    "claude-haiku-4-5",   # expose specifies Claude-3.5-Haiku; see README.md "Methodology notes"
+    "gemini-2.5-flash",   # expose specifies Gemini-1.5-Flash; see README.md "Methodology notes"
     "phi-4-mini-instruct",
     "Mistral-7B-v0.3",
     "Llama-3.2-3B-Instruct",
