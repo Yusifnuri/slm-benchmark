@@ -86,7 +86,11 @@ def test_slm_dataset_tokenization():
     assert "input_ids" in sample
     assert "attention_mask" in sample
     assert "labels" in sample
-    assert sample["input_ids"].shape[0] == 128
+    # Samples are no longer padded to max_length here — the Trainer's data
+    # collator pads dynamically per batch instead (see dataset_loader.py).
+    # Just check the truncation cap is respected.
+    assert sample["input_ids"].shape[0] <= 128
+    assert sample["input_ids"].shape == sample["labels"].shape
     print(f"   Sample keys: {list(sample.keys())}")
     print(f"   input_ids shape: {sample['input_ids'].shape}")
     print("✅ SLMDataset tokenization: PASSED")
