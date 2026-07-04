@@ -144,12 +144,14 @@ def load_task_dataset(
         }[split]
 
     elif task == "ner":
-        # CoNLL-2003 requires parquet revision workaround
+        # CoNLL-2003 requires parquet revision workaround. trust_remote_code
+        # is deliberately omitted: current `datasets` versions serve this
+        # revision as parquet (no loading script) and warn that the flag is
+        # unsupported/unnecessary here.
         dataset = load_dataset(
             config["dataset"],
             revision=config["revision"],
             split=split,
-            trust_remote_code=True,
         )
 
     elif task == "summarization":
@@ -161,8 +163,9 @@ def load_task_dataset(
 
     elif task == "code_generation":
         # MBPP has real train/validation/test splits — HumanEval is never
-        # touched here (see module docstring for why).
-        dataset = load_dataset(config["dataset"], split=split, trust_remote_code=True)
+        # touched here (see module docstring for why). trust_remote_code
+        # omitted; MBPP is served as parquet, no loading script involved.
+        dataset = load_dataset(config["dataset"], split=split)
 
     elif task == "classification":
         if split == "test":
