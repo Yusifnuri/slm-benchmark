@@ -96,8 +96,11 @@ def train(config_path: str, task: str, financial_path: str = None):
         financial_phrasebank_path=financial_path,
     )
     eval_ds = SLMDataset(
+        # "validation" here is for Trainer's periodic loss checks /
+        # load_best_model_at_end checkpoint selection only. Final reported
+        # benchmark numbers come from the untouched "test" split in evaluate.py.
         task=task,
-        split="validation" if task != "code_generation" else "test",
+        split="validation",
         tokenizer=tokenizer,
         max_length=cfg["model"]["max_length"],
         max_samples=cfg["training"]["max_samples_eval"],

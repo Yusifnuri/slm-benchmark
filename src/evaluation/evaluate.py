@@ -208,14 +208,19 @@ def run_full_evaluation(
     Computes all 5 metrics required by the expose.
     Logs results to MLflow.
     """
+    if task == "code_generation":
+        raise ValueError("Use evaluate_code.py for task: code_generation")
+
     print(f"\n📊 Evaluating: {base_model_name.split('/')[-1]} | Task: {task}")
 
     model, tokenizer = load_model_for_inference(base_model_name, adapter_path)
 
-    # Load evaluation dataset
+    # Load the held-out test split — never seen during training or during
+    # Trainer's periodic "validation" checks — for the numbers that actually
+    # get reported in the benchmark matrix.
     eval_ds = SLMDataset(
         task=task,
-        split="test" if task == "code_generation" else "validation",
+        split="test",
         tokenizer=tokenizer,
         max_length=512,
         max_samples=max_eval_samples,
