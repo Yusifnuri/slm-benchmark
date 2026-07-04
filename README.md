@@ -100,9 +100,24 @@ notebooks, so the reasoning survives into the thesis write-up:
    file so the SLM fine-tuning pipeline and the LLM baselines are scored
    against the same ground truth.
 
-**Not fixed, flagged for awareness:** the LLM baseline notebooks evaluate on
-a fixed prefix of N samples (100, or 50 for HumanEval) with no retry/resume
-on OpenAI/Anthropic failures (only Gemini retries) — a single rate limit or
-transient error partway through a paid 100-sample loop loses all progress
-already paid for. Consider adding per-call retry + incremental result
-saving if this becomes a problem during the actual Phase 1 run.
+6. **No retry or resume on OpenAI/Anthropic failures** — only the Gemini
+   calls retried transient errors; a single rate limit or 5xx partway
+   through a paid 100-sample loop crashed the whole cell and lost every
+   result already paid for. Fixed in all 5 notebooks:
+   - `generate_*`/`classify_*`/`extract_entities_*`/`summarize_*` for
+     OpenAI and Anthropic now retry up to 3 times with backoff (matching
+     the style already used for Gemini), returning an error sentinel
+     instead of raising if every attempt fails — one bad sample no longer
+     kills the run.
+   - Results are checkpointed to a **fixed** (non-timestamped) CSV path
+     every 20 samples, and each notebook checks for that file on startup —
+     if it exists, already-completed rows are loaded and the loop picks up
+     where it left off instead of re-querying (and re-paying for) samples
+     already done. Final accuracy/latency/F1/ROUGE aggregates are computed
+     from the accumulated `results` list rather than separately-tracked
+     running lists, so they're correct whether a run went start-to-finish
+     or resumed a partial checkpoint.
+   - `06_baseline_humaneval.ipynb`'s two near-duplicate cells now write to
+     distinct checkpoint files (`humaneval_baseline_v1.csv` for the
+     gpt-4o-mini/no-system-prompt draft, `humaneval_baseline.csv` for the
+     "v2_fixed" version) instead of silently overwriting each other.
