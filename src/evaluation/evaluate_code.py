@@ -146,7 +146,9 @@ def evaluate_humaneval(
     Returns:
         dict with pass@k scores and avg latency
     """
-    dataset = load_dataset("openai_humaneval", split="test")
+    # HuggingFace retired the canonical (namespace-less) "openai_humaneval"
+    # repo id; this is its current maintained location.
+    dataset = load_dataset("openai/openai_humaneval", split="test")
     dataset = dataset.select(range(min(max_problems, len(dataset))))
 
     # trust_remote_code deliberately omitted — see build_lora_model in
