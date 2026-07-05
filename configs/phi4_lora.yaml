@@ -18,7 +18,7 @@ training:
   num_epochs: 3
   batch_size: 4
   gradient_accumulation_steps: 4     # effective batch = 4x4 = 16
-  learning_rate: 2e-4
+  learning_rate: 2.0e-4  # bare "2e-4" (no decimal point) parses as a string in PyYAML, not a float
   warmup_ratio: 0.03
   lr_scheduler: "cosine"
   fp16: true
