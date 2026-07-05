@@ -14,7 +14,16 @@ import os
 from typing import List
 
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
-from evaluation.metrics import LLM_API_COSTS, get_privacy_risk
+from evaluation.metrics import LLM_API_COSTS, get_privacy_risk, calculate_roi_breakeven
+
+# The GPU used for Phase 2 was free (university-provided), so there's no real
+# invoice to read a $/hour off of. Kept at the same $2.50/hr already assumed
+# in configs/*.yaml ("SRH A6000 approximate USD/hr") so the ROI numbers model
+# a realistic paid-GPU enterprise scenario instead of the accidental "$0
+# because we didn't pay for it" case, which wouldn't mean anything for the
+# thesis's actual question.
+GPU_COST_PER_HOUR = 2.50
+ROI_REFERENCE_API = "gpt-4o"
 
 
 MODELS = [
@@ -109,6 +118,40 @@ def _parse_phase1_notebook_runs(client: "mlflow.tracking.MlflowClient") -> List[
     return rows
 
 
+def _lookup_training_info(client: "mlflow.tracking.MlflowClient") -> dict:
+    """
+    Maps (model, task) -> {"method": "LoRA"/"QLoRA", "training_hours": float}
+    from the phase2_fine_tuning-tagged runs train_lora.py/train_qlora.py log.
+
+    benchmark_matrix.py uses this rather than trusting whatever "method" and
+    "roi_breakeven_tokens" a benchmark run already logged, because:
+    - log_benchmark_result never set a "method" tag, so every benchmark row
+      (SLM included) fell back to the "API" default.
+    - Evaluation runs (run_full_evaluation / evaluate_humaneval) always
+      called with fine_tuning_cost_usd=0.0, so every previously-logged
+      roi_breakeven_tokens assumed free training — meaningless for the
+      thesis's actual "when does fine-tuning pay off" question.
+    Deduped to the latest run per (model, task), since retries after bugfixes
+    (e.g. the learning_rate/dataset-id fixes mid-sweep) left stale runs
+    alongside the final successful ones.
+    """
+    info = {}
+    for exp in client.search_experiments():
+        for run in client.search_runs(experiment_ids=[exp.experiment_id]):
+            tags = run.data.tags
+            if tags.get("phase") != "phase2_fine_tuning":
+                continue
+            key = (tags.get("model", "unknown").split("/")[-1], tags.get("task", "unknown"))
+            if key in info and info[key]["start_time"] >= run.info.start_time:
+                continue
+            info[key] = {
+                "method": tags.get("method", "unknown"),
+                "training_hours": run.data.metrics.get("training_hours", 0.0),
+                "start_time": run.info.start_time,
+            }
+    return info
+
+
 def compile_benchmark_matrix(
     # Phase 1 (LLM API baselines) and Phase 2 (fine-tuned SLMs) log to two
     # separate mlflow.db files, because each phase's scripts/notebooks run
@@ -136,6 +179,11 @@ def compile_benchmark_matrix(
         # this doesn't double-count anything regardless of which db is which.
         rows.extend(_parse_phase1_notebook_runs(client))
 
+        # (model, task) -> real training method/hours, for the "method" and
+        # "roi_breakeven_tokens" fixups below. A no-op on notebooks/mlflow.db
+        # (no phase2_fine_tuning runs there).
+        training_info = _lookup_training_info(client)
+
         # Fetch all runs and keep only benchmark ones (phase2_benchmark or
         # phase1_baseline). Filtered in Python, not via filter_string's
         # "IN (...)" syntax — this mlflow version's search DSL only accepts
@@ -161,15 +209,37 @@ def compile_benchmark_matrix(
         for (model_name, task), run in latest_by_key.items():
             tags = run.data.tags
             metrics = run.data.metrics
+            model_short = model_name.split("/")[-1]
+            cost_per_1m = metrics.get("cost_per_1m_tokens", None)
+            train_info = training_info.get((model_short, task))
+
+            if train_info is not None:
+                # SLM row: log_benchmark_result never tagged "method", and
+                # every previously-logged roi_breakeven_tokens assumed
+                # $0 fine-tuning cost. Use the real training method/hours
+                # instead of trusting either.
+                method = train_info["method"]
+                fine_tuning_cost_usd = train_info["training_hours"] * GPU_COST_PER_HOUR
+                api_cost = LLM_API_COSTS[ROI_REFERENCE_API]["blended"]
+                roi_breakeven_tokens = (
+                    calculate_roi_breakeven(fine_tuning_cost_usd, api_cost, cost_per_1m)
+                    if cost_per_1m is not None else None
+                )
+            else:
+                # No matching fine-tuning run — either a genuine API row or
+                # an SLM row whose training run predates this script's fix.
+                method = tags.get("method", "API")
+                roi_breakeven_tokens = metrics.get("roi_breakeven_tokens", None)
+
             rows.append({
-                "model": model_name.split("/")[-1],
+                "model": model_short,
                 "task": task,
-                "method": tags.get("method", "API"),
+                "method": method,
                 "accuracy": metrics.get("accuracy", None),
                 "latency_ms": metrics.get("latency_ms", None),
-                "cost_per_1m_tokens": metrics.get("cost_per_1m_tokens", None),
+                "cost_per_1m_tokens": cost_per_1m,
                 "privacy_risk": tags.get("privacy_risk", "unknown"),
-                "roi_breakeven_tokens": metrics.get("roi_breakeven_tokens", None),
+                "roi_breakeven_tokens": roi_breakeven_tokens,
             })
 
     df = pd.DataFrame(rows)
