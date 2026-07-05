@@ -65,13 +65,26 @@ PHASE1_MODEL_PREFIXES = {
 
 
 def _parse_phase1_notebook_runs(client: "mlflow.tracking.MlflowClient") -> List[dict]:
-    """Reconstruct one row per (model, task) from Phase 1's bundled-metrics runs."""
+    """
+    Reconstruct one row per (model, task) from Phase 1's bundled-metrics runs.
+
+    Only the latest run per experiment is used — these notebooks were
+    re-executed many times over the course of debugging (retry logic added,
+    temperature fixed, checkpoints resumed, etc.), and mlflow.start_run()
+    creates a new run each time rather than overwriting, so an experiment
+    can hold several stale pre-fix runs alongside the final one.
+    """
     rows = []
     for exp in client.search_experiments():
         if exp.name not in PHASE1_EXPERIMENT_TASKS:
             continue
         task, accuracy_key = PHASE1_EXPERIMENT_TASKS[exp.name]
-        for run in client.search_runs(experiment_ids=[exp.experiment_id]):
+        latest_runs = client.search_runs(
+            experiment_ids=[exp.experiment_id],
+            order_by=["start_time DESC"],
+            max_results=1,
+        )
+        for run in latest_runs:
             metrics = run.data.metrics
             for prefix, model_name in PHASE1_MODEL_PREFIXES.items():
                 accuracy = metrics.get(f"{prefix}_{accuracy_key}")
@@ -127,6 +140,12 @@ def compile_benchmark_matrix(
         # phase1_baseline). Filtered in Python, not via filter_string's
         # "IN (...)" syntax — this mlflow version's search DSL only accepts
         # a single quoted value per tag comparison and raises on a tuple.
+        #
+        # Deduped to the latest run per (model, task): re-running evaluation
+        # for the same combo (e.g. after a bugfix) creates a new mlflow run
+        # rather than overwriting, so without this a stale pre-fix result
+        # could sit alongside the real one and get averaged together.
+        latest_by_key = {}
         experiments = client.search_experiments()
         for exp in experiments:
             runs = client.search_runs(experiment_ids=[exp.experiment_id])
@@ -134,17 +153,24 @@ def compile_benchmark_matrix(
                 tags = run.data.tags
                 if tags.get("phase") not in ("phase2_benchmark", "phase1_baseline"):
                     continue
-                metrics = run.data.metrics
-                rows.append({
-                    "model": tags.get("model", "unknown").split("/")[-1],
-                    "task": tags.get("task", "unknown"),
-                    "method": tags.get("method", "API"),
-                    "accuracy": metrics.get("accuracy", None),
-                    "latency_ms": metrics.get("latency_ms", None),
-                    "cost_per_1m_tokens": metrics.get("cost_per_1m_tokens", None),
-                    "privacy_risk": tags.get("privacy_risk", "unknown"),
-                    "roi_breakeven_tokens": metrics.get("roi_breakeven_tokens", None),
-                })
+                key = (tags.get("model", "unknown"), tags.get("task", "unknown"))
+                if key in latest_by_key and latest_by_key[key].info.start_time >= run.info.start_time:
+                    continue
+                latest_by_key[key] = run
+
+        for (model_name, task), run in latest_by_key.items():
+            tags = run.data.tags
+            metrics = run.data.metrics
+            rows.append({
+                "model": model_name.split("/")[-1],
+                "task": task,
+                "method": tags.get("method", "API"),
+                "accuracy": metrics.get("accuracy", None),
+                "latency_ms": metrics.get("latency_ms", None),
+                "cost_per_1m_tokens": metrics.get("cost_per_1m_tokens", None),
+                "privacy_risk": tags.get("privacy_risk", "unknown"),
+                "roi_breakeven_tokens": metrics.get("roi_breakeven_tokens", None),
+            })
 
     df = pd.DataFrame(rows)
 
