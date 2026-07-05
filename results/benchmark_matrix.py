@@ -59,15 +59,17 @@ def compile_benchmark_matrix(
         mlflow.set_tracking_uri(tracking_uri)
         client = mlflow.tracking.MlflowClient()
 
-        # Fetch all benchmark runs (tagged phase = phase2_benchmark or phase1_baseline)
+        # Fetch all runs and keep only benchmark ones (phase2_benchmark or
+        # phase1_baseline). Filtered in Python, not via filter_string's
+        # "IN (...)" syntax — this mlflow version's search DSL only accepts
+        # a single quoted value per tag comparison and raises on a tuple.
         experiments = client.search_experiments()
         for exp in experiments:
-            runs = client.search_runs(
-                experiment_ids=[exp.experiment_id],
-                filter_string="tags.phase IN ('phase2_benchmark', 'phase1_baseline')",
-            )
+            runs = client.search_runs(experiment_ids=[exp.experiment_id])
             for run in runs:
                 tags = run.data.tags
+                if tags.get("phase") not in ("phase2_benchmark", "phase1_baseline"):
+                    continue
                 metrics = run.data.metrics
                 rows.append({
                     "model": tags.get("model", "unknown").split("/")[-1],
