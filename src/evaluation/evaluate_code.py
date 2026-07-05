@@ -12,7 +12,6 @@ import time
 import multiprocessing
 import torch
 import numpy as np
-import mlflow
 from typing import List, Tuple, Optional
 
 CODE_EXEC_TIMEOUT_SECONDS = 5
@@ -30,6 +29,14 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from datasets import load_dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
+
+from utils.mlflow_logger import BenchmarkLogger
+from evaluation.metrics import (
+    calculate_slm_cost_per_1m_tokens,
+    calculate_roi_breakeven,
+    get_privacy_risk,
+    LLM_API_COSTS,
+)
 
 
 def pass_at_k(n: int, c: int, k: int) -> float:
@@ -132,6 +139,9 @@ def evaluate_humaneval(
     k_values: List[int] = [1, 10],
     max_problems: int = 164,
     mlflow_experiment: str = "phase2_evaluation",
+    gpu_cost_per_hour: float = 2.50,
+    fine_tuning_cost_usd: float = 0.0,
+    compare_against_llm: str = "gpt-4o",
 ) -> dict:
     """
     Full HumanEval evaluation pipeline.
@@ -188,20 +198,44 @@ def evaluate_humaneval(
         )
         problem_results.append({"n": n_samples, "c": correct})
 
-    # Calculate pass@k for each k value
-    results = {}
+    # Calculate pass@k for each k value. Keys use "_at_" instead of "@" —
+    # mlflow metric names only allow alphanumerics/underscore/dash/period/
+    # space/colon/slash, and "pass@1" raised a validation error right after
+    # all 164 problems had already been generated and tested.
+    pass_at_k_scores = {}
     for k in k_values:
         scores = [pass_at_k(r["n"], r["c"], k) for r in problem_results]
-        results[f"pass@{k}"] = round(float(np.mean(scores)), 4)
+        pass_at_k_scores[f"pass_at_{k}"] = round(float(np.mean(scores)), 4)
 
-    results["avg_latency_ms"] = round(float(np.mean(all_latencies)), 2)
+    avg_latency_ms = round(float(np.mean(all_latencies)), 2)
 
-    # Log to MLflow
-    with mlflow.start_run(run_name=f"humaneval_{base_model_name.split('/')[-1]}"):
-        mlflow.set_experiment(mlflow_experiment)
-        mlflow.set_tags({"model": base_model_name, "task": "code_generation"})
-        mlflow.log_metrics(results)
+    # Cost / ROI / privacy, computed the same way as evaluate.py's
+    # run_full_evaluation, so code_generation logs through the same
+    # BenchmarkLogger shape (accuracy/latency_ms/cost_per_1m_tokens/
+    # privacy_risk/roi_breakeven_tokens) and lands in benchmark_matrix.py's
+    # rows alongside the other 4 tasks instead of being invisible to it.
+    generated_tokens = 256  # max_new_tokens used in generate_solutions()
+    avg_tokens_per_second = generated_tokens / (avg_latency_ms / 1000)
+    cost_per_1m = calculate_slm_cost_per_1m_tokens(gpu_cost_per_hour, avg_tokens_per_second)
+    privacy_risk = get_privacy_risk("on_premise")
+    api_cost = LLM_API_COSTS[compare_against_llm]["blended"]
+    roi_breakeven = calculate_roi_breakeven(fine_tuning_cost_usd, api_cost, cost_per_1m)
 
+    # pass@1 (probability at least 1 of n samples passes) is the standard
+    # headline HumanEval number — used here as this task's "accuracy" so it
+    # sits in the same column as the other 4 tasks' accuracy/F1/ROUGE-L.
+    logger = BenchmarkLogger(mlflow_experiment)
+    logger.log_benchmark_result(
+        model_name=base_model_name,
+        task="code_generation",
+        accuracy=pass_at_k_scores.get("pass_at_1", 0.0),
+        latency_ms=avg_latency_ms,
+        cost_per_1m_tokens=cost_per_1m,
+        privacy_risk=privacy_risk,
+        roi_breakeven_tokens=roi_breakeven,
+    )
+
+    results = {**pass_at_k_scores, "avg_latency_ms": avg_latency_ms}
     print(f"\n✅ HumanEval Results: {results}")
     return results
 
