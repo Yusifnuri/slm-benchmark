@@ -55,7 +55,10 @@ def build_qlora_model(model_name: str, qlora_cfg: dict):
     """
     print(f"\n📦 Loading model in 4-bit QLoRA: {model_name}")
 
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    # trust_remote_code deliberately omitted — see build_lora_model in
+    # train_lora.py for why (breaks phi-4-mini-instruct on current transformers;
+    # unneeded for Mistral/Llama's native architectures).
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
 
     # QLoRA quantization config (Dettmers et al. 2023)
@@ -70,7 +73,6 @@ def build_qlora_model(model_name: str, qlora_cfg: dict):
         model_name,
         quantization_config=bnb_config,
         device_map="auto",
-        trust_remote_code=True,
     )
 
     # Required for QLoRA: prepares quantized layers for gradient flow
