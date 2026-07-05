@@ -45,7 +45,9 @@ from transformers import PreTrainedTokenizer
 # Task configuration: dataset names, columns, prompts, label maps
 TASK_CONFIGS: Dict[str, Dict] = {
     "classification": {
-        "dataset": "ag_news",
+        # HuggingFace retired the canonical (namespace-less) "ag_news" repo id;
+        # this is its current maintained location.
+        "dataset": "fancyzhx/ag_news",
         "input_col": "text",
         "label_col": "label",
         "label_map": {0: "World", 1: "Sports", 2: "Business", 3: "Technology"},
@@ -55,7 +57,9 @@ TASK_CONFIGS: Dict[str, Dict] = {
         ),
     },
     "ner": {
-        "dataset": "conll2003",
+        # HuggingFace retired the canonical (namespace-less) "conll2003" repo id;
+        # this is its current maintained location.
+        "dataset": "eriktks/conll2003",
         "revision": "refs/convert/parquet",  # known HuggingFace workaround
         "input_col": "tokens",
         "label_col": "ner_tags",
@@ -67,7 +71,9 @@ TASK_CONFIGS: Dict[str, Dict] = {
         ),
     },
     "summarization": {
-        "dataset": "cnn_dailymail",
+        # HuggingFace retired the canonical (namespace-less) "cnn_dailymail" repo id;
+        # this is its current maintained location.
+        "dataset": "abisee/cnn_dailymail",
         "config": "3.0.0",
         "input_col": "article",
         "label_col": "highlights",
