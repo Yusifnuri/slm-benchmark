@@ -3,3 +3,8 @@ venv/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Raw Trainer checkpoint dirs (outputs/<model>_<task>/checkpoint-*) — bulky,
+# not the thesis deliverable. The deliverable is adapters/ (LoRA/QLoRA
+# weights only, saved separately via model.save_pretrained()).
+outputs/
