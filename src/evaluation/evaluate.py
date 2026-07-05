@@ -40,14 +40,16 @@ def load_model_for_inference(
     If adapter_path provided: load fine-tuned SLM.
     If None: load base model (for baseline comparison).
     """
-    tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
+    # trust_remote_code deliberately omitted — see build_lora_model in
+    # train_lora.py for why (breaks phi-4-mini-instruct on current transformers;
+    # unneeded for Mistral/Llama's native architectures).
+    tokenizer = AutoTokenizer.from_pretrained(base_model_name)
     tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForCausalLM.from_pretrained(
         base_model_name,
         torch_dtype=torch.float16,
         device_map="auto",
-        trust_remote_code=True,
     )
 
     if adapter_path and os.path.exists(adapter_path):

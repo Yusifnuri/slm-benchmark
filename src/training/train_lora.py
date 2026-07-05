@@ -46,14 +46,18 @@ def build_lora_model(model_name: str, lora_cfg: dict):
     """Load base model in float16 and attach LoRA adapters."""
     print(f"\n📦 Loading model: {model_name}")
 
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    # trust_remote_code deliberately omitted: transformers >= 4.51 has native
+    # Phi3/Mistral/Llama support, and enabling it for phi-4-mini-instruct pulls
+    # Microsoft's stale custom modeling_phi3.py, which imports `LossKwargs`
+    # from transformers.utils — removed in current transformers and fails
+    # with ImportError. Native classes work for all 3 models we fine-tune.
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         torch_dtype=torch.float16,
         device_map="auto",
-        trust_remote_code=True,
     )
 
     lora_config = LoraConfig(

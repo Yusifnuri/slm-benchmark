@@ -1,6 +1,6 @@
 # Core ML
 torch>=2.1.0
-transformers>=4.46.0
+transformers>=4.51.0  # native Phi3 support — see train_lora.py's trust_remote_code note
 peft>=0.11.0
 accelerate>=0.30.0
 bitsandbytes>=0.43.0
