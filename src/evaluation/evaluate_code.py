@@ -58,6 +58,26 @@ def pass_at_k(n: int, c: int, k: int) -> float:
     ))
 
 
+# Stop markers from the original Codex/HumanEval evaluation harness (Chen et
+# al. 2021, appendix). Without these, generation runs to max_new_tokens with
+# no notion of "the function is done", so the model keeps going and often
+# hallucinates a second, unrelated function after a correct answer. If that
+# trailing hallucination gets cut off mid-statement by the token budget, the
+# whole solution becomes a syntax error when exec'd — even though the actual
+# answer above it was correct. Truncating at the first stop marker discards
+# only the run-on tail, not the (possibly correct) real solution.
+STOP_SEQUENCES = ["\nclass", "\ndef", "\n#", "\nif __name__", "\nprint("]
+
+
+def truncate_solution(text: str) -> str:
+    cut_at = len(text)
+    for stop in STOP_SEQUENCES:
+        idx = text.find(stop)
+        if idx != -1:
+            cut_at = min(cut_at, idx)
+    return text[:cut_at]
+
+
 def generate_solutions(
     model,
     tokenizer,
@@ -92,7 +112,7 @@ def generate_solutions(
         latencies.append((time.time() - start) * 1000)
         new_tokens = output[0][input_len:]
         solution = tokenizer.decode(new_tokens, skip_special_tokens=True)
-        solutions.append(solution)
+        solutions.append(truncate_solution(solution))
 
     return solutions, float(np.mean(latencies))
 
