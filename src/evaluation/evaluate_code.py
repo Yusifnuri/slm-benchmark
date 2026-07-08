@@ -194,8 +194,14 @@ def evaluate_humaneval(
     )
 
     if adapter_path and os.path.exists(adapter_path):
+        # merge_and_unload() is a documented source of quality loss for
+        # adapters trained with 4-bit QLoRA (HF peft issues report merged
+        # models scoring far worse than the unmerged PeftModel on the same
+        # input) — suspected cause of Mistral-7B-v0.3 (QLoRA)'s pass@1=0.0
+        # here while its LoRA (fp16) siblings scored normally. Keeping the
+        # adapter unmerged and running inference through PeftModel directly
+        # sidesteps that regardless of which base precision it stems from.
         model = PeftModel.from_pretrained(model, adapter_path)
-        model = model.merge_and_unload()
 
     model.eval()
 
