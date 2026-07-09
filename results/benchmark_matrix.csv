@@ -14,9 +14,9 @@ gemini-2.5-flash,ner,API,0.923142,722.23,1.4,high,
 gpt-4o,classification,API,0.85,777.98,10.0,high,
 claude-haiku-4-5,classification,API,0.81,900.58,3.0,high,
 gemini-2.5-flash,classification,API,0.85,617.85,1.4,high,
-Llama-3.2-3B-Instruct,code_generation,LoRA,0.2421,3555.77,9.6456,low,110273.0
-Mistral-7B-v0.3,code_generation,QLoRA,0.0,2917.92,7.9154,low,60801.0
-phi-4-mini-instruct,code_generation,LoRA,0.4024,1966.22,5.3337,low,6426.0
+Llama-3.2-3B-Instruct,code_generation,LoRA,0.3341,5768.99,15.6494,low,inf
+Mistral-7B-v0.3,code_generation,QLoRA,0.0006,4530.61,12.2901,low,inf
+phi-4-mini-instruct,code_generation,LoRA,0.4287,2200.08,5.9681,low,7437.0
 Llama-3.2-3B-Instruct,financial_sentiment,LoRA,0.76,468.38,10.1645,low,inf
 Llama-3.2-3B-Instruct,summarization,LoRA,0.186,1761.31,9.5557,low,1161415.0
 Llama-3.2-3B-Instruct,ner,LoRA,0.7917,940.42,10.2042,low,inf
