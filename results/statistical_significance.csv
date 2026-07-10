@@ -1,0 +1,10 @@
+slm,llm_baseline,slm_mean_accuracy,llm_mean_accuracy,mean_difference,t_statistic,p_value,significant_at_0.05,n_pairs
+phi-4-mini-instruct,gpt-4o,0.6102,0.6927,-0.0825,-0.8702,0.4333,False,5
+phi-4-mini-instruct,claude-haiku-4-5,0.6102,0.68,-0.0698,-0.808,0.4644,False,5
+phi-4-mini-instruct,gemini-2.5-flash,0.6102,0.7525,-0.1423,-1.3405,0.2512,False,5
+Mistral-7B-v0.3,gpt-4o,0.4668,0.6927,-0.2259,-2.8118,0.0482,True,5
+Mistral-7B-v0.3,claude-haiku-4-5,0.4668,0.68,-0.2132,-2.3423,0.0792,False,5
+Mistral-7B-v0.3,gemini-2.5-flash,0.4668,0.7525,-0.2857,-2.2039,0.0923,False,5
+Llama-3.2-3B-Instruct,gpt-4o,0.5784,0.6927,-0.1143,-2.837,0.047,True,5
+Llama-3.2-3B-Instruct,claude-haiku-4-5,0.5784,0.68,-0.1016,-2.4701,0.0689,False,5
+Llama-3.2-3B-Instruct,gemini-2.5-flash,0.5784,0.7525,-0.1741,-2.2528,0.0874,False,5
