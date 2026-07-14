@@ -117,7 +117,7 @@ notebooks, so the reasoning survives into the thesis write-up:
      from the accumulated `results` list rather than separately-tracked
      running lists, so they're correct whether a run went start-to-finish
      or resumed a partial checkpoint.
-   - `06_baseline_humaneval.ipynb`'s two near-duplicate cells now write to
-     distinct checkpoint files (`humaneval_baseline_v1.csv` for the
-     gpt-4o-mini/no-system-prompt draft, `humaneval_baseline.csv` for the
-     "v2_fixed" version) instead of silently overwriting each other.
+   - `06_baseline_humaneval.ipynb` originally contained a superseded
+     gpt-4o-mini draft cell alongside the real gpt-4o baseline cell; the
+     draft was removed entirely (PR #3), so the notebook now has a single
+     baseline cell checkpointing to `logs/humaneval_baseline.csv`.
