@@ -5,9 +5,8 @@ Expose: Deliverable 1, "SLM Decision Framework Tool" (Weeks 15-16)
 Inputs (task type, monthly token volume, accuracy threshold, privacy
 requirement) -> recommendation (which model, projected cost, accuracy,
 ROI breakeven chart), driven entirely by results/benchmark_matrix.csv —
-no model inference happens here, this just reads the already-compiled
-benchmark numbers and applies the decision logic tree described in the
-expose (Weeks 13-14).
+no model inference happens here. The decision logic itself lives in
+src/decision_framework.py, shared with scripts/internal_validation.py.
 
 Run locally:
     streamlit run app.py
@@ -16,6 +15,13 @@ Run locally:
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
+
+from src.decision_framework import (
+    ROI_REFERENCE_MODEL,
+    implied_fine_tuning_cost,
+    recommend,
+    reference_api_cost_per_1m,
+)
 
 TASKS = ["classification", "ner", "summarization", "financial_sentiment", "code_generation"]
 TASK_LABELS = {
@@ -31,21 +37,6 @@ VOLUME_OPTIONS = [100_000, 500_000, 1_000_000, 5_000_000, 10_000_000, 50_000_000
 @st.cache_data
 def load_benchmark() -> pd.DataFrame:
     return pd.read_csv("results/benchmark_matrix.csv")
-
-
-def implied_fine_tuning_cost(row: pd.Series, llm_cost_per_1m: float) -> float:
-    """
-    Recovers the fine-tuning cost baked into an already-computed
-    roi_breakeven_tokens (rather than storing it as a separate column):
-    at volume = roi_breakeven_tokens, SLM total cost == LLM total cost, so
-    fine_tuning_cost = (llm_cost - slm_cost) * roi_breakeven_tokens / 1e6.
-    Returns 0.0 for API rows or an infinite/missing breakeven (never
-    recovers its cost against this reference LLM within any realistic volume).
-    """
-    breakeven = row["roi_breakeven_tokens"]
-    if pd.isna(breakeven) or breakeven in (float("inf"),) or row["privacy_risk"] != "low":
-        return 0.0
-    return (llm_cost_per_1m - row["cost_per_1m_tokens"]) / 1_000_000 * breakeven
 
 
 st.set_page_config(page_title="SLM Decision Framework", layout="wide")
@@ -75,20 +66,18 @@ task_df = df[df["task"] == task].copy()
 if privacy_required:
     task_df = task_df[task_df["privacy_risk"] == "low"]
 
-eligible = task_df[task_df["accuracy"] >= accuracy_threshold].copy()
+recommended, eligible = recommend(df, task, monthly_volume, accuracy_threshold, privacy_required)
 
-if eligible.empty:
+if recommended is None:
     st.warning(
         f"No model reaches {accuracy_threshold:.0%} accuracy on "
         f"{TASK_LABELS[task]} under these constraints. Closest options:"
     )
-    eligible = task_df.sort_values("accuracy", ascending=False).head(3)
-else:
-    eligible["projected_monthly_cost"] = (
-        eligible["cost_per_1m_tokens"] / 1_000_000 * monthly_volume
+    st.dataframe(
+        eligible[["model", "method", "accuracy", "cost_per_1m_tokens", "privacy_risk"]].reset_index(drop=True),
+        use_container_width=True,
     )
-    recommended = eligible.sort_values("projected_monthly_cost").iloc[0]
-
+else:
     st.success(f"**Recommended: {recommended['model']}** ({recommended['method']})")
 
     m1, m2, m3, m4 = st.columns(4)
@@ -128,39 +117,41 @@ st.plotly_chart(fig_cost, use_container_width=True)
 st.caption("Blue = on-premise (low privacy risk), orange = API (high privacy risk)")
 
 # --- ROI breakeven chart, only meaningful when an SLM was recommended ---
-if not eligible.empty and recommended["privacy_risk"] == "low":
-    st.subheader(f"ROI breakeven: {recommended['model']} vs cheapest API")
-    api_rows = task_df[task_df["privacy_risk"] == "high"]
-    if not api_rows.empty:
-        cheapest_api = api_rows.sort_values("cost_per_1m_tokens").iloc[0]
-        fine_tune_cost = implied_fine_tuning_cost(recommended, cheapest_api["cost_per_1m_tokens"])
+# Plotted against gpt-4o — the same reference API the stored
+# roi_breakeven_tokens was computed against — so the line intersection on
+# the chart and the breakeven number in the caption agree with each other.
+if recommended is not None and recommended["privacy_risk"] == "low":
+    st.subheader(f"ROI breakeven: {recommended['model']} vs {ROI_REFERENCE_MODEL} (reference API)")
+    ref_cost = reference_api_cost_per_1m(df)
+    fine_tune_cost = implied_fine_tuning_cost(recommended, df)
 
-        volumes = [v for v in range(0, 20_000_000, 200_000)]
-        slm_costs = [fine_tune_cost + recommended["cost_per_1m_tokens"] / 1_000_000 * v for v in volumes]
-        api_costs = [cheapest_api["cost_per_1m_tokens"] / 1_000_000 * v for v in volumes]
+    x_max = max(20_000_000, int(monthly_volume * 1.2))
+    volumes = list(range(0, x_max, max(x_max // 100, 1)))
+    slm_costs = [fine_tune_cost + recommended["cost_per_1m_tokens"] / 1_000_000 * v for v in volumes]
+    api_costs = [ref_cost / 1_000_000 * v for v in volumes]
 
-        fig_roi = go.Figure()
-        fig_roi.add_trace(go.Scatter(x=volumes, y=slm_costs, name=f"{recommended['model']} (fine-tuned)", mode="lines"))
-        fig_roi.add_trace(go.Scatter(x=volumes, y=api_costs, name=f"{cheapest_api['model']} (API)", mode="lines"))
-        fig_roi.add_vline(x=monthly_volume, line_dash="dot", annotation_text="Your monthly volume")
-        fig_roi.update_layout(
-            xaxis_title="Cumulative monthly tokens",
-            yaxis_title="Cumulative cost (USD)",
+    fig_roi = go.Figure()
+    fig_roi.add_trace(go.Scatter(x=volumes, y=slm_costs, name=f"{recommended['model']} (fine-tuned)", mode="lines"))
+    fig_roi.add_trace(go.Scatter(x=volumes, y=api_costs, name=f"{ROI_REFERENCE_MODEL} (API)", mode="lines"))
+    fig_roi.add_vline(x=monthly_volume, line_dash="dot", annotation_text="Your monthly volume")
+    fig_roi.update_layout(
+        xaxis_title="Cumulative monthly tokens",
+        yaxis_title="Cumulative cost (USD)",
+    )
+    st.plotly_chart(fig_roi, use_container_width=True)
+
+    breakeven = recommended["roi_breakeven_tokens"]
+    if pd.notna(breakeven) and breakeven != float("inf"):
+        st.caption(
+            f"Breakeven at ~{breakeven:,.0f} tokens/month against {ROI_REFERENCE_MODEL} — "
+            f"below that volume, the API is cheaper; above it, the fine-tuned SLM wins."
         )
-        st.plotly_chart(fig_roi, use_container_width=True)
-
-        breakeven = recommended["roi_breakeven_tokens"]
-        if pd.notna(breakeven) and breakeven != float("inf"):
-            st.caption(
-                f"Breakeven at ~{breakeven:,.0f} tokens/month against {cheapest_api['model']} — "
-                f"below that volume, the API is cheaper; above it, the fine-tuned SLM wins."
-            )
-        else:
-            st.caption(
-                f"At this task's inference cost, {recommended['model']} never recovers its "
-                f"training cost against {cheapest_api['model']} on a pure per-token basis — "
-                f"it's recommended here on accuracy and/or privacy grounds instead."
-            )
+    else:
+        st.caption(
+            f"At this task's inference cost, {recommended['model']} never recovers its "
+            f"training cost against {ROI_REFERENCE_MODEL} on a pure per-token basis — "
+            f"it's recommended here on accuracy and/or privacy grounds instead."
+        )
 
 st.divider()
 st.caption(
