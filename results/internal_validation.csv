@@ -1,0 +1,11 @@
+scenario,task,monthly_volume,min_accuracy,privacy_required,recommended_model,recommended_method,accuracy,projected_monthly_cost_usd,n_eligible_candidates
+Support ticket routing at a telco,classification,10000000,0.8,False,gemini-2.5-flash,API,0.85,14.0,5
+Hospital extracting entities from patient records (GDPR: on-premise),ner,5000000,0.75,True,phi-4-mini-instruct,LoRA,0.9328,33.0,2
+Media monitoring firm summarising news at scale,summarization,50000000,0.2,False,gemini-2.5-flash,API,0.2192,70.0,4
+Bank scoring sentiment on internal client communications (on-premise),financial_sentiment,2000000,0.8,True,Mistral-7B-v0.3,QLoRA,0.845,24.4,1
+SaaS vendor adding an AI coding assistant,code_generation,1000000,0.5,False,gemini-2.5-flash,API,0.78,1.4,3
+Defence contractor generating code in an air-gapped environment,code_generation,1000000,0.3,True,phi-4-mini-instruct,LoRA,0.4287,5.97,2
+Legal firm demanding near-perfect summarisation on-premise (unsatisfiable),summarization,5000000,0.5,True,NONE (no model meets constraints),-,,,0
+Early-stage startup classifying low-volume user feedback,classification,100000,0.8,False,gemini-2.5-flash,API,0.85,0.14,5
+E-commerce giant running NER over 100M tokens/month of product data,ner,100000000,0.85,False,gemini-2.5-flash,API,0.9231,140.0,4
+"Hedge fund needing top-accuracy financial sentiment, volume-heavy",financial_sentiment,20000000,0.9,False,gemini-2.5-flash,API,0.99,28.0,3
