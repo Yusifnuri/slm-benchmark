@@ -63,6 +63,7 @@ class BenchmarkLogger:
         cost_per_1m_tokens: float,
         privacy_risk: str,           # "low" | "medium" | "high"
         roi_breakeven_tokens: float,
+        extra_metrics: Optional[Dict[str, float]] = None,
     ):
         """
         Log final benchmark entry for the 6x5x5 matrix.
@@ -83,4 +84,8 @@ class BenchmarkLogger:
                 "cost_per_1m_tokens": cost_per_1m_tokens,
                 "roi_breakeven_tokens": roi_breakeven_tokens,
             })
+            # Diagnostics that don't fit the 5-metric matrix shape
+            # (e.g. micro_f1, parse_failure_rate) but must survive the run.
+            if extra_metrics:
+                mlflow.log_metrics(extra_metrics)
         print(f"Benchmark result logged: {model_name} | {task}")
