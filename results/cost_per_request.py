@@ -48,6 +48,20 @@ AG_SYSTEM = (
 )
 
 
+def billed_usage_if_present(df: pd.DataFrame, provider: str):
+    """
+    Prefer provider-billed token counts over the chars-per-token estimate.
+    The notebooks were patched to persist {provider}_prompt_tokens /
+    {provider}_completion_tokens; once a log has been (re-)run with that
+    schema, this returns exact means and the band machinery is bypassed.
+    """
+    pin, pout = f"{provider}_prompt_tokens", f"{provider}_completion_tokens"
+    if pin in df.columns and df[pin].notna().any():
+        sub = df[df[pin].notna() & (df[pin] > 0)]
+        return float(sub[pin].mean()), float(sub[pout].mean())
+    return None
+
+
 def classification_char_counts() -> tuple:
     ag = pd.read_csv("logs/ag_news_baseline.csv")
     in_chars = np.array(
@@ -71,15 +85,22 @@ def code_char_counts() -> tuple:
 def analyse() -> pd.DataFrame:
     rows = []
 
+    ag = pd.read_csv("logs/ag_news_baseline.csv")
     in_c, out_c = classification_char_counts()
-    for cpt in (3.8, 4.2, 4.6):
-        t_in, t_out = in_c / cpt, out_c / cpt
-        c_slm = SLM_LATENCY_S["classification"] * R_GPU / 3600
-        for api, (pi, po) in PRICES.items():
+    c_slm = SLM_LATENCY_S["classification"] * R_GPU / 3600
+    for api, (pi, po) in PRICES.items():
+        provider = {"gpt-4o": "openai", "claude-haiku-4-5": "anthropic",
+                    "gemini-2.5-flash": "gemini"}[api]
+        billed = billed_usage_if_present(ag, provider)
+        if billed:
+            bands = [("billed", billed[0], billed[1])]
+        else:
+            bands = [(cpt, in_c / cpt, out_c / cpt) for cpt in (3.8, 4.2, 4.6)]
+        for label, t_in, t_out in bands:
             c_api = (t_in * pi + t_out * po) / 1e6
             delta = c_api - c_slm
             rows.append({
-                "task": "classification", "chars_per_token": cpt, "api": api,
+                "task": "classification", "chars_per_token": label, "api": api,
                 "T_in": round(t_in, 1), "T_out": round(t_out, 1),
                 "api_usd_per_1k_req": round(c_api * 1000, 4),
                 "slm_usd_per_1k_req": round(c_slm * 1000, 4),
@@ -115,7 +136,10 @@ def analyse() -> pd.DataFrame:
     # Batching flip factors for the classification cell (mid band): the
     # single-stream SLM per-request cost divided by k must fall below the
     # API's per-request cost for the comparison to flip.
-    mid = df[(df.task == "classification") & (df.chars_per_token == 4.2)]
+    cls = df[df.task == "classification"]
+    mid = (cls[cls.chars_per_token == "billed"]
+           if (cls.chars_per_token == "billed").any()
+           else cls[cls.chars_per_token == 4.2])
     c_slm = mid["slm_usd_per_1k_req"].iloc[0]
     print("\nBatching factor k at which the SLM undercuts each API (classification):")
     for _, r in mid.iterrows():
