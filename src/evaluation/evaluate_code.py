@@ -159,7 +159,7 @@ def evaluate_humaneval(
     k_values: List[int] = [1, 10],
     max_problems: int = 164,
     mlflow_experiment: str = "phase2_evaluation",
-    gpu_cost_per_hour: float = 2.50,
+    gpu_cost_per_hour: float = 3.99,
     fine_tuning_cost_usd: float = 0.0,
     compare_against_llm: str = "gpt-4o",
 ) -> dict:
@@ -195,12 +195,16 @@ def evaluate_humaneval(
 
     if adapter_path and os.path.exists(adapter_path):
         # merge_and_unload() is a documented source of quality loss for
-        # adapters trained with 4-bit QLoRA (HF peft issues report merged
-        # models scoring far worse than the unmerged PeftModel on the same
-        # input) — suspected cause of Mistral-7B-v0.3 (QLoRA)'s pass@1=0.0
-        # here while its LoRA (fp16) siblings scored normally. Keeping the
-        # adapter unmerged and running inference through PeftModel directly
-        # sidesteps that regardless of which base precision it stems from.
+        # adapters trained with 4-bit QLoRA, and was the first suspect for
+        # Mistral-7B-v0.3's pass@1≈0 here. That hypothesis was TESTED and
+        # RULED OUT: removing the merge and re-running reproduced the same
+        # near-zero score (0.0006). The actual explanation (documented in the
+        # thesis, §4.2.5) is that Mistral-7B-v0.3 is the only base
+        # (non-instruction-tuned) model of the three — it never learned a
+        # stopping convention and rambles past the target function into
+        # unrelated, often syntax-breaking code. The unmerged path is kept
+        # anyway since it costs only latency and avoids the known 4-bit
+        # merge degradation class of bugs entirely.
         model = PeftModel.from_pretrained(model, adapter_path)
 
     model.eval()
@@ -222,7 +226,21 @@ def evaluate_humaneval(
             )
             for sol in solutions
         )
-        problem_results.append({"n": n_samples, "c": correct})
+        problem_results.append({
+            "task_id": problem["task_id"],
+            "n": n_samples,
+            "c": correct,
+            "problem_pass_rate": round(correct / n_samples, 4),
+            "avg_latency_ms": round(avg_lat, 2),
+            # First sampled solution, truncated — enough to diagnose
+            # format/rambling failures without re-running generation.
+            "first_solution": solutions[0][:400] if solutions else "",
+        })
+
+    # Persist per-problem outcomes so problem-level statistics (bootstrap
+    # CIs over problems, failure-mode inspection) don't require a re-run.
+    from evaluation.evaluate import save_predictions
+    save_predictions(base_model_name, "code_generation", problem_results)
 
     # Calculate pass@k for each k value. Keys use "_at_" instead of "@" —
     # mlflow metric names only allow alphanumerics/underscore/dash/period/
