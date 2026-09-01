@@ -81,6 +81,58 @@ PHASE1_MODEL_PREFIXES = {
 }
 
 
+# Phase 1's real source of truth is the per-instance CSV each notebook writes
+# to logs/ — mlflow only ever held a derived copy of the same aggregates. The
+# CSVs are preferred here because they are per-instance (so confidence
+# intervals and error analysis remain computable), they are human-auditable,
+# and they do not depend on a sqlite file that a stale kernel can lock. If a
+# notebook's mlflow logging fails, the benchmark is unaffected.
+PHASE1_CSV_SPECS = {
+    # task: (candidate filenames in priority order, per-model column suffix)
+    "classification": (["ag_news_baseline.csv"], "correct"),
+    "ner": (["conll_baseline.csv"], "f1"),
+    "summarization": (["cnn_dailymail_baseline.csv"], "rougeL"),
+    # the v3 file is the corrected seeded-split sample; the bare name is the
+    # superseded label-clustered one kept only as a fallback (see §4.2.4)
+    "financial_sentiment": (["financial_baseline_v3_seededsplit.csv",
+                             "financial_baseline.csv"], "correct"),
+    "code_generation": (["humaneval_baseline.csv"], "pass"),
+}
+
+
+def _parse_phase1_csvs(logs_dir: str = "logs") -> List[dict]:
+    """One row per (API model, task), computed from the per-instance CSVs."""
+    rows = []
+    for task, (candidates, suffix) in PHASE1_CSV_SPECS.items():
+        path = next((os.path.join(logs_dir, c) for c in candidates
+                     if os.path.exists(os.path.join(logs_dir, c))), None)
+        if path is None:
+            continue
+        df = pd.read_csv(path)
+        for prefix, model_name in PHASE1_MODEL_PREFIXES.items():
+            score_col, lat_col = f"{prefix}_{suffix}", f"{prefix}_latency_s"
+            if score_col not in df.columns:
+                continue
+            score = df[score_col].dropna()
+            if score.empty:
+                continue
+            latency = df[lat_col].dropna() if lat_col in df.columns else None
+            rows.append({
+                "model": model_name,
+                "task": task,
+                "method": "API",
+                "accuracy": round(float(score.mean()), 6),
+                "latency_ms": (round(float(latency.mean()) * 1000, 2)
+                               if latency is not None and not latency.empty else None),
+                "cost_per_1m_tokens": LLM_API_COSTS[model_name]["blended"],
+                "privacy_risk": get_privacy_risk("api"),
+                "roi_breakeven_tokens": None,
+                "n_instances": int(len(score)),
+                "source": os.path.basename(path),
+            })
+    return rows
+
+
 def _parse_phase1_notebook_runs(client: "mlflow.tracking.MlflowClient") -> List[dict]:
     """
     Reconstruct one row per (model, task) from Phase 1's bundled-metrics runs.
@@ -176,16 +228,26 @@ def compile_benchmark_matrix(
     """
     rows = []
 
+    # Phase 1: read the per-instance CSVs first. This is the authoritative
+    # source and needs no mlflow connection at all.
+    csv_rows = _parse_phase1_csvs()
+    if csv_rows:
+        covered = {(r["model"], r["task"]) for r in csv_rows}
+        print(f"Phase 1 from CSVs: {len(csv_rows)} rows "
+              f"({len({t for _, t in covered})} tasks)")
+        rows.extend(csv_rows)
+    else:
+        print("Phase 1 CSVs not found — falling back to mlflow")
+
     for tracking_uri in tracking_uris:
         mlflow.set_tracking_uri(tracking_uri)
         client = mlflow.tracking.MlflowClient()
 
-        # Phase 1's notebooks use a different run shape (see
-        # _parse_phase1_notebook_runs docstring) than Phase 2's BenchmarkLogger
-        # runs — try both parsers against both dbs. Each is naturally a no-op
-        # on the "wrong" db (no matching experiment names / no phase tags), so
-        # this doesn't double-count anything regardless of which db is which.
-        rows.extend(_parse_phase1_notebook_runs(client))
+        # Phase 1 rows come from the CSVs (see PHASE1_CSV_SPECS); the mlflow
+        # parser below is kept only as a fallback for tasks whose CSV is
+        # missing, since the two sources hold the same aggregates.
+        if not csv_rows:
+            rows.extend(_parse_phase1_notebook_runs(client))
 
         # (model, task) -> real training method/hours, for the "method" and
         # "roi_breakeven_tokens" fixups below. A no-op on notebooks/mlflow.db
