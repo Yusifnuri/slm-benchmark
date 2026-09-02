@@ -19,6 +19,7 @@ Usage:
     python results/make_figures.py            # writes results/figures/*.png
 """
 
+import math
 import os
 
 import matplotlib
@@ -69,21 +70,38 @@ TASKS = ["classification", "ner", "summarization", "financial_sentiment", "code_
 #          positive); the self-hosted arm's seeded-split scores stand.
 INVALID = {("ner", m) for m in SLMS} | {("financial_sentiment", m) for m in APIS}
 
-# Wilson 95% CIs for the binomial cells (proportion + n is sufficient; no
-# per-instance data needed). Continuous-metric cells (NER F1, ROUGE-L) have
-# no CI for the self-hosted arm because per-instance scores were not
-# persisted in the first sweep.
-CI = {
-    ("classification", "phi-4-mini-instruct"): (0.874, 0.950),
-    ("classification", "Llama-3.2-3B-Instruct"): (0.761, 0.867),
-    ("classification", "Mistral-7B-v0.3"): (0.623, 0.750),
-    ("classification", "gpt-4o"): (0.767, 0.907),
-    ("classification", "claude-haiku-4-5"): (0.722, 0.875),
-    ("classification", "gemini-2.5-flash"): (0.767, 0.907),
-    ("code_generation", "gpt-4o"): (0.385, 0.652),
-    ("code_generation", "claude-haiku-4-5"): (0.404, 0.670),
-    ("code_generation", "gemini-2.5-flash"): (0.648, 0.872),
-}
+# Wilson 95% confidence intervals, computed from the data rather than
+# hardcoded, so they track the CSVs through every re-run. A proportion and a
+# sample size are sufficient — no per-instance data is needed — which is why
+# intervals exist for the binomial cells (classification, financial
+# sentiment, pass@1) but not for the continuous-metric cells (NER entity F1,
+# ROUGE-L), whose per-instance scores the first sweep did not persist for the
+# self-hosted arm.
+BINOMIAL_TASKS = {"classification", "financial_sentiment", "code_generation"}
+# The self-hosted arm's evaluation size is fixed by run_full_evaluation's
+# max_eval_samples; HumanEval is scored over all 164 problems.
+SLM_N = {"classification": 200, "financial_sentiment": 200, "code_generation": 164}
+
+
+def wilson(p, n, z=1.96):
+    if n <= 0:
+        return None
+    den = 1 + z * z / n
+    centre = (p + z * z / (2 * n)) / den
+    half = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / den
+    return max(0.0, centre - half), min(1.0, centre + half)
+
+
+def ci_for(df, task, model):
+    """(lo, hi) or None when the cell has no defensible interval."""
+    if task not in BINOMIAL_TASKS:
+        return None
+    row = df[(df.task == task) & (df.model == model)]
+    if row.empty:
+        return None
+    row = row.iloc[0]
+    n = row["n_instances"] if "n_instances" in row and pd.notna(row["n_instances"]) else SLM_N.get(task)
+    return wilson(float(row["accuracy"]), int(n))
 
 
 def style():
@@ -155,7 +173,7 @@ def fig_classification_ci(df):
     ypos = np.arange(len(ORDER))[::-1]
     for y, m in zip(ypos, ORDER):
         v = sub.loc[m, "accuracy"]
-        lo, hi = CI[("classification", m)]
+        lo, hi = ci_for(df, "classification", m)
         ax.plot([lo, hi], [y, y], color=colour(m), lw=2, solid_capstyle="round", zorder=3)
         ax.plot(v, y, "o", ms=9, color=colour(m), mec=SURFACE, mew=1.6, zorder=4)
         ax.text(hi + 0.012, y, f"{v:.2f}", va="center", fontsize=8.5, color=INK)
@@ -246,21 +264,38 @@ def fig_breakeven():
     """The headline economic figure: cumulative cost, crossover marked."""
     c_slm_req = 0.16177 * R_GPU / 3600
     c_ft = 0.1544 * R_GPU
-    reqs = np.linspace(0, 12000, 400)
+    cpr = pd.read_csv("results/cost_per_request.csv")
+    rows = cpr[(cpr.task == "classification") & (cpr.api == "gpt-4o")]
+    # After the usage-capture re-run the API cost comes from provider-billed
+    # token counts, so there is a single exact line rather than an estimate
+    # band. Before it, the chars-per-token band gives one line per bound.
+    billed = (rows.chars_per_token.astype(str) == "billed").any()
+    if billed:
+        variants = [(rows[rows.chars_per_token.astype(str) == "billed"], "-",
+                     "GPT-4o API (provider-billed tokens)")]
+    else:
+        variants = [(rows[rows.chars_per_token.astype(str) == str(c)], ls,
+                     f"GPT-4o API ({c} chars/token estimate)")
+                    for c, ls in [(3.8, "-"), (4.6, "--")]]
+
+    x_max = 12000
+    for row, _, _ in variants:
+        c_api = row["api_usd_per_1k_req"].iloc[0] / 1000
+        x_max = max(x_max, int(c_ft / (c_api - c_slm_req) * 2.6)) if c_api > c_slm_req else x_max
+    reqs = np.linspace(0, x_max, 400)
     fig, ax = plt.subplots(figsize=(7.6, 4.2))
     ax.plot(reqs, c_ft + c_slm_req * reqs, color=SLM_C, lw=2.2,
             label="Fine-tuned Phi-4-mini (self-hosted)", zorder=4)
-    for cpt, style_ in [(3.8, "-"), (4.6, "--")]:
-        cpr = pd.read_csv("results/cost_per_request.csv")
-        row = cpr[(cpr.task == "classification") & (cpr.api == "gpt-4o") &
-                  (cpr.chars_per_token.astype(str) == str(cpt))]
+    for row, style_, lab in variants:
         c_api = row["api_usd_per_1k_req"].iloc[0] / 1000
-        ax.plot(reqs, c_api * reqs, color=API_C, lw=2.0, ls=style_, zorder=3,
-                label=f"GPT-4o API ({cpt} chars/token estimate)")
+        ax.plot(reqs, c_api * reqs, color=API_C, lw=2.0, ls=style_, zorder=3, label=lab)
+        if c_api <= c_slm_req:
+            continue
         be = c_ft / (c_api - c_slm_req)
         ax.plot(be, c_ft + c_slm_req * be, "o", ms=8, color=INK, mec=SURFACE, mew=1.5, zorder=6)
         ax.annotate(f"breakeven {be:,.0f} requests",
-                    xy=(be, c_ft + c_slm_req * be), xytext=(be + 900, c_ft + c_slm_req * be - 0.42),
+                    xy=(be, c_ft + c_slm_req * be),
+                    xytext=(be + x_max * 0.09, c_ft + c_slm_req * be - 0.42),
                     fontsize=8.5, color=INK,
                     arrowprops=dict(arrowstyle="-", color=INK2, lw=0.8))
     ax.axhline(c_ft, color=INK2, lw=0.9, ls=":", zorder=2)
@@ -268,7 +303,8 @@ def fig_breakeven():
             fontsize=8.5, color=INK2, va="bottom")
     ax.set_xlabel("Cumulative requests served")
     ax.set_ylabel("Cumulative cost (USD)")
-    ax.set_xlim(0, 12000); ax.set_ylim(0, 4.2)
+    ax.set_xlim(0, x_max)
+    ax.set_ylim(0, max(4.2, (c_ft + c_slm_req * x_max) * 1.5))
     ax.legend(loc="upper left", frameon=False, fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_5_breakeven")
@@ -282,6 +318,10 @@ def fig_utilisation():
     cpr = pd.read_csv("results/cost_per_request.csv")
     api_band = cpr[(cpr.task == "classification") & (cpr.api == "gpt-4o")]["api_usd_per_1k_req"]
     lo, hi = api_band.min() / 1000, api_band.max() / 1000
+    # With provider-billed tokens there is no band; widen it fractionally so
+    # the region stays visible as a line rather than collapsing to nothing.
+    if hi - lo < 1e-9:
+        lo, hi = lo * 0.995, hi * 1.005
     reqs = np.linspace(0, 30000, 400)
 
     fig, ax = plt.subplots(figsize=(7.6, 4.2))

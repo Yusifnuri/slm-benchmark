@@ -100,6 +100,18 @@ PHASE1_CSV_SPECS = {
 }
 
 
+# Latency samples above this are treated as measurement artefacts, not
+# provider behaviour. Five samples across four tasks exceed it: four sit at
+# 1,652-1,656 s and one at 727 s, against medians of 0.7-2.0 s and
+# non-artefact maxima of ~12 s. Four of the five cluster within seconds of
+# each other in wall-clock terms, which is the signature of the client host
+# suspending mid-request rather than of five independent slow responses. A
+# completion capped at 512 tokens cannot legitimately take 27 minutes. They
+# are excluded from the reported latency and counted in
+# latency_artefacts_excluded so the exclusion is visible rather than silent.
+LATENCY_ARTEFACT_THRESHOLD_S = 60.0
+
+
 def _parse_phase1_csvs(logs_dir: str = "logs") -> List[dict]:
     """One row per (API model, task), computed from the per-instance CSVs."""
     rows = []
@@ -116,14 +128,25 @@ def _parse_phase1_csvs(logs_dir: str = "logs") -> List[dict]:
             score = df[score_col].dropna()
             if score.empty:
                 continue
-            latency = df[lat_col].dropna() if lat_col in df.columns else None
+            raw_latency = df[lat_col].dropna() if lat_col in df.columns else None
+            if raw_latency is not None and not raw_latency.empty:
+                clean = raw_latency[raw_latency <= LATENCY_ARTEFACT_THRESHOLD_S]
+                excluded = int(len(raw_latency) - len(clean))
+                lat_mean = round(float(clean.mean()) * 1000, 2) if not clean.empty else None
+                lat_median = round(float(clean.median()) * 1000, 2) if not clean.empty else None
+                lat_p95 = round(float(clean.quantile(0.95)) * 1000, 2) if not clean.empty else None
+            else:
+                lat_mean = lat_median = lat_p95 = None
+                excluded = 0
             rows.append({
                 "model": model_name,
                 "task": task,
                 "method": "API",
                 "accuracy": round(float(score.mean()), 6),
-                "latency_ms": (round(float(latency.mean()) * 1000, 2)
-                               if latency is not None and not latency.empty else None),
+                "latency_ms": lat_mean,
+                "latency_median_ms": lat_median,
+                "latency_p95_ms": lat_p95,
+                "latency_artefacts_excluded": excluded,
                 "cost_per_1m_tokens": LLM_API_COSTS[model_name]["blended"],
                 "privacy_risk": get_privacy_risk("api"),
                 "roi_breakeven_tokens": None,
