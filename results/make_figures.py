@@ -66,9 +66,11 @@ TASKS = ["classification", "ner", "summarization", "financial_sentiment", "code_
 # OPPOSITE arms, which is why the flags are per-cell rather than per-task:
 #   NER  — the self-hosted arm was scored with a non-comparable instrument
 #          (token overlap on tag strings); the API arm's entity-set F1 stands.
-#   FPB  — the API arm was drawn from a label-clustered file region (95%
-#          positive); the self-hosted arm's seeded-split scores stand.
-INVALID = {("ner", m) for m in SLMS} | {("financial_sentiment", m) for m in APIS}
+#   FPB  — the API arm was originally drawn from a label-clustered file
+#          region (95% positive). Corrected: the re-run samples the same
+#          seeded split as the self-hosted arm, so this task is no longer
+#          withdrawn and only the NER cells remain outstanding.
+INVALID = {("ner", m) for m in SLMS}
 
 # Wilson 95% confidence intervals, computed from the data rather than
 # hardcoded, so they track the CSVs through every re-run. A proportion and a
