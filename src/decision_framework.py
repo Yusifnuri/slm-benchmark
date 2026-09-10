@@ -23,6 +23,26 @@ import pandas as pd
 # whenever the SLM's per-token cost exceeds the cheaper API's).
 ROI_REFERENCE_MODEL = "gpt-4o"
 
+# Cells whose stored score is not a valid measurement, and which must therefore
+# never drive a recommendation. In the first evaluation sweep the self-hosted
+# named-entity-recognition arm was scored by whitespace-token overlap between
+# generated and reference integer tag strings -- a quantity dominated by the
+# majority 'O' tag, so it measures output-format imitation rather than entity
+# extraction, and is not comparable with the API arm's entity-set F1 (thesis
+# SS3.5.1, SS4.2.2). The harness has since been corrected to BIO-decode both
+# arms identically, but these three cells await re-evaluation.
+#
+# Keyed by (task, method) because the defect is a property of how that arm was
+# scored, not of any individual model. Remove an entry once its cell has been
+# re-measured under the corrected instrument.
+WITHDRAWN_CELLS = {("ner", "LoRA"), ("ner", "QLoRA")}
+
+
+def withdrawn(df: pd.DataFrame, task: str) -> pd.DataFrame:
+    """Rows for `task` that are excluded from recommendation as unmeasured."""
+    mask = df.apply(lambda r: (r["task"], r["method"]) in WITHDRAWN_CELLS, axis=1)
+    return df[mask & (df["task"] == task)]
+
 
 def recommend(
     df: pd.DataFrame,
@@ -37,8 +57,17 @@ def recommend(
     recommended is None when no model meets the constraints; in that case
     eligible_candidates holds the closest-by-accuracy fallbacks so a caller
     can show "here's what almost qualifies" instead of nothing.
+
+    Cells listed in WITHDRAWN_CELLS are dropped before any filtering: a score
+    that is not a valid measurement cannot support a recommendation, and
+    silently ranking on one would put the instrument defect the thesis reports
+    straight back into the advice the tool gives. Callers that want to explain
+    the absence to a user can list them with withdrawn().
     """
     candidates = df[df["task"] == task].copy()
+    candidates = candidates[
+        ~candidates.apply(lambda r: (r["task"], r["method"]) in WITHDRAWN_CELLS, axis=1)
+    ]
     if privacy_required:
         candidates = candidates[candidates["privacy_risk"] == "low"]
 
