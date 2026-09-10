@@ -1,0 +1,8 @@
+# Runtime dependencies for the SLM Decision Framework app (app.py) only.
+# The app reads results/benchmark_matrix.csv and runs no model inference, so it
+# needs none of the training stack in requirements.txt. Deploying with the full
+# file pulls torch and bitsandbytes and exceeds Streamlit Community Cloud's
+# resource limit — see docs/RELEASE.md.
+streamlit>=1.35.0
+pandas>=2.0.0
+plotly>=5.20.0
