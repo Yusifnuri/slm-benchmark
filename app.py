@@ -21,6 +21,7 @@ from src.decision_framework import (
     implied_fine_tuning_cost,
     recommend,
     reference_api_cost_per_1m,
+    withdrawn,
 )
 
 TASKS = ["classification", "ner", "summarization", "financial_sentiment", "code_generation"]
@@ -63,10 +64,23 @@ with col2:
     privacy_required = st.toggle("Data must stay on-premise (privacy requirement)")
 
 task_df = df[df["task"] == task].copy()
+withheld = withdrawn(df, task)
+task_df = task_df[~task_df.index.isin(withheld.index)]
 if privacy_required:
     task_df = task_df[task_df["privacy_risk"] == "low"]
 
 recommended, eligible = recommend(df, task, monthly_volume, accuracy_threshold, privacy_required)
+
+if not withheld.empty:
+    st.info(
+        f"**{len(withheld)} self-hosted {TASK_LABELS[task]} models are withheld from this "
+        "recommendation.** Their scores came from a different measurement instrument than the "
+        "API models were scored with, so the two are not comparable and the stored numbers do "
+        "not represent extraction quality. The evaluation harness has been corrected; these "
+        "cells await re-evaluation. Withheld: "
+        + ", ".join(sorted(withheld["model"]))
+        + "."
+    )
 
 if recommended is None:
     st.warning(
