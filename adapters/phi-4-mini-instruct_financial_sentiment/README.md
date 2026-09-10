@@ -1,207 +1,97 @@
 ---
-base_model: microsoft/phi-4-mini-instruct
+base_model: microsoft/Phi-4-mini-instruct
 library_name: peft
+license: mit
 pipeline_tag: text-generation
 tags:
-- base_model:adapter:microsoft/phi-4-mini-instruct
 - lora
-- transformers
+- peft
+- small-language-model
+- enterprise-benchmark
+- financial-sentiment
+- base_model:adapter:microsoft/Phi-4-mini-instruct
 ---
 
-# Model Card for Model ID
+# phi-4-mini-instruct — Financial sentiment adapter
 
-<!-- Provide a quick summary of what the model is/does. -->
+A LoRA adapter that specialises `microsoft/Phi-4-mini-instruct` (3.80 B parameters) for a single enterprise task: it classifies a financial sentence as negative, neutral or positive.
 
+It was produced for the MSc thesis *Fine-Tune or Pay Per Token? An Enterprise Benchmark of Small Language Models* (SRH University Hamburg), which measures fine-tuned small models against frontier provider APIs on accuracy, latency, cost, privacy exposure and return-on-investment breakeven volume. The adapter is released so that the benchmark can be independently verified.
 
+## Read this before using the adapter
 
-## Model Details
+- The training corpus (Financial PhraseBank) is licensed CC BY-NC-SA 3.0. **This adapter is a research artefact and is not commercially deployable**; commercial use would require a licensed corpus or your own annotations.
 
-### Model Description
+- This adapter scores **below its own split's neutral-majority share (~0.61)**, which indicates a failure to produce the target output format rather than partial competence. Do not use it. The cause is under investigation; see §4.2.4 of the thesis.
 
-<!-- Provide a longer summary of what this model is. -->
+## Measured performance
 
+| Metric | Value |
+|---|---|
+| Accuracy | **0.545** |
+| Mean latency, batch 1 | 522 ms |
+| Cost per 1M generated tokens | USD 18.09 |
 
+Measured on a single NVIDIA H200 (141 GB) at batch size one and full utilisation, priced at an imputed USD 3.99 per GPU-hour. Latency excludes network transit. Scores are not comparable across tasks — each task carries its own metric. Evaluation ran on 5 July 2026; the complete matrix is at [`results/benchmark_matrix.csv`](https://github.com/Yusifnuri/slm-benchmark/blob/main/results/benchmark_matrix.csv).
 
-- **Developed by:** [More Information Needed]
-- **Funded by [optional]:** [More Information Needed]
-- **Shared by [optional]:** [More Information Needed]
-- **Model type:** [More Information Needed]
-- **Language(s) (NLP):** [More Information Needed]
-- **License:** [More Information Needed]
-- **Finetuned from model [optional]:** [More Information Needed]
+## Training
 
-### Model Sources [optional]
+| | |
+|---|---|
+| Method | LoRA |
+| Dataset | Financial PhraseBank (AllAgree) (`(not redistributable)`) |
+| Dataset licence | CC BY-NC-SA 3.0 — non-commercial |
+| Training examples | 5,000 (500 held out for checkpoint selection) |
+| Rank / alpha / dropout | 16 / 32 / 0.05 |
+| Target modules | `q_proj`, `k_proj`, `v_proj`, `o_proj` |
+| Learning rate | 2e-4, cosine schedule, 3% warmup |
+| Epochs | 3 |
+| Effective batch size | 16 (4 x 4 gradient accumulation) |
+| Max sequence length | 512 tokens |
+| Optimiser | AdamW |
+| Seed | 42 |
 
-<!-- Provide the basic links for the model. -->
+Hyperparameters were held constant across every model and task rather than tuned per cell, so these figures are a conservative lower bound on attainable performance.
 
-- **Repository:** [More Information Needed]
-- **Paper [optional]:** [More Information Needed]
-- **Demo [optional]:** [More Information Needed]
+## Usage
 
-## Uses
+```python
+from peft import PeftModel
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-<!-- Address questions around how the model is intended to be used, including the foreseeable users of the model and those affected by the model. -->
+base = AutoModelForCausalLM.from_pretrained("microsoft/Phi-4-mini-instruct", device_map="auto")
+model = PeftModel.from_pretrained(base, "<your-hf-username>/phi-4-mini-instruct_financial_sentiment")
+tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-4-mini-instruct")
+```
 
-### Direct Use
+The adapter was trained on this prompt format and expects it at inference:
 
-<!-- This section is for the model use without fine-tuning or plugging into a larger ecosystem/app. -->
+```text
+Classify the sentiment of this financial sentence (negative / neutral / positive):
+{text}
+Sentiment:
+```
 
-[More Information Needed]
+## Limitations
 
-### Downstream Use [optional]
+- Trained once, with a single seed. Reported differences confound model quality with initialisation variance.
+- Specialised to one task on one public corpus. It is not a general-purpose assistant and should not be treated as one.
+- The evaluation corpora are long-standing public benchmarks and are plausibly present in the base model's pretraining data, which inflates absolute scores.
+- Evaluation used 200 held-out instances (all 164 problems for code generation), so detectable effect sizes are bounded at roughly ten percentage points.
 
-<!-- This section is for the model use when fine-tuned for a task, or when plugged into a larger ecosystem/app -->
+## Links
 
-[More Information Needed]
+- Code, configurations and evaluation harness: [https://github.com/Yusifnuri/slm-benchmark](https://github.com/Yusifnuri/slm-benchmark)
+- Full benchmark matrix: [`results/benchmark_matrix.csv`](https://github.com/Yusifnuri/slm-benchmark/blob/main/results/benchmark_matrix.csv)
+- Per-request cost analysis: [`results/cost_per_request.csv`](https://github.com/Yusifnuri/slm-benchmark/blob/main/results/cost_per_request.csv)
 
-### Out-of-Scope Use
+## Citation
 
-<!-- This section addresses misuse, malicious use, and uses that the model will not work well for. -->
-
-[More Information Needed]
-
-## Bias, Risks, and Limitations
-
-<!-- This section is meant to convey both technical and sociotechnical limitations. -->
-
-[More Information Needed]
-
-### Recommendations
-
-<!-- This section is meant to convey recommendations with respect to the bias, risk, and technical limitations. -->
-
-Users (both direct and downstream) should be made aware of the risks, biases and limitations of the model. More information needed for further recommendations.
-
-## How to Get Started with the Model
-
-Use the code below to get started with the model.
-
-[More Information Needed]
-
-## Training Details
-
-### Training Data
-
-<!-- This should link to a Dataset Card, perhaps with a short stub of information on what the training data is all about as well as documentation related to data pre-processing or additional filtering. -->
-
-[More Information Needed]
-
-### Training Procedure
-
-<!-- This relates heavily to the Technical Specifications. Content here should link to that section when it is relevant to the training procedure. -->
-
-#### Preprocessing [optional]
-
-[More Information Needed]
-
-
-#### Training Hyperparameters
-
-- **Training regime:** [More Information Needed] <!--fp32, fp16 mixed precision, bf16 mixed precision, bf16 non-mixed precision, fp16 non-mixed precision, fp8 mixed precision -->
-
-#### Speeds, Sizes, Times [optional]
-
-<!-- This section provides information about throughput, start/end time, checkpoint size if relevant, etc. -->
-
-[More Information Needed]
-
-## Evaluation
-
-<!-- This section describes the evaluation protocols and provides the results. -->
-
-### Testing Data, Factors & Metrics
-
-#### Testing Data
-
-<!-- This should link to a Dataset Card if possible. -->
-
-[More Information Needed]
-
-#### Factors
-
-<!-- These are the things the evaluation is disaggregating by, e.g., subpopulations or domains. -->
-
-[More Information Needed]
-
-#### Metrics
-
-<!-- These are the evaluation metrics being used, ideally with a description of why. -->
-
-[More Information Needed]
-
-### Results
-
-[More Information Needed]
-
-#### Summary
-
-
-
-## Model Examination [optional]
-
-<!-- Relevant interpretability work for the model goes here -->
-
-[More Information Needed]
-
-## Environmental Impact
-
-<!-- Total emissions (in grams of CO2eq) and additional considerations, such as electricity usage, go here. Edit the suggested text below accordingly -->
-
-Carbon emissions can be estimated using the [Machine Learning Impact calculator](https://mlco2.github.io/impact#compute) presented in [Lacoste et al. (2019)](https://arxiv.org/abs/1910.09700).
-
-- **Hardware Type:** [More Information Needed]
-- **Hours used:** [More Information Needed]
-- **Cloud Provider:** [More Information Needed]
-- **Compute Region:** [More Information Needed]
-- **Carbon Emitted:** [More Information Needed]
-
-## Technical Specifications [optional]
-
-### Model Architecture and Objective
-
-[More Information Needed]
-
-### Compute Infrastructure
-
-[More Information Needed]
-
-#### Hardware
-
-[More Information Needed]
-
-#### Software
-
-[More Information Needed]
-
-## Citation [optional]
-
-<!-- If there is a paper or blog post introducing the model, the APA and Bibtex information for that should go in this section. -->
-
-**BibTeX:**
-
-[More Information Needed]
-
-**APA:**
-
-[More Information Needed]
-
-## Glossary [optional]
-
-<!-- If relevant, include terms and calculations in this section that can help readers understand the model or model card. -->
-
-[More Information Needed]
-
-## More Information [optional]
-
-[More Information Needed]
-
-## Model Card Authors [optional]
-
-[More Information Needed]
-
-## Model Card Contact
-
-[More Information Needed]
-### Framework versions
-
-- PEFT 0.19.1
+```bibtex
+@mastersthesis{nuri2026finetune,
+  title  = {Fine-Tune or Pay Per Token? An Enterprise Benchmark of Small Language Models},
+  author = {Nuri, Yusif},
+  school = {SRH University Hamburg},
+  year   = {2026}
+}
+```
