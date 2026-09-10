@@ -1,32 +1,8 @@
-# Core ML
-torch>=2.1.0
-transformers>=4.51.0  # native Phi3 support — see train_lora.py's trust_remote_code note
-peft>=0.11.0
-accelerate>=0.30.0
-bitsandbytes>=0.43.0
-
-# Datasets
-datasets>=2.20.0
-pandas>=2.0.0
-
-# Evaluation
-scikit-learn>=1.4.0
-rouge-score>=0.1.2
-evaluate>=0.4.0
-scipy>=1.11.0
-numpy>=1.26.0
-
-# Experiment tracking
-mlflow>=2.13.0
-
-# Config
-pyyaml>=6.0.0
-
-# App
+# Runtime dependencies for the SLM Decision Framework app (app.py) only.
+# The app reads results/benchmark_matrix.csv and runs no model inference, so it
+# needs none of the training stack in requirements.txt. Deploying with the full
+# file pulls torch and bitsandbytes and exceeds Streamlit Community Cloud's
+# resource limit — see docs/RELEASE.md.
 streamlit>=1.35.0
+pandas>=2.0.0
 plotly>=5.20.0
-
-# Utils
-sentencepiece>=0.2.0
-protobuf>=3.20.0
-tqdm>=4.66.0
