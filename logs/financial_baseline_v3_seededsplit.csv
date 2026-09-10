@@ -1,0 +1,101 @@
+text,true_label,openai_pred,anthropic_pred,gemini_pred,openai_correct,anthropic_correct,gemini_correct,openai_latency_s,anthropic_latency_s,gemini_latency_s,openai_prompt_tokens,openai_completion_tokens,anthropic_prompt_tokens,anthropic_completion_tokens,gemini_prompt_tokens,gemini_completion_tokens
+Finland 's national carrier Finnair PLC carried a record 8.5 million passengers ,positive,positive,positive,neutral,1,1,0,1.182,0.97,0.819,82,1,81,4,75,1
+"Thus the method will cut working costs , and will fasten the planning and buildi",positive,positive,positive,positive,1,1,1,0.763,0.788,0.689,58,1,54,4,50,1
+The company reported net sales of 302 mln euro $ 441.6 mln and an operating marg,neutral,neutral,positive,neutral,1,0,1,0.795,0.853,0.648,69,1,72,4,69,1
+"Together with Latvia , Cramo will operate 54 rental outlets in the Baltic States",neutral,neutral,neutral,neutral,1,1,1,0.746,0.832,0.518,58,1,55,4,51,1
+"The power supplies , DC power systems and inverters designed and manufactured by",neutral,neutral,neutral,neutral,1,1,1,0.68,0.792,0.545,68,1,65,4,61,1
+"`` The implementation of these programs has had , and will have , negative impac",negative,negative,negative,negative,1,1,1,0.686,0.85,0.544,72,1,73,4,69,1
+They both will report to Oriola-KD 's chief executive officer Eero Hautaniemi .,neutral,neutral,neutral,neutral,1,1,1,0.777,0.828,0.577,60,1,60,4,53,1
+"( ADP News ) - Feb 12 , 2009 - Finnish IT solutions provider Affecto Oyj ( HEL :",positive,positive,positive,positive,1,1,1,0.553,0.791,0.585,103,1,109,4,103,1
+"Operating profit decreased to nearly EUR 1.7 mn , however .",negative,negative,negative,negative,1,1,1,0.567,0.834,0.593,54,1,51,4,47,1
+Stora Enso will receive a 19.9 pct equity interest in the combined company .,neutral,neutral,neutral,neutral,1,1,1,0.856,0.816,0.501,59,1,58,4,53,1
+"Profit after taxes was EUR 0.1 mn , compared to EUR -0.4 mn the previous year .",positive,positive,positive,positive,1,1,1,0.687,0.985,0.511,63,1,62,4,56,1
+The exercise originated in Finland in the early 1930s as a training method for c,neutral,neutral,neutral,neutral,1,1,1,0.736,0.869,0.572,62,1,59,4,57,1
+"The changes will take effect on 1 January 2010 , and they are not estimated to h",neutral,neutral,neutral,neutral,1,1,1,0.837,0.802,0.574,68,1,66,4,63,1
+Operating profit fell to EUR 20.3 mn from EUR 74.2 mn in the second quarter of 2,negative,negative,negative,negative,1,1,1,0.701,0.869,0.698,66,1,65,4,63,1
+The EA Reng group posted sales of approximately 84 million kroons for 2007 .,neutral,neutral,neutral,neutral,1,1,1,0.779,0.775,1.091,59,1,58,4,55,2
+"The Liquid Handling segment offers laboratory equipment and accessories , includ",neutral,neutral,neutral,neutral,1,1,1,0.675,0.928,0.626,89,1,90,4,82,1
+"Svyturys-Utenos Alus , which is controlled by the Nordic group Baltic Beverages ",positive,positive,positive,positive,1,1,1,0.763,0.825,0.642,89,1,95,4,87,1
+"Operating profit surged to EUR21m from EUR106 ,000 .",positive,positive,positive,positive,1,1,1,4.06,1.017,0.985,53,1,52,4,51,1
+Finnish airline Finnair has won a deal with the UK public sector to be the offic,positive,positive,positive,positive,1,1,1,0.822,0.782,1.148,84,1,83,4,75,1
+"Following the move , Stora Enso holding in NewPage will remain unchanged .",neutral,neutral,neutral,neutral,1,1,1,0.657,0.871,0.527,56,1,53,4,49,1
+"CapMan , an asset manager , has EUR 3bn worth of assets under management in the ",neutral,neutral,neutral,neutral,1,1,1,0.641,0.989,0.58,62,1,59,4,55,1
+"Indigo and Somoncom serve 377,000 subscribers and had a market share of approxim",neutral,neutral,neutral,neutral,1,1,1,0.836,0.747,0.524,69,1,70,4,68,1
+"Uponor made an operating profit of EUR 151.0 mn , up from EUR 143.7 mn , which m",positive,positive,positive,positive,1,1,1,0.67,0.863,0.578,72,1,73,4,71,1
+"The share capital of Alma Media Corporation (business ID 1944757-4)is EUR 45,031",neutral,neutral,neutral,neutral,1,1,1,0.727,0.833,0.662,79,1,79,4,88,1
+The employee negotiations are to address measures needed to adjust the operation,neutral,neutral,neutral,neutral,1,1,1,0.923,1.011,0.614,58,1,54,4,51,1
+"F-Secure , a developer of security solutions as a service through Internet Servi",neutral,neutral,neutral,neutral,1,1,1,0.733,0.966,0.571,70,1,70,4,62,2
+The company is studying the feasibility of focusing most of its processed meat p,neutral,neutral,neutral,neutral,1,1,1,0.818,0.741,0.56,71,1,71,4,65,1
+Both the net sales and operating profit were record high in the company 's histo,positive,positive,positive,positive,1,1,1,0.669,0.889,0.56,57,1,53,4,50,1
+"October-December sales were 302 mln eur , or a 25.3 pct increase year on year .",positive,positive,positive,positive,1,1,1,0.609,0.775,0.601,62,1,63,4,58,1
+"Igor and Oleg Yankov , who currently manage Moron and Vitim , will hold onto the",neutral,neutral,neutral,neutral,1,1,1,0.712,0.755,0.553,68,1,68,4,60,1
+"Deliveries of Nokia 1112 , Nokia 2310 and Nokia 2610 are expected to start in th",neutral,neutral,neutral,neutral,1,1,1,0.681,0.821,0.602,70,1,71,4,71,1
+`` This vessel order will help Aspo secure the long-term competitiveness of its ,positive,positive,positive,positive,1,1,1,0.754,0.776,0.609,65,1,66,4,59,1
+The company said that sales in the three months to the end of March slid to EUR8,negative,negative,negative,negative,1,1,1,0.614,1653.235,0.936,77,1,79,4,74,1
+There have not been previous share subscriptions with 2004 stock options .,neutral,neutral,neutral,neutral,1,1,1,2.079,0.748,0.713,54,1,52,4,49,1
+The Tecnomen Convergent Charging solution includes functionality for prepaid and,neutral,neutral,neutral,neutral,1,1,1,0.933,0.799,0.811,83,1,83,4,76,1
+"EQ Bank forecasts Olvi 's net sales at EUR 67mn in the second quarter of 2009 , ",neutral,neutral,neutral,neutral,1,1,1,2.071,0.806,0.721,74,1,75,4,70,1
+3 February 2011 - Finnish broadband data communication systems provider Teleste ,positive,positive,positive,positive,1,1,1,0.747,1.521,0.831,95,1,106,4,99,1
+Decisions are to be made as quickly as possible .,neutral,neutral,neutral,neutral,1,1,1,0.772,0.942,1.272,51,1,47,4,43,1
+"Kemira 's R&D organization comprises approximately 750 people , the company said",neutral,neutral,neutral,neutral,1,1,1,1.167,4.843,0.605,57,1,56,4,53,1
+"Marathon now has a 4.6 percent stake in PLX , it said , according to Bloomberg .",neutral,neutral,neutral,neutral,1,1,1,0.859,1.188,0.697,62,1,58,4,54,1
+2009 3 February 2010 - Finland-based steel maker Rautaruukki Oyj ( HEL : RTRKS ),negative,negative,negative,negative,1,1,1,1.393,2.711,0.809,108,1,119,4,112,1
+"The company 's net profit amounted to EE 55.5 mn , which was 36 % more than in 2",positive,positive,positive,positive,1,1,1,0.792,0.898,0.677,67,1,68,4,64,1
+The company has decided to stop the operations of Ruukki Construction Division i,neutral,neutral,negative,neutral,1,0,1,0.68,1.23,1.186,76,1,74,4,71,1
+Activities range from the development of natural resources to the retailed marke,neutral,neutral,neutral,neutral,1,1,1,5.922,0.805,0.65,57,1,53,4,50,1
+Financial Statements include the consolidated financial statements of the Group ,neutral,neutral,neutral,neutral,1,1,1,0.703,0.791,0.605,69,1,68,4,61,1
+"EBIT excluding non-recurring items , totalled EUR 67.8 mn , up from EUR 38.1 mn ",positive,positive,positive,positive,1,1,1,0.759,0.852,0.957,66,1,65,4,59,1
+Stora Enso 's business in North America has annual capacity of about 3 million t,neutral,neutral,neutral,neutral,1,1,1,0.942,0.8,0.553,68,1,68,4,63,1
+The new factory working model and reorganisations would decrease Nokian Tyres ' ,positive,positive,positive,positive,1,1,1,0.715,7.479,0.738,73,1,74,4,68,1
+Marimekko is considering further measures in the matter .,neutral,neutral,neutral,neutral,1,1,1,0.809,0.907,1.099,52,1,49,4,44,1
+The business to be divested generates consolidated net sales of EUR 60 million a,neutral,neutral,neutral,neutral,1,1,1,0.733,0.827,1.061,64,1,62,4,60,1
+The capital structure of Solidium may be complemented by other financial instrum,neutral,neutral,neutral,neutral,1,1,1,0.704,0.876,0.657,57,1,55,4,50,1
+The acquisition price was not disclosed .,neutral,neutral,neutral,neutral,1,1,1,0.618,0.962,0.869,47,1,43,4,40,1
+"Tikkurila Powder Coatings has some 50 employees at its four paint plants , which",neutral,neutral,neutral,neutral,1,1,1,0.682,0.914,1.011,77,1,83,4,72,1
+With this appointment Kaupthing Bank aims to further co-ordinate Capital Markets,positive,neutral,positive,positive,0,1,1,0.885,0.82,0.726,68,1,66,4,61,1
+"The building will house , for example , Respecta Oy 's Jyvaskyla premises , as w",neutral,neutral,neutral,neutral,1,1,1,0.709,0.769,1.235,86,1,90,4,79,1
+Stichting Pensioenfonds ABP : 4 118 122 shares representing 5.19 % of the share ,neutral,neutral,neutral,neutral,1,1,1,0.894,0.736,0.88,69,1,71,4,67,1
+( A spokesperson told WWD to expect a 50-50 mix of clothing and home decor . ),neutral,neutral,neutral,neutral,1,1,1,0.679,0.815,0.612,61,1,59,4,56,1
+Also the development of online businesses will continue .,neutral,neutral,neutral,positive,1,1,0,1.035,0.828,0.693,49,1,45,4,42,1
+UPM-Kymmene said its has ` not indicated any interest in any domestic consolidat,neutral,neutral,neutral,neutral,1,1,1,1.129,1.104,0.959,60,1,60,4,54,1
+"`` BasWare 's product sales grew strongly in the financial period , by 24 percen",positive,positive,positive,positive,1,1,1,0.712,0.871,0.803,59,1,58,4,53,1
+The operating profit for Grain Trading increased to EUR 2.0 mn from EUR 1.4 mn i,positive,positive,positive,positive,1,1,1,0.987,1.023,1.16,66,1,66,4,61,1
+"The platform is based built on Intel s second-generation MID platform , called M",neutral,neutral,neutral,neutral,1,1,1,0.849,0.936,1.165,57,1,56,4,51,1
+narrows to EUR2 .8 m 9-mo '09 29 October 2009 - Finnish software and hardware de,positive,positive,positive,positive,1,1,1,1.044,0.839,1.54,115,1,129,4,115,1
+"In the building and home improvement trade , sales decreased by 22.5 % to EUR 20",negative,negative,negative,negative,1,1,1,0.715,0.809,0.832,64,1,62,4,60,1
+The shares shall be acquired according to the Rules of NASDAQ OMX Helsinki and o,neutral,neutral,neutral,neutral,1,1,1,1.141,1.747,0.672,71,1,69,4,63,1
+"Therefore , the company 's 2005 result will remain weaker than that of 2004 .",negative,negative,negative,negative,1,1,1,0.728,0.933,0.696,60,1,59,4,57,1
+The transaction is planned to be financed with a EUR40m market-based loan grante,neutral,neutral,neutral,neutral,1,1,1,1.253,0.846,0.597,63,1,62,4,58,1
+The non-recurring costs caused to Talentum 's Premedia business area by the rest,neutral,negative,negative,negative,0,0,0,0.96,0.835,0.684,93,1,98,4,88,1
+Sales in Finland rose by 3.9 % and international growth was 0.7 % .,positive,positive,neutral,positive,1,0,1,0.749,1.546,0.651,60,1,58,4,53,1
+Operating profit rose from EUR 1.94 mn to EUR 2.45 mn .,positive,positive,positive,positive,1,1,1,0.636,0.846,0.726,58,1,56,4,53,1
+"Operating profit margin was 8.3 % , compared to 11.8 % a year earlier .",negative,negative,negative,negative,1,1,1,0.969,0.877,0.642,61,1,59,4,55,1
+"However , sales volumes in the food industry are expected to remain at relativel",positive,positive,positive,positive,1,1,1,1.825,0.809,0.919,67,1,66,4,59,1
+A total of 16.5 mn passenger ship journeys took place in the northern Baltic Sea,negative,neutral,neutral,negative,0,0,1,0.663,1.409,0.75,76,1,77,4,75,1
+`` We could be there .,neutral,neutral,neutral,neutral,1,1,1,0.73,0.981,2.17,46,1,43,4,39,1
+"In Sweden , operating profit for the period under review totaled EUR 3.4 mn , up",positive,positive,positive,positive,1,1,1,0.966,0.89,0.852,73,1,73,4,69,1
+The company 's equipment rental portfolio consists primarily of tools for small ,neutral,neutral,neutral,neutral,1,1,1,0.683,0.805,1.137,62,1,59,4,56,1
+Net sales have been eaten by the weak US dollar .,negative,negative,negative,negative,1,1,1,0.705,1.188,0.676,51,1,47,4,44,1
+`` It wo n't happen overnight .,neutral,neutral,neutral,neutral,1,1,1,0.748,0.813,0.634,47,1,45,4,42,1
+"In 2007 , Etteplan had turnover of EUR125 .2 m.",neutral,neutral,neutral,neutral,1,1,1,0.596,0.757,0.662,57,1,58,4,54,1
+( The acquisition sum has not been disclosed . ),neutral,neutral,neutral,neutral,1,1,1,1.446,0.769,0.533,50,1,46,4,43,1
+Pretax profit rose to EUR 0.6 mn from EUR 0.4 mn in the corresponding period in ,positive,positive,positive,positive,1,1,1,0.773,0.844,0.615,67,1,67,4,62,1
+"In Q1 of 2010 , Bank of +àland 's net interest income increased from EUR 9.1 mn ",positive,positive,positive,positive,1,1,1,0.694,1.197,0.602,74,1,74,4,69,1
+"By the end of 2006 , the number of joint branch offices will total 170 .",neutral,neutral,neutral,neutral,1,1,1,1.098,0.858,0.602,59,1,57,4,56,1
+Finnish electronics contract manufacturer Scanfil reports net sales of EUR 241.2,negative,negative,negative,negative,1,1,1,0.859,5.624,0.709,75,1,76,4,75,1
+"According to Finnish petrol station chain St1 's managing director Kim Wiio , th",negative,positive,neutral,negative,0,0,1,0.711,0.891,1.663,88,1,87,4,83,1
+"After the transaction , Tikkurila has no powder coatings related operations .",neutral,neutral,neutral,neutral,1,1,1,0.608,0.86,0.743,55,1,54,4,48,1
+20 October 2010 - Finnish environmental management company Lassila & Tikanoja Oy,negative,negative,negative,negative,1,1,1,0.797,0.783,0.784,98,1,107,4,100,1
+Short-term licenses for the games cost as little as $ 3 while purchasing a game ,neutral,neutral,neutral,neutral,1,1,1,2.233,1.003,0.609,71,1,72,4,67,1
+"If Honkarakenne starts production there , it will need a partner for sawmill ope",neutral,neutral,neutral,neutral,1,1,1,0.789,0.864,0.602,59,1,56,4,51,1
+The expansion is to be finalized in the autumn of 2009 .,neutral,neutral,neutral,neutral,1,1,1,0.8,0.844,0.687,54,1,52,4,49,1
+"Tampere Science Parks is a Finnish company that owns , leases and builds office ",neutral,neutral,neutral,neutral,1,1,1,0.762,0.775,0.693,67,1,66,4,60,1
+Finnish construction group Lemmink+ñinen has been awarded two road building cont,positive,positive,positive,positive,1,1,1,0.892,0.775,0.644,64,1,60,4,55,1
+Other details were not provided .,neutral,neutral,neutral,neutral,1,1,1,0.838,0.817,0.724,46,1,42,4,39,1
+- Cash flow from operating activities before investments was EUR 7.6 million EUR,neutral,neutral,neutral,neutral,1,1,1,0.771,0.989,0.722,62,1,60,4,55,1
+Panostaja did not disclose the purchase price .,neutral,neutral,neutral,neutral,1,1,1,1.32,1.314,0.559,50,1,48,4,43,1
+"According to Finnish FIM Bank , Alpro 's price would be around EUR 100mn-150mn .",neutral,neutral,neutral,neutral,1,1,1,0.621,0.968,0.575,63,1,60,4,60,1
+"In 2008 , Kemira recorded revenue of approximately EUR 2.8 billion and had a sta",neutral,neutral,neutral,neutral,1,1,1,0.939,1.397,0.64,67,1,67,4,64,1
+COPYRIGHT AFX News and AFX Financial News Logo are registered trademarks of AFX ,neutral,neutral,neutral,neutral,1,1,1,0.75,1.048,1.225,59,1,56,4,51,1
+"About 72 % of Evraz Group shares are owned by Lanebrook , whose beneficiaries , ",neutral,neutral,neutral,neutral,1,1,1,0.831,1.454,1.313,107,1,117,4,101,1
+"Metsaliitto , however , narrowed its net loss for the second quarter of 2007 to ",positive,positive,positive,positive,1,1,1,0.663,0.856,0.611,87,1,94,4,83,1

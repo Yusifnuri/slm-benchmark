@@ -34,7 +34,7 @@ training:
   max_samples_eval: 500
 
 cost:
-  gpu_cost_per_hour: 2.50
+  gpu_cost_per_hour: 3.99            # H200 single-GPU on-demand (JarvisLabs, Aug 2026); band $3.68-4.50/hr
   deployment: "on_premise"
 
 mlflow:
