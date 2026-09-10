@@ -1,0 +1,101 @@
+text,true_label,openai_pred,anthropic_pred,gemini_pred,openai_correct,anthropic_correct,gemini_correct,openai_latency_s,anthropic_latency_s,gemini_latency_s
+Fears for T N pension after talks Unions representing workers at Turner   Newall,Business,Business,Business,Business,1,1,1,2.269,0.806,0.519
+The Race is On: Second Private Team Sets Launch Date for Human Spaceflight (SPAC,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.617,0.614,0.518
+Ky. Company Wins Grant to Study Peptides (AP) AP - A company founded by a chemis,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,1.221,0.795,0.641
+Prediction Unit Helps Forecast Wildfires (AP) AP - It's barely dawn when Mike Fi,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.578,0.855,0.765
+Calif. Aims to Limit Farm-Related Smog (AP) AP - Southern California's smog-figh,Sci/Tech,Sci/Tech,World,Sci/Tech,1,0,1,1.139,1.2,0.697
+Open Letter Against British Copyright Indoctrination in Schools The British Depa,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.498,0.717,0.727
+"Loosing the War on Terrorism \\""Sven Jaschan, self-confessed author of the Netsk",Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.592,0.742,0.601
+"FOAFKey: FOAF, PGP, Key Distribution, and Bloom Filters \\FOAF/LOAF  and bloom f",Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,1.229,0.851,0.479
+"E-mail scam targets police chief Wiltshire Police warns about ""phishing"" after i",Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.65,1.482,0.561
+"Card fraud unit nets 36,000 cards In its first two years, the UK's dedicated car",Sci/Tech,Business,Business,Business,0,0,0,0.685,0.719,0.642
+Group to Propose New High-Speed Wireless Format  LOS ANGELES (Reuters) - A group,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.94,1.309,0.797
+"Apple Launches Graphics Software, Video Bundle  LOS ANGELES (Reuters) - Apple Co",Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.56,0.984,1.119
+Dutch Retailer Beats Apple to Local Download Market  AMSTERDAM (Reuters) - Free ,Sci/Tech,Business,Business,Business,0,0,0,0.643,0.625,1.407
+Super ant colony hits Australia A giant 100km colony of ants  which has been dis,Sci/Tech,Sci/Tech,World,Sci/Tech,1,0,1,0.649,1.402,1.007
+"Socialites unite dolphin groups Dolphin groups, or ""pods"", rely on socialites to",Sci/Tech,Sci/Tech,World,Sci/Tech,1,0,1,0.919,0.922,0.475
+Teenage T. rex's monster growth Tyrannosaurus rex achieved its massive size due ,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.874,0.926,0.475
+Scientists Discover Ganymede has a Lumpy Interior Jet Propulsion Lab -- Scientis,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.65,0.675,0.737
+Mars Rovers Relay Images Through Mars Express European Space Agency -- ESAs Mars,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,1.231,0.713,0.717
+Rocking the Cradle of Life When did life begin? One evidential clue stems from t,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.618,0.85,0.452
+"Storage, servers bruise HP earnings update Earnings per share rise compared with",Sci/Tech,Business,Business,Business,0,0,0,1.093,0.981,1.04
+"IBM to hire even more new workers By the end of the year, the computing giant pl",Sci/Tech,Business,Business,Business,0,0,0,0.689,0.749,0.55
+Sun's Looking Glass Provides 3D View Developers get early code for new operating,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.542,0.897,0.417
+IBM Chips May Someday Heal Themselves New technology applies electrical fuses to,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.531,0.922,0.512
+Some People Not Eligible to Get in on Google IPO Google has billed its IPO as a ,Sci/Tech,Business,Business,Business,0,0,0,0.716,0.614,0.528
+Rivals Try to Turn Tables on Charles Schwab By MICHAEL LIEDTKE     SAN FRANCISCO,Sci/Tech,Business,Business,Business,0,0,0,0.908,0.73,0.489
+News: Sluggish movement on power grid cyber security Industry cyber security sta,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.68,1.43,0.459
+Giddy Phelps Touches Gold for First Time Michael Phelps won the gold medal in th,Sports,Sports,Sports,Sports,1,1,1,1.068,0.613,0.536
+Tougher rules won't soften Law's game FOXBOROUGH -- Looking at his ridiculously ,Sports,Sports,Sports,Sports,1,1,1,0.502,0.56,0.815
+Shoppach doesn't appear ready to hit the next level With the weeks dwindling unt,Sports,Sports,Sports,Sports,1,1,1,0.623,0.708,0.823
+Mighty Ortiz makes sure Sox can rest easy Just imagine what David Ortiz could do,Sports,Sports,Sports,Sports,1,1,1,0.918,0.727,0.48
+"They've caught his eye In  quot;helping themselves, quot; Ricky Bryant, Chas Ges",Sports,Sports,Sports,Sports,1,1,1,0.795,0.66,0.614
+Indians Mount Charge The Cleveland Indians pulled within one game of the AL Cent,Sports,Sports,Sports,Sports,1,1,1,0.718,1.022,0.613
+Sister of man who died in Vancouver police custody slams chief (Canadian Press) ,World,World,World,World,1,1,1,0.717,0.818,0.719
+"Man Sought  #36;50M From McGreevey, Aides Say (AP) AP - The man who claims Gov. ",World,World,World,World,1,1,1,0.716,0.922,0.508
+"Explosions Echo Throughout Najaf NAJAF, Iraq - Explosions and gunfire rattled th",World,World,World,World,1,1,1,0.514,1.208,0.377
+"Frail Pope Celebrates Mass at Lourdes LOURDES, France - A frail Pope John Paul I",World,World,World,World,1,1,1,0.788,0.718,0.465
+Venezuela Prepares for Chavez Recall Vote Supporters and rivals warn of possible,World,World,World,World,1,1,1,0.581,0.791,0.718
+1994 Law Designed to Preserve Guard Jobs (AP) AP - A 1994 law strengthened job p,World,World,World,World,1,1,1,1.01,0.816,0.567
+Iran Warns Its Missiles Can Hit Anywhere in Israel  TEHRAN (Reuters) - A senior ,World,World,World,World,1,1,1,0.577,1.066,0.775
+"Afghan Army Dispatched to Calm Violence KABUL, Afghanistan - Government troops i",World,World,World,World,1,1,1,0.598,0.798,0.475
+Johnson Helps D-Backs End Nine-Game Slide (AP) AP - Randy Johnson took a four-hi,Sports,Sports,Sports,Sports,1,1,1,0.615,1.287,0.511
+Retailers Vie for Back-To-School Buyers (Reuters) Reuters - Apparel retailers ar,Business,Business,Business,Business,1,1,1,0.715,1.025,0.516
+Politics an Afterthought Amid Hurricane (AP) AP - If Hurricane Charley had struc,World,World,World,World,1,1,1,0.793,1.25,0.459
+"Spam suspension hits Sohu.com shares (FT.com) FT.com - Shares in Sohu.com, a lea",Sci/Tech,Business,Business,Business,0,0,0,0.838,0.853,0.494
+Erstad's Double Lifts Angels to Win (AP) AP - Darin Erstad doubled in the go-ahe,Sports,Sports,Sports,Sports,1,1,1,0.63,1.849,0.524
+Drew Out of Braves' Lineup After Injury (AP) AP - Outfielder J.D. Drew missed th,Sports,Sports,Sports,Sports,1,1,1,0.551,0.612,0.399
+"Venezuelans Flood Polls, Voting Extended  CARACAS, Venezuela (Reuters) - Venezue",World,World,World,World,1,1,1,0.597,1.001,0.51
+Dell Exits Low-End China Consumer PC Market  HONG KONG (Reuters) - Dell Inc. &lt,Sci/Tech,Business,Business,Business,0,0,0,1.953,0.708,0.535
+China Says Taiwan Spy Also Operated in U.S. - Media  BEIJING (Reuters) - Beijing,World,World,World,World,1,1,1,0.536,0.875,0.409
+"Another Major Non-Factor Another major, another disappointment for Tiger Woods, ",Sports,Sports,Sports,Sports,1,1,1,0.554,0.675,0.423
+US fighter squadron to be deployed in South Korea next month (AFP) AFP - A squad,World,World,World,World,1,1,1,0.613,0.807,0.717
+Johnson Back to His Best as D-Backs End Streak  NEW YORK (Reuters) - Randy Johns,Sports,Sports,Sports,Sports,1,1,1,0.74,1.0,0.615
+Restive Maldives eases curfew after rounding up dissidents (AFP) AFP - A curfew ,World,World,World,World,1,1,1,0.613,0.615,0.717
+Vodafone hires Citi for Cesky bid (TheDeal.com) TheDeal.com - The U.K. mobile gi,Sci/Tech,Business,Business,Business,0,0,0,0.634,0.673,0.842
+Dollar Briefly Hits 4-Wk Low Vs Euro  LONDON (Reuters) - The dollar dipped to a ,Business,Business,Business,Business,1,1,1,1.024,0.696,0.738
+Promoting a Shared Vision As Michael Kaleko kept running into people who were ge,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.599,1.652,0.513
+India's Tata expands regional footprint via NatSteel buyout (AFP) AFP - India's ,World,Business,Business,Business,0,0,0,0.72,0.919,0.464
+"Delegates Urge Cleric to Pull Out of Najaf BAGHDAD, Iraq - Delegates at Iraq's N",World,World,World,World,1,1,1,0.575,0.653,0.471
+Treasuries Slip as Stocks Rally  NEW YORK (Reuters) - U.S. Treasury debt prices ,Business,Business,Business,Business,1,1,1,0.908,0.72,0.62
+Dollar Rises Vs Euro on Asset Flows Data  NEW YORK (Reuters) - The dollar extend,Business,Business,Business,Business,1,1,1,0.528,0.631,0.819
+"Sutton Adds Haas, Cink to Ryder Cup Team  MILWAUKEE (Sports Network) - U.S. Ryde",Sports,Sports,Sports,Sports,1,1,1,0.673,0.755,0.558
+Haas and Cink Selected for Ryder Cup Team Jay Haas joined Stewart Cink as the tw,Sports,Sports,Sports,Sports,1,1,1,0.631,2.976,0.506
+Natalie Coughlin Wins 100M Backstroke (AP) AP - American Natalie Coughlin won Ol,Sports,Sports,Sports,Sports,1,1,1,0.716,1.233,0.755
+Oracle Overhauls Sales-Side Apps for CRM Suite (NewsFactor) NewsFactor - Oracle ,Sci/Tech,Sci/Tech,Business,Sci/Tech,1,0,1,0.486,0.655,0.68
+UN launches 210-million-dollar appeal for flood-hit Bangladesh (AFP) AFP - The U,World,World,World,World,1,1,1,0.499,0.756,0.874
+Indian state rolls out wireless broadband Government in South Indian state of Ke,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.631,0.719,0.7
+"Hurricane Survivors Wait for Water, Gas PUNTA GORDA, Fla. - Urban rescue teams, ",World,World,World,World,1,1,1,0.716,0.719,0.817
+"Jackson Squares Off With Prosecutor SANTA MARIA, Calif. - Fans of Michael Jackso",World,World,World,World,1,1,1,0.983,0.716,0.451
+Bobcats Trade Drobnjak to Hawks for Pick (AP) AP - The Charlotte Bobcats traded ,Sports,Sports,Sports,Sports,1,1,1,0.615,0.818,0.636
+"Suspect charged in abduction, sexual assault of 11-year-old girl (Canadian Press",World,World,World,World,1,1,1,1.001,1.127,0.512
+"China's Red Flag Linux to focus on enterprise Red Flag Software Co., the company",Sci/Tech,Sci/Tech,Business,Sci/Tech,1,0,1,0.819,0.695,0.432
+AOL Properties Sign Girafa For Thumbnail Search Images AOL Properties Sign Giraf,Sci/Tech,Business,Business,Sci/Tech,0,0,1,0.714,0.923,0.613
+Cassini Spies Two Little Saturn Moons (AP) AP - NASA's Cassini spacecraft has sp,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.702,0.74,0.401
+On front line of AIDS in Russia An industrial city northwest of Moscow struggles,World,World,World,Sci/Tech,1,1,0,0.715,1.127,0.513
+Nobel Laureate Decries Stem Cell Limits (AP) AP - A Nobel laureate in medicine s,Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.547,0.993,0.536
+Jury Can Hear of Kobe Accuser's Sex Life (AP) AP - Prosecutors suffered another ,Sports,Sports,Sports,Sports,1,1,1,0.614,0.996,0.512
+"North Korea Talks Still On, China Tells Downer (Reuters) Reuters - China has sai",World,World,World,World,1,1,1,0.716,0.717,0.512
+Griffin to Anchor D-Line The Redskins expect huge things from 300-pound Corneliu,Sports,Sports,Sports,Sports,1,1,1,0.737,3.357,0.615
+Last American defector in North Korea agrees to tell story (AFP) AFP - The last ,World,World,World,World,1,1,1,0.615,0.631,0.802
+Live: Olympics day four Richard Faulds and Stephen Parry are going for gold for ,World,Sports,Sports,Sports,0,0,0,0.616,1.558,0.494
+"Kerry Widens Lead in California, Poll Finds (Reuters) Reuters - Democratic chall",World,World,World,World,1,1,1,0.912,0.723,0.507
+Capacity Crowds at Beach Volleyball Rock the Joint  ATHENS (Reuters) - At the be,Sports,Sports,Sports,Sports,1,1,1,3.489,0.675,0.441
+"Dollar Near Recent Lows, Awaits ZEW/CPI  LONDON (Reuters) - The dollar held stea",Business,Business,Business,Business,1,1,1,0.718,0.694,0.638
+Intel to delay product aimed for high-definition TVs SAN FRANCISCO -- In the lat,Business,Sci/Tech,Business,Business,0,1,1,0.92,0.661,0.545
+Venezuela vote keeps Chavez as president CARACAS -- Venezuelans voted resounding,World,World,World,World,1,1,1,0.637,0.717,1.062
+Jailing of HK democrat in China 'politically motivated' (AFP) AFP - Hong Kong de,World,World,World,World,1,1,1,0.473,0.718,0.717
+Kmart Swings to Profit in 2Q; Stock Surges (AP) AP - Shares of Kmart Holding Cor,Business,Business,Business,Business,1,1,1,1.041,0.698,0.515
+Fischer's Fiancee: Marriage Plans Genuine (AP) AP - Former chess champion Bobby ,World,World,World,Sports,1,1,0,0.614,0.716,0.516
+"U.S. Misses Cut in Olympic 100 Free ATHENS, Greece - Top American sprinters Jaso",World,Sports,Sports,Sports,0,0,0,0.618,0.608,0.784
+Consumers Would Pay In Phone Proposal A proposal backed by a coalition of teleph,Sci/Tech,Business,Business,Business,0,0,0,0.853,0.778,0.553
+U.S. Brokers Cease-fire in Western Afghanistan  KABUL (Reuters) - The United Sta,World,World,World,World,1,1,1,1.335,0.713,0.819
+Sneaky Credit Card Tactics Keep an eye on your credit card issuers -- they may b,Business,Business,Business,Business,1,1,1,0.715,0.924,0.612
+"Intel Delays Launch of Projection TV Chip In another product postponement, semic",Sci/Tech,Sci/Tech,Sci/Tech,Sci/Tech,1,1,1,0.717,0.637,0.778
+Fund pessimism grows NEW YORK (CNN/Money) - Money managers are growing more pess,Business,Business,Business,Business,1,1,1,0.736,0.62,0.857
+Kederis proclaims innocence Olympic champion Kostas Kederis today left hospital ,Sports,Sports,Sports,Sports,1,1,1,0.571,0.921,0.395
+"Eriksson doesn #39;t feel any extra pressure following scandal NEWCASTLE, Englan",Sports,Sports,Sports,Sports,1,1,1,0.732,0.613,0.513
+"Injured Heskey to miss England friendly NEWCASTLE, England (AP) - Striker Emile ",Sports,Sports,Sports,Sports,1,1,1,0.621,0.763,0.766
+"Staples Profit Up, to Enter China Market  NEW YORK (Reuters) - Staples Inc. &lt;",Business,Business,Business,Business,1,1,1,0.612,0.939,0.446
+"Delegation Is Delayed Before Reaching Najaf AGHDAD, Iraq, Aug. 17  A delegation ",World,World,World,World,1,1,1,0.562,0.656,0.573
+"Consumer Prices Down, Industry Output Up  WASHINGTON (Reuters) - U.S. consumer p",Business,Business,Business,Business,1,1,1,0.594,0.635,0.717

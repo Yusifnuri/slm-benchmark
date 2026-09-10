@@ -52,6 +52,21 @@ def run_significance_tests(
             })
 
     result_df = pd.DataFrame(rows)
+
+    # Holm–Bonferroni step-down correction across the 9 comparisons.
+    # Running 9 uncorrected tests at alpha=0.05 inflates the family-wise
+    # error rate; the thesis methodology (§3.6) requires multiplicity
+    # control, so both raw and adjusted p-values are reported.
+    m = len(result_df)
+    order = result_df["p_value"].argsort().values
+    adjusted = [0.0] * m
+    running_max = 0.0
+    for rank, idx in enumerate(order):
+        running_max = max(running_max, (m - rank) * result_df["p_value"].iloc[idx])
+        adjusted[idx] = min(1.0, running_max)
+    result_df["holm_adjusted_p"] = [round(p, 4) for p in adjusted]
+    result_df["significant_after_holm"] = result_df["holm_adjusted_p"] < 0.05
+
     result_df.to_csv(output_path, index=False)
     print(f"Statistical significance results saved -> {output_path}")
     print(result_df.to_string(index=False))

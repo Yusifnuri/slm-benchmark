@@ -16,13 +16,21 @@ from typing import List
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 from evaluation.metrics import LLM_API_COSTS, get_privacy_risk, calculate_roi_breakeven
 
-# The GPU used for Phase 2 was free (university-provided), so there's no real
-# invoice to read a $/hour off of. Kept at the same $2.50/hr already assumed
-# in configs/*.yaml ("SRH A6000 approximate USD/hr") so the ROI numbers model
-# a realistic paid-GPU enterprise scenario instead of the accidental "$0
-# because we didn't pay for it" case, which wouldn't mean anything for the
-# thesis's actual question.
-GPU_COST_PER_HOUR = 2.50
+# Throughput was measured on the rented H200 instance, so the imputed rate
+# must be an H200-class commercial rate — pricing the measured hardware at a
+# cheaper card's rate would systematically understate c_slm (fast GPU + cheap
+# price). $3.99/hr is a single-H200 on-demand rate (JarvisLabs, verified
+# Aug 2026); the specialised-cloud band is roughly $3.68 (Vast.ai) to $4.50
+# (Nebius), with hyperscalers (AWS/Azure/OCI) near $10/GPU-hr. All SLM cost
+# and ROI numbers scale linearly in this constant, so re-pricing at any
+# other rate is a one-line substitution.
+GPU_COST_PER_HOUR = 3.99
+# The evaluation runs stored in mlflow logged cost_per_1m_tokens at the rate
+# in force at eval time ($2.50/hr). c_slm is linear in the rate, so stored
+# costs are rescaled to GPU_COST_PER_HOUR here — otherwise the matrix would
+# mix a $3.99-based training cost with a $2.50-based inference cost and the
+# breakeven division would be meaningless.
+LOGGED_GPU_RATE = 2.50
 ROI_REFERENCE_API = "gpt-4o"
 
 
@@ -71,6 +79,81 @@ PHASE1_MODEL_PREFIXES = {
     "anthropic": "claude-haiku-4-5",
     "gemini": "gemini-2.5-flash",
 }
+
+
+# Phase 1's real source of truth is the per-instance CSV each notebook writes
+# to logs/ — mlflow only ever held a derived copy of the same aggregates. The
+# CSVs are preferred here because they are per-instance (so confidence
+# intervals and error analysis remain computable), they are human-auditable,
+# and they do not depend on a sqlite file that a stale kernel can lock. If a
+# notebook's mlflow logging fails, the benchmark is unaffected.
+PHASE1_CSV_SPECS = {
+    # task: (candidate filenames in priority order, per-model column suffix)
+    "classification": (["ag_news_baseline.csv"], "correct"),
+    "ner": (["conll_baseline.csv"], "f1"),
+    "summarization": (["cnn_dailymail_baseline.csv"], "rougeL"),
+    # the v3 file is the corrected seeded-split sample; the bare name is the
+    # superseded label-clustered one kept only as a fallback (see §4.2.4)
+    "financial_sentiment": (["financial_baseline_v3_seededsplit.csv",
+                             "financial_baseline.csv"], "correct"),
+    "code_generation": (["humaneval_baseline.csv"], "pass"),
+}
+
+
+# Latency samples above this are treated as measurement artefacts, not
+# provider behaviour. Five samples across four tasks exceed it: four sit at
+# 1,652-1,656 s and one at 727 s, against medians of 0.7-2.0 s and
+# non-artefact maxima of ~12 s. Four of the five cluster within seconds of
+# each other in wall-clock terms, which is the signature of the client host
+# suspending mid-request rather than of five independent slow responses. A
+# completion capped at 512 tokens cannot legitimately take 27 minutes. They
+# are excluded from the reported latency and counted in
+# latency_artefacts_excluded so the exclusion is visible rather than silent.
+LATENCY_ARTEFACT_THRESHOLD_S = 60.0
+
+
+def _parse_phase1_csvs(logs_dir: str = "logs") -> List[dict]:
+    """One row per (API model, task), computed from the per-instance CSVs."""
+    rows = []
+    for task, (candidates, suffix) in PHASE1_CSV_SPECS.items():
+        path = next((os.path.join(logs_dir, c) for c in candidates
+                     if os.path.exists(os.path.join(logs_dir, c))), None)
+        if path is None:
+            continue
+        df = pd.read_csv(path)
+        for prefix, model_name in PHASE1_MODEL_PREFIXES.items():
+            score_col, lat_col = f"{prefix}_{suffix}", f"{prefix}_latency_s"
+            if score_col not in df.columns:
+                continue
+            score = df[score_col].dropna()
+            if score.empty:
+                continue
+            raw_latency = df[lat_col].dropna() if lat_col in df.columns else None
+            if raw_latency is not None and not raw_latency.empty:
+                clean = raw_latency[raw_latency <= LATENCY_ARTEFACT_THRESHOLD_S]
+                excluded = int(len(raw_latency) - len(clean))
+                lat_mean = round(float(clean.mean()) * 1000, 2) if not clean.empty else None
+                lat_median = round(float(clean.median()) * 1000, 2) if not clean.empty else None
+                lat_p95 = round(float(clean.quantile(0.95)) * 1000, 2) if not clean.empty else None
+            else:
+                lat_mean = lat_median = lat_p95 = None
+                excluded = 0
+            rows.append({
+                "model": model_name,
+                "task": task,
+                "method": "API",
+                "accuracy": round(float(score.mean()), 6),
+                "latency_ms": lat_mean,
+                "latency_median_ms": lat_median,
+                "latency_p95_ms": lat_p95,
+                "latency_artefacts_excluded": excluded,
+                "cost_per_1m_tokens": LLM_API_COSTS[model_name]["blended"],
+                "privacy_risk": get_privacy_risk("api"),
+                "roi_breakeven_tokens": None,
+                "n_instances": int(len(score)),
+                "source": os.path.basename(path),
+            })
+    return rows
 
 
 def _parse_phase1_notebook_runs(client: "mlflow.tracking.MlflowClient") -> List[dict]:
@@ -168,16 +251,26 @@ def compile_benchmark_matrix(
     """
     rows = []
 
+    # Phase 1: read the per-instance CSVs first. This is the authoritative
+    # source and needs no mlflow connection at all.
+    csv_rows = _parse_phase1_csvs()
+    if csv_rows:
+        covered = {(r["model"], r["task"]) for r in csv_rows}
+        print(f"Phase 1 from CSVs: {len(csv_rows)} rows "
+              f"({len({t for _, t in covered})} tasks)")
+        rows.extend(csv_rows)
+    else:
+        print("Phase 1 CSVs not found — falling back to mlflow")
+
     for tracking_uri in tracking_uris:
         mlflow.set_tracking_uri(tracking_uri)
         client = mlflow.tracking.MlflowClient()
 
-        # Phase 1's notebooks use a different run shape (see
-        # _parse_phase1_notebook_runs docstring) than Phase 2's BenchmarkLogger
-        # runs — try both parsers against both dbs. Each is naturally a no-op
-        # on the "wrong" db (no matching experiment names / no phase tags), so
-        # this doesn't double-count anything regardless of which db is which.
-        rows.extend(_parse_phase1_notebook_runs(client))
+        # Phase 1 rows come from the CSVs (see PHASE1_CSV_SPECS); the mlflow
+        # parser below is kept only as a fallback for tasks whose CSV is
+        # missing, since the two sources hold the same aggregates.
+        if not csv_rows:
+            rows.extend(_parse_phase1_notebook_runs(client))
 
         # (model, task) -> real training method/hours, for the "method" and
         # "roi_breakeven_tokens" fixups below. A no-op on notebooks/mlflow.db
@@ -219,6 +312,10 @@ def compile_benchmark_matrix(
                 # $0 fine-tuning cost. Use the real training method/hours
                 # instead of trusting either.
                 method = train_info["method"]
+                # Rescale the eval-time cost to the current imputed rate
+                # (see LOGGED_GPU_RATE comment above).
+                if cost_per_1m is not None:
+                    cost_per_1m = round(cost_per_1m * GPU_COST_PER_HOUR / LOGGED_GPU_RATE, 4)
                 fine_tuning_cost_usd = train_info["training_hours"] * GPU_COST_PER_HOUR
                 api_cost = LLM_API_COSTS[ROI_REFERENCE_API]["blended"]
                 roi_breakeven_tokens = (
