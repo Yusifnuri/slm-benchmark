@@ -160,7 +160,7 @@ def fig_matrix(df):
         Patch(facecolor=SLM_C, label="Fine-tuned SLM (on-premise)"),
         Patch(facecolor=API_C, label="Frontier API"),
         Patch(facecolor=INVALID_C, hatch="///",
-              label="Withdrawn by the validity audit — non-comparable\ninstrument (NER) or sample (financial sentiment)"),
+              label="Withdrawn by the validity audit — non-comparable\ninstrument (named entity recognition)"),
     ], loc="lower center", ncol=3, frameon=False, bbox_to_anchor=(0.5, -0.16),
         fontsize=8.5)
     fig.tight_layout()
@@ -184,9 +184,11 @@ def fig_classification_ci(df):
     ax.set_xlabel("Accuracy on held-out AG News test instances (95% Wilson CI)")
     ax.set_xlim(0.55, 1.0)
     ax.grid(axis="y", visible=False)
+    ax.set_ylim(-0.9, len(ORDER) - 0.4)
     ax.legend(handles=[Patch(facecolor=SLM_C, label="Fine-tuned SLM (n = 200)"),
                        Patch(facecolor=API_C, label="Frontier API (n = 100)")],
-              loc="lower right", frameon=False, fontsize=8.5)
+              loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=2,
+              frameon=False, fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_2_classification_ci")
 
@@ -234,9 +236,18 @@ def fig_cost_per_request():
             labels.append(SHORT[api]); los.append(s.min()); his.append(s.max())
         ypos = np.arange(len(labels))[::-1]
         for y, lo, hi in zip(ypos, los, his):
-            ax.plot([lo, hi], [y, y], color=API_C, lw=6, solid_capstyle="butt", zorder=3)
-            ax.text(hi * 1.08, y, f"{lo:.3f}–{hi:.3f}" if hi - lo > 1e-4 else f"{hi:.3f}",
-                    va="center", fontsize=8, color=INK)
+            if hi - lo > 1e-4:
+                # estimation band: a bar spanning both bounds
+                ax.plot([lo, hi], [y, y], color=API_C, lw=6,
+                        solid_capstyle="butt", zorder=3)
+                label = f"{lo:.3f}–{hi:.3f}"
+            else:
+                # provider-billed token counts give one exact price, not a
+                # band; a zero-length line draws nothing, so mark the point.
+                ax.plot(hi, y, "o", ms=8, color=API_C, mec=SURFACE, mew=1.4,
+                        zorder=3)
+                label = f"{hi:.3f}"
+            ax.text(hi * 1.10, y, label, va="center", fontsize=8, color=INK)
         ax.axvline(c_slm, color=SLM_C, lw=2, zorder=4)
         ax.text(c_slm, len(labels) - 0.35, f"  Phi-4-mini {c_slm:.2f}",
                 color=SLM_C, fontsize=8.5, va="bottom")
@@ -301,8 +312,8 @@ def fig_breakeven():
                     fontsize=8.5, color=INK,
                     arrowprops=dict(arrowstyle="-", color=INK2, lw=0.8))
     ax.axhline(c_ft, color=INK2, lw=0.9, ls=":", zorder=2)
-    ax.text(150, c_ft + 0.13, f"one-off adaptation cost ${c_ft:.2f}",
-            fontsize=8.5, color=INK2, va="bottom")
+    ax.text(x_max * 0.985, c_ft - 0.06, f"one-off adaptation cost ${c_ft:.2f}",
+            fontsize=8.5, color=INK2, va="top", ha="right")
     ax.set_xlabel("Cumulative requests served")
     ax.set_ylabel("Cumulative cost (USD)")
     ax.set_xlim(0, x_max)
@@ -327,22 +338,34 @@ def fig_utilisation():
     reqs = np.linspace(0, 30000, 400)
 
     fig, ax = plt.subplots(figsize=(7.6, 4.2))
-    ax.fill_between(reqs, lo * reqs, hi * reqs, color=API_C, alpha=0.22, zorder=2,
-                    label="GPT-4o API (tokenizer-estimate band)")
+    # With provider-billed token counts the API price is a single exact line.
+    # Label it for what it is rather than as an estimate band, and keep the
+    # fill only so the line stays visible at this aspect ratio.
+    banded = (hi - lo) / max(hi, 1e-12) > 0.02
+    api_label = ("GPT-4o API (tokeniser-estimate band)" if banded
+                 else "GPT-4o API (provider-billed tokens)")
+    ax.fill_between(reqs, lo * reqs, hi * reqs, color=API_C, alpha=0.22, zorder=2)
+    ax.plot(reqs, ((lo + hi) / 2) * reqs, color=API_C, lw=2.0, zorder=3,
+            label=api_label)
+    c_api = (lo + hi) / 2
+    notes = []
     for u, ls, lab in [(1.0, "-", "u = 1.00 (fully utilised)"),
                        (0.5, "--", "u = 0.50"),
                        (0.25, ":", "u = 0.25 (idle-heavy)")]:
-        ax.plot(reqs, c_ft + (base / u) * reqs, color=SLM_C, lw=2.0, ls=ls,
+        c_u = base / u
+        ax.plot(reqs, c_ft + c_u * reqs, color=SLM_C, lw=2.0, ls=ls,
                 label=f"Self-hosted, {lab}", zorder=4)
-    ax.annotate("at u = 0.5 the self-hosted line runs inside the API band —\n"
-                "the comparison stops being decidable",
-                xy=(21000, c_ft + (base / 0.5) * 21000),
-                xytext=(9200, 9.4), fontsize=8.5, color=INK,
-                arrowprops=dict(arrowstyle="-", color=INK2, lw=0.8))
+        # State the breakeven each utilisation actually implies, rather than
+        # asserting a verdict the plotted lines do not support.
+        notes.append(f"u = {u:.2f}: " + (f"breakeven ≈ {c_ft / (c_api - c_u):,.0f} requests"
+                                         if c_u < c_api else "API cheaper at every volume"))
+    ax.annotate("\n".join(notes), xy=(0.985, 0.035), xycoords="axes fraction",
+                ha="right", va="bottom", fontsize=8.5, color=INK,
+                bbox=dict(boxstyle="round,pad=0.45", fc=SURFACE, ec=GRID, lw=0.8))
     ax.set_xlabel("Cumulative requests served")
     ax.set_ylabel("Cumulative cost (USD)")
     ax.set_xlim(0, 30000); ax.set_ylim(0, 12)
-    ax.legend(loc="upper left", frameon=False, fontsize=8.5)
+    ax.legend(loc="upper left", frameon=False, fontsize=8.5, ncol=1)
     fig.tight_layout()
     save(fig, "fig4_6_utilisation_sensitivity")
 
