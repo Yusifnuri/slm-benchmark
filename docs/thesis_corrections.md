@@ -38,3 +38,30 @@ in the thesis can be traced to the artefact that supports it.
 - Table 2.1 was set entirely in bright red (`EE0000`); all nine tables now share one header and zebra style.
 - Document default font changed from Calibri to Times New Roman.
 - The five `TO BE COMPLETED BEFORE SUBMISSION` notes are deliberately left in **red bold** so they cannot be submitted unnoticed.
+
+## D. Second round — artefacts and practitioner validation
+
+- **§3.7.2 / Appendix F**: the decision tool is deployed at
+  <https://slm-benchmark-iqwxhymearqtuw7rr6mdmt.streamlit.app/> from the
+  `streamlit-deploy` branch. The thesis previously recorded the deployment as
+  not realised; exposé Deliverable 1 is now met.
+- **Appendix A.1**: five technical prompts added alongside the language-editing
+  prompt, covering the NER decode fix, the per-request cost script, the figure
+  generation, the MLflow readonly-database bug and the stale-checkpoint fix.
+- **§3.7.3 / Appendix E**: the practitioner sessions were with three
+  equipment-supply companies in **Azerbaijan**, not the Hamburg innovation
+  network the exposé named and the thesis text claimed. Both departures from
+  the exposé (five sessions → three, Hamburg → Azerbaijan) are now recorded.
+- **Appendix E.1**: the protocol as written said the framework was run during
+  each session and its recommendation shown to the participant. It was not —
+  the source notes record questions 7–9 as unanswered "because the framework
+  has not yet been run with real inputs". The protocol now describes what was
+  administered, and states that two of the four framework inputs (volume in
+  tokens, minimum accuracy) were assumed rather than elicited.
+- **Appendix E.2**: filled from the session notes. The framework was run on the
+  three real use cases via `src/decision_framework.py`; it recommends Gemini
+  2.5 Flash (API) in all three, unchanged at both ends of every stated volume
+  range. Agreement is partial in all three: the deployment mode matches, the
+  provider does not.
+- **§5.4, §6.1 (SQ5), §6.2**: the validation outcome is now reported. It was
+  previously described as having been carried out, with no result given.
