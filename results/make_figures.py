@@ -160,7 +160,7 @@ def fig_matrix(df):
         Patch(facecolor=SLM_C, label="Fine-tuned SLM (on-premise)"),
         Patch(facecolor=API_C, label="Frontier API"),
         Patch(facecolor=INVALID_C, hatch="///",
-              label="Withdrawn by the validity audit — non-comparable\ninstrument (NER) or sample (financial sentiment)"),
+              label="Awaiting re-evaluation — non-comparable\ninstrument (NER cells, §4.2.2)"),
     ], loc="lower center", ncol=3, frameon=False, bbox_to_anchor=(0.5, -0.16),
         fontsize=8.5)
     fig.tight_layout()
