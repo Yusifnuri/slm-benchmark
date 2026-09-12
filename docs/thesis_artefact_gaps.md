@@ -58,8 +58,9 @@ remain the ones the runs were produced under.
 
 ## Hardware note
 
-The single H200 (141 GB, Madrid) on which every fine-tuning and self-hosted
-inference run was executed was provided at no charge through the university.
+Every fine-tuning and self-hosted inference run was executed on a single H200
+(141 GB) belonging to the university, in Heidelberg, Germany, and made available
+to the author at no charge.
 No accelerator cost was therefore incurred, and every self-hosted cost, ROI and
 breakeven figure in the thesis rests on the imputed commercial rate of USD 3.99
 per GPU-hour rather than on an amount paid. The thesis states this in §3.4.3,
