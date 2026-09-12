@@ -55,3 +55,16 @@ imputes USD 3.99/hr for the H200 the throughput was measured on (§3.4.3) — bu
 the field contradicts the thesis at a glance. Appendix B of the thesis carries a
 note explaining this. Leave the field as it was at run time so the configs
 remain the ones the runs were produced under.
+
+## Hardware note
+
+Every fine-tuning and self-hosted inference run was executed on a single H200
+(141 GB) belonging to the university, in Heidelberg, Germany, and made available
+to the author at no charge.
+No accelerator cost was therefore incurred, and every self-hosted cost, ROI and
+breakeven figure in the thesis rests on the imputed commercial rate of USD 3.99
+per GPU-hour rather than on an amount paid. The thesis states this in §3.4.3,
+in footnote 3 to §3.5.3 and in the Appendix H verification log; the constant
+carries the same note at `results/benchmark_matrix.py`, `GPU_COST_PER_HOUR`.
+Earlier drafts described the accelerator as rented, which was inaccurate; the
+rate and every number derived from it are unchanged.

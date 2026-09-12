@@ -16,14 +16,15 @@ from typing import List
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 from evaluation.metrics import LLM_API_COSTS, get_privacy_risk, calculate_roi_breakeven
 
-# Throughput was measured on the rented H200 instance, so the imputed rate
-# must be an H200-class commercial rate — pricing the measured hardware at a
-# cheaper card's rate would systematically understate c_slm (fast GPU + cheap
-# price). $3.99/hr is a single-H200 on-demand rate (JarvisLabs, verified
-# Aug 2026); the specialised-cloud band is roughly $3.68 (Vast.ai) to $4.50
-# (Nebius), with hyperscalers (AWS/Azure/OCI) near $10/GPU-hr. All SLM cost
-# and ROI numbers scale linearly in this constant, so re-pricing at any
-# other rate is a one-line substitution.
+# The H200 this study ran on was provided at no charge, so no accelerator cost
+# was actually incurred and every self-hosted figure rests on an imputed rate.
+# That rate must be H200-class, because throughput was measured on an H200 —
+# pricing the measured hardware at a cheaper card's rate would systematically
+# understate c_slm (fast GPU + cheap price). $3.99/hr is a single-H200
+# on-demand rate (JarvisLabs, verified Aug 2026); the specialised-cloud band is
+# roughly $3.68 (Vast.ai) to $4.50 (Nebius), with hyperscalers (AWS/Azure/OCI)
+# near $10/GPU-hr. All SLM cost and ROI numbers scale linearly in this
+# constant, so re-pricing at any other rate is a one-line substitution.
 GPU_COST_PER_HOUR = 3.99
 # The evaluation runs stored in mlflow logged cost_per_1m_tokens at the rate
 # in force at eval time ($2.50/hr). c_slm is linear in the rate, so stored

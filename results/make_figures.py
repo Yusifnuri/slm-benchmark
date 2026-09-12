@@ -216,7 +216,7 @@ def fig_latency(df):
         ax.grid(axis="y", visible=False)
     fig.legend(handles=[
         Patch(facecolor=SLM_C, label="Fine-tuned SLM — generation only, excludes network transit"),
-        Patch(facecolor=API_C, label="Frontier API — end-to-end from the Madrid client, includes transit"),
+        Patch(facecolor=API_C, label="Frontier API — end-to-end from the Heidelberg client, includes transit"),
     ], loc="lower center", ncol=2, frameon=False, bbox_to_anchor=(0.5, -0.13), fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_3_latency")
