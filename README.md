@@ -95,10 +95,15 @@ notebooks, so the reasoning survives into the thesis write-up:
    repo. Fixed to run in a subprocess with a 5-second timeout.
 5. **`05_baseline_financial.ipynb` had a hardcoded absolute path**
    (`/Users/yusifnuri/...`) that only works on one machine. Changed to a
-   relative path. It already uses `Sentences_AllAgree.txt` (100% annotator
-   agreement) — `scripts/prepare_financial_data.py`'s default matches this
-   file so the SLM fine-tuning pipeline and the LLM baselines are scored
-   against the same ground truth.
+   relative path. **This notebook scores the LLM baselines on
+   `Sentences_AllAgree.txt` (100% annotator agreement), while
+   `scripts/prepare_financial_data.py` defaults to `Sentences_50Agree.txt`
+   for the fine-tuning arm — the two arms are trained/scored on different
+   configurations of Financial PhraseBank.** This is a real, currently
+   unresolved comparability defect, not a bug that was silently fixed; see
+   finding A2 in `docs/thesis_corrections.md` and the thesis's own
+   disclosure (§3.2.3, §3.5.1, §4.2.4) for the direction of the resulting
+   bias. It needs a re-run with matching corpora, not a documentation fix.
 
 6. **No retry or resume on OpenAI/Anthropic failures** — only the Gemini
    calls retried transient errors; a single rate limit or 5xx partway
