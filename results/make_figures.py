@@ -13,7 +13,12 @@ Design rules applied (SRH thesis guide + accessibility):
   - cells the validity audit invalidated are hatched and annotated rather
     than silently plotted, so no figure asserts a comparison the data
     cannot support;
-  - 300 dpi, print-safe fonts >= 8pt.
+  - 300 dpi, print-safe fonts >= 8.5pt. Each figure is authored at the
+    width it is printed at in the thesis (6.5in full-column, 5.12in and
+    5.31in for the narrower plates), so the point sizes declared here are
+    the point sizes on the page. Authoring wider and letting Word scale
+    down is what put earlier exports below the 8pt floor the programme's
+    figure standard sets.
 
 Usage:
     python results/make_figures.py            # writes results/figures/*.png
@@ -21,6 +26,7 @@ Usage:
 
 import math
 import os
+import textwrap
 
 import matplotlib
 matplotlib.use("Agg")
@@ -119,6 +125,13 @@ def style():
     })
 
 
+def _wrap_title(label, width=17):
+    """Panel titles run wider than a fifth of the page; wrap instead of clipping."""
+    return "\n".join(
+        textwrap.fill(part, width) for part in label.split("\n")
+    )
+
+
 def colour(model):
     return SLM_C if model in SLMS else API_C
 
@@ -134,7 +147,7 @@ def save(fig, name):
 # ---------------------------------------------------------------- Fig 4.1
 def fig_matrix(df):
     """Small multiples: one panel per task, six models, audit state visible."""
-    fig, axes = plt.subplots(1, 5, figsize=(15, 4.2))
+    fig, axes = plt.subplots(1, 5, figsize=(6.15, 2.85))
     for ax, task in zip(axes, TASKS):
         sub = df[df.task == task].set_index("model")
         vals = [sub.loc[m, "accuracy"] for m in ORDER]
@@ -146,7 +159,7 @@ def fig_matrix(df):
                     hatch="///" if invalid else None,
                     edgecolor=SURFACE, linewidth=1.4, zorder=3)
             ax.text(v + 0.02, y, f"{v:.3f}".rstrip("0").rstrip("."),
-                    va="center", ha="left", fontsize=8,
+                    va="center", ha="left", fontsize=8.5,
                     color=INK2 if invalid else INK, zorder=4)
         ax.set_yticks(ypos)
         ax.set_yticklabels([SHORT[m] for m in ORDER] if task == TASKS[0] else [])
@@ -154,14 +167,14 @@ def fig_matrix(df):
         ax.set_xlim(0, 1.18)
         ax.set_xticks([0, 0.5, 1.0])
         ax.set_xlabel("score (0–1)")
-        ax.set_title(TASK_LABEL[task], fontsize=8.5, color=INK, pad=8)
+        ax.set_title(_wrap_title(TASK_LABEL[task]), fontsize=8.5, color=INK, pad=6)
         ax.grid(axis="y", visible=False)
     fig.legend(handles=[
         Patch(facecolor=SLM_C, label="Fine-tuned SLM (on-premise)"),
         Patch(facecolor=API_C, label="Frontier API"),
         Patch(facecolor=INVALID_C, hatch="///",
               label="Withdrawn by the validity audit — non-comparable\ninstrument (named entity recognition)"),
-    ], loc="lower center", ncol=3, frameon=False, bbox_to_anchor=(0.5, -0.16),
+    ], loc="lower center", ncol=1, frameon=False, bbox_to_anchor=(0.5, -0.30),
         fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_1_benchmark_matrix")
@@ -170,7 +183,7 @@ def fig_matrix(df):
 # ---------------------------------------------------------------- Fig 4.2
 def fig_classification_ci(df):
     """The one task with an aligned instrument AND nested samples."""
-    fig, ax = plt.subplots(figsize=(7.2, 3.4))
+    fig, ax = plt.subplots(figsize=(5.12, 2.4))
     sub = df[df.task == "classification"].set_index("model")
     ypos = np.arange(len(ORDER))[::-1]
     for y, m in zip(ypos, ORDER):
@@ -196,7 +209,7 @@ def fig_classification_ci(df):
 # ---------------------------------------------------------------- Fig 4.3
 def fig_latency(df):
     """Small multiples, matching Fig 4.1's layout so the two read as a pair."""
-    fig, axes = plt.subplots(1, 5, figsize=(15, 3.9))
+    fig, axes = plt.subplots(1, 5, figsize=(6.15, 2.55))
     for ax, task in zip(axes, TASKS):
         sub = df[df.task == task].set_index("model")
         vals = [sub.loc[m, "latency_ms"] for m in ORDER]
@@ -206,18 +219,18 @@ def fig_latency(df):
             ax.barh(y, v, height=0.62, color=colour(m),
                     edgecolor=SURFACE, linewidth=1.4, zorder=3)
             ax.text(v + vmax * 0.04, y, f"{v:,.0f}", va="center", ha="left",
-                    fontsize=8, color=INK, zorder=4)
+                    fontsize=8.5, color=INK, zorder=4)
         ax.set_yticks(ypos)
         ax.set_yticklabels([SHORT[m] for m in ORDER] if task == TASKS[0] else [])
         ax.tick_params(axis="y", length=0)
         ax.set_xlim(0, vmax * 1.38)
         ax.set_xlabel("ms per request")
-        ax.set_title(TASK_LABEL[task].split("\n")[0], fontsize=8.5, color=INK, pad=8)
+        ax.set_title(_wrap_title(TASK_LABEL[task].split("\n")[0]), fontsize=8.5, color=INK, pad=6)
         ax.grid(axis="y", visible=False)
     fig.legend(handles=[
         Patch(facecolor=SLM_C, label="Fine-tuned SLM — generation only, excludes network transit"),
         Patch(facecolor=API_C, label="Frontier API — end-to-end from the Heidelberg client, includes transit"),
-    ], loc="lower center", ncol=2, frameon=False, bbox_to_anchor=(0.5, -0.13), fontsize=8.5)
+    ], loc="lower center", ncol=1, frameon=False, bbox_to_anchor=(0.5, -0.24), fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_3_latency")
 
@@ -225,7 +238,7 @@ def fig_latency(df):
 # ---------------------------------------------------------------- Fig 4.4
 def fig_cost_per_request():
     cpr = pd.read_csv("results/cost_per_request.csv")
-    fig, axes = plt.subplots(1, 2, figsize=(11, 3.6))
+    fig, axes = plt.subplots(1, 2, figsize=(6.5, 2.1))
     for ax, task, slm_lat in [(axes[0], "classification", 0.16177),
                               (axes[1], "code_generation", 2.20008)]:
         sub = cpr[cpr.task == task]
@@ -247,7 +260,7 @@ def fig_cost_per_request():
                 ax.plot(hi, y, "o", ms=8, color=API_C, mec=SURFACE, mew=1.4,
                         zorder=3)
                 label = f"{hi:.3f}"
-            ax.text(hi * 1.10, y, label, va="center", fontsize=8, color=INK)
+            ax.text(hi * 1.10, y, label, va="center", fontsize=8.5, color=INK)
         ax.axvline(c_slm, color=SLM_C, lw=2, zorder=4)
         ax.text(c_slm, len(labels) - 0.35, f"  Phi-4-mini {c_slm:.2f}",
                 color=SLM_C, fontsize=8.5, va="bottom")
@@ -296,7 +309,7 @@ def fig_breakeven():
         c_api = row["api_usd_per_1k_req"].iloc[0] / 1000
         x_max = max(x_max, int(c_ft / (c_api - c_slm_req) * 2.6)) if c_api > c_slm_req else x_max
     reqs = np.linspace(0, x_max, 400)
-    fig, ax = plt.subplots(figsize=(7.6, 4.2))
+    fig, ax = plt.subplots(figsize=(5.31, 2.92))
     ax.plot(reqs, c_ft + c_slm_req * reqs, color=SLM_C, lw=2.2,
             label="Fine-tuned Phi-4-mini (self-hosted)", zorder=4)
     for row, style_, lab in variants:
@@ -337,7 +350,7 @@ def fig_utilisation():
         lo, hi = lo * 0.995, hi * 1.005
     reqs = np.linspace(0, 30000, 400)
 
-    fig, ax = plt.subplots(figsize=(7.6, 4.2))
+    fig, ax = plt.subplots(figsize=(5.31, 2.92))
     # With provider-billed token counts the API price is a single exact line.
     # Label it for what it is rather than as an estimate band, and keep the
     # fill only so the line stays visible at this aspect ratio.
