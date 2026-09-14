@@ -21,7 +21,13 @@ Then paste into **Appendix F**:
 > the MIT licence. The state corresponding to this submission is tagged
 > `v1.0.0-thesis`.
 
-## 2. Streamlit Community Cloud (about 15 minutes)
+## 2. Streamlit Community Cloud — DONE
+
+Deployed at https://slm-benchmark-iqwxhymearqtuw7rr6mdmt.streamlit.app/ from the
+`streamlit-deploy` branch. §3.7.2 and Appendix F of the thesis now carry the URL.
+The steps below are kept for redeployment.
+
+### Original steps (about 15 minutes)
 
 **The root `requirements.txt` will not work for this.** It carries the full
 training stack — torch, transformers, bitsandbytes, mlflow — while `app.py` needs
@@ -46,10 +52,8 @@ git checkout streamlit-deploy -- requirements.txt
 git commit -am "sync with main, keep slim requirements" && git push
 ```
 
-Then replace the sentence in **§3.7.2** of the thesis:
-
-> ~~Public deployment of the application is pending at the time of writing.~~
-> The application is deployed at <your Streamlit URL>.
+Done: §3.7.2 now reads "The application is publicly deployed on Streamlit Community Cloud
+at https://slm-benchmark-iqwxhymearqtuw7rr6mdmt.streamlit.app/".
 
 ## 3. Hugging Face Hub (about 20 minutes)
 

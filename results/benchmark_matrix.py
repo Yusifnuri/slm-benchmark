@@ -16,20 +16,30 @@ from typing import List
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 from evaluation.metrics import LLM_API_COSTS, get_privacy_risk, calculate_roi_breakeven
 
-# Throughput was measured on the rented H200 instance, so the imputed rate
-# must be an H200-class commercial rate — pricing the measured hardware at a
-# cheaper card's rate would systematically understate c_slm (fast GPU + cheap
-# price). $3.99/hr is a single-H200 on-demand rate (JarvisLabs, verified
-# Aug 2026); the specialised-cloud band is roughly $3.68 (Vast.ai) to $4.50
-# (Nebius), with hyperscalers (AWS/Azure/OCI) near $10/GPU-hr. All SLM cost
-# and ROI numbers scale linearly in this constant, so re-pricing at any
-# other rate is a one-line substitution.
+# The H200 this study ran on was provided at no charge, so no accelerator cost
+# was actually incurred and every self-hosted figure rests on an imputed rate.
+# That rate must be H200-class, because throughput was measured on an H200 —
+# pricing the measured hardware at a cheaper card's rate would systematically
+# understate c_slm (fast GPU + cheap price). $3.99/hr is a single-H200
+# on-demand rate (JarvisLabs, verified Aug 2026); the specialised-cloud band is
+# roughly $3.68 (Vast.ai) to $4.50 (Nebius), with hyperscalers (AWS/Azure/OCI)
+# near $10/GPU-hr. All SLM cost and ROI numbers scale linearly in this
+# constant, so re-pricing at any other rate is a one-line substitution.
 GPU_COST_PER_HOUR = 3.99
 # The evaluation runs stored in mlflow logged cost_per_1m_tokens at the rate
 # in force at eval time ($2.50/hr). c_slm is linear in the rate, so stored
 # costs are rescaled to GPU_COST_PER_HOUR here — otherwise the matrix would
 # mix a $3.99-based training cost with a $2.50-based inference cost and the
 # breakeven division would be meaningless.
+#
+# Known limitation: the three NER rows were re-evaluated after the metric
+# fix (§4.2.2) using evaluate.py's current default of gpu_cost_per_hour=3.99
+# directly, i.e. already at GPU_COST_PER_HOUR — not at the $2.50 this
+# rescale assumes. No per-run rate is logged to mlflow, so this script
+# cannot distinguish the two cases and will double-scale those three cells
+# if re-run. The exported CSV's NER cost_per_1m_tokens values were corrected
+# by hand for this reason; a proper fix needs evaluate.py to log the rate it
+# actually used per run.
 LOGGED_GPU_RATE = 2.50
 ROI_REFERENCE_API = "gpt-4o"
 

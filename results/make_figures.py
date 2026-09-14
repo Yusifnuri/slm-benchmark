@@ -13,7 +13,12 @@ Design rules applied (SRH thesis guide + accessibility):
   - cells the validity audit invalidated are hatched and annotated rather
     than silently plotted, so no figure asserts a comparison the data
     cannot support;
-  - 300 dpi, print-safe fonts >= 8pt.
+  - 300 dpi, print-safe fonts >= 8.5pt. Each figure is authored at the
+    width it is printed at in the thesis (6.5in full-column, 5.12in and
+    5.31in for the narrower plates), so the point sizes declared here are
+    the point sizes on the page. Authoring wider and letting Word scale
+    down is what put earlier exports below the 8pt floor the programme's
+    figure standard sets.
 
 Usage:
     python results/make_figures.py            # writes results/figures/*.png
@@ -21,6 +26,7 @@ Usage:
 
 import math
 import os
+import textwrap
 
 import matplotlib
 matplotlib.use("Agg")
@@ -62,15 +68,16 @@ TASK_LABEL = {
 }
 TASKS = ["classification", "ner", "summarization", "financial_sentiment", "code_generation"]
 
-# Cells the validity audit invalidated (§4.2.2, §4.2.4). The two defects hit
-# OPPOSITE arms, which is why the flags are per-cell rather than per-task:
-#   NER  — the self-hosted arm was scored with a non-comparable instrument
-#          (token overlap on tag strings); the API arm's entity-set F1 stands.
+# Cells the validity audit invalidated. Both defects have since been
+# corrected by re-running the affected measurements with a fixed harness:
+#   NER  — the self-hosted arm was originally scored with a non-comparable
+#          instrument (token overlap on tag strings); it has been re-run
+#          with the same entity-level F1 as the API arm (§4.2.2).
 #   FPB  — the API arm was originally drawn from a label-clustered file
-#          region (95% positive). Corrected: the re-run samples the same
-#          seeded split as the self-hosted arm, so this task is no longer
-#          withdrawn and only the NER cells remain outstanding.
-INVALID = {("ner", m) for m in SLMS}
+#          region (95% positive); the re-run samples the same seeded split
+#          as the self-hosted arm (§4.2.4).
+# No cells remain withdrawn as of this run.
+INVALID = set()
 
 # Wilson 95% confidence intervals, computed from the data rather than
 # hardcoded, so they track the CSVs through every re-run. A proportion and a
@@ -119,6 +126,13 @@ def style():
     })
 
 
+def _wrap_title(label, width=17):
+    """Panel titles run wider than a fifth of the page; wrap instead of clipping."""
+    return "\n".join(
+        textwrap.fill(part, width) for part in label.split("\n")
+    )
+
+
 def colour(model):
     return SLM_C if model in SLMS else API_C
 
@@ -134,7 +148,7 @@ def save(fig, name):
 # ---------------------------------------------------------------- Fig 4.1
 def fig_matrix(df):
     """Small multiples: one panel per task, six models, audit state visible."""
-    fig, axes = plt.subplots(1, 5, figsize=(15, 4.2))
+    fig, axes = plt.subplots(1, 5, figsize=(6.15, 2.85))
     for ax, task in zip(axes, TASKS):
         sub = df[df.task == task].set_index("model")
         vals = [sub.loc[m, "accuracy"] for m in ORDER]
@@ -146,7 +160,7 @@ def fig_matrix(df):
                     hatch="///" if invalid else None,
                     edgecolor=SURFACE, linewidth=1.4, zorder=3)
             ax.text(v + 0.02, y, f"{v:.3f}".rstrip("0").rstrip("."),
-                    va="center", ha="left", fontsize=8,
+                    va="center", ha="left", fontsize=8.5,
                     color=INK2 if invalid else INK, zorder=4)
         ax.set_yticks(ypos)
         ax.set_yticklabels([SHORT[m] for m in ORDER] if task == TASKS[0] else [])
@@ -154,15 +168,19 @@ def fig_matrix(df):
         ax.set_xlim(0, 1.18)
         ax.set_xticks([0, 0.5, 1.0])
         ax.set_xlabel("score (0–1)")
-        ax.set_title(TASK_LABEL[task], fontsize=8.5, color=INK, pad=8)
+        ax.set_title(_wrap_title(TASK_LABEL[task]), fontsize=8.5, color=INK, pad=6)
         ax.grid(axis="y", visible=False)
-    fig.legend(handles=[
+    legend_handles = [
         Patch(facecolor=SLM_C, label="Fine-tuned SLM (on-premise)"),
         Patch(facecolor=API_C, label="Frontier API"),
-        Patch(facecolor=INVALID_C, hatch="///",
-              label="Withdrawn by the validity audit — non-comparable\ninstrument (NER) or sample (financial sentiment)"),
-    ], loc="lower center", ncol=3, frameon=False, bbox_to_anchor=(0.5, -0.16),
-        fontsize=8.5)
+    ]
+    if INVALID:
+        legend_handles.append(
+            Patch(facecolor=INVALID_C, hatch="///",
+                  label="Withdrawn by the validity audit — non-comparable instrument")
+        )
+    fig.legend(handles=legend_handles, loc="lower center", ncol=1, frameon=False,
+               bbox_to_anchor=(0.5, -0.30), fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_1_benchmark_matrix")
 
@@ -170,7 +188,7 @@ def fig_matrix(df):
 # ---------------------------------------------------------------- Fig 4.2
 def fig_classification_ci(df):
     """The one task with an aligned instrument AND nested samples."""
-    fig, ax = plt.subplots(figsize=(7.2, 3.4))
+    fig, ax = plt.subplots(figsize=(5.12, 2.4))
     sub = df[df.task == "classification"].set_index("model")
     ypos = np.arange(len(ORDER))[::-1]
     for y, m in zip(ypos, ORDER):
@@ -184,9 +202,11 @@ def fig_classification_ci(df):
     ax.set_xlabel("Accuracy on held-out AG News test instances (95% Wilson CI)")
     ax.set_xlim(0.55, 1.0)
     ax.grid(axis="y", visible=False)
+    ax.set_ylim(-0.9, len(ORDER) - 0.4)
     ax.legend(handles=[Patch(facecolor=SLM_C, label="Fine-tuned SLM (n = 200)"),
                        Patch(facecolor=API_C, label="Frontier API (n = 100)")],
-              loc="lower right", frameon=False, fontsize=8.5)
+              loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=2,
+              frameon=False, fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_2_classification_ci")
 
@@ -194,7 +214,7 @@ def fig_classification_ci(df):
 # ---------------------------------------------------------------- Fig 4.3
 def fig_latency(df):
     """Small multiples, matching Fig 4.1's layout so the two read as a pair."""
-    fig, axes = plt.subplots(1, 5, figsize=(15, 3.9))
+    fig, axes = plt.subplots(1, 5, figsize=(6.15, 2.55))
     for ax, task in zip(axes, TASKS):
         sub = df[df.task == task].set_index("model")
         vals = [sub.loc[m, "latency_ms"] for m in ORDER]
@@ -204,18 +224,18 @@ def fig_latency(df):
             ax.barh(y, v, height=0.62, color=colour(m),
                     edgecolor=SURFACE, linewidth=1.4, zorder=3)
             ax.text(v + vmax * 0.04, y, f"{v:,.0f}", va="center", ha="left",
-                    fontsize=8, color=INK, zorder=4)
+                    fontsize=8.5, color=INK, zorder=4)
         ax.set_yticks(ypos)
         ax.set_yticklabels([SHORT[m] for m in ORDER] if task == TASKS[0] else [])
         ax.tick_params(axis="y", length=0)
         ax.set_xlim(0, vmax * 1.38)
         ax.set_xlabel("ms per request")
-        ax.set_title(TASK_LABEL[task].split("\n")[0], fontsize=8.5, color=INK, pad=8)
+        ax.set_title(_wrap_title(TASK_LABEL[task].split("\n")[0]), fontsize=8.5, color=INK, pad=6)
         ax.grid(axis="y", visible=False)
     fig.legend(handles=[
         Patch(facecolor=SLM_C, label="Fine-tuned SLM — generation only, excludes network transit"),
-        Patch(facecolor=API_C, label="Frontier API — end-to-end from the Madrid client, includes transit"),
-    ], loc="lower center", ncol=2, frameon=False, bbox_to_anchor=(0.5, -0.13), fontsize=8.5)
+        Patch(facecolor=API_C, label="Frontier API — end-to-end from the Heidelberg client, includes transit"),
+    ], loc="lower center", ncol=1, frameon=False, bbox_to_anchor=(0.5, -0.24), fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_3_latency")
 
@@ -223,7 +243,7 @@ def fig_latency(df):
 # ---------------------------------------------------------------- Fig 4.4
 def fig_cost_per_request():
     cpr = pd.read_csv("results/cost_per_request.csv")
-    fig, axes = plt.subplots(1, 2, figsize=(11, 3.6))
+    fig, axes = plt.subplots(1, 2, figsize=(6.5, 2.1))
     for ax, task, slm_lat in [(axes[0], "classification", 0.16177),
                               (axes[1], "code_generation", 2.20008)]:
         sub = cpr[cpr.task == task]
@@ -234,9 +254,18 @@ def fig_cost_per_request():
             labels.append(SHORT[api]); los.append(s.min()); his.append(s.max())
         ypos = np.arange(len(labels))[::-1]
         for y, lo, hi in zip(ypos, los, his):
-            ax.plot([lo, hi], [y, y], color=API_C, lw=6, solid_capstyle="butt", zorder=3)
-            ax.text(hi * 1.08, y, f"{lo:.3f}–{hi:.3f}" if hi - lo > 1e-4 else f"{hi:.3f}",
-                    va="center", fontsize=8, color=INK)
+            if hi - lo > 1e-4:
+                # estimation band: a bar spanning both bounds
+                ax.plot([lo, hi], [y, y], color=API_C, lw=6,
+                        solid_capstyle="butt", zorder=3)
+                label = f"{lo:.3f}–{hi:.3f}"
+            else:
+                # provider-billed token counts give one exact price, not a
+                # band; a zero-length line draws nothing, so mark the point.
+                ax.plot(hi, y, "o", ms=8, color=API_C, mec=SURFACE, mew=1.4,
+                        zorder=3)
+                label = f"{hi:.3f}"
+            ax.text(hi * 1.10, y, label, va="center", fontsize=8.5, color=INK)
         ax.axvline(c_slm, color=SLM_C, lw=2, zorder=4)
         ax.text(c_slm, len(labels) - 0.35, f"  Phi-4-mini {c_slm:.2f}",
                 color=SLM_C, fontsize=8.5, va="bottom")
@@ -285,7 +314,7 @@ def fig_breakeven():
         c_api = row["api_usd_per_1k_req"].iloc[0] / 1000
         x_max = max(x_max, int(c_ft / (c_api - c_slm_req) * 2.6)) if c_api > c_slm_req else x_max
     reqs = np.linspace(0, x_max, 400)
-    fig, ax = plt.subplots(figsize=(7.6, 4.2))
+    fig, ax = plt.subplots(figsize=(5.31, 2.92))
     ax.plot(reqs, c_ft + c_slm_req * reqs, color=SLM_C, lw=2.2,
             label="Fine-tuned Phi-4-mini (self-hosted)", zorder=4)
     for row, style_, lab in variants:
@@ -301,8 +330,8 @@ def fig_breakeven():
                     fontsize=8.5, color=INK,
                     arrowprops=dict(arrowstyle="-", color=INK2, lw=0.8))
     ax.axhline(c_ft, color=INK2, lw=0.9, ls=":", zorder=2)
-    ax.text(150, c_ft + 0.13, f"one-off adaptation cost ${c_ft:.2f}",
-            fontsize=8.5, color=INK2, va="bottom")
+    ax.text(x_max * 0.985, c_ft - 0.06, f"one-off adaptation cost ${c_ft:.2f}",
+            fontsize=8.5, color=INK2, va="top", ha="right")
     ax.set_xlabel("Cumulative requests served")
     ax.set_ylabel("Cumulative cost (USD)")
     ax.set_xlim(0, x_max)
@@ -326,23 +355,35 @@ def fig_utilisation():
         lo, hi = lo * 0.995, hi * 1.005
     reqs = np.linspace(0, 30000, 400)
 
-    fig, ax = plt.subplots(figsize=(7.6, 4.2))
-    ax.fill_between(reqs, lo * reqs, hi * reqs, color=API_C, alpha=0.22, zorder=2,
-                    label="GPT-4o API (tokenizer-estimate band)")
+    fig, ax = plt.subplots(figsize=(5.31, 2.92))
+    # With provider-billed token counts the API price is a single exact line.
+    # Label it for what it is rather than as an estimate band, and keep the
+    # fill only so the line stays visible at this aspect ratio.
+    banded = (hi - lo) / max(hi, 1e-12) > 0.02
+    api_label = ("GPT-4o API (tokeniser-estimate band)" if banded
+                 else "GPT-4o API (provider-billed tokens)")
+    ax.fill_between(reqs, lo * reqs, hi * reqs, color=API_C, alpha=0.22, zorder=2)
+    ax.plot(reqs, ((lo + hi) / 2) * reqs, color=API_C, lw=2.0, zorder=3,
+            label=api_label)
+    c_api = (lo + hi) / 2
+    notes = []
     for u, ls, lab in [(1.0, "-", "u = 1.00 (fully utilised)"),
                        (0.5, "--", "u = 0.50"),
                        (0.25, ":", "u = 0.25 (idle-heavy)")]:
-        ax.plot(reqs, c_ft + (base / u) * reqs, color=SLM_C, lw=2.0, ls=ls,
+        c_u = base / u
+        ax.plot(reqs, c_ft + c_u * reqs, color=SLM_C, lw=2.0, ls=ls,
                 label=f"Self-hosted, {lab}", zorder=4)
-    ax.annotate("at u = 0.5 the self-hosted line runs inside the API band —\n"
-                "the comparison stops being decidable",
-                xy=(21000, c_ft + (base / 0.5) * 21000),
-                xytext=(9200, 9.4), fontsize=8.5, color=INK,
-                arrowprops=dict(arrowstyle="-", color=INK2, lw=0.8))
+        # State the breakeven each utilisation actually implies, rather than
+        # asserting a verdict the plotted lines do not support.
+        notes.append(f"u = {u:.2f}: " + (f"breakeven ≈ {c_ft / (c_api - c_u):,.0f} requests"
+                                         if c_u < c_api else "API cheaper at every volume"))
+    ax.annotate("\n".join(notes), xy=(0.985, 0.035), xycoords="axes fraction",
+                ha="right", va="bottom", fontsize=8.5, color=INK,
+                bbox=dict(boxstyle="round,pad=0.45", fc=SURFACE, ec=GRID, lw=0.8))
     ax.set_xlabel("Cumulative requests served")
     ax.set_ylabel("Cumulative cost (USD)")
     ax.set_xlim(0, 30000); ax.set_ylim(0, 12)
-    ax.legend(loc="upper left", frameon=False, fontsize=8.5)
+    ax.legend(loc="upper left", frameon=False, fontsize=8.5, ncol=1)
     fig.tight_layout()
     save(fig, "fig4_6_utilisation_sensitivity")
 
