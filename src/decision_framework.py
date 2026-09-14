@@ -27,15 +27,16 @@ ROI_REFERENCE_MODEL = "gpt-4o"
 # never drive a recommendation. In the first evaluation sweep the self-hosted
 # named-entity-recognition arm was scored by whitespace-token overlap between
 # generated and reference integer tag strings -- a quantity dominated by the
-# majority 'O' tag, so it measures output-format imitation rather than entity
-# extraction, and is not comparable with the API arm's entity-set F1 (thesis
+# majority 'O' tag, so it measured output-format imitation rather than entity
+# extraction, and was not comparable with the API arm's entity-set F1 (thesis
 # SS3.5.1, SS4.2.2). The harness has since been corrected to BIO-decode both
-# arms identically, but these three cells await re-evaluation.
+# arms identically, and the three affected cells have been re-measured under
+# it, so none remain withdrawn as of this run.
 #
 # Keyed by (task, method) because the defect is a property of how that arm was
-# scored, not of any individual model. Remove an entry once its cell has been
-# re-measured under the corrected instrument.
-WITHDRAWN_CELLS = {("ner", "LoRA"), ("ner", "QLoRA")}
+# scored, not of any individual model. Add an entry back here if a future
+# instrument defect is found, and remove it once that cell is re-measured.
+WITHDRAWN_CELLS: set = set()
 
 
 def withdrawn(df: pd.DataFrame, task: str) -> pd.DataFrame:
