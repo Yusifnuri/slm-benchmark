@@ -68,15 +68,16 @@ TASK_LABEL = {
 }
 TASKS = ["classification", "ner", "summarization", "financial_sentiment", "code_generation"]
 
-# Cells the validity audit invalidated (§4.2.2, §4.2.4). The two defects hit
-# OPPOSITE arms, which is why the flags are per-cell rather than per-task:
-#   NER  — the self-hosted arm was scored with a non-comparable instrument
-#          (token overlap on tag strings); the API arm's entity-set F1 stands.
+# Cells the validity audit invalidated. Both defects have since been
+# corrected by re-running the affected measurements with a fixed harness:
+#   NER  — the self-hosted arm was originally scored with a non-comparable
+#          instrument (token overlap on tag strings); it has been re-run
+#          with the same entity-level F1 as the API arm (§4.2.2).
 #   FPB  — the API arm was originally drawn from a label-clustered file
-#          region (95% positive). Corrected: the re-run samples the same
-#          seeded split as the self-hosted arm, so this task is no longer
-#          withdrawn and only the NER cells remain outstanding.
-INVALID = {("ner", m) for m in SLMS}
+#          region (95% positive); the re-run samples the same seeded split
+#          as the self-hosted arm (§4.2.4).
+# No cells remain withdrawn as of this run.
+INVALID = set()
 
 # Wilson 95% confidence intervals, computed from the data rather than
 # hardcoded, so they track the CSVs through every re-run. A proportion and a
@@ -169,13 +170,17 @@ def fig_matrix(df):
         ax.set_xlabel("score (0–1)")
         ax.set_title(_wrap_title(TASK_LABEL[task]), fontsize=8.5, color=INK, pad=6)
         ax.grid(axis="y", visible=False)
-    fig.legend(handles=[
+    legend_handles = [
         Patch(facecolor=SLM_C, label="Fine-tuned SLM (on-premise)"),
         Patch(facecolor=API_C, label="Frontier API"),
-        Patch(facecolor=INVALID_C, hatch="///",
-              label="Withdrawn by the validity audit — non-comparable\ninstrument (named entity recognition)"),
-    ], loc="lower center", ncol=1, frameon=False, bbox_to_anchor=(0.5, -0.30),
-        fontsize=8.5)
+    ]
+    if INVALID:
+        legend_handles.append(
+            Patch(facecolor=INVALID_C, hatch="///",
+                  label="Withdrawn by the validity audit — non-comparable instrument")
+        )
+    fig.legend(handles=legend_handles, loc="lower center", ncol=1, frameon=False,
+               bbox_to_anchor=(0.5, -0.30), fontsize=8.5)
     fig.tight_layout()
     save(fig, "fig4_1_benchmark_matrix")
 

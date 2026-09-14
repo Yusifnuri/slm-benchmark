@@ -31,6 +31,15 @@ GPU_COST_PER_HOUR = 3.99
 # costs are rescaled to GPU_COST_PER_HOUR here — otherwise the matrix would
 # mix a $3.99-based training cost with a $2.50-based inference cost and the
 # breakeven division would be meaningless.
+#
+# Known limitation: the three NER rows were re-evaluated after the metric
+# fix (§4.2.2) using evaluate.py's current default of gpu_cost_per_hour=3.99
+# directly, i.e. already at GPU_COST_PER_HOUR — not at the $2.50 this
+# rescale assumes. No per-run rate is logged to mlflow, so this script
+# cannot distinguish the two cases and will double-scale those three cells
+# if re-run. The exported CSV's NER cost_per_1m_tokens values were corrected
+# by hand for this reason; a proper fix needs evaluate.py to log the rate it
+# actually used per run.
 LOGGED_GPU_RATE = 2.50
 ROI_REFERENCE_API = "gpt-4o"
 
