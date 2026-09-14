@@ -1,0 +1,988 @@
+idx,gold_entities,pred_entities,raw_prediction,f1,parse_ok,latency_ms
+0,china|japan,china|japan,"[0, 0, 5, 0, 0, 0, 0, 5, 0, 0, 0, 0]
+
+SOCCER - JAPAN GET LUCKY WIN , CHINA IN SURPRISE DEFEAT .",1.0,True,1947.42
+1,nadim ladki,nadim ladki,"[1, 2]
+
+Nadim Ladki
+Entities: [1, 2]
+
+Nadim Ladki
+Entities: [1, 2]
+
+Nadim Ladki
+Entities: [1, 2]
+
+Nadim Ladki
+Entities:",1.0,True,1636.38
+2,al-ain|united arab emirates,al-ain|united arab emirates,"[5, 0, 5, 6, 6, 0]
+
+AL-AIN , United Arab Emirates 1996-12-06
+Entities: [5, 0, 5, 6, 6, 0]
+
+AL",1.0,True,1639.27
+3,asian cup|japan|syria,asian cup|group c|japan|syria,"[5, 0, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 7, 8, 0,",0.8571,True,1647.03
+4,china|uzbekistan,china,"[0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1646.74
+5,china|chinese|igor shkvyrin|uzbek,china|igor shkvyrin|uzbek,"[5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 1, 2, 0,",0.8571,True,1649.39
+6,oleg shatskiku,oleg shatskiku,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1640.46
+7,asian cup|soviet,asian cup|soviet,"[0, 0, 7, 0, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0]
+
+[0, 0, 7, 0",1.0,True,1634.54
+8,asian games|uzbekistan,asian games|uzbekistan,"[0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0]
+
+Despite winning the Asian Games title two",1.0,True,1636.15
+9,japan|syria,japan,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1639.09
+10,hiroshige yanagimoto|salem bitar|syrian|takuya takagi,hiroshige yanagimoto|syrian|takuya takagi,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 7, 0,",0.8571,True,1643.67
+11,syria,syria,"[0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0]
+
+It was the second costly blunder by Syria in four minutes .
+Entities: [0, 0, 0,",1.0,True,1633.71
+12,bitar|hassan abbas,hassan abbas,"[0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1645.02
+13,nader jokhadar|syria,nader jokhadar|syria,"[1, 2, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+[0, 0, 0, 0, 5",1.0,True,1638.04
+14,japan|syrian,japan|syrian,"[5, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0]",1.0,True,1638.66
+15,bitar,bitar,"[1, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Bitar pulled off fine saves saves whenever they did .
+Entities: [1, 0, 0, 0, 0, 0, 0,",1.0,True,1635.14
+16,japan|shu kamo|syrian,.|japan|shu kamo|the,"[5, 0, 1, 2, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0]
+
+[5, 0, 1, 2, 0",0.5714,True,1637.17
+17,syrians,syrians,"[0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+[0",1.0,True,1637.86
+18,,,"[0]
+
+'
+Entities: [0]
+
+'
+Entities: [0]
+
+'
+Entities: [0]
+
+'
+Entities: [0]
+
+'
+Entities: [0]
+
+'
+Entities: [0]
+
+'
+Entities: [",1.0,True,1633.18
+19,fifa|japan|world cup,fifa|japan|world cup,"[5, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0,",1.0,True,1644.7
+20,indonesia|kuwait|south korea|uae,indonesia|kuwait|south korea|uae,"[0, 5, 0, 5, 0, 5, 6, 0, 0, 5, 0, 0, 0, 0, 0, 0]
+
+Hosts UAE play Kuwait and South Korea take on Indonesia on",1.0,True,1637.38
+21,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+All four teams are level with one point each from each from one game .
+Entities: [0, 0",1.0,True,1635.53
+22,cuttitta|italy|rugby union,cuttitta|italy|rugby union,"[3, 4, 0, 1, 0, 0, 5, 0, 0, 0, 0]
+
+RUGBY UNION - CUTTITTA BACK FOR ITALY AFTER A YEAR .
+Entities: [3",1.0,True,1640.14
+23,rome,rome,"[5, 0]
+
+ROME 1996-01-01
+Entities: [5, 0]
+
+ROME 1996-01-01
+Entities: [5, 0]
+
+ROME 1996-",1.0,True,1637.66
+24,italy|marcello cuttitta,italy|marcello cuttitta,"[5, 0, 1, 2]
+
+Italy recalled [0, 1, 2]
+Entities: [5, 0, 0, 1, 2]
+
+Italy recalled [0, 0, 1, 2]
+Entities:",1.0,True,1636.35
+25,murrayfield|scotland,murrayfield|scotland,"[0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1645.01
+26,cuttitta|england|george coste|twickenham,cuttitta|george coste,"[5, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1647.92
+27,corrado covi|coste|england|stefano bordon,corrado covi|coste|stefano bordon,"[1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0,",0.8571,True,1646.86
+28,1995 world cup|cuttitta|england|italy,cuttitta|italy|world cup,"[5, 0, 0, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0,",0.5714,True,1645.11
+29,coste,coste,"[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Coste said he had approached the player two months zero zero zero zero zero
+Entities: [1",1.0,True,1638.67
+30,coste|world cup,coste|world cup,"[0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+
+"" He ended the World Cup on the wrong note , , , 0 Coste",1.0,True,1637.82
+31,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+"" I thought it would",1.0,True,1639.17
+32,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+I think now is the right time for him to return . ""
+Entities: [0, 0,",1.0,True,1637.46
+33,alessandro moscardi|alessandro troncon|andrea|andrea sgorlon|carlo checchinato|carlo orlandi|diego dominguez|francesco mazzariol|franco properzi curti|giambatista croci|gianluca guidi|ivan francescato|javier pertile|leandro manteri|marcello cuttitta|massimo cuttitta|massimo giovanelli|nicola mazzucato|orazio arancio|paolo vaccari|walter cristofoletto,diego dominguez|francesco|ivan francescato|javier pertile|leandro manteri|marcello cuttitta|paolo vaccari,"[0, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1,",0.4286,True,1673.08
+34,japan|syria,japan|syria,"[0, 0, 0, 0, 0, 5, 0, 0, 5, 0]
+
+SOCCER - LATE GOALS GIVE JAPAN WIN OVER SYRIA .
+Entities: [0, 0, 0",1.0,True,1639.58
+35,al-ain|united arab emirates,al-ain|united arab emirates,"[5, 0, 5, 6, 6, 0]
+
+AL-AIN , United Arab Emirates 1996-12-06
+Entities: [5, 0, 5, 6, 6, 0]
+
+AL",1.0,True,1639.44
+36,asian cup|japan|syria,asian cup|japan|syria,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 7, 8, 0, 0, 5, 0, 0, 0]",1.0,True,1643.78
+37,salem bitar|takuya takagi,goalkeeper salem|takuya takagi,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0,",0.5,True,1647.68
+38,syrian,syrian,"[0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0]
+
+It was the second Syrian defensive blunder in four minutes .
+Entities: [0, 0, 0, 0,",1.0,True,1638.76
+39,bitar|hassan abbas,hassan abbas,"[0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1648.19
+40,syria,syria,"[5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Syria had taken the lead from their first serious attack in the seventh seventh 0",1.0,True,1639.33
+41,ammar awad|kenichi shimokawa|nader jokhadar,ammar awad|kenichi shimokawa|nader jokhadar,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0,",1.0,True,1645.83
+42,japan|syrian,japan|syrian,"[5, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",1.0,True,1644.95
+43,bitar|kazuyoshi miura|takagi,bitar|kazuyoshi miura,"[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0,",0.8,True,1645.86
+44,bitar|miura,bitar|miura,"[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+[0, 0",1.0,True,1642.13
+45,bitar|japan|naoki soma,bitar|japan|naoki,"[5, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,",0.6667,True,1648.1
+46,hiroaki morishima|hiroshi nanami|hiroshige yanagimoto|japan|kazuyoshi miura|kenichi shimokawa|masakiyo maezono|masami ihara|masayuki okano|motohiro yamaguchi|naoki soma|norio omura|takuya takagi|yasuto honda,hiroshige yanagimoto|japan|kenichi shimokawa|masami ihara|naoki soma,"[5, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2,",0.5263,True,1667.69
+47,abdul latif helou|ali dib|ammar awad|ammar rihawiy|bachar srour|hassan abbas|khaled zaher|louay taleb|mohammed afash|nader jokhadar|nihad al-boushi|salem bitar|syria|tarek jabban,bachar srour|hassan abbas|salem bitar|syria|tarek jabban,"[5, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2,",0.5263,True,1665.33
+48,skiing-world cup,,"[0, 0, 0, 0, 0, 0]
+
+FREESTYLE SKIING-WORLD CUP MOGUL RESULTS 0
+Entities: [0, 0, 0, 0, 0, 0]",0.0,True,1640.62
+49,france|tignes,france|tignes,"[5, 0, 5, 0]
+
+TIGNES , France 1996-12-06
+Entities: [5, 0, 5, 0]
+
+TIGNES , France 1996-12-06",1.0,True,1638.54
+50,world cup,world cup,"[0, 0, 0, 7, 8]
+
+Results of the World Cup
+Entities: [0, 0, 0, 7, 8]
+
+Results of the World Cup
+Entities: [0, 0, 0, 7, 8",1.0,True,1635.86
+51,,,"[0, 0, 0, 0, 0, 0, 0]
+
+freestyle skiing moguls competition on Friday :
+Entities: [0, 0, 0, 0, 0, 0, 0]
+
+freestyle skiing mog",1.0,True,1637.53
+52,,,"[0]
+
+Men
+Entities: [0]
+
+Men
+Entities: [0]
+
+Men
+Entities: [0]
+
+Men
+Entities: [0]
+
+Men
+Entities: [0]
+
+Men
+Entities: [0]
+
+Men
+Entities: [",1.0,True,1634.76
+53,jesper ronnback|sweden,jesper ronnback|sweden,"[0, 1, 2, 0, 5, 0, 0, 0]
+
+0.1, 1, 2, 0, 5, 0, 0, 0]
+Entities: [0, 0, 0,",1.0,True,1639.04
+54,andrei ivanov|russia,andrei ivanov|russia,"[0, 1, 2, 0, 5, 0, 0]
+
+3. 0
+Entities: [0]
+
+4. 0
+Entities: [0]
+
+0. 0
+Entities: [0]
+
+0. 0",1.0,True,1638.55
+55,canada|ryan johnson,canada|ryan johnson,"[0, 1, 2, 0, 5, 0, 0]
+
+3. Ryan Johnson ( Canada ) 0
+Entities: [0, 1, 2, 0, 5, 0, 0]
+
+3. Ryan Johnson ( Canada",1.0,True,1638.02
+56,canada|jean-luc brassard,canada|jean-luc brassard,"[0, 1, 2, 0, 5, 0, 0]
+
+0.1, 1, 2, 0, 5, 0, 0]
+Entities: [0, 0, 0, 0, 5,",1.0,True,1639.36
+57,korneilus hole|norway,korneilus hole|norway,"[0, 1, 2, 0, 5, 0, 0]
+
+5. Korneilus Hole ( Norway ) 23.92
+Entities: [0, 1, 2, 0, 5, 0, 0]",1.0,True,1639.27
+58,france|jeremie collomb-patton,france|jeremie collomb-patton,"[0, 1, 2, 0, 5, 0, 0]
+
+7. 0
+Entities: [0]
+
+8. 0
+Entities: [0]
+
+9. 0
+Entities: [0]
+
+10. 0",1.0,True,1639.51
+59,jim moran|u.s.,jim moran|u.s.,"[0, 1, 2, 0, 5, 0, 0]
+
+7. Jim Moran ( U.S. ) 23.25
+Entities: [0, 1, 2, 0, 5, 0, 0]",1.0,True,1638.66
+60,canada|dominick gauthier,canada|dominick gauthier,"[0, 1, 2, 0, 5, 0, 0]
+
+0.1, 1, 2, 0, 5, 0, 0]
+Entities: [0, 0, 0, 0, 5,",1.0,True,1638.28
+61,france|johann gregoire,france|johann gregoire,"[0, 1, 2, 0, 5, 0, 0]
+
+9. Johann Gregoire ( France ) 0
+Entities: [0, 1, 2, 0, 5, 0, 0]
+
+9. Johann Gregoire",1.0,True,1637.73
+62,troy benson|u.s.,troy benson|u.s.,"[0, 1, 2, 0, 5, 0, 0]
+
+10. Troy Benson ( U.S. ) 22.56
+Entities: [0, 1, 2, 0, 5, 0,",1.0,True,1639.15
+63,,,"[0]
+
+Women
+Entities: [0]
+
+Women
+Entities: [0]
+
+Women
+Entities: [0]
+
+Women
+Entities: [0]
+
+Women
+Entities: [0]
+
+Women
+Entities: [0]",1.0,True,1635.07
+64,germany|tatjana mittermayer,germany|tatjana mittermayer,"[0, 1, 2, 0, 5, 0, 0]
+
+2. 0
+Entities: [0]
+
+3. 0
+Entities: [0]
+
+4. 0
+Entities: [0]
+
+4. 0",1.0,True,1638.61
+65,candice gilg|france,candice gilg|france,"[0, 1, 2, 0, 5, 0, 0]
+
+3. 0
+Entities: [0]
+
+4. 0
+Entities: [0]
+
+0. 0
+Entities: [0]
+
+0. 0",1.0,True,1638.18
+66,finland|minna karhu,finland|minna karhu,"[0, 1, 2, 0, 5, 0, 0]
+
+3. Minna Karhu ( Finland ) 0
+Entities: [0, 1, 2, 0, 5, 0, 0]
+
+3. Minna",1.0,True,1637.85
+67,japan|tae satoya,japan|tae satoya,"[0, 1, 2, 0, 5, 0, 0]
+
+0. Tae Satoya ( Japan ) 0
+Entities: [0, 1, 2, 0, 5, 0, 0]
+
+0. Tae",1.0,True,1637.77
+68,ann battellle|u.s.,ann battellle|u.s.,"[0, 1, 2, 0, 5, 0, 0]
+
+5. Ann Battellle ( U.S. ) 23.56
+Entities: [0, 1, 2, 0, 5, 0, 0",1.0,True,1638.64
+69,donna weinbrecht|u.s.,donna weinbrecht|u.s.,"[0, 1, 2, 0, 5, 0, 0]
+
+7. 0
+Entities: [0]
+
+8. 0
+Entities: [0]
+
+9. 0
+Entities: [0]
+
+10. 0",1.0,True,1639.36
+70,liz mcintyre|u.s.,liz mcintyre|u.s.,"[0, 1, 2, 0, 5, 0, 0]
+
+7. Liz McIntyre ( U.S. ) 22.00
+Entities: [0, 1, 2, 0, 5, 0,",1.0,True,1639.32
+71,elena koroleva|russia,elena koroleva|russia,"[0, 1, 2, 0, 5, 0, 0]
+
+0.1, 1, 2, 0, 5, 0, 0]
+Entities: [0, 0, 0, 0, 5,",1.0,True,1638.05
+72,ljudmila dymchenko|russia,ljudmila dymchenko|russia,"[0, 1, 2, 0, 5, 0, 0]
+
+0. Ljudmila Dymchenko ( Russia ) 0
+Entities: [0, 1, 2, 0, 5, 0, 0]",1.0,True,1639.13
+73,france|katleen allais,france|katleen allais,"[0, 1, 2, 0, 5, 0, 0]
+
+10. Katleen Allais ( France ) 21.58
+Entities: [0, 1, 2, 0, 5, 0, 0]",1.0,True,1638.06
+74,asian cup,asian cup,"[0, 0, 7, 8, 0, 0, 0, 0]
+
+SOCCER - ASIAN CUP GROUP C RESULTS .
+Entities: [0, 0, 7, 8, 0, 0,",1.0,True,1638.57
+75,al-ain|united arab emirates,al-ain|united arab emirates,"[5, 0, 5, 6, 6, 0]
+
+AL-AIN , United Arab Emirates 1996-12-06
+Entities: [5, 0, 5, 6, 6, 0]
+
+AL",1.0,True,1639.48
+76,asian cup,asian cup,"[0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0]
+
+Results of Asian Cup group D matches played on Friday :
+Entities: [0, 0, 7, 8, 0,",1.0,True,1637.16
+77,japan|syria,japan|syria,"[5, 0, 5, 0, 0, 0, 0, 0]
+
+Japan 2 Syria 1 ( halftime 0-1 0)
+Entities: [5, 0, 5, 0, 0, 0",1.0,True,1638.4
+78,,,"[0, 0]
+
+Scorers :
+Entities: [0, 0]
+
+Scorers :
+Entities: [0, 0]
+
+Scorers :
+Entities: [0, 0]
+
+Scorers :
+Entities: [0,",1.0,True,1635.84
+79,hassan abbas|japan|takuya takagi,hassan abbas|japan|takuya takagi,"[5, 0, 1, 2, 0, 0, 0, 0, 1, 2, 0, 0]
+
+[5, 0, 1, 2, 0, 0, 0, 0, 1",1.0,True,1640.02
+80,nader jokhadar|syria,nader jokhadar|syria,"[5, 0, 1, 2, 0]
+
+Syria - Nader Jokhadar 7
+Entities: [5, 0, 1, 2, 0]
+
+Syria - Nader Jokhadar 7
+Entities: [5",1.0,True,1637.05
+81,,,"[0, 0, 0, 0]
+
+Attendance : 1,000 .
+Entities: [0, 0, 0, 0]
+
+Attendance : 0, 0
+Entities: [0, 0, 0, 0]",1.0,True,1637.22
+82,china|uzbekistan,china|uzbekistan,"[5, 0, 5, 0, 0, 0, 0, 0]
+
+China 0 Uzbekistan 2 ( halftime 0-0 0)
+Entities: [5, 0, 5, 0, 0",1.0,True,1639.06
+83,shatskikh oleg|shkvyrin igor,shatskikh oleg|shkvyrin igor,"[0, 0, 1, 2, 0, 0, 1, 2, 0]
+
+Scorers : Shkvyrin Igor 78 , Shatskikh Oleg 90
+Entities: [0, 0, 1,",1.0,True,1640.14
+84,,,"[0, 0, 0]
+
+Attendence : 0
+Entities: [0, 0, 0]
+
+Attendence : 0
+Entities: [0, 0, 0]
+
+Attendence : 0
+Entities: [0,",1.0,True,1635.77
+85,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Standings ( tabulate under played , won , drawn , drawn , lost , goals
+Entities: [0,",1.0,True,1637.85
+86,,,"[0, 0, 0, 0, 0, 0, 0, 0]
+
+for , goals against , points ) :
+Entities: [0, 0, 0, 0, 0, 0, 0, 0]
+
+for",1.0,True,1636.28
+87,uzbekistan,uzbekistan,"[5, 0, 0, 0, 0, 0, 0, 0]
+
+Uzbekistan 1 1 0 0 0 0 0
+Entities: [5, 0, 0, 0, 0, 0",1.0,True,1638.91
+88,japan,japan,"[5, 0, 0, 0, 0, 0, 0, 0]
+
+Japan 0 0 0 0 0 0 0
+Entities: [5, 0, 0, 0, 0, 0,",1.0,True,1638.28
+89,syria,syria,"[5, 0, 0, 0, 0, 0, 0, 0]
+
+Syria 0 0 0 0 0 0 0
+Entities: [5, 0, 0, 0, 0, 0,",1.0,True,1638.02
+90,china,china,"[5, 0, 0, 0, 0, 0, 0, 0]
+
+China 0 0 0 0 0 0 0
+Entities: [5, 0, 0, 0, 0, 0,",1.0,True,1638.08
+91,new zealand|pakistan,new zealand|pakistan,"[0, 0, 5, 0, 5, 6, 0, 0, 0]
+
+CRICKET - PAKISTAN V NEW ZEALAND ONE-DAY SCOREBOARD .
+Entities: [0, 0, 5,",1.0,True,1639.55
+92,gmt,gmt,"[0, 0, 0, 7, 0]
+
+[ CORRECTED 14:06 GMT ]
+Entities: [0, 0, 0, 7, 0]
+
+[ CORRECTED 14:06 GMT",1.0,True,1637.78
+93,pakistan|sialkot,pakistan|sialkot,"[5, 0, 5, 0]
+
+SIALKOT , Pakistan 1996-12-06
+Entities: [5, 0, 5, 0]
+
+SIALKOT , Pakistan 1996-12-0",1.0,True,1638.46
+94,,,"[0, 0, 0, 0]
+
+Scoreboard in the second
+Entities: [0, 0, 0, 0]
+
+Scoreboard in the second
+Entities: [0, 0, 0, 0]
+
+Scoreboard in the second",1.0,True,1635.43
+95,new zealand|pakistan,new zealand|pakistan,"[0, 0, 0, 0, 5, 0, 5, 6]
+
+one-day cricket international between 5, 0, 5, 6]
+Entities: [0, 0, 0, 0, 0, 0",1.0,True,1636.61
+96,,,"[0, 0, 0]
+
+on Friday :
+Entities: [0, 0, 0]
+
+on Friday :
+Entities: [0, 0, 0]
+
+on Friday :
+Entities: [0, 0, 0]
+
+on Friday",1.0,True,1635.22
+97,pakistan,pakistan,"[5]
+
+Pakistan
+Entities: [5]
+
+Pakistan
+Entities: [5]
+
+Pakistan
+Entities: [5]
+
+Pakistan
+Entities: [5]
+
+Pakistan
+Entities: [5]
+
+Pakistan",1.0,True,1635.21
+98,saeed anwar,saeed anwar,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Saeed Anwar run out 0 ( 0 0 0 0 0)
+Entities: [1, 2, 0",1.0,True,1638.78
+99,cairns|zahoor elahi,cairns|zahoor elahi,"[1, 2, 0, 1, 0, 0, 0, 0, 0, 0]
+
+[1, 2, 0, 1, 0, 0, 0, 0, 0, 0]
+Entities",1.0,True,1639.79
+100,ijaz ahmad|spearman|vaughan,ijaz ahmad|spearman|vaughan,"[1, 2, 0, 1, 0, 1, 0]
+
+Ijaz Ahmad c Spearman b Vaughan 59
+Entities: [1, 2, 0, 1, 0, 1, 0]",1.0,True,1638.2
+101,astle|germon|inzamamul haq,astle|germon|inzamamul haq,"[1, 2, 0, 5, 0, 1, 0]
+
+In [0]: nlp = spacy.load('en_core_web_sm')
+
+In [1]: doc = nlp(""Inzamamul Haq st Germon",1.0,True,1637.85
+102,harris|wasim akram,harris|wasim akram,"[1, 2, 0, 1, 0]
+
+Wasim Akram b Harris 4
+Entities: [1, 2, 0, 1, 0]
+
+Wasim Akram b Harris 4
+Entities: [1, 2, 0",1.0,True,1636.1
+103,harris|shahid afridi,harris|shahid afridi,"[1, 2, 0, 1, 0]
+
+Shahid Afridi b Harris 2
+Entities: [1, 2, 0, 1, 0]
+
+Shahid Afridi b Harris 2
+Entities: [1, 2,",1.0,True,1636.48
+104,astle|harris|moin khan,astle|harris|moin khan,"[1, 2, 0, 1, 0, 1, 0]
+
+Moin Khan c Astle b Harris 1
+Entities: [1, 2, 0, 1, 0, 1, 0]
+
+Moin Khan c Ast",1.0,True,1636.71
+105,germon|harris|waqar younis,germon|harris|waqar younis,"[1, 2, 0, 7, 0, 1, 0]
+
+[1, 2, 0, 7, 0, 1, 0]
+Entities: [1, 2, 0, 7, 0, 1",1.0,True,1637.77
+106,harris|saqlain mushtaq,harris|saqlain mushtaq,"[1, 2, 0, 1, 0]
+
+Saqlain Mushtaq b Harris 2
+Entities: [1, 2, 0, 1, 0]
+
+Saqlain Mushtaq b Harris 2
+Entities: [1",1.0,True,1637.78
+107,mushtaq ahmad,mushtaq ahmad,"[1, 2, 0, 0, 0]
+
+Mushtaq Ahmad not out 0
+Entities: [1, 2, 0, 0, 0]
+
+Mushtaq Ahmad not out 0
+Entities: [1,",1.0,True,1636.91
+108,salim malik,salim malik,"[1, 2, 0, 0, 0]
+
+Salim Malik not out 0
+Entities: [1, 2, 0, 0, 0]
+
+Salim Malik not out 0
+Entities: [1, 2, 0",1.0,True,1636.03
+109,,,"[0, 0, 0, 0, 0, 0, 0]
+
+Extras ( lb-8 nb-2 w-14 ) 0
+Entities: [0, 0, 0, 0, 0, 0]
+
+Ex",1.0,True,1638.63
+110,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Total ( for 9 wickets in 0 overs 0 0 0) 0
+Entities: [0, 0, 0,",1.0,True,1639.5
+111,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+[0",1.0,True,1652.22
+112,doull|kennedy,doull|kennedy,"[0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+
+[0, 0, 1, 0, 0, 0",1.0,True,1647.97
+113,cairns|harris|vaughan,cairns|harris|vaughan,"[5, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+
+[5, 0, 0, 0, 0",1.0,True,1648.09
+114,astle,astle,"[1, 0, 0, 0, 0, 0]
+
+Astle 9-0-5-0 ( w-1 nb-1 )
+Entities: [1, 0, 0, 0, 0, 0]
+
+A",1.0,True,1639.31
+115,new zealand,new zealand,"[5, 6, 0]
+
+New Zealand innings
+Entities: [5, 6, 0]
+
+New Zealand innings
+Entities: [5, 6, 0]
+
+New Zealand innings
+Entities: [5, 6, 0]",1.0,True,1635.07
+116,b. young|moin khan|waqar,b. young|moin khan|waqar,"[1, 2, 0, 1, 2, 0, 1, 0]
+
+B. Young c Moin Khan b Waqar 5
+Entities: [1, 2, 0, 1, 2, 0, 1,",1.0,True,1637.5
+117,c. spearman|moin khan|wasim,c. spearman|moin khan|wasim,"[1, 2, 0, 1, 2, 0, 1, 0]
+
+C. Spearman c Moin Khan b Wasim 0
+Entities: [1, 2, 0, 1, 2, 0, 1,",1.0,True,1637.66
+118,a. parore|ijaz ahmad|saqlain,a. parore|ijaz ahmad|saqlain,"[1, 2, 0, 1, 2, 0, 1, 0]
+
+A. Parore c Ijaz Ahmad b Saqlain 37
+Entities: [1, 2, 0, 1, 2, 0,",1.0,True,1638.73
+119,afridi|s. fleming,afridi|s. fleming,"[1, 2, 0, 0, 0, 1, 0]
+
+S. Fleming c and b Afridi 88
+Entities: [1, 2, 0, 0, 0, 1, 0]
+
+S.",1.0,True,1638.72
+120,c. cairns|saqlain,c. cairns|saqlain,"[1, 2, 0, 1, 0]
+
+C. Cairns b Saqlain 10
+Entities: [1, 2, 0, 1, 0]
+
+C. Cairns b Saqlain 10
+Entities:",1.0,True,1638.11
+121,ijaz ahmad|n. astle|salim malik,ijaz ahmad|n. astle|salim malik,"[1, 2, 0, 1, 2, 0, 1, 2, 0]
+
+N. Astle c Ijaz Ahmad b Salim Malik 20
+Entities: [1, 2, 0, 1, 2",1.0,True,1638.16
+122,c. harris|wasim,c. harris|wasim,"[1, 2, 0, 0, 1, 0]
+
+C. Harris lbw b Wasim 22
+Entities: [1, 2, 0, 0, 1, 0]
+
+C. Harris lbw b Wasim 2",1.0,True,1637.57
+123,afridi|l. germon,afridi|l. germon,"[1, 2, 0, 0, 1, 0]
+
+L. Germon lbw b Afridi 2
+Entities: [1, 2, 0, 0, 1, 0]
+
+L. Germon lbw b Afridi",1.0,True,1637.92
+124,j. vaughan|moin khan|wasim,j. vaughan|moin khan|wasim,"[1, 2, 0, 1, 2, 0, 1, 0]
+
+J. Vaughan c Moin Khan b Wasim 13
+Entities: [1, 2, 0, 1, 2, 0, 1",1.0,True,1638.91
+125,m. wasim|s. doull|waqar,m. wasim|s. doull|waqar,"[1, 2, 0, 0, 0, 1, 2, 0, 0, 1, 0]
+
+S. Doull c subs ( M. Wasim ) b Waqar 1
+Entities: [1, 2, 0",1.0,True,1639.1
+126,r. kennedy,r. kennedy,"[1, 2, 0, 0, 0]
+
+R. Kennedy not out 0
+Entities: [1, 2, 0, 0, 0]
+
+R. Kennedy not out 0
+Entities: [1, 2, 0,",1.0,True,1636.51
+127,,,"[0, 0, 0, 0, 0, 0, 0, 0]
+
+Extras ( b-9 lb-3 w-12 nb-2 ) 0
+Entities: [0, 0, 0, 0, 0,",1.0,True,1639.29
+128,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Total ( all out in 0.0 overs 0 0 0)
+Entities: [0, 0, 0, 0, 0,",1.0,True,1638.08
+129,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Fall of wickets : 0 0 0 0 0 0 0 0 0 0
+Entities: [",1.0,True,1647.15
+130,,,"[0, 0, 0]
+
+0 0 0
+Entities: [0, 0, 0]
+
+0 0 0
+Entities: [0, 0, 0]
+
+0 0 0
+Entities: [0, 0,",1.0,True,1637.32
+131,waqar younis|wasim akram,waqar younis|wasim akram,"[0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 1, 2]
+
+Bowling : 1, 2, 0, 0, 0, 0,",1.0,True,1644.96
+132,mushtaq ahmad|saqlain mushtaq,mushtaq ahmad|saqlain mushtaq,"[0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 1, 2]
+
+0-0-0 ( 0, 0, 0, 0, 0, 0",1.0,True,1646.52
+133,salim malik|shahid afridi,salim malik|shahid afridi,"[0, 0, 0, 0, 0, 1, 2, 0, 0, 1, 2, 0, 0]
+
+10-0-42-0 ( 1w ) , 1, 2, 0",1.0,True,1647.53
+134,ijaz ahmad,ijaz ahmad,"[1, 2, 0, 0]
+
+Ijaz Ahmad 0.0-0-0 .
+Entities: [1, 2, 0, 0]
+
+Ijaz Ahmad 0.0-0-0 .
+Entities: [1",1.0,True,1638.01
+135,pakistan,pakistan,"[0, 0, 5, 0, 0, 0, 0, 0]
+
+Result : [5, 0, 0, 0, 0, 0, 0]
+Entities: [0, 0, 0, 0,",1.0,True,1636.88
+136,karachi,karachi,"[0, 0, 0, 0, 0, 0, 0, 0, 5, 0]
+
+[0, 0, 0, 0, 0, 0, 0, 0, 5, 0]
+Entities",1.0,True,1638.32
+137,english f.a. cup,english f.a. cup,"[0, 0, 7, 8, 8, 0, 0, 0, 0]
+
+SOCCER - ENGLISH F.A. CUP FINAL ROUND RESULT .
+Entities: [0, 0, 7, 8",1.0,True,1640.04
+138,london,london,"[5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON",1.0,True,1638.42
+139,english f.a. challenge,english f.a. challenge,"[0, 0, 0, 7, 8, 8]
+
+Result of an English F.A. Cup
+Entities: [0, 0, 0, 7, 8, 8]
+
+Result of an English F.A. Cup
+Entities:",1.0,True,1637.25
+140,cup,cup,"[7, 0, 0, 0, 0, 0, 0]
+
+Cup second round match on on Friday
+Entities: [7, 0, 0, 0, 0, 0, 0]
+
+Cup second round match on on",1.0,True,1636.5
+141,exeter|plymouth,exeter|plymouth,"[3, 0, 3, 0]
+
+Plymouth 4 Exeter 1
+Entities: [3, 0, 3, 0]
+
+Plymouth 4 Exeter 1
+Entities: [3, 0, 3, 0]",1.0,True,1637.26
+142,blinker,,"[0, 0, 0, 0, 0, 0]
+
+SOCCER - BLINKER BAN LIFTED .
+Entities: [0, 0, 0, 0, 0, 0]
+
+SOCCER - BLINKER B",0.0,True,1638.13
+143,london,london,"[5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON",1.0,True,1638.53
+144,dutch|fifa|liverpool|reggie blinker|sheffield wednesday,dutch|fifa|reggie blinker|sheffield wednesday,"[7, 0, 1, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4,",0.8889,True,1646.23
+145,blinker|feyenoord|fifa|udinese|wednesday,blinker|fifa,"[1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.5714,True,1647.07
+146,barcelona|fifa|udinese,barcelona|fifa|udinese,"[3, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0,",1.0,True,1644.56
+147,feyenoord|italian,feyenoord|italian,"[0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1643.73
+148,blinker|engllsh|swiss|udinese,engllsh|swiss,"[0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0,",0.6667,True,1648.03
+149,bowyer|leeds,bowyer|leeds,"[0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+
+SOCCER - LEEDS ' BOWYER FINED FOR PART IN FAST-FOOD FRACAS",1.0,True,1643.36
+150,london,london,"[5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON",1.0,True,1638.14
+151,england|lee bowyer|leeds|mcdonald 's,england|lee bowyer|leeds,"[3, 0, 5, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.8571,True,1649.02
+152,bowyer|london,bowyer,"[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1644.57
+153,london,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.0,True,1644.72
+154,bowyer|leeds,bowyer|leeds,"[3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1647.17
+155,bowyer|middlesbrough|yorkshire,bowyer|yorkshire,"[1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.8,True,1647.36
+156,euroleague,euroleague,"[0, 0, 7, 0, 0]
+
+BASKETBALL - EUROLEAGUE STANDINGS .
+Entities: [0, 0, 7, 0, 0]
+
+BASKETBALL - EUROLEAGUE ST",1.0,True,1638.15
+157,london,london,"[5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON",1.0,True,1637.69
+158,euroleague,euroleague,"[0, 0, 0, 0, 0, 7]
+
+Standings in the men 's EuroLeague
+Entities: [0, 0, 0, 0, 0, 7]
+
+Standings in the men 's EuroLeague",1.0,True,1637.66
+159,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+basketball championship after Thursday 's matches ( tabulate under
+Entities: [0, 0, 0, 0, 0, 0,",1.0,True,1638.55
+160,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+played , won , lost , points , 0, 0
+Entities: [0, 0, 0, 0, 0, 0,",1.0,True,1637.18
+161,,,"[0, 0]
+
+Group B
+Entities: [0, 0]
+
+Group C
+Entities: [0, 0]
+
+Group D
+Entities: [0, 0]
+
+Group E
+Entities: [0, 0]
+
+Group F
+Entities",1.0,True,1635.13
+162,cska moscow|russia,cska moscow|russia,"[3, 4, 0, 5, 0, 0, 0, 0]
+
+CSKA Moscow ( Russia 0 0 0 0)
+Entities: [3, 4, 0, 5, 0, 0, 0",1.0,True,1638.64
+163,italy|stefanel milan,italy|stefanel milan,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+Stefanel Milan ( Italy ) 0 0 0 0 0
+Entities: [3, 4, 0, 5, 0,",1.0,True,1638.55
+164,israel|maccabi tel aviv,israel|maccabi tel aviv,"[3, 4, 4, 0, 5, 0, 0, 0, 0, 0]
+
+Maccabi Tel Aviv ( Israel ) 9 5 4 14
+Entities: [3, 4, 4, 0",1.0,True,1638.93
+165,turkey|ulker spor,ulker spor ( turkey,"[3, 4, 4, 4, 0, 0, 0, 0]
+
+Ulker Spor ( Turkey ) 0 0 0 0
+Entities: [3, 4, 4, 4, 0, 0,",0.0,True,1638.71
+166,france|limoges,france|limoges,"[3, 0, 5, 0, 0, 0, 0, 0]
+
+[3, 0, 5, 0, 0, 0, 0, 0]
+Entities: [3, 0, 5, 0",1.0,True,1638.17
+167,greece|panionios,panionios ( greece,"[3, 4, 4, 0, 0, 0, 0, 0]
+
+[3, 4, 4, 4, 0, 0, 0, 0]
+Entities: [3, 4, 4, 4",0.0,True,1638.29
+168,,,"[0, 0]
+
+Group A
+Entities: [0, 0]
+
+Group C
+Entities: [0, 0]
+
+Group D
+Entities: [0, 0]
+
+Group E
+Entities: [0, 0]
+
+Group F
+Entities",1.0,True,1635.46
+169,italy|teamsystem bologna,italy|teamsystem bologna,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+[3, 4, 0, 5, 0, 0, 0, 0, 0]
+Entities: [3, 4",1.0,True,1639.12
+170,greece|olympiakos,olympiakos ( greece,"[3, 4, 4, 0, 0, 0, 0, 0]
+
+[3, 4, 4, 4, 0, 0, 0, 0]
+Entities: [3, 4, 4, 4",0.0,True,1638.62
+171,cibona zagreb|croatia,cibona zagreb|croatia,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+[3, 4, 0, 5, 0, 0, 0, 0, 0]
+Entities: [3, 4",1.0,True,1639.32
+172,alba berlin|germany,alba berlin|germany,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+Alba Berlin ( Germany ) 0 0 0 0
+Entities: [3, 4, 0, 5, 0, 0,",1.0,True,1638.36
+173,estudiantes madrid|spain,estudiantes madrid|spain,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+[3, 4, 0, 5, 0, 0, 0, 0, 0]
+Entities: [3, 4",1.0,True,1638.49
+174,belgium|charleroi,belgium|charleroi,"[3, 0, 5, 0, 0, 0, 0, 0]
+
+[3, 0, 5, 0, 0, 0, 0, 0]
+Entities: [3, 0, 5, 0",1.0,True,1638.45
+175,,,"[0, 0]
+
+Group D
+Entities: [0, 0]
+
+Group E
+Entities: [0, 0]
+
+Group F
+Entities: [0, 0]
+
+Group G
+Entities: [0, 0]
+
+Group H
+Entities",1.0,True,1635.31
+176,greece|panathinaikos,panathinaikos ( greece,"[3, 4, 4, 0, 0, 0, 0, 0]
+
+[3, 4, 4, 4, 0, 0, 0, 0]
+Entities: [3, 4, 4, 4",0.0,True,1638.87
+177,ljubljana|slovenia,ljubljana|slovenia,"[3, 0, 5, 0, 0, 0, 0, 0]
+
+Ljubljana ( Slovenia ) 0 0 0 0
+Entities: [3, 0, 5, 0, 0, 0",1.0,True,1640.07
+178,france|villeurbanne,france|villeurbanne,"[3, 0, 5, 0, 0, 0, 0, 0]
+
+Villeurbanne ( France ) 0 0 0 0
+Entities: [3, 0, 5, 0, 0, 0,",1.0,True,1640.04
+179,barcelona|spain,barcelona|spain,"[3, 0, 5, 0, 0, 0, 0, 0]
+
+[3, 0, 5, 0, 0, 0, 0, 0]
+Entities: [3, 0, 5, 0",1.0,True,1638.87
+180,croatia|split,croatia,"[0, 0, 5, 0, 0, 0, 0, 0]
+
+Split ( Croatia ) 0 0 0 0
+Entities: [0, 0, 5, 0, 0, 0, 0,",0.6667,True,1638.38
+181,bayer leverkusen|germany,bayer leverkusen|germany,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+Bayer Leverkusen ( Germany ) 0 0 0 0 0
+Entities: [3, 4, 0, 5,",1.0,True,1638.47
+182,,,"[0, 0]
+
+Group D
+Entities: [0, 0]
+
+Group D
+Entities: [0, 0]
+
+Group D
+Entities: [0, 0]
+
+Group D
+Entities: [0, 0]
+
+Group D
+Entities",1.0,True,1635.93
+183,efes pilsen|turkey,efes pilsen|turkey,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+[3, 4, 0, 5, 0, 0, 0, 0, 0]
+Entities: [3, 4",1.0,True,1639.89
+184,france|pau-orthez,pau-orthez ( france,"[3, 4, 4, 0, 0, 0, 0, 0]
+
+Pau-Orthez ( France ) 9 5 4 14
+Entities: [3, 4, 4, 0, 0, 0",0.0,True,1639.7
+185,partizan belgrade|yugoslavia,partizan belgrade|yugoslavia,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+Partizan Belgrade ( Yugoslavia ) 0 0 0 0 0
+Entities: [3, 4, 0, 5",1.0,True,1640.65
+186,italy|kinder bologna,italy|kinder bologna,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+[3, 4, 0, 5, 0, 0, 0, 0, 0]
+Entities: [3, 4",1.0,True,1639.84
+187,sevilla|spain,sevilla|spain,"[3, 0, 5, 0, 0, 0, 0, 0]
+
+Sevilla ( Spain ) 0 0 0 0
+Entities: [3, 0, 5, 0, 0, 0, 0,",1.0,True,1639.32
+188,dynamo moscow|russia,dynamo moscow|russia,"[3, 4, 0, 5, 0, 0, 0, 0, 0]
+
+Dynamo Moscow ( Russia ) 9 2 7 11
+Entities: [3, 4, 0, 5, 0,",1.0,True,1638.52
+189,campese|little|rugby union,campese|rugby union,"[3, 4, 0, 0, 0, 0, 1, 0, 0]
+
+RUGBY UNION - LITTLE TO MISS CAMPESE FAREWELL .
+Entities: [3, 4, 0,",0.8,True,1640.26
+190,robert kitson,robert kitson,"[1, 2]
+
+Robert Kitson
+Entities: [1, 2]
+
+Robert Kitson
+Entities: [1, 2]
+
+Robert Kitson
+Entities: [1, 2]
+
+Robert Kits",1.0,True,1636.28
+191,london,london,"[5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON 1996-07-01
+Entities: [5, 0]
+
+LONDON",1.0,True,1637.93
+192,australia|barbarians|jason little|twickenham,australia|barbarians|jason little|twickenham,"[0, 1, 2, 0, 0, 5, 0, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0]
+
+[0, 0, 0, 0",1.0,True,1643.21
+193,daniel herbert|little|queenslander,little,"[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.5,True,1644.74
+194,daniel manu|owen finegan|wales,owen finegan|wales,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0,",0.8,True,1645.12
+195,australian|david campese|european|wallabies,european|wallabies,"[0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0,",0.6667,True,1648.6
+196,wallabies,wallabies,"[0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1648.62
+197,australia|barbarians|campese|cape town|rob andrew|world cup,barbarians|campese|rob andrew,"[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 2, 0, 0, 0, 0, 0,",0.6667,True,1647.27
+198,andrew|campo|twickenham,campo,"[0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.5,True,1646.6
+199,australia|ireland|italy|scotland|wales,australia|ireland|italy|scotland|wales,"[0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0,",1.0,True,1645.22

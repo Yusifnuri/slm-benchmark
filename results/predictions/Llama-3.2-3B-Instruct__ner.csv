@@ -1,0 +1,201 @@
+idx,gold_entities,pred_entities,raw_prediction,f1,parse_ok,latency_ms
+0,china|japan,china|japan,"[0, 0, 5, 0, 0, 0, 0, 5, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1363.83
+1,nadim ladki,nadim ladki,"[1, 2] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.56
+2,al-ain|united arab emirates,al-ain|united arab emirates,"[5, 0, 5, 6, 6, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.26
+3,asian cup|japan|syria,asian cup|group c|japan|syria,"[5, 0, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 7, 8, 0,",0.8571,True,1036.68
+4,china|uzbekistan,china,"[0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1035.56
+5,china|chinese|igor shkvyrin|uzbek,china|igor shkvyrin|uzbek,"[5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 1, 2, 0,",0.8571,True,1057.31
+6,oleg shatskiku,oleg shatskiku,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1044.26
+7,asian cup|soviet,asian cup|soviet,"[0, 0, 7, 0, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [",1.0,True,1030.81
+8,asian games|uzbekistan,asian games|uzbekistan,"[0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [",1.0,True,1033.09
+9,japan|syria,japan,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1033.38
+10,hiroshige yanagimoto|salem bitar|syrian|takuya takagi,hiroshige yanagimoto|syrian|takuya takagi,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 7, 0,",0.8571,True,1035.47
+11,syria,syria,"[0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.74
+12,bitar|hassan abbas,hassan abbas,"[0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1033.37
+13,nader jokhadar|syria,nader jokhadar|the,"[1, 2, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [",0.5,True,1033.81
+14,japan|syrian,japan|syrian,"[5, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0] [",1.0,True,1033.32
+15,bitar,bitar,"[1, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.11
+16,japan|shu kamo|syrian,japan|shu kamo|syrian,"[5, 0, 1, 2, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [",1.0,True,1032.93
+17,syrians,syrians,"[0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [",1.0,True,1033.28
+18,,,[0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0],1.0,True,1031.65
+19,fifa|japan|world cup,fifa|japan|world cup,"[5, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0,",1.0,True,1031.98
+20,indonesia|kuwait|south korea|uae,group a|indonesia|kuwait|south korea|uae,"[0, 5, 0, 5, 0, 5, 6, 0, 0, 5, 0, 0, 0, 3, 4, 0, 0] [0] [0] [0] [0] [",0.8889,True,1031.43
+21,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.54
+22,cuttitta|italy|rugby union,cuttitta|italy|rugby union,"[3, 4, 0, 3, 0, 0, 5, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.86
+23,rome,rome,"[5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.9
+24,italy|marcello cuttitta,italy|marcello cuttitta,"[5, 0, 1, 2] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.48
+25,murrayfield|scotland,murrayfield|scotland,"[0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1030.48
+26,cuttitta|england|george coste|twickenham,cuttitta|george coste,"[1, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1033.09
+27,corrado covi|coste|england|stefano bordon,corrado covi|coste|stefano bordon,"[1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0,",0.8571,True,1036.43
+28,1995 world cup|cuttitta|england|italy,cuttitta|italy|world cup,"[1, 0, 0, 0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0,",0.5714,True,1035.03
+29,coste,coste,"[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.98
+30,coste|world cup,coste|world cup,"[0, 0, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 1, 0, 0] [0] [0] [0] [0] [0] [0] [",1.0,True,1039.38
+31,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [",1.0,True,1035.3
+32,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.47
+33,alessandro moscardi|alessandro troncon|andrea|andrea sgorlon|carlo checchinato|carlo orlandi|diego dominguez|francesco mazzariol|franco properzi curti|giambatista croci|gianluca guidi|ivan francescato|javier pertile|leandro manteri|marcello cuttitta|massimo cuttitta|massimo giovanelli|nicola mazzucato|orazio arancio|paolo vaccari|walter cristofoletto,diego dominguez|francesco|ivan francescato|javier pertile|leandro manteri|marcello cuttitta|paolo vaccari,"[0, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1,",0.4286,True,1049.46
+34,japan|syria,japan|syria,"[0, 0, 0, 0, 0, 5, 0, 0, 5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.28
+35,al-ain|united arab emirates,al-ain|united arab emirates,"[5, 0, 5, 6, 6, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.44
+36,asian cup|japan|syria,asian cup|japan|syria,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 7, 8, 0, 0, 5, 0, 0, 0] [",1.0,True,1037.78
+37,salem bitar|takuya takagi,after|takuya takagi,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,",0.5,True,1035.37
+38,syrian,syrian,"[0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.85
+39,bitar|hassan abbas,hassan abbas,"[0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1035.35
+40,syria,syria,"[5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.68
+41,ammar awad|kenichi shimokawa|nader jokhadar,ammar awad|kenichi shimokawa|nader jokhadar,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0,",1.0,True,1039.11
+42,japan|syrian,japan|syrian,"[5, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [",1.0,True,1034.56
+43,bitar|kazuyoshi miura|takagi,bitar|kazuyoshi miura,"[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0,",0.8,True,1034.67
+44,bitar|miura,bitar|miura,"[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [",1.0,True,1035.37
+45,bitar|japan|naoki soma,bitar|japan|naoki,"[5, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,",0.6667,True,1035.15
+46,hiroaki morishima|hiroshi nanami|hiroshige yanagimoto|japan|kazuyoshi miura|kenichi shimokawa|masakiyo maezono|masami ihara|masayuki okano|motohiro yamaguchi|naoki soma|norio omura|takuya takagi|yasuto honda,hiroshige yanagimoto|japan|kenichi shimokawa|masami ihara|naoki soma,"[5, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2,",0.5263,True,1048.03
+47,abdul latif helou|ali dib|ammar awad|ammar rihawiy|bachar srour|hassan abbas|khaled zaher|louay taleb|mohammed afash|nader jokhadar|nihad al-boushi|salem bitar|syria|tarek jabban,bachar srour|hassan abbas|salem bitar|syria|tarek jabban,"[5, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 0, 1, 2,",0.5263,True,1047.9
+48,skiing-world cup,freestyle skiing-world cup,"[7, 8, 8, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",0.0,True,1035.56
+49,france|tignes,france|tignes,"[5, 0, 5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.06
+50,world cup,world cup,"[0, 0, 0, 7, 8] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.21
+51,,,"[0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.28
+52,,,[0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0],1.0,True,1062.84
+53,jesper ronnback|sweden,jesper ronnback|sweden,"[0, 1, 2, 0, 5, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.05
+54,andrei ivanov|russia,andrei ivanov|russia,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.96
+55,canada|ryan johnson,canada|ryan johnson,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.48
+56,canada|jean-luc brassard,canada|jean-luc brassard,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.43
+57,korneilus hole|norway,korneilus hole|norway,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.26
+58,france|jeremie collomb-patton,france|jeremie collomb-patton,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.85
+59,jim moran|u.s.,jim moran|u.s.,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.8
+60,canada|dominick gauthier,canada|dominick gauthier,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.6
+61,france|johann gregoire,france|johann gregoire,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.93
+62,troy benson|u.s.,troy benson|u.s.,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.7
+63,,,[0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0]  # [0],1.0,True,1034.89
+64,germany|tatjana mittermayer,germany|tatjana mittermayer,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.36
+65,candice gilg|france,candice gilg|france,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1038.14
+66,finland|minna karhu,finland|minna karhu,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.39
+67,japan|tae satoya,japan|tae satoya,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1038.06
+68,ann battellle|u.s.,ann battellle|u.s.,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1039.13
+69,donna weinbrecht|u.s.,donna weinbrecht|u.s.,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1040.07
+70,liz mcintyre|u.s.,liz mcintyre|u.s.,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.79
+71,elena koroleva|russia,elena koroleva|russia,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.29
+72,ljudmila dymchenko|russia,ljudmila dymchenko|russia,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.22
+73,france|katleen allais,france|katleen allais,"[0, 1, 2, 0, 5, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1038.51
+74,asian cup,asian cup group c,"[0, 0, 7, 8, 8, 8, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",0.0,True,1035.66
+75,al-ain|united arab emirates,al-ain|united arab emirates,"[5, 0, 5, 6, 6, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.97
+76,asian cup,asian cup,"[0, 0, 7, 8, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.32
+77,japan|syria,japan|syria,"[5, 0, 5, 0, 0, 0, 0, 0] [0] (0) (0) (0) (0) (0) (0) (0) (0) (0) (0) (0) (0) (",1.0,True,1037.38
+78,,,"[0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.68
+79,hassan abbas|japan|takuya takagi,hassan abbas|japan|takuya takagi,"[5, 0, 1, 2, 0, 0, 0, 0, 1, 2, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.14
+80,nader jokhadar|syria,nader jokhadar|syria,"[5, 0, 1, 2, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.61
+81,,,"[0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.79
+82,china|uzbekistan,china|uzbekistan,"[5, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.33
+83,shatskikh oleg|shkvyrin igor,shatskikh oleg|shkvyrin igor,"[0, 0, 1, 2, 0, 0, 1, 2, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.85
+84,,,"[0, 0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [",1.0,True,1034.45
+85,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.05
+86,,,"[0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1057.34
+87,uzbekistan,uzbekistan,"[5, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1040.49
+88,japan,japan,"[5, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.61
+89,syria,syria,"[3, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.19
+90,china,china,"[3, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.12
+91,new zealand|pakistan,new|pakistan,"[0, 0, 5, 0, 5, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",0.5,True,1035.82
+92,gmt,gmt,"[0, 0, 0, 7, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.12
+93,pakistan|sialkot,pakistan|sialkot,"[5, 0, 5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.46
+94,,,"[0, 0, 0, 0] [0, 0, 0] [0, 0, 0] [0, 0, 0] [0, 0, 0] [0, 0, 0] [0, 0,",1.0,True,1036.26
+95,new zealand|pakistan,new zealand|pakistan,"[0, 0, 0, 0, 5, 0, 5, 6] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.47
+96,,,"[0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.58
+97,pakistan,pakistan,[5]  [0]  [0]  [0]  [0]  [0]  [0]  [0]  [0]  [0]  [0]  [0]  [0]  [0]  [0]  [0],1.0,True,1036.67
+98,saeed anwar,saeed anwar,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.57
+99,cairns|zahoor elahi,cairns|zahoor elahi,"[1, 2, 0, 1, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.43
+100,ijaz ahmad|spearman|vaughan,ijaz ahmad|spearman|vaughan,"[1, 2, 0, 1, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.42
+101,astle|germon|inzamamul haq,astle|germon|inzamamul haq,"[1, 2, 0, 1, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.36
+102,harris|wasim akram,harris|wasim akram,"[1, 2, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.9
+103,harris|shahid afridi,harris|shahid afridi,"[1, 2, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.41
+104,astle|harris|moin khan,astle|harris|moin khan,"[1, 2, 0, 1, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.22
+105,germon|harris|waqar younis,germon|harris|waqar younis,"[1, 2, 0, 1, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.48
+106,harris|saqlain mushtaq,harris|saqlain mushtaq,"[1, 2, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.23
+107,mushtaq ahmad,mushtaq ahmad,"[1, 2, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.14
+108,salim malik,salim malik,"[1, 2, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.14
+109,,,"[0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.13
+110,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.61
+111,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [",1.0,True,1035.47
+112,doull|kennedy,doull|kennedy,"[0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [",1.0,True,1034.36
+113,cairns|harris|vaughan,cairns|harris|vaughan|w-1,"[3, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0] [0] [0] [0] [0] [",0.8571,True,1035.35
+114,astle,astle,"[1, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.63
+115,new zealand,new zealand,"[5, 6, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.01
+116,b. young|moin khan|waqar,b. young|moin khan|waqar,"[1, 2, 0, 1, 2, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.63
+117,c. spearman|moin khan|wasim,c. spearman|moin khan|wasim,"[1, 2, 0, 1, 2, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.34
+118,a. parore|ijaz ahmad|saqlain,a. parore|ijaz ahmad|saqlain,"[1, 2, 0, 1, 2, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.4
+119,afridi|s. fleming,afridi|s. fleming,"[1, 2, 0, 0, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.6
+120,c. cairns|saqlain,c. cairns|saqlain,"[1, 2, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.28
+121,ijaz ahmad|n. astle|salim malik,ijaz ahmad|n. astle|salim malik,"[1, 2, 0, 1, 2, 0, 1, 2, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.03
+122,c. harris|wasim,c. harris|wasim,"[1, 2, 0, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.07
+123,afridi|l. germon,afridi|l. germon,"[1, 2, 0, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.6
+124,j. vaughan|moin khan|wasim,j. vaughan|moin khan|wasim,"[1, 2, 0, 1, 2, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.99
+125,m. wasim|s. doull|waqar,m. wasim|s. doull|waqar,"[1, 2, 0, 0, 0, 1, 2, 0, 0, 1, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.78
+126,r. kennedy,r. kennedy,"[1, 2, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.85
+127,,,"[0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.05
+128,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.43
+129,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.17
+130,,,"[0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.58
+131,waqar younis|wasim akram,waqar younis|wasim akram,"[0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 1, 2] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.94
+132,mushtaq ahmad|saqlain mushtaq,mushtaq ahmad|saqlain mushtaq,"[0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 1, 2] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.97
+133,salim malik|shahid afridi,", salim|, shahid","[0, 0, 0, 0, 1, 2, 0, 0, 1, 2, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",0.0,True,1035.14
+134,ijaz ahmad,ijaz ahmad,"[1, 2, 0, 0, 0] [0] (0) [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.13
+135,pakistan,pakistan,"[0, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.01
+136,karachi,karachi,"[0, 0, 0, 0, 0, 0, 0, 0, 5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.66
+137,english f.a. cup,english f.a. cup,"[0, 0, 7, 8, 8, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.41
+138,london,london,"[5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.52
+139,english f.a. challenge,english f.a. challenge,"[0, 0, 0, 7, 8, 8] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.46
+140,cup,cup,"[7, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.19
+141,exeter|plymouth,exeter|plymouth,"[3, 0, 3, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0,",1.0,True,1034.93
+142,blinker,,"[0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",0.0,True,1035.14
+143,london,london,"[5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.69
+144,dutch|fifa|liverpool|reggie blinker|sheffield wednesday,dutch|fifa|reggie blinker|sheffield wednesday,"[7, 0, 1, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4,",0.8889,True,1035.68
+145,blinker|feyenoord|fifa|udinese|wednesday,fifa,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.3333,True,1033.71
+146,barcelona|fifa|udinese,barcelona|fifa|udinese,"[3, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0,",1.0,True,1036.78
+147,feyenoord|italian,feyenoord|italian,"[0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1035.34
+148,blinker|engllsh|swiss|udinese,engllsh|swiss,"[0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0,",0.6667,True,1036.69
+149,bowyer|leeds,bowyer|leeds,"[0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.23
+150,london,london,"[5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.87
+151,england|lee bowyer|leeds|mcdonald 's,england|lee bowyer|leeds,"[3, 0, 5, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.8571,True,1036.06
+152,bowyer|london,bowyer,"[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.6667,True,1036.15
+153,london,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.0,True,1036.1
+154,bowyer|leeds,bowyer|leeds,"[3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1035.52
+155,bowyer|middlesbrough|yorkshire,bowyer|yorkshire,"[1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.8,True,1048.46
+156,euroleague,euroleague,"[0, 0, 7, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.24
+157,london,london,"[5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.39
+158,euroleague,euroleague,"[0, 0, 0, 0, 0, 7] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1041.08
+159,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1046.39
+160,,,"[0, 0, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1032.19
+161,,,"[0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0,",1.0,True,1034.13
+162,cska moscow|russia,cska moscow|russia,"[3, 4, 0, 5, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.05
+163,italy|stefanel milan,italy|stefanel milan,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.39
+164,israel|maccabi tel aviv,israel|maccabi tel aviv,"[3, 4, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.07
+165,turkey|ulker spor,turkey|ulker spor,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.29
+166,france|limoges,france|limoges,"[5, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.62
+167,greece|panionios,greece|panionios,"[3, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1033.98
+168,,,"[0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0,",1.0,True,1035.44
+169,italy|teamsystem bologna,italy|teamsystem bologna,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.24
+170,greece|olympiakos,greece|olympiakos,"[3, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.81
+171,cibona zagreb|croatia,cibona zagreb|croatia,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.26
+172,alba berlin|germany,alba berlin|germany,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.87
+173,estudiantes madrid|spain,estudiantes madrid|spain,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.17
+174,belgium|charleroi,belgium|charleroi,"[3, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.24
+175,,,"[0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0,",1.0,True,1039.05
+176,greece|panathinaikos,greece|panathinaikos,"[3, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.14
+177,ljubljana|slovenia,ljubljana|slovenia,"[5, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.72
+178,france|villeurbanne,france|villeurbanne,"[5, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.32
+179,barcelona|spain,barcelona|spain,"[3, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1037.32
+180,croatia|split,croatia,"[0, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",0.6667,True,1036.76
+181,bayer leverkusen|germany,bayer leverkusen|germany,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.72
+182,,,"[0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0, 0] [0,",1.0,True,1035.81
+183,efes pilsen|turkey,efes pilsen|turkey,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.62
+184,france|pau-orthez,france|pau-orthez,"[3, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.86
+185,partizan belgrade|yugoslavia,partizan belgrade|yugoslavia,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.22
+186,italy|kinder bologna,italy|kinder bologna,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.47
+187,sevilla|spain,sevilla|spain,"[3, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.15
+188,dynamo moscow|russia,dynamo moscow|russia,"[3, 4, 0, 5, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1034.0
+189,campese|little|rugby union,rugby union,"[3, 4, 0, 0, 0, 0, 0, 0, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",0.5,True,1034.76
+190,robert kitson,robert kitson,"[1, 2] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1035.16
+191,london,london,"[5, 0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [0] [",1.0,True,1036.4
+192,australia|barbarians|jason little|twickenham,australia|barbarians|centre jason little|twickenham,"[3, 4, 4, 0, 0, 5, 0, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0] [0] [0] [0] [0] [",0.75,True,1035.2
+193,daniel herbert|little|queenslander,,"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.0,True,1033.75
+194,daniel manu|owen finegan|wales,owen finegan|wales,"[1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0,",0.8,True,1034.69
+195,australian|david campese|european|wallabies,european|wallabies,"[0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0,",0.6667,True,1040.3
+196,wallabies,wallabies,"[0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",1.0,True,1037.56
+197,australia|barbarians|campese|cape town|rob andrew|world cup,barbarians|campese|kicked|rob andrew,"[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 2, 0, 0, 0, 0, 5,",0.6,True,1037.33
+198,andrew|campo|twickenham,campo,"[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,",0.5,True,1036.94
+199,australia|ireland|italy|scotland|wales,australia|ireland|italy|scotland|wales,"[0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0,",1.0,True,1036.74
