@@ -20,7 +20,12 @@ Scope: only the tasks where BOTH arms report a proportion over a known
 number of instances.
   - classification        accuracy over n instances, both arms       -> tested
   - financial_sentiment   accuracy over n instances, both arms       -> tested
-  - ner                   self-hosted cells withdrawn (§4.2.2)       -> skipped
+  - ner                   entity F1 is a mean of per-sentence scores
+                          in [0,1], not a proportion of successes
+                          (the self-hosted cells were withdrawn when
+                          this script was written; they have since
+                          been re-measured, but the metric still is
+                          not a binomial count)                      -> skipped
   - summarization         ROUGE-L is a mean of per-instance scores
                           in [0,1], not a proportion of successes    -> skipped
   - code_generation       API arm is greedy pass@1 (a proportion),
