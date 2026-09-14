@@ -59,9 +59,11 @@ at https://slm-benchmark-iqwxhymearqtuw7rr6mdmt.streamlit.app/".
 
 All fifteen adapters carry a written model card recording the measured score,
 the training configuration, the prompt format the adapter expects, and the
-caveats that must travel with the weights — including the three cells that
-should not be used (both NER instrument placeholders, Phi-4-mini on financial
-sentiment, and Mistral-7B on code generation).
+caveats that must travel with the weights — including the two cells that should
+not be used (Phi-4-mini on financial sentiment, and Mistral-7B on code
+generation). The three NER cards previously carried instrument placeholders;
+those cells were re-measured in #33 and their cards now report the corrected
+entity-level F1, so they need re-pushing to the Hub.
 
 ```bash
 huggingface-cli login                     # or export HF_TOKEN
