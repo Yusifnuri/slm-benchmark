@@ -20,10 +20,11 @@ exclusion count carried as a column.
 
 ## Resolved in the thesis text
 
-**`results/predictions/`** does not exist and depends on the pending NER
-re-evaluation. Appendix D no longer lists it among the released artefacts; it is
-now stated as pending. Appendix F still names it in the reproduction order,
-which is correct — `src/evaluation/` writes that directory when it is run.
+**`results/predictions/`** now exists. The NER re-evaluation it depended on has
+been run (#33), and the directory carries the per-instance predictions for all
+three fine-tuned NER cells. Appendix D lists it among the released artefacts;
+Appendix F names it in the reproduction order, which is correct —
+`src/evaluation/` writes that directory when it is run.
 
 **Summarisation comparator.** The released matrix puts Gemini 2.5 Flash at
 0.223499 ROUGE-L, making it the strongest baseline on that task rather than
@@ -58,9 +59,14 @@ remain the ones the runs were produced under.
 
 ## Hardware note
 
-Every fine-tuning and self-hosted inference run was executed on a single H200
-(141 GB) belonging to the university, in Heidelberg, Germany, and made available
-to the author at no charge.
+Every fine-tuning run, and every self-hosted inference run in the original
+sweep, was executed on a single H200 (141 GB) belonging to the university, in
+Heidelberg, Germany, and made available to the author at no charge. The one
+exception is the NER re-evaluation of #33, which ran on an RTX A6000 because
+the H200 was unavailable at the time: its accuracy figures are unaffected
+(entity F1 does not depend on the accelerator), but its latency and cost cells
+are not comparable with the other four tasks', and Table 4.1 of the thesis
+carries that caveat.
 No accelerator cost was therefore incurred, and every self-hosted cost, ROI and
 breakeven figure in the thesis rests on the imputed commercial rate of USD 3.99
 per GPU-hour rather than on an amount paid. The thesis states this in §3.4.3,
