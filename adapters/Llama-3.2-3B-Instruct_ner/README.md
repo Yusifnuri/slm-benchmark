@@ -20,7 +20,8 @@ It was produced for the MSc thesis *Fine-Tune or Pay Per Token? An Enterprise Be
 
 ## Read this before using the adapter
 
-- **This adapter's reported score is not a valid measurement.** In the first evaluation sweep the self-hosted arm was scored by whitespace-token overlap between generated and reference integer tag strings — a quantity dominated by the majority `O` tag that tracks output-format imitation rather than entity extraction. The evaluation harness has since been corrected to BIO-decode tag output into entity surface forms and score both arms identically, but this cell has not yet been re-evaluated. Treat the number below as a placeholder, not as performance.
+- **This score was re-measured after a metric defect.** In the first evaluation sweep the self-hosted arm was scored by whitespace-token overlap between generated and reference integer tag strings — a quantity dominated by the majority `O` tag that tracks output-format imitation rather than entity extraction. The harness was corrected to BIO-decode tag output into entity surface forms and score both arms identically, and this cell has since been re-evaluated under it. The figure below is that corrected measurement; the superseded one was 0.9328 (Phi-4-mini), 0.6267 (Mistral-7B-v0.3) and 0.7917 (Llama-3.2-3B).
+- **Latency and cost below were measured on an NVIDIA RTX A6000**, not the H200 used for the rest of the benchmark, so they are not comparable with this repository's other task cells.
 
 - The Llama 3.2 Community Licence permits commercial use but conditions it on attribution, a naming convention for derivative models, and a monthly-active-user eligibility threshold. Check it before adopting.
 
@@ -28,11 +29,11 @@ It was produced for the MSc thesis *Fine-Tune or Pay Per Token? An Enterprise Be
 
 | Metric | Value |
 |---|---|
-| Entity-level F1 (sentence-averaged) | **0.7917** |
-| Mean latency, batch 1 | 940 ms |
-| Cost per 1M generated tokens | USD 16.29 |
+| Entity-level F1 (sentence-averaged) | **0.9161** |
+| Mean latency, batch 1 | 1,038 ms |
+| Cost per 1M generated tokens | USD 17.97 |
 
-Measured on a single NVIDIA H200 (141 GB) at batch size one and full utilisation, priced at an imputed USD 3.99 per GPU-hour. Latency excludes network transit. Scores are not comparable across tasks — each task carries its own metric. Evaluation ran on 5 July 2026; the complete matrix is at [`results/benchmark_matrix.csv`](https://github.com/Yusifnuri/slm-benchmark/blob/main/results/benchmark_matrix.csv).
+Measured at batch size one and full utilisation, priced at an imputed USD 3.99 per GPU-hour; the re-evaluation ran on an NVIDIA RTX A6000 rather than the H200 used for the original sweep. Latency excludes network transit. Scores are not comparable across tasks — each task carries its own metric. Evaluation ran on 5 July 2026; the complete matrix is at [`results/benchmark_matrix.csv`](https://github.com/Yusifnuri/slm-benchmark/blob/main/results/benchmark_matrix.csv).
 
 ## Training
 
