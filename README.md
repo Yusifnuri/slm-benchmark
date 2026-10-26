@@ -1,128 +1,116 @@
-# slm-benchmark
+# Fine-Tune or Pay Per Token?
 
-Fine-Tune or Pay Per Token? An Enterprise Benchmark of Small Language Models.
+An enterprise benchmark comparing **three fine-tuned small language models** with **three hosted language model APIs** across five NLP tasks, with a Streamlit decision tool for exploring quality, latency, cost, and deployment constraints.
 
-## Methodology notes (data-leakage guards)
+[Decision tool](https://slm-benchmark-iqwxhymearqtuw7rr6mdmt.streamlit.app/) · [Benchmark data](results/benchmark_matrix.csv) · [Methodology](docs/METHODOLOGY.md) · [Audit and limitations](docs/thesis_corrections.md)
 
-These are deliberate fixes to the original benchmark pipeline. Written down
-so the reasoning doesn't have to be reconstructed later while writing up the
-thesis methodology section.
+## What this project investigates
 
-**Problem:** the original data loader let the same examples be used for both
-fine-tuning and final benchmark evaluation on three of the five tasks. That
-inflates the reported accuracy/pass@k numbers and is exactly the kind of
-thing a peer reviewer (EMNLP/ICLR Industry Track) would flag.
+When does adapting a smaller model make sense compared with using an API? This repository brings together LoRA/QLoRA training, task evaluation, API baseline notebooks, MLflow experiment records, and cost analysis. The application reads recorded results; it does **not** run live model inference.
 
-1. **`code_generation`**: the loader forced *training* data to come from
-   HumanEval's only split ("test", 164 problems) — the identical 164
-   problems `evaluate_code.py` later scores pass@k on. Fine-tuning on your
-   own test set measures memorization, not generalisation.
-   → Fixed: fine-tuning now uses **MBPP** (a different, non-overlapping
-   Python problem set) for both training and the Trainer's periodic
-   validation checks. HumanEval stays completely untouched, loaded only by
-   `evaluate_code.py`, reserved solely for the final pass@k benchmark number.
+| Component | Coverage |
+| --- | --- |
+| Fine-tuned models | Llama 3.2 3B Instruct, Mistral 7B v0.3, Phi-4-mini Instruct |
+| API baselines | GPT-4o, Claude Haiku 4.5, Gemini 2.5 Flash |
+| Tasks | News classification, named entity recognition, summarization, financial sentiment, code generation |
+| Training | LoRA / QLoRA configurations, task-specific adapters, MLflow logging |
+| Analysis | Task scores, latency, per-request cost, significance analysis, and decision recommendations |
 
-2. **`classification` (AG News)**: AG News only ships `train`/`test` splits —
-   there is no `validation` split. The loader used to request `split="validation"`
-   anyway, which would crash the very first training run.
-   → Fixed: a seeded 90/10 split is carved out of `train` to produce a
-   `validation` set for training-time checkpoint selection. The real `test`
-   split is never touched until final evaluation.
+## Recorded results at a glance
 
-3. **`financial_sentiment` (Financial PhraseBank)**: this dataset has no
-   splits at all — it's a single local CSV. The loader used to load the same
-   full file for "train" and "validation" and just slice off the first N
-   rows for each, so the "held-out" eval set was actually a subset of the
-   training data.
-   → Fixed: a seeded 80/10/10 train/validation/test split is carved out once
-   in `src/data/dataset_loader.py`, so the three never overlap.
+The following classification rows are taken from the committed [benchmark matrix](results/benchmark_matrix.csv). These are recorded experimental results, not independently reproduced measurements or universal model rankings.
 
-**The resulting convention, consistent across all 5 tasks:**
-- `train` → used for fine-tuning (gradient updates).
-- `validation` → used only by the `Trainer`'s periodic loss checks /
-  `load_best_model_at_end` checkpoint selection during training. Never
-  backpropagated through, but also never used for reported numbers.
-- `test` → touched exactly once, in `src/evaluation/evaluate.py` (or
-  `evaluate_code.py` for code_generation via HumanEval) — these are the
-  numbers that go into the benchmark matrix and the thesis.
+| Model | Method | Classification accuracy | Recorded mean latency |
+| --- | --- | ---: | ---: |
+| Phi-4-mini Instruct | LoRA | 92% | 161.77 ms |
+| Gemini 2.5 Flash | API | 85% | 936.22 ms |
+| Llama 3.2 3B Instruct | LoRA | 82% | 459.50 ms |
+| GPT-4o | API | 82% | 913.69 ms |
+| Claude Haiku 4.5 | API | 81% | 923.21 ms |
+| Mistral 7B v0.3 | QLoRA | 69% | 555.93 ms |
 
-All splits are seeded (`seed=42`) so they're reproducible across runs.
+API classification rows contain 100 examples each. Hardware, network conditions, sample sizes, and decoding settings affect comparisons. The matrix's `accuracy` column is a generic score field: NER, summarization, and code generation use different metrics, so scores must be interpreted within each task.
 
-**Before spending real GPU hours**: `python tests/test_local_cpu.py` exercises
-every task's `train`/`validation`/`test` loading path on CPU with 5 samples.
-If a dataset id or split name is ever wrong (e.g. an HF Hub repo gets
-renamed), this is where it will show up — cheaply, before the full sweep in
-`scripts/run_all_experiments.py`.
+![Recorded benchmark overview](results/figures/fig4_1_benchmark_matrix.png)
 
-## Phase 1 (LLM baseline) methodology notes
+## Run the decision tool locally
 
-The `notebooks/02`–`06` baselines call GPT-4o, Claude, and Gemini directly via
-API. A few deliberate deviations/fixes from a first-draft version of these
-notebooks, so the reasoning survives into the thesis write-up:
+The dashboard needs only the lightweight application dependencies and the committed result files; no GPU or provider API key is required.
 
-1. **Model versions differ from the exposé.** The exposé names
-   Claude-3.5-Haiku and Gemini-1.5-Flash; the notebooks actually call
-   **`claude-haiku-4-5-20251001`** and **`gemini-2.5-flash`**. This is a
-   scope deviation the exposé's own rules say needs supervisor sign-off —
-   flag it explicitly in the thesis methodology section, and check whether
-   the older models are still reachable via API before deciding this is
-   final. `src/evaluation/metrics.py`'s `LLM_API_COSTS` table and
-   `results/benchmark_matrix.py`'s `MODELS` list have been updated to match
-   the models actually queried, with verified current pricing (Claude Haiku
-   4.5: $1.00/$5.00 per 1M input/output tokens; Gemini 2.5 Flash standard
-   tier: $0.30/$2.50) — before, the cost table was silently pricing a
-   different model than the one being benchmarked, which would have made
-   every ROI number in the thesis wrong.
-2. **Anthropic calls were missing `temperature=0.0`.** GPT-4o and Gemini were
-   already called at `temperature=0.0` (greedy, deterministic) in every
-   notebook, but the Claude calls had no `temperature` set — Anthropic's
-   default is 1.0. That meant Claude alone had sampling randomness in a
-   benchmark meant to compare models under identical decoding conditions.
-   Fixed across all 5 notebooks.
-3. **Gemini's retry loop was polluting the latency metric.** `summarize_gemini`/
-   `classify`/`generate_gemini` retry on a transient 503 with `time.sleep`
-   backoff (3s, 6s, 9s...), but `start = time.time()` was set once *before*
-   the retry loop — so a retried call's reported "latency" included the
-   failed attempts' round-trip time plus the deliberate sleep, sometimes
-   ballooning to 100+ seconds for what was really a fast successful call.
-   This is why notebook 06's own analysis cell flags a 151s Gemini outlier.
-   Fixed by resetting `start` inside each retry attempt, so latency reflects
-   only the successful call.
-4. **`evaluate_pass_at_1` ran model-generated code via bare `exec()` with no
-   timeout**, in both the HumanEval baseline (`06_baseline_humaneval.ipynb`)
-   and the SLM fine-tuning eval (`src/evaluation/evaluate_code.py`) — same
-   class of risk as any of the other untrusted-code-execution fixes in this
-   repo. Fixed to run in a subprocess with a 5-second timeout.
-5. **`05_baseline_financial.ipynb` had a hardcoded absolute path**
-   (`/Users/yusifnuri/...`) that only works on one machine. Changed to a
-   relative path. **This notebook scores the LLM baselines on
-   `Sentences_AllAgree.txt` (100% annotator agreement), while
-   `scripts/prepare_financial_data.py` defaults to `Sentences_50Agree.txt`
-   for the fine-tuning arm — the two arms are trained/scored on different
-   configurations of Financial PhraseBank.** This is a real, currently
-   unresolved comparability defect, not a bug that was silently fixed; see
-   finding A2 in `docs/thesis_corrections.md` and the thesis's own
-   disclosure (§3.2.3, §3.5.1, §4.2.4) for the direction of the resulting
-   bias. It needs a re-run with matching corpora, not a documentation fix.
+```bash
+git clone https://github.com/Yusifnuri/slm-benchmark.git
+cd slm-benchmark
+python -m venv .venv
+source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements-app.txt
+python -m streamlit run app.py
+```
 
-6. **No retry or resume on OpenAI/Anthropic failures** — only the Gemini
-   calls retried transient errors; a single rate limit or 5xx partway
-   through a paid 100-sample loop crashed the whole cell and lost every
-   result already paid for. Fixed in all 5 notebooks:
-   - `generate_*`/`classify_*`/`extract_entities_*`/`summarize_*` for
-     OpenAI and Anthropic now retry up to 3 times with backoff (matching
-     the style already used for Gemini), returning an error sentinel
-     instead of raising if every attempt fails — one bad sample no longer
-     kills the run.
-   - Results are checkpointed to a **fixed** (non-timestamped) CSV path
-     every 20 samples, and each notebook checks for that file on startup —
-     if it exists, already-completed rows are loaded and the loop picks up
-     where it left off instead of re-querying (and re-paying for) samples
-     already done. Final accuracy/latency/F1/ROUGE aggregates are computed
-     from the accumulated `results` list rather than separately-tracked
-     running lists, so they're correct whether a run went start-to-finish
-     or resumed a partial checkpoint.
-   - `06_baseline_humaneval.ipynb` originally contained a superseded
-     gpt-4o-mini draft cell alongside the real gpt-4o baseline cell; the
-     draft was removed entirely (PR #3), so the notebook now has a single
-     baseline cell checkpointing to `logs/humaneval_baseline.csv`.
+Choose a task, quality threshold, monthly token volume, and whether data must remain on-premise. Recommendations reflect the stored measurements and the framework's assumptions. Review the cost caveats below before using them for a deployment decision.
+
+## Research workflow
+
+Run commands from the repository root. The full research stack is separate from the dashboard environment.
+
+### 1. Install the research dependencies
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+GPU training uses the CUDA-compatible PyTorch / bitsandbytes stack. Select a compatible environment for the model and configuration you intend to run. Access to gated model weights requires the model provider's permission and Hugging Face authentication.
+
+### 2. Prepare data and inspect the loading paths
+
+```bash
+python scripts/prepare_financial_data.py
+python tests/test_local_cpu.py
+```
+
+The preparation script creates `data/financial_phrasebank.csv`. The CPU smoke script checks selected dataset-loading paths and metric utilities; it downloads data and is not a full training or evaluation run.
+
+### 3. Fine-tune a model
+
+```bash
+python src/training/train_lora.py   --config configs/llama_lora.yaml   --task classification
+```
+
+For the complete training/evaluation sweep, inspect `scripts/run_all_experiments.py` before running it. It performs up to 15 model/task runs and skips training when an adapter directory already exists. Use a separate checkout or deliberately manage existing adapters when reproducing training; existing artifacts do not prove that a fresh run completed.
+
+### 4. API baselines and analysis
+
+The baseline notebooks are under `notebooks/02`–`06`. Copy `.env.example` to `.env` and supply your own provider keys. These notebooks make billable API calls. Their imports also require the relevant provider SDKs (`openai`, `anthropic`, `google-generativeai`) and a notebook environment; these are not all listed in the research requirements file.
+
+The `results/` scripts aggregate logs and MLflow records, estimate request costs, and produce figures. Read each script's inputs before regenerating committed artifacts. See [release notes](docs/RELEASE.md) for the separate Streamlit deployment branch and adapter publication workflow.
+
+## Methodology and interpretation
+
+- **Training and final evaluation are separated.** AG News uses a seeded validation split from training data. Financial PhraseBank uses a seeded 80/10/10 split. Code-generation fine-tuning uses MBPP; HumanEval is reserved for final evaluation.
+- **Financial sentiment has an open comparability limitation.** API baselines use AllAgree while fine-tuned models use 50Agree. The resulting scores are not a matched-corpus comparison; resolving this requires rerunning experiments.
+- **Cost units matter.** API blended cost per total token and self-hosted cost per generated token are different denominators. Use the per-request analysis in `results/cost_per_request.py` and its assumptions when interpreting economics. The dashboard's token-based projections are exploratory.
+- **Pricing and hardware assumptions are snapshots.** They are recorded in code/configuration and need updating for a new deployment, especially when utilization changes.
+- **Code-generation evaluation executes generated programs.** Run it only in an isolated, disposable environment. A subprocess timeout does not provide a security sandbox.
+- **Recorded results have an audit trail.** [Methodology notes](docs/METHODOLOGY.md), [correction log](docs/thesis_corrections.md), and [artifact gaps](docs/thesis_artefact_gaps.md) preserve corrections and outstanding limitations.
+
+## Repository map
+
+```text
+app.py                 Streamlit interface
+src/decision_framework.py  Shared recommendation logic
+src/data/              Dataset loading and task definitions
+src/training/          LoRA and QLoRA training
+src/evaluation/        Task evaluation and metrics
+configs/               Model and training configurations
+notebooks/             API baseline experiments
+scripts/               Preparation, experiment sweep, validation, publication
+adapters/              Task-specific adapters and model cards
+logs/                  Recorded baseline outputs
+results/               Benchmark tables, analysis scripts, and figures
+tests/                 Local CPU smoke script
+docs/                  Methodology, audits, and release instructions
+```
+
+## License
+
+Source code is provided under the [MIT license](LICENSE). Model and dataset licenses remain separate. Financial PhraseBank-derived adapters carry non-commercial research restrictions; consult their model cards before reuse.
