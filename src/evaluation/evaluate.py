@@ -26,6 +26,7 @@ from rouge_score import rouge_scorer
 from data.dataset_loader import SLMDataset, TASK_CONFIGS
 from utils.mlflow_logger import BenchmarkLogger
 from training.run_utils import seed_from_adapter_path
+from evaluation.ner_typed import bio_tags, bio_to_entities, micro_prf
 from evaluation.metrics import (
     calculate_slm_cost_per_1m_tokens,
     calculate_roi_breakeven,
@@ -278,6 +279,7 @@ def evaluate_ner(
     latencies, f1_scores, rows = [], [], []
     micro_tp = micro_fp = micro_fn = 0
     parse_failures = 0
+    gold_typed, pred_typed = [], []
 
     for i, sample in enumerate(samples):
         pred, lat = generate_prediction(
@@ -289,6 +291,8 @@ def evaluate_ner(
         pred_set, parse_ok = _decode_tag_string_to_entities(pred, tokens)
         if not parse_ok:
             parse_failures += 1
+        gold_typed.append(bio_to_entities(tokens, bio_tags(sample["completion"]) or []))
+        pred_typed.append(bio_to_entities(tokens, bio_tags(pred) or []))
 
         if not gold_set and not pred_set:
             precision = recall = f1 = 1.0
@@ -309,7 +313,8 @@ def evaluate_ner(
             "idx": i,
             "gold_entities": "|".join(sorted(gold_set)),
             "pred_entities": "|".join(sorted(pred_set)),
-            "raw_prediction": pred[:300],
+            # Kept whole: results/ner_typed_f1.py re-decodes typed entities from it.
+            "raw_prediction": pred,
             "f1": round(f1, 4),
             "parse_ok": parse_ok,
             "latency_ms": round(lat, 2),
@@ -319,8 +324,12 @@ def evaluate_ner(
     micro_r = micro_tp / (micro_tp + micro_fn) if (micro_tp + micro_fn) else 0.0
     micro_f1 = (2 * micro_p * micro_r / (micro_p + micro_r)
                 if (micro_p + micro_r) else 0.0)
+    typed = micro_prf(gold_typed, pred_typed)
     extras = {
         "micro_f1": round(micro_f1, 4),
+        "typed_micro_f1": round(typed["f1"], 4),
+        "typed_micro_precision": round(typed["precision"], 4),
+        "typed_micro_recall": round(typed["recall"], 4),
         "parse_failure_rate": round(parse_failures / len(samples), 4),
     }
     return round(float(np.mean(f1_scores)), 4), round(float(np.mean(latencies)), 2), rows, extras

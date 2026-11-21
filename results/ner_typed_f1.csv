@@ -1,0 +1,10 @@
+model,arm,n,lenient_f1,lenient_rows_reproduced,typed_micro_precision,typed_micro_recall,typed_micro_f1,typed_micro_f1_cased,untyped_micro_f1,parse_failures,seqeval_f1,rows_cut_in_saved_file
+phi-4-mini-instruct,fine-tuned,200,0.9,200,0.8776,0.7396,0.8027,0.8027,0.84,0,0.8027,0.0
+phi-4-mini-instruct,fine-tuned,100,0.8905,100,0.8457,0.682,0.7551,0.7551,0.7959,0,0.7551,0.0
+Llama-3.2-3B-Instruct,fine-tuned,200,0.9161,200,0.924,0.7764,0.8438,0.8438,0.8732,0,0.8438,0.0
+Llama-3.2-3B-Instruct,fine-tuned,100,0.9167,100,0.9148,0.7419,0.8193,0.8193,0.8448,0,0.8193,0.0
+Mistral-7B-v0.3,fine-tuned,200,0.912,200,0.9407,0.7789,0.8522,0.8522,0.8737,0,0.8522,0.0
+Mistral-7B-v0.3,fine-tuned,100,0.9335,100,0.9429,0.7604,0.8418,0.8418,0.8571,0,0.8418,0.0
+gpt-4o,API,100,0.8827,100,0.8537,0.8065,0.8294,0.7915,0.8768,1,,
+claude-haiku-4-5,API,100,0.9074,100,0.8077,0.6774,0.7368,0.7368,0.817,10,,
+gemini-2.5-flash,API,100,0.9231,100,0.8706,0.682,0.7649,0.7649,0.8269,5,,
