@@ -1,4 +1,4 @@
-# Thesis correction log — v19 → v20
+# Thesis correction log — v19 → v32
 
 Every change below was made against evidence in this repository (the MLflow run
 history in `mlflow.db`, the released CSVs under `results/`, and the pipeline
@@ -37,7 +37,9 @@ in the thesis can be traced to the artefact that supports it.
 - Captions: 10 pt, uniform (previously mixed 9 pt / 10 pt, and mixed within a single caption).
 - Table 2.1 was set entirely in bright red (`EE0000`); all nine tables now share one header and zebra style.
 - Document default font changed from Calibri to Times New Roman.
-- The five `TO BE COMPLETED BEFORE SUBMISSION` notes are deliberately left in **red bold** so they cannot be submitted unnoticed.
+- The five `TO BE COMPLETED BEFORE SUBMISSION` notes were left in **red bold** so
+  they could not be submitted unnoticed. All five have since been resolved; no
+  red text remains in the document.
 
 ## D. Second round — artefacts and practitioner validation
 
@@ -48,10 +50,11 @@ in the thesis can be traced to the artefact that supports it.
 - **Appendix A.1**: five technical prompts added alongside the language-editing
   prompt, covering the NER decode fix, the per-request cost script, the figure
   generation, the MLflow readonly-database bug and the stale-checkpoint fix.
-- **§3.7.3 / Appendix E**: the practitioner sessions were with three
-  equipment-supply companies in **Azerbaijan**, not the Hamburg innovation
-  network the exposé named and the thesis text claimed. Both departures from
-  the exposé (five sessions → three, Hamburg → Azerbaijan) are now recorded.
+- **§3.7.3 / Appendix E**: all five practitioner sessions planned in the exposé
+  were completed, but with five equipment-supply companies in **Azerbaijan**,
+  not the Hamburg innovation network the exposé named and the thesis text
+  claimed. The count matches the exposé; the recruitment pool does not, and
+  that departure is now recorded.
 - **Appendix E.1**: the protocol as written said the framework was run during
   each session and its recommendation shown to the participant. It was not —
   the source notes record questions 7–9 as unanswered "because the framework
@@ -59,9 +62,33 @@ in the thesis can be traced to the artefact that supports it.
   administered, and states that two of the four framework inputs (volume in
   tokens, minimum accuracy) were assumed rather than elicited.
 - **Appendix E.2**: filled from the session notes. The framework was run on the
-  three real use cases via `src/decision_framework.py`; it recommends Gemini
-  2.5 Flash (API) in all three, unchanged at both ends of every stated volume
-  range. Agreement is partial in all three: the deployment mode matches, the
+  five real use cases via `src/decision_framework.py`; it recommends Gemini
+  2.5 Flash (API) in all five, unchanged at both ends of every stated volume
+  range. Agreement is partial in all five: the deployment mode matches, the
   provider does not.
 - **§5.4, §6.1 (SQ5), §6.2**: the validation outcome is now reported. It was
   previously described as having been carried out, with no result given.
+
+## E. Third round — thesis↔repository re-audit (v31 → v32)
+
+Checks that passed and are recorded so they need not be repeated: all 30 cells of
+Table 4.1 reproduce `results/benchmark_matrix.csv` exactly (score, latency,
+USD/1M tokens and breakeven, including the `none`/`—` distinction); every one of
+the 25 repository paths the thesis names exists, the sole exception being
+`results/predictions/`, which the thesis itself reports as pending; Appendix E's
+five cases, their net promoter scores and their partial-agreement verdicts match
+§5.4; the ten constructed scenarios match `results/internal_validation.csv`,
+both no-recommendation cases included; the hyperparameters of §3.4.2 match
+`configs/*.yaml` (r 16, α 32, dropout 0.05 on the attention projections, 3
+epochs, lr 2e-4 cosine, 3 % warmup, effective batch 16, sequence length 512).
+
+| # | Finding | Evidence | Resolution |
+|---|---|---|---|
+| E1 | §5.4 still described the practitioner base as **three** cases in two sentences, against **five** everywhere else. | Appendix E tabulates five cases with five net promoter scores; §3.7.3 and §6.1 state five. | Both sentences now read five. Five is the correct count; the earlier three-session figure in section D of this log was superseded and has been corrected there. |
+| E2 | Figure 4.3's legend named a **Madrid** client; the thesis names **Heidelberg** in §3.3.4, §4.3 and the figure caption. | `results/make_figures.py` carried the only occurrence of "Madrid" anywhere in thesis or repository; the figure embedded in the document reads "Heidelberg". | Legend corrected to Heidelberg and the figure regenerated. |
+| E3 | The embedded Figure 4.3 was a stale render — the only one of the six that did not match the pipeline output byte for byte. | MD5 of `word/media/image3.png` against `results/figures/`. | Regenerated after E2 and re-embedded; all six figures now match the released PNGs exactly. |
+| E4 | §4.2.4 announced that the majority-class reference quoted below it was **≈0.61, AllAgree's**; the paragraph below quotes **≈0.59**, which is 50Agree's — the split the fine-tuned arm was actually scored on. | §3.5.1 records ≈0.59 on 50Agree and ≈0.61 on AllAgree. | The forward reference now names 0.59 as 50Agree's, with AllAgree's 0.61 given as the baselines' reference. 0.59 was the right figure to quote; only the disclaimer was stale. |
+| E5 | §4.2.4 opened by stating that accuracies were reported "using only the AllAgree subset", which holds for the API arm alone. | `scripts/prepare_financial_data.py` takes `Sentences_50Agree.txt` (A2 above). | The opening now states which arm was scored on which configuration. |
+| E6 | The abstract implied one outstanding item; two are outstanding. | §4.2.2 withdraws the NER comparison pending a re-run; §4.2.4 leaves the financial-sentiment corpus mismatch open. | The abstract now names both. |
+| E7 | §5.4 described every incumbent as "a premium tier", but four of the five buy per-seat chat subscriptions, which are not an API tier — as the same paragraph goes on to say. | Appendix E, cases 1 and 3–5. | Reworded: a premium API in one company, per-seat chat subscriptions in the other four. |
+| E8 | §4.6 gave the self-hosted cost at u = 0.5 as USD 0.358 per 1,000 requests. | 0.1793 ÷ 0.5 = 0.3586. A5 of this log already used 0.359. | Corrected to 0.359. The breakeven of ≈3,202 requests is unaffected. |
