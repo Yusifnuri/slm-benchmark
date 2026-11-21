@@ -47,7 +47,7 @@ python -m pip install -r requirements-app.txt
 python -m streamlit run app.py
 ```
 
-Choose a task, quality threshold, monthly token volume, and whether data must remain on-premise. Recommendations reflect the stored measurements and the framework's assumptions. Review the cost caveats below before using them for a deployment decision.
+Choose a task, quality threshold, monthly request volume, and whether data must remain on-premise. Candidates are ranked by per-request serving cost from `results/cost_per_request_matrix.csv` (regenerate with `python results/cost_per_request_matrix.py`). Recommendations reflect the stored measurements and the framework's assumptions. Review the cost caveats below before using them for a deployment decision.
 
 ## Research workflow
 
@@ -88,7 +88,7 @@ The `results/` scripts aggregate logs and MLflow records, estimate request costs
 
 - **Training and final evaluation are separated.** AG News uses a seeded validation split from training data. Financial PhraseBank uses a seeded 80/10/10 split. Code-generation fine-tuning uses MBPP; HumanEval is reserved for final evaluation.
 - **Financial sentiment has an open comparability limitation.** API baselines use AllAgree while fine-tuned models use 50Agree. The resulting scores are not a matched-corpus comparison; resolving this requires rerunning experiments.
-- **Cost units matter.** API blended cost per total token and self-hosted cost per generated token are different denominators. Use the per-request analysis in `results/cost_per_request.py` and its assumptions when interpreting economics. The dashboard's token-based projections are exploratory.
+- **Cost units matter.** API blended cost per total token and self-hosted cost per generated token are different denominators. The dashboard and `scripts/internal_validation.py` therefore rank on per-request cost (`results/cost_per_request_matrix.py`), which extends the thesis's two-cell analysis in `results/cost_per_request.py` to all 30 cells. NER API costs are estimated from characters, because the CoNLL log has no billed token counts. The thesis's token-based ranking is preserved in `results/internal_validation.csv`.
 - **Pricing and hardware assumptions are snapshots.** They are recorded in code/configuration and need updating for a new deployment, especially when utilization changes.
 - **Code-generation evaluation executes generated programs.** Run it only in an isolated, disposable environment. A subprocess timeout does not provide a security sandbox.
 - **Recorded results have an audit trail.** [Methodology notes](docs/METHODOLOGY.md), [correction log](docs/thesis_corrections.md), and [artifact gaps](docs/thesis_artefact_gaps.md) preserve corrections and outstanding limitations.

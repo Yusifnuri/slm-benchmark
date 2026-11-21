@@ -9,7 +9,12 @@ src/decision_framework.py — not a reimplementation) against 10 made-up
 but realistic enterprise use cases spanning all 5 tasks, both privacy
 modes, volumes from 100k to 100M tokens/month, and one deliberately
 unsatisfiable case, then writes the recommendations to
-results/internal_validation.csv for the thesis appendix.
+results/internal_validation_per_request.csv.
+
+The scenarios keep the thesis's monthly token volumes; each is converted to
+requests with the task's mean API tokens per request, because the framework
+now ranks on per-request cost. results/internal_validation.csv is the thesis
+appendix's output (token-based ranking) and is not overwritten.
 
 Usage:
     python scripts/internal_validation.py
@@ -22,7 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pandas as pd
 
-from src.decision_framework import recommend
+from src.decision_framework import load_matrix, recommend, tokens_per_request
 
 # (name, task, monthly token volume, min accuracy, data must stay on-premise)
 SCENARIOS = [
@@ -51,17 +56,20 @@ SCENARIOS = [
 
 def run_internal_validation(
     matrix_path: str = "results/benchmark_matrix.csv",
-    output_path: str = "results/internal_validation.csv",
+    cost_path: str = "results/cost_per_request_matrix.csv",
+    output_path: str = "results/internal_validation_per_request.csv",
 ) -> pd.DataFrame:
-    df = pd.read_csv(matrix_path)
+    df = load_matrix(matrix_path, cost_path)
 
     rows = []
     for name, task, volume, threshold, privacy in SCENARIOS:
-        recommended, eligible = recommend(df, task, volume, threshold, privacy)
+        requests = round(volume / tokens_per_request(df, task))
+        recommended, eligible = recommend(df, task, requests, threshold, privacy)
         rows.append({
             "scenario": name,
             "task": task,
-            "monthly_volume": volume,
+            "monthly_volume_tokens": volume,
+            "monthly_requests": requests,
             "min_accuracy": threshold,
             "privacy_required": privacy,
             "recommended_model": recommended["model"] if recommended is not None else "NONE (no model meets constraints)",
@@ -69,6 +77,9 @@ def run_internal_validation(
             "accuracy": round(recommended["accuracy"], 4) if recommended is not None else None,
             "projected_monthly_cost_usd": (
                 round(recommended["projected_monthly_cost"], 2) if recommended is not None else None
+            ),
+            "fine_tuning_cost_usd": (
+                round(recommended["fine_tuning_cost_usd"], 2) if recommended is not None else None
             ),
             "n_eligible_candidates": len(eligible) if recommended is not None else 0,
         })
