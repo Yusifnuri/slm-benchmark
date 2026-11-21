@@ -28,6 +28,8 @@ Run `python scripts/prepare_financial_data.py` once beforehand — the
 financial_sentiment task needs data/financial_phrasebank.csv to exist.
 """
 
+import argparse
+import itertools
 import os
 import sys
 import time
@@ -39,6 +41,7 @@ from src.training.train_lora import train as train_lora
 from src.training.train_qlora import train as train_qlora
 from src.evaluation.evaluate import run_full_evaluation
 from src.evaluation.evaluate_code import evaluate_humaneval
+from src.training.run_utils import DEFAULT_SEED, adapter_dir
 
 FINANCIAL_PATH = "data/financial_phrasebank.csv"
 TASKS = ["classification", "ner", "summarization", "financial_sentiment", "code_generation"]
@@ -51,53 +54,53 @@ MODELS = [
 ]
 
 
-def adapter_path_for(model_name: str, task: str) -> str:
-    return f"./adapters/{model_name.split('/')[-1]}_{task}"
+def adapter_path_for(model_name: str, task: str, seed: int) -> str:
+    return adapter_dir(model_name, task, seed)
 
 
-def run_all_training() -> list:
-    """Fine-tune every (model, task) combination once, skipping ones already done."""
+def run_all_training(seeds: list) -> list:
+    """Fine-tune every (model, task, seed) combination once, skipping ones already done."""
     failures = []
-    total = len(MODELS) * len(TASKS)
+    total = len(MODELS) * len(TASKS) * len(seeds)
     done = 0
 
     for label, config_path, trainer_fn, model_name in MODELS:
-        for task in TASKS:
+        for task, seed in itertools.product(TASKS, seeds):
             done += 1
             progress = f"[{done}/{total}]"
 
-            if os.path.isdir(adapter_path_for(model_name, task)):
-                print(f"{progress} Skipping {label}/{task} — adapter already exists")
+            if os.path.isdir(adapter_path_for(model_name, task, seed)):
+                print(f"{progress} Skipping {label}/{task}/seed{seed} — adapter already exists")
                 continue
 
-            print(f"\n{'=' * 60}\n{progress} Training {label} | {task}\n{'=' * 60}")
+            print(f"\n{'=' * 60}\n{progress} Training {label} | {task} | seed {seed}\n{'=' * 60}")
             kwargs = {"financial_path": FINANCIAL_PATH} if task == "financial_sentiment" else {}
 
             start = time.time()
             try:
-                trainer_fn(config_path, task, **kwargs)
-                print(f"Done: {label}/{task} in {(time.time() - start) / 60:.1f} min")
+                trainer_fn(config_path, task, seed=seed, **kwargs)
+                print(f"Done: {label}/{task}/seed{seed} in {(time.time() - start) / 60:.1f} min")
             except Exception:
-                print(f"FAILED: {label}/{task} — continuing with next run")
+                print(f"FAILED: {label}/{task}/seed{seed} — continuing with next run")
                 traceback.print_exc()
-                failures.append((label, task))
+                failures.append((label, task, seed))
 
     print(f"\nTraining sweep complete. {len(failures)} failure(s): {failures}")
     return failures
 
 
-def run_all_evaluation() -> list:
-    """Evaluate every fine-tuned (model, task) combination and log to MLflow."""
+def run_all_evaluation(seeds: list) -> list:
+    """Evaluate every fine-tuned (model, task, seed) combination and log to MLflow."""
     failures = []
 
     for label, _config_path, _trainer_fn, model_name in MODELS:
-        for task in TASKS:
-            adapter_path = adapter_path_for(model_name, task)
+        for task, seed in itertools.product(TASKS, seeds):
+            adapter_path = adapter_path_for(model_name, task, seed)
             if not os.path.isdir(adapter_path):
-                print(f"Skipping evaluation for {label}/{task} — no adapter found, train it first")
+                print(f"Skipping evaluation for {label}/{task}/seed{seed} — no adapter found, train it first")
                 continue
 
-            print(f"\nEvaluating {label} | {task}")
+            print(f"\nEvaluating {label} | {task} | seed {seed}")
             try:
                 if task == "code_generation":
                     evaluate_humaneval(base_model_name=model_name, adapter_path=adapter_path)
@@ -111,15 +114,22 @@ def run_all_evaluation() -> list:
                         ),
                     )
             except Exception:
-                print(f"FAILED evaluation: {label}/{task}")
+                print(f"FAILED evaluation: {label}/{task}/seed{seed}")
                 traceback.print_exc()
-                failures.append((label, task))
+                failures.append((label, task, seed))
 
     print(f"\nEvaluation sweep complete. {len(failures)} failure(s): {failures}")
     return failures
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--seeds", type=int, nargs="+", default=[DEFAULT_SEED],
+        help="training seeds, e.g. --seeds 42 43 44 for three runs per (model, task)",
+    )
+    seeds = parser.parse_args().seeds
+
     if not os.path.exists(FINANCIAL_PATH):
         print(
             f"⚠ {FINANCIAL_PATH} not found. Run "
@@ -128,10 +138,10 @@ if __name__ == "__main__":
         )
 
     print("PHASE 2 — Fine-tuning all SLMs across all tasks (sequential GPU sweep)")
-    train_failures = run_all_training()
+    train_failures = run_all_training(seeds)
 
     print("\nPHASE 2 — Evaluating all fine-tuned SLMs")
-    eval_failures = run_all_evaluation()
+    eval_failures = run_all_evaluation(seeds)
 
     if train_failures or eval_failures:
         print(
@@ -139,4 +149,4 @@ if __name__ == "__main__":
             "Re-running this script will retry only the missing (model, task) combinations."
         )
     else:
-        print(f"\nAll {len(MODELS) * len(TASKS)} model x task combinations trained and evaluated.")
+        print(f"\nAll {len(MODELS) * len(TASKS) * len(seeds)} model x task x seed runs trained and evaluated.")

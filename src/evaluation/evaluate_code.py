@@ -240,7 +240,9 @@ def evaluate_humaneval(
     # Persist per-problem outcomes so problem-level statistics (bootstrap
     # CIs over problems, failure-mode inspection) don't require a re-run.
     from evaluation.evaluate import save_predictions
-    save_predictions(base_model_name, "code_generation", problem_results)
+    from training.run_utils import seed_from_adapter_path
+    seed = seed_from_adapter_path(adapter_path)
+    save_predictions(base_model_name, "code_generation", problem_results, seed=seed)
 
     # Calculate pass@k for each k value. Keys use "_at_" instead of "@" —
     # mlflow metric names only allow alphanumerics/underscore/dash/period/
@@ -277,6 +279,7 @@ def evaluate_humaneval(
         cost_per_1m_tokens=cost_per_1m,
         privacy_risk=privacy_risk,
         roi_breakeven_tokens=roi_breakeven,
+        seed=seed,
     )
 
     results = {**pass_at_k_scores, "avg_latency_ms": avg_latency_ms}

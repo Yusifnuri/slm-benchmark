@@ -64,6 +64,7 @@ class BenchmarkLogger:
         privacy_risk: str,           # "low" | "medium" | "high"
         roi_breakeven_tokens: float,
         extra_metrics: Optional[Dict[str, float]] = None,
+        seed: Optional[int] = None,
     ):
         """
         Log final benchmark entry for the 6x5x5 matrix.
@@ -71,13 +72,18 @@ class BenchmarkLogger:
         Expose Section 2: '6 models x 5 tasks x 5 metrics'
         """
         run_name = f"benchmark_{model_name.split('/')[-1]}_{task}"
+        if seed is not None:
+            run_name += f"_seed{seed}"
         with mlflow.start_run(run_name=run_name):
-            mlflow.set_tags({
+            tags = {
                 "model": model_name,
                 "task": task,
                 "phase": "phase2_benchmark",
                 "privacy_risk": privacy_risk,
-            })
+            }
+            if seed is not None:
+                tags["seed"] = str(seed)
+            mlflow.set_tags(tags)
             mlflow.log_metrics({
                 "accuracy": accuracy,
                 "latency_ms": latency_ms,

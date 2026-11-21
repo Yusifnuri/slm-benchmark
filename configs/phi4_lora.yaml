@@ -10,7 +10,9 @@ lora:
   r: 16                              # rank — higher = more capacity, more memory
   alpha: 32                          # scaling factor (usually 2x r)
   dropout: 0.05
-  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+  # Phi-3/Phi-4 fuse q, k and v into one qkv_proj layer; q_proj/k_proj/v_proj do not
+  # exist here. The thesis config listed them, so its adapters trained on o_proj only.
+  target_modules: ["qkv_proj", "o_proj"]
   bias: "none"
   task_type: "CAUSAL_LM"
 

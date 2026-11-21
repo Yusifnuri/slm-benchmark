@@ -25,6 +25,7 @@ from rouge_score import rouge_scorer
 
 from data.dataset_loader import SLMDataset, TASK_CONFIGS
 from utils.mlflow_logger import BenchmarkLogger
+from training.run_utils import seed_from_adapter_path
 from evaluation.metrics import (
     calculate_slm_cost_per_1m_tokens,
     calculate_roi_breakeven,
@@ -112,11 +113,12 @@ PREDICTIONS_DIR = os.path.join(
 )
 
 
-def save_predictions(model_name: str, task: str, rows: List[Dict]) -> str:
-    """Write per-instance prediction rows to results/predictions/."""
+def save_predictions(model_name: str, task: str, rows: List[Dict], seed: Optional[int] = None) -> str:
+    """Write per-instance prediction rows to results/predictions/ (one file per seed)."""
     os.makedirs(PREDICTIONS_DIR, exist_ok=True)
     short = model_name.split("/")[-1]
-    path = os.path.join(PREDICTIONS_DIR, f"{short}__{task}.csv")
+    suffix = "" if seed is None else f"__seed{seed}"
+    path = os.path.join(PREDICTIONS_DIR, f"{short}__{task}{suffix}.csv")
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         writer.writeheader()
@@ -380,7 +382,8 @@ def run_full_evaluation(
     else:
         raise ValueError(f"Use evaluate_code.py for task: {task}")
 
-    save_predictions(base_model_name, task, pred_rows)
+    seed = seed_from_adapter_path(adapter_path)
+    save_predictions(base_model_name, task, pred_rows, seed=seed)
 
     # --- Metric 3: Cost per 1M tokens ---
     # Estimate tokens per second from latency using the actual max_new_tokens
@@ -406,6 +409,7 @@ def run_full_evaluation(
         privacy_risk=privacy_risk,
         roi_breakeven_tokens=roi_breakeven,
         extra_metrics=extras or None,
+        seed=seed,
     )
 
     print(f"\n✅ Results:")

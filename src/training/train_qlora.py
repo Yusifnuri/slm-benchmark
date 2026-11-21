@@ -26,6 +26,7 @@ from transformers import (
     TrainingArguments,
     Trainer,
     DataCollatorForSeq2Seq,
+    set_seed,
     BitsAndBytesConfig,
 )
 from peft import (
@@ -37,6 +38,7 @@ from peft import (
 
 from data.dataset_loader import SLMDataset
 from utils.mlflow_logger import BenchmarkLogger
+from training.run_utils import DEFAULT_SEED, adapter_dir, check_lora_targets, run_name
 
 
 def load_config(path: str) -> dict:
@@ -87,6 +89,7 @@ def build_qlora_model(model_name: str, qlora_cfg: dict):
         task_type=TaskType.CAUSAL_LM,
     )
 
+    check_lora_targets(model, qlora_cfg["target_modules"])
     model = get_peft_model(model, lora_config)
     model.print_trainable_parameters()
 
@@ -101,7 +104,7 @@ def build_qlora_model(model_name: str, qlora_cfg: dict):
     return model, tokenizer
 
 
-def train(config_path: str, task: str, financial_path: str = None):
+def train(config_path: str, task: str, financial_path: str = None, seed: int = DEFAULT_SEED):
     cfg = load_config(config_path)
     model_short = cfg["model"]["name"].split("/")[-1]
     logger = BenchmarkLogger(
@@ -109,8 +112,12 @@ def train(config_path: str, task: str, financial_path: str = None):
         cfg["mlflow"]["tracking_uri"],
     )
 
-    print(f"\n🚀 QLoRA Training | Model: {model_short} | Task: {task}")
+    print(f"\n🚀 QLoRA Training | Model: {model_short} | Task: {task} | Seed: {seed}")
 
+    # Seed before the model is built: get_peft_model draws LoRA's random A matrices,
+    # and that happens before Trainer applies TrainingArguments.seed. The data split
+    # stays fixed (seed 42 in dataset_loader.py), so seeds vary training only.
+    set_seed(seed)
     model, tokenizer = build_qlora_model(cfg["model"]["name"], cfg["qlora"])
 
     train_ds = SLMDataset(
@@ -131,7 +138,8 @@ def train(config_path: str, task: str, financial_path: str = None):
         financial_phrasebank_path=financial_path,
     )
 
-    output_dir = f"./outputs/{model_short}_{task}"
+    name = run_name(cfg["model"]["name"], task, seed)
+    output_dir = f"./outputs/{name}"
     os.makedirs(output_dir, exist_ok=True)
 
     training_args = TrainingArguments(
@@ -149,7 +157,8 @@ def train(config_path: str, task: str, financial_path: str = None):
         eval_steps=100,
         load_best_model_at_end=True,
         report_to="mlflow",
-        run_name=f"{model_short}_{task}",
+        run_name=name,
+        seed=seed,
     )
 
     trainer = Trainer(
@@ -169,6 +178,7 @@ def train(config_path: str, task: str, financial_path: str = None):
         task=task,
         method="QLoRA",
         params={
+            "seed": seed,
             "lora_r": cfg["qlora"]["r"],
             "lora_alpha": cfg["qlora"]["alpha"],
             "lr": cfg["training"]["learning_rate"],
@@ -184,7 +194,7 @@ def train(config_path: str, task: str, financial_path: str = None):
         artifacts_path=output_dir,
     )
 
-    adapter_path = f"./adapters/{model_short}_{task}"
+    adapter_path = adapter_dir(cfg["model"]["name"], task, seed)
     os.makedirs(adapter_path, exist_ok=True)
     model.save_pretrained(adapter_path)
     tokenizer.save_pretrained(adapter_path)
@@ -199,5 +209,6 @@ if __name__ == "__main__":
         "financial_sentiment", "code_generation",
     ])
     parser.add_argument("--financial_path", default=None)
+    parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
     args = parser.parse_args()
-    train(args.config, args.task, args.financial_path)
+    train(args.config, args.task, args.financial_path, seed=args.seed)
