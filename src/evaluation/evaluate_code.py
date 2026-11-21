@@ -279,6 +279,8 @@ def evaluate_humaneval(
         cost_per_1m_tokens=cost_per_1m,
         privacy_risk=privacy_risk,
         roi_breakeven_tokens=roi_breakeven,
+        # results/benchmark_matrix.py rescales cost_per_1m_tokens by the rate it was logged at
+        extra_metrics={"gpu_cost_per_hour": gpu_cost_per_hour},
         seed=seed,
     )
 

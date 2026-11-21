@@ -5,13 +5,16 @@ Expose: "Full benchmark matrix: 6 models x 5 tasks x 5 metrics" (Week 11-12)
 Pulls all logged results from MLflow and compiles into:
 - benchmark_matrix.csv (for thesis tables)
 - summary statistics per model and task
+
+Fine-tuned cells trained with several seeds are reported as the mean over
+seeds, with accuracy_sd / latency_ms_sd (sample SD, ddof=1) and n_seeds.
 """
 
 import sys
-import mlflow
+import numpy as np
 import pandas as pd
 import os
-from typing import List
+from typing import List, Optional
 
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 from evaluation.metrics import LLM_API_COSTS, get_privacy_risk, calculate_roi_breakeven
@@ -32,14 +35,19 @@ GPU_COST_PER_HOUR = 3.99
 # mix a $3.99-based training cost with a $2.50-based inference cost and the
 # breakeven division would be meaningless.
 #
-# Known limitation: the three NER rows were re-evaluated after the metric
-# fix (§4.2.2) using evaluate.py's current default of gpu_cost_per_hour=3.99
-# directly, i.e. already at GPU_COST_PER_HOUR — not at the $2.50 this
-# rescale assumes. No per-run rate is logged to mlflow, so this script
-# cannot distinguish the two cases and will double-scale those three cells
-# if re-run. The exported CSV's NER cost_per_1m_tokens values were corrected
-# by hand for this reason; a proper fix needs evaluate.py to log the rate it
-# actually used per run.
+# evaluate.py and evaluate_code.py now log the rate they used as the
+# gpu_cost_per_hour metric, and that logged rate is used when present.
+# LOGGED_GPU_RATE is the fallback for runs that predate it.
+#
+# Known limitation: the three thesis NER rows were re-evaluated after the
+# metric fix (§4.2.2) at gpu_cost_per_hour=3.99 but before the rate was
+# logged, so this fallback double-scales those three cells if re-run. The
+# exported CSV's NER cost_per_1m_tokens values were corrected by hand.
+#
+# Do not re-run this script until seeded NER runs exist: that re-measurement
+# updated benchmark_matrix.csv and results/predictions/*__ner.csv but not the
+# committed mlflow.db, which still holds the withdrawn pre-fix NER runs.
+# Re-running now would put those withdrawn scores back into the matrix.
 LOGGED_GPU_RATE = 2.50
 ROI_REFERENCE_API = "gpt-4o"
 
@@ -245,6 +253,61 @@ def _lookup_training_info(client: "mlflow.tracking.MlflowClient") -> dict:
     return info
 
 
+def aggregate_benchmark_runs(records: List[dict]) -> List[dict]:
+    """
+    One row per (model, task) from per-run records with keys model, task,
+    seed (int, or None for runs that predate seeding), start_time, accuracy,
+    latency_ms, cost_per_1m_tokens and privacy_risk.
+
+    Runs are deduped to the latest per (model, task, seed): re-running an
+    evaluation (e.g. after a bugfix) creates a new mlflow run rather than
+    overwriting, so a stale pre-fix result would otherwise be averaged in.
+
+    Seeded runs supersede unseeded ones for the same (model, task). The
+    unseeded runs are the thesis's single-seed adapters, trained before the
+    Phi-4-mini LoRA-target fix, so averaging them with the seeded re-runs
+    would mix two different configurations.
+    """
+    latest = {}
+    for rec in records:
+        key = (rec["model"], rec["task"], rec["seed"])
+        if key not in latest or rec["start_time"] > latest[key]["start_time"]:
+            latest[key] = rec
+
+    by_cell = {}
+    for (model, task, seed), rec in latest.items():
+        by_cell.setdefault((model, task), []).append(rec)
+
+    rows = []
+    for (model, task), recs in by_cell.items():
+        seeded = [r for r in recs if r["seed"] is not None]
+        recs = sorted(seeded, key=lambda r: r["seed"]) if seeded else recs
+
+        def mean(col: str) -> Optional[float]:
+            vals = [r.get(col) for r in recs if r.get(col) is not None]
+            return float(np.mean(vals)) if vals else None
+
+        def sd(col: str) -> Optional[float]:
+            vals = [r.get(col) for r in recs if r.get(col) is not None]
+            return float(np.std(vals, ddof=1)) if len(vals) > 1 else None
+
+        rows.append({
+            "model": model,
+            "task": task,
+            "method": recs[0].get("method", "API"),
+            "roi_breakeven_tokens": mean("roi_breakeven_tokens"),
+            "accuracy": mean("accuracy"),
+            "accuracy_sd": sd("accuracy"),
+            "latency_ms": mean("latency_ms"),
+            "latency_ms_sd": sd("latency_ms"),
+            "cost_per_1m_tokens": mean("cost_per_1m_tokens"),
+            "privacy_risk": recs[0]["privacy_risk"],
+            "n_seeds": len(recs),
+            "seeds": ";".join(str(r["seed"]) for r in recs) if seeded else "",
+        })
+    return rows
+
+
 def compile_benchmark_matrix(
     # Phase 1 (LLM API baselines) and Phase 2 (fine-tuned SLMs) log to two
     # separate mlflow.db files, because each phase's scripts/notebooks run
@@ -259,6 +322,8 @@ def compile_benchmark_matrix(
     Pull all benchmark results from MLflow (both phases' dbs) and compile
     into the 6x5x5 matrix. Returns DataFrame and saves to CSV.
     """
+    import mlflow
+
     rows = []
 
     # Phase 1: read the per-instance CSVs first. This is the authoritative
@@ -291,29 +356,39 @@ def compile_benchmark_matrix(
         # phase1_baseline). Filtered in Python, not via filter_string's
         # "IN (...)" syntax — this mlflow version's search DSL only accepts
         # a single quoted value per tag comparison and raises on a tuple.
-        #
-        # Deduped to the latest run per (model, task): re-running evaluation
-        # for the same combo (e.g. after a bugfix) creates a new mlflow run
-        # rather than overwriting, so without this a stale pre-fix result
-        # could sit alongside the real one and get averaged together.
-        latest_by_key = {}
-        experiments = client.search_experiments()
-        for exp in experiments:
-            runs = client.search_runs(experiment_ids=[exp.experiment_id])
-            for run in runs:
+        records = []
+        for exp in client.search_experiments():
+            for run in client.search_runs(experiment_ids=[exp.experiment_id]):
                 tags = run.data.tags
                 if tags.get("phase") not in ("phase2_benchmark", "phase1_baseline"):
                     continue
-                key = (tags.get("model", "unknown"), tags.get("task", "unknown"))
-                if key in latest_by_key and latest_by_key[key].info.start_time >= run.info.start_time:
-                    continue
-                latest_by_key[key] = run
+                metrics = run.data.metrics
+                model_short = tags.get("model", "unknown").split("/")[-1]
+                task = tags.get("task", "unknown")
+                cost_per_1m = metrics.get("cost_per_1m_tokens", None)
+                if cost_per_1m is not None and (model_short, task) in training_info:
+                    # Rescale the eval-time cost to the current imputed rate
+                    # (see LOGGED_GPU_RATE comment above).
+                    logged_rate = metrics.get("gpu_cost_per_hour", LOGGED_GPU_RATE)
+                    cost_per_1m = cost_per_1m * GPU_COST_PER_HOUR / logged_rate
+                records.append({
+                    "model": model_short,
+                    "task": task,
+                    "seed": int(tags["seed"]) if "seed" in tags else None,
+                    "start_time": run.info.start_time,
+                    "accuracy": metrics.get("accuracy", None),
+                    "latency_ms": metrics.get("latency_ms", None),
+                    "cost_per_1m_tokens": cost_per_1m,
+                    "privacy_risk": tags.get("privacy_risk", "unknown"),
+                    "method": tags.get("method", "API"),
+                    "roi_breakeven_tokens": metrics.get("roi_breakeven_tokens", None),
+                })
 
-        for (model_name, task), run in latest_by_key.items():
-            tags = run.data.tags
-            metrics = run.data.metrics
-            model_short = model_name.split("/")[-1]
-            cost_per_1m = metrics.get("cost_per_1m_tokens", None)
+        for cell in aggregate_benchmark_runs(records):
+            model_short, task = cell["model"], cell["task"]
+            cost_per_1m = cell["cost_per_1m_tokens"]
+            if cost_per_1m is not None:
+                cost_per_1m = round(cost_per_1m, 4)
             train_info = training_info.get((model_short, task))
 
             if train_info is not None:
@@ -322,10 +397,6 @@ def compile_benchmark_matrix(
                 # $0 fine-tuning cost. Use the real training method/hours
                 # instead of trusting either.
                 method = train_info["method"]
-                # Rescale the eval-time cost to the current imputed rate
-                # (see LOGGED_GPU_RATE comment above).
-                if cost_per_1m is not None:
-                    cost_per_1m = round(cost_per_1m * GPU_COST_PER_HOUR / LOGGED_GPU_RATE, 4)
                 fine_tuning_cost_usd = train_info["training_hours"] * GPU_COST_PER_HOUR
                 api_cost = LLM_API_COSTS[ROI_REFERENCE_API]["blended"]
                 roi_breakeven_tokens = (
@@ -335,18 +406,22 @@ def compile_benchmark_matrix(
             else:
                 # No matching fine-tuning run — either a genuine API row or
                 # an SLM row whose training run predates this script's fix.
-                method = tags.get("method", "API")
-                roi_breakeven_tokens = metrics.get("roi_breakeven_tokens", None)
+                method = cell["method"]
+                roi_breakeven_tokens = cell["roi_breakeven_tokens"]
 
             rows.append({
                 "model": model_short,
                 "task": task,
                 "method": method,
-                "accuracy": metrics.get("accuracy", None),
-                "latency_ms": metrics.get("latency_ms", None),
+                "accuracy": cell["accuracy"],
+                "accuracy_sd": cell["accuracy_sd"],
+                "latency_ms": cell["latency_ms"],
+                "latency_ms_sd": cell["latency_ms_sd"],
                 "cost_per_1m_tokens": cost_per_1m,
-                "privacy_risk": tags.get("privacy_risk", "unknown"),
+                "privacy_risk": cell["privacy_risk"],
                 "roi_breakeven_tokens": roi_breakeven_tokens,
+                "n_seeds": cell["n_seeds"],
+                "seeds": cell["seeds"],
             })
 
     df = pd.DataFrame(rows)
